@@ -21,6 +21,7 @@ urlpatterns = [
     path('submit',views.loginRequest),
     path('signup',views.signupUser),
     path('register',views.RegisterUser),
-    
+    path('addfriend',views.AddFriend),
+    path('logout',views.logoutRequest),
 ]
 

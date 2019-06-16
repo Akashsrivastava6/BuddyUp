@@ -2,7 +2,7 @@
 <html lang="en" xmlns:>
 
 <head>
-	<title>Welcome Page</title>
+	<title>CWelcome Page</title>
 	<meta charset="utf-8" />
 	{% load staticfiles %}
 	<link rel="stylesheet" href="{% static 'css/style.css' %}" type = "text/css"/>
@@ -30,14 +30,21 @@
 			  <div class="col-sm-10">
 				  <br>
 				  <center>
-				  <h3> Welcome to Dummy Page </h3>
+				  <h3></h3>
 				  </center>
+				  
 			  </div>
 
-
-			
+			  <table border="1" cellpadding="3px">
+					<tr><th>User</th>	<th>Tweet id</th>	<th>date created</th><th>Tweet</th></tr>
+				{%for a in tmp%}
+				<tr><td>{{a.0}}</td><td>{{a.1}}</td><td>{{a.2}}</td><td>{{a.3}}</td></tr>
+				{%endfor %}
+			  </table>	
 				
-							<h3 style="margin-left: 480px"> Hii:{{Message}}  </h3>
+			  
+				
+							<h3 style="margin-left: 480px"> {{Message}}  </h3>
 			
 
                  
