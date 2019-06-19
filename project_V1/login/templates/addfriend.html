@@ -38,10 +38,11 @@
 			
 				
 							
-			  				<form action='addfriend' method="post">			
+			  				<form action='/addfriend/addfriend' method="post">			
 								{%csrf_token%}  
 								<h3 style="margin-left: 480px">Add Friend  </h3>
 								<input class="input100" type="text" name="username" placeholder="Add friend">
+								<input class="input100" type="text" name="email" placeholder="friend Email">
 							<div class="container-login-form-btn">
 								<button class="login-form-btn"  >
 								Add friend
@@ -52,7 +53,7 @@
 
 						
 					</form>
-					<div><button class="login-form-btn"><a href="logout">logout</a></button></div>	
+					<div><button class="login-form-btn"><a href="/logout/logout">logout</a></button></div>	
                </div>
         </div>
     </div>

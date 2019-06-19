@@ -60,17 +60,26 @@
             
                 if  (lname.match(/^[a-zA-Z][a-zA-Z]*$/g)){
                     // email validation needs to be added here
-                    if(password===cpassword){
-                        $('form[name="signup"]').unbind('submit');
-                        
+                    if(password.length>6 || password.length<15){
+                        if(password===cpassword){
+                            $('form[name="signup"]').unbind('submit');
+                            
 
+                        }
+                        else{
+                            alert("invalid confirm password")
+                            $('form[name="signup"]').submit(function(event) {
+                            event.preventDefault();
+                            $(this).submit();
+                            }); 
+                        }
                     }
                     else{
-                        alert("invalid confirm password")
-                        $('form[name="signup"]').submit(function(event) {
-                        event.preventDefault();
-                        $(this).submit();
-                        }); 
+                        alert("Password lenght should be between 7 to 14 characters")
+                            $('form[name="signup"]').submit(function(event) {
+                            event.preventDefault();
+                            $(this).submit();
+                            }); 
                     }
                 }
                 else{
@@ -125,7 +134,7 @@
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Date of birth">
-                        <input class="input100" type="text" name="dob" placeholder=" Date of Birth (YYYY-MM-DD)" required data-date-end-date="-18y" >
+                        <input class="input100" type="text" name="dob" placeholder=" Date of Birth (YYYY-MM-DD)" readonly required data-date-end-date="-18y" >
                         <span class="focus-input100" data-placeholder="&#xf332;"></span>
                     </div>
 
@@ -143,8 +152,14 @@
                         <input class="input100" type="password" name="confirmpassword" placeholder="Confirm Password" required >
                         <span class="focus-input100" data-placeholder="&#xf191;"></span>
                     </div>
-
-
+                    <div>
+                        <br>
+                    <div class="login-form-title">
+                        <h6>
+                        {{Message}}
+                         </h6>
+                   </div>
+                </div>
                     <div class="container-login-form-btn">
                             <button class="login-form-btn" name="register">
                             Register
