@@ -6,7 +6,6 @@ from random import randint
 from django.core.mail import send_mail
 from passlib.hash import pbkdf2_sha256
 from . import Preprocess
-import pickle
 
 
 # Create your views here.
@@ -27,7 +26,6 @@ def AddFriend(request):
 
                 return render(request,'submit.html',{'Message':"An Email has been sent for confirmation"})
         return render(request,'submit.html',{'Message':"Please login to continue"})
-#when authentication is complete after consent on twitter
 def Checking(request):
         
        
@@ -38,7 +36,6 @@ def Checking(request):
                 d=following.objects.get(twitter_handle=extra)
                 d.isActive=1
                 d.save()
-                #dump tweets into database
                 tmp=AddFriendTweets(extra)
                 return render(request,'submit.html',{'Message':tmp[3]})
 
@@ -86,23 +83,12 @@ def AddFriendTweets(friend_handle):
                 
                 tmp1.append(j.id)
                 tmp2.append(j.created_at)
-                #tweets
                 tmp3.append(j.text)
                 #tweet=tweets_data(twitter_handle=friend_handle,tweet_id=j.id,tweet_data=j.text,tweet_date=j.created_at)
                 #tweet.save()
                 #print(tmp)
-        #temp3: main tweet list for preprocessing and prediction
+
         df=Preprocess.preprocess(tmp3)
-        ##################TEST OUR MODEL HERE###################################
-        #input text
-        #st=["I'm not unhappy today", "I love my country"]
-        #transform our input text for prediction
-        #unpickle the tfidf vectorizer
-        #vectorizer_new = pickle.load(open("x_result.pkl", "rb" ) )
-        #classifier_new = pickle.load(open("classifier.pkl", "rb" ) )
-        #B_ok=vectorizer_new.transform(st).toarray()
-        #predict label for unseen data
-        #print(st,classifier_new.predict(B_ok)) 
         tmp4.append([tmp,tmp1,tmp2,df])
 
 
