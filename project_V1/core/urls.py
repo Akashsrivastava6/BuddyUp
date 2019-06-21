@@ -17,11 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 urlpatterns = [
-    path('',views.loginPage),
-    path('logout',views.logoutRequest),
-    path('submit',views.loginRequest),
-    path('signup',views.signupUser),
-    path('register',views.RegisterUser),
-    
+    path('addfriend',views.AddFriend),
+    #path('verifyFriend',views.VerifyFriend),
+    path('login/submit',views.Checking)
 ]
-

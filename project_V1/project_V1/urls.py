@@ -19,5 +19,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/',include('login.urls')),
-    
+    path('logout/',include('login.urls')),
+    path('addfriend/',include('core.urls')),
+    path('oauth/complete/twitter/',include('core.urls')),
+    path(r'oauth/', include('social_django.urls', namespace='social')),
 ]

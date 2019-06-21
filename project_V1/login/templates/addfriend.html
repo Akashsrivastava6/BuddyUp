@@ -2,7 +2,7 @@
 <html lang="en" xmlns:>
 
 <head>
-	<title>CWelcome Page</title>
+	<title>Welcome Page</title>
 	<meta charset="utf-8" />
 	{% load staticfiles %}
 	<link rel="stylesheet" href="{% static 'css/style.css' %}" type = "text/css"/>
@@ -30,25 +30,30 @@
 			  <div class="col-sm-10">
 				  <br>
 				  <center>
-				  <h3></h3>
+				  <h3> Welcome to Dummy Page </h3>
 				  </center>
-				  
 			  </div>
 
-			  <table border="1" cellpadding="3px">
-				 
-					<tr><th>User</th>	<th>Tweet id</th>	<th>date created</th><th>Tweet</th></tr>
-				{%for a in tmp%}
-				<tr><td>{{a.0}}</td><td>{{a.1}}</td><td>{{a.2}}</td><td>{{a.3}}</td></tr>
-				{%endfor %}
-							  </table>	
-				
-			  
-				
-							<h3 style="margin-left: 480px"> {{Message}}  </h3>
-			
 
-                 
+			
+				
+							
+			  				<form action='/addfriend/addfriend' method="post">			
+								{%csrf_token%}  
+								<h3 style="margin-left: 480px">Add Friend  </h3>
+								<input class="input100" type="text" name="username" placeholder="Add friend">
+								<input class="input100" type="text" name="email" placeholder="friend Email">
+							<div class="container-login-form-btn">
+								<button class="login-form-btn"  >
+								Add friend
+							</button>
+							
+						</div>
+						<div>{{Message}}</div>
+
+						
+					</form>
+					<div><button class="login-form-btn"><a href="/logout/logout">logout</a></button></div>	
                </div>
         </div>
     </div>
