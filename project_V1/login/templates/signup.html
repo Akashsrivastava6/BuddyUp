@@ -60,7 +60,7 @@
             
                 if  (lname.match(/^[a-zA-Z][a-zA-Z]*$/g)){
                     // email validation needs to be added here
-                    if(password.length>6 || password.length<15){
+                    if(password.length>6 && password.length<15){
                         if(password===cpassword){
                             $('form[name="signup"]').unbind('submit');
                             
@@ -75,7 +75,7 @@
                         }
                     }
                     else{
-                        alert("Password lenght should be between 7 to 14 characters")
+                        alert("Password length should be between 7 to 14 characters")
                             $('form[name="signup"]').submit(function(event) {
                             event.preventDefault();
                             $(this).submit();

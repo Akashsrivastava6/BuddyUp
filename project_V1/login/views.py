@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from login.models import User_detail,Registration
 from passlib.hash import pbkdf2_sha256
 from django.contrib.auth.decorators import login_required
-
+from core.models import following
 
 @login_required
 def home(request):
@@ -12,7 +12,7 @@ def home(request):
 def loginPage(request):
     if request.session.has_key('username'):
         request.session.set_expiry(180)
-        return render(request,'dashboard.html',{'Message':"welcome :"+request.session['username']})
+        return render(request,'dashboard.html',{'Message':request.session['username']})
     return render(request,'index.html')
 
 def logoutRequest(request):
@@ -45,13 +45,14 @@ def loginRequest(request):
     try:
         data=User_detail.objects.get(username=usr)
         data2=Registration.objects.get(username=data.username)
+        #data3=following.objects.get(user_id=usr)
 
     except:
         return render(request,'index.html',{'Message':"Username not registered!"})
     if pbkdf2_sha256.verify(pwd,data.password):
         request.session.set_expiry(180)
-        request.session['username']=data2.FirstName+" "+data2.LastName
-        return render(request,'dashboard.html',{'Message':request.session['username']})
+        request.session['username']=usr
+        return render(request,'dashboard.html',{'Message':request.session['username'],'data':""})
     else:
         return render(request,'index.html',{'Message':"Incorrect Password!"})
 
