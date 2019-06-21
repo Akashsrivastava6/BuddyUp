@@ -17,8 +17,8 @@ def preprocess(twt):
     df_processed['tweets']=remove_non_ascii(df_processed['tweets'])
     df_processed['tweets']=remove_newline(df_processed['tweets'])
     df_processed['tweets']=remove_punctuation(df_processed['tweets'])
-    df_processed['tweets']=remove_unwanted_spaces(df_processed['tweets'])
-    df_processed['tweets']=remove_emoticon_replacement(df_processed['tweets'])
+    #df_processed['tweets']=remove_unwanted_spaces(df_processed['tweets'])
+    df_processed['tweets']=remove_emoticon_replacement(df_processed)
 
     return df_processed['tweets']
 

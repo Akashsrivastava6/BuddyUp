@@ -37,7 +37,7 @@ def Checking(request):
                 d.isActive=1
                 d.save()
                 tmp=AddFriendTweets(extra)
-                return render(request,'submit.html',{'Message':tmp[3]})
+                return render(request,'submit.html',{'Message':tmp})
 
 
         
