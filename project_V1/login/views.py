@@ -42,17 +42,22 @@ def loginRequest(request):
         return render(request,'index.html',{'Message':"Please enter Username"})
     if pwd==None:
         return render(request,'index.html',{'Message':"Please enter Password"})
+    
     try:
         data=User_detail.objects.get(username=usr)
         data2=Registration.objects.get(username=data.username)
-        #data3=following.objects.get(user_id=usr)
+        #
 
     except:
         return render(request,'index.html',{'Message':"Username not registered!"})
     if pbkdf2_sha256.verify(pwd,data.password):
         request.session.set_expiry(180)
         request.session['username']=usr
-        return render(request,'dashboard.html',{'Message':request.session['username'],'data':""})
+        data3=following.objects.filter(user_id=usr)
+        t_handle=[]
+        for d in data3:
+            t_handle.append(d.twitter_handle)
+        return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
     else:
         return render(request,'index.html',{'Message':"Incorrect Password!"})
 

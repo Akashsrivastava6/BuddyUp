@@ -16,3 +16,4 @@ class tweets_data(models.Model):
     tweet_id=models.BigIntegerField("tweets_id",primary_key=True)
     tweet_data=models.TextField("tweet_data",max_length=280)
     tweet_date=models.DateField("date")
+    class_label=models.IntegerField("class_label",default=-1)

@@ -152,28 +152,22 @@
                         <div class="following-container">
                             <h3>Following</h3>
                             <form class="form-inline" id="friends-list">
+                                 {%block content%}
+                                 {% for c in data%}
                                 <div class="mx-sm-3 mb-2" id="friends-name-1">
                                     <img class="img-xs mdi-rounded-corner"
                                         src="../Dashboard/assets/images/faces/face8.jpg" alt="Profile image"
                                         style="height: 50px; width: 50px;"> </a>
                                 </div>
+                               
                                 <div class="mx-sm-3 mb-2">
-                                    <h4> {{data}}</h4>
+                                    <h4> {{c}}</h4>
                                 </div>
-                                <button type="submit" class="btn btn-primary mx-sm-3 mb-2" id="btn-1"
-                                    formaction="trend.html">View
+                                <button  class="btn btn-primary mx-sm-3 mb-2" id="btn-1" >
+                                    <a href="/trendpage/" >View
                                     Trend</button>
-                                <div class="mx-sm-3 mb-2" id="friends-name-2">
-                                    <img class="img-xs mdi-rounded-corner"
-                                        src="../Dashboard/assets/images/faces/face8.jpg" alt="Profile image"
-                                        style="height: 50px; width: 50px;"> </a>
-                                </div>
-                                <div class="mx-sm-3 mb-2">
-                                    <h4> Arpan Tiwari</h4>
-                                </div>
-                                <a href="trend.html"><button type="submit" class="btn btn-primary mx-sm-3 mb-2"
-                                        id="btn-1" formaction="trend.html">View
-                                        Trend</button></a>
+                                 {%endfor%}
+                                 {%endblock %}
                             </form>
                         </div>
 
