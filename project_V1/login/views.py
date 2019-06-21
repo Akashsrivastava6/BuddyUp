@@ -1,7 +1,12 @@
 from django.shortcuts import render,redirect
 from login.models import User_detail,Registration
 from passlib.hash import pbkdf2_sha256
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
+def home(request):
+    return render(request, 'index.html')
 
 # Create your views here.
 def loginPage(request):

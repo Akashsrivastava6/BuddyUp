@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 from passlib.hash import pbkdf2_sha256
 
 
+
 # Create your views here.
 
 def AddFriend(request):
@@ -20,13 +21,27 @@ def AddFriend(request):
 
 
 
-                send_mail("test mail","127.0.0.1:8000/addfriend/verifyFriend?usr="+usr+"&friend_handle="+friend_handle+"&friend_email="+friend_email+"&url="+url,"a.team.ucd.5@gmail.com",["Akashsrivastava6@gmail.com"])
+                send_mail("test mail","127.0.0.1:8000/oauth/login/twitter/","a.team.ucd.5@gmail.com",[friend_email])
                 friend_tweet.save()
 
                 return render(request,'submit.html',{'Message':"An Email has been sent for confirmation"})
         return render(request,'submit.html',{'Message':"Please login to continue"})
+def Checking(request):
+        
+       
+        if request.user.is_authenticated:
+                user=request.user.social_auth.get(provider="twitter")
+                extra=user.extra_data['access_token']['screen_name']
+               
+                d=following.objects.get(twitter_handle=extra)
+                d.isActive=1
+                d.save()
+                tmp=AddFriendTweets(extra)
+                return render(request,'submit.html',{'Message':extra})
 
 
+        
+'''
 def VerifyFriend(request):
         usr=request.GET.get("usr")
         friend_handle=request.GET.get("friend_handle")
@@ -46,7 +61,7 @@ def VerifyFriend(request):
         return render(request,'submit.html',{'Message':friend_handle})
 
 
-
+'''
 
 def AddFriendTweets(friend_handle):
         
@@ -74,5 +89,4 @@ def AddFriendTweets(friend_handle):
                 print(tmp)
         tmp4.append([tmp,tmp1,tmp2,tmp3])
         return tmp4
-       
-        
+

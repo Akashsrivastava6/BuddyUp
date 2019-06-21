@@ -18,6 +18,6 @@ from django.urls import path
 from . import views
 urlpatterns = [
     path('addfriend',views.AddFriend),
-    path('verifyFriend',views.VerifyFriend),
-    
+    #path('verifyFriend',views.VerifyFriend),
+    path('login/submit',views.Checking)
 ]

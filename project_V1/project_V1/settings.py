@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'login',
     'core',
+    'social_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'project_V1.urls'
@@ -64,10 +66,25 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
+
             ],
         },
     },
 ]
+AUTHENTICATION_BACKENDS = (
+    
+    'social_core.backends.twitter.TwitterOAuth',
+    
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+
+
 
 WSGI_APPLICATION = 'project_V1.wsgi.application'
 
@@ -133,3 +150,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'login/submit'
+
+SOCIAL_AUTH_TWITTER_KEY = 'twVFhyS2oNaSjcUUVaYVnTBpH'
+SOCIAL_AUTH_TWITTER_SECRET = 'GlvJcYHsfeT6szx7oLuVBiWgtwAg2SCEEzhJpyUuWslooI61cn'
+
