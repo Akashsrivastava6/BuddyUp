@@ -2,7 +2,7 @@ import pandas as pd
 import re
 
 
-
+tweets=[]
 def preprocess(twt):
     df = pd.DataFrame()
 
@@ -10,11 +10,17 @@ def preprocess(twt):
     df['tweets']=remove_non_ascii(df['tweets'])
     df['tweets']=remove_newline(df['tweets'])
     df['tweets']=remove_punctuation(df['tweets']) 
-    tweets=[]
+    
     remove_emoticon_replacement(df) 
     df_processed = pd.DataFrame()
     df_processed['tweets'] = tweets
-    return df_processed
+    df_processed['tweets']=remove_non_ascii(df_processed['tweets'])
+    df_processed['tweets']=remove_newline(df_processed['tweets'])
+    df_processed['tweets']=remove_punctuation(df_processed['tweets'])
+    df_processed['tweets']=remove_unwanted_spaces(df_processed['tweets'])
+    df_processed['tweets']=remove_emoticon_replacement(df_processed['tweets'])
+
+    return df_processed['tweets']
 
 def remove_non_ascii(dff):
     #s2 = str(df) 
@@ -55,5 +61,5 @@ def remove_emoticon_replacement(df):
             tweets.append(df.loc[i]['tweets'])
 
 
-df_processed = pd.DataFrame()
-df_processed['tweets'] = tweets
+# df_processed = pd.DataFrame()
+# df_processed['tweets'] = tweets
