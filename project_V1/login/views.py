@@ -12,7 +12,12 @@ def home(request):
 def loginPage(request):
     if request.session.has_key('username'):
         request.session.set_expiry(180)
-        return render(request,'dashboard.html',{'Message':request.session['username']})
+        usr=request.session['username']
+        data3=following.objects.filter(user_id=usr)
+        t_handle=[]
+        for d in data3:
+            t_handle.append(d.twitter_handle)
+        return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
     return render(request,'index.html')
 
 def logoutRequest(request):
@@ -33,7 +38,12 @@ def loginRequest(request):
 
     if request.session.has_key('username'):
         request.session.set_expiry(180)
-        return render(request,'dashboard.html',{'Message':request.session['username']})
+        usr=request.session['username']
+        data3=following.objects.filter(user_id=usr)
+        t_handle=[]
+        for d in data3:
+            t_handle.append(d.twitter_handle)
+        return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
     request.session.clear_expired()
 
     usr=request.POST.get("username")

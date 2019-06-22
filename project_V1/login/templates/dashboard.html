@@ -151,8 +151,10 @@
                     <div class="col-xs-12 col-sm-6 col-md-8" id="col1" style="text-align: center">
                         <div class="following-container">
                             <h3>Following</h3>
-                            <form class="form-inline" id="friends-list">
+                            <form class="form-inline" id="friends-list" action='/addfriend/trendpage' method="post">
+                                {%csrf_token%}
                                  {%block content%}
+                                 {%if data%}
                                  {% for c in data%}
                                 <div class="mx-sm-3 mb-2" id="friends-name-1">
                                     <img class="img-xs mdi-rounded-corner"
@@ -161,12 +163,14 @@
                                 </div>
                                
                                 <div class="mx-sm-3 mb-2">
-                                    <h4> {{c}}</h4>
+                                    <input name="friend" value={{c}}> </input>
                                 </div>
-                                <button  class="btn btn-primary mx-sm-3 mb-2" id="btn-1" >
-                                    <a href="/trendpage/" >View
+                                <button class="btn btn-primary mx-sm-3 mb-2" id="btn-1">View
                                     Trend</button>
                                  {%endfor%}
+                                 {%else%}
+                                 <h4>Please add a friend to see the trend</h4>
+                                 {%endif%}
                                  {%endblock %}
                             </form>
                         </div>

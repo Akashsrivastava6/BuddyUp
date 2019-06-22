@@ -19,5 +19,6 @@ from . import views
 urlpatterns = [
     path('addfriend',views.AddFriend),
     #path('verifyFriend',views.VerifyFriend),
-    path('login/submit',views.Checking)
+    path('login/submit',views.Checking),
+    path('trendpage',views.trend),
 ]

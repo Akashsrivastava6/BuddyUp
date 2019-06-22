@@ -24,7 +24,7 @@ def AddFriend(request):
                 send_mail("test mail","127.0.0.1:8000/oauth/login/twitter/","a.team.ucd.5@gmail.com",[friend_email])
                 friend_tweet.save()
 
-                return render(request,'submit.html',{'Message':"An Email has been sent for confirmation"})
+                return render(request,'contact.html',{'Message':"An Email has been sent for confirmation"})
         return render(request,'submit.html',{'Message':"Please login to continue"})
 def Checking(request):
         
@@ -38,7 +38,7 @@ def Checking(request):
                 d.save()
                 tmp=AddFriendTweets(extra)
                 
-                return render(request,'submit.html',{'Message':tmp})
+                return render(request,'contact.html',{'Message':"Thanks for the confirmation!!"})
 
 
         
@@ -113,3 +113,13 @@ def AddFriendTweets(friend_handle):
 
 
 
+def trend(request):
+        twitter_handle=request.POST.get("friend")
+        tweet_data=tweets_data.objects.filter(twitter_handle=twitter_handle)
+        
+        twt_date=[]
+        for d in tweet_data:
+               twt_date.append([d.tweet_date,d.tweet_data,d.class_label]) 
+
+
+        return render(request,'trend.html',{"Message":twt_date})

@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Welcome to Buddyup</title>
-
+    {% load staticfiles %}
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -15,7 +15,7 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static style.css%}">
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
@@ -35,37 +35,7 @@
             <div class="sidebar-header text-align-center">
             </div>
 
-            <ul class="list-unstyled components">
-                <li>
-                    <a href="dashboard.html">
-                        <i class="fas fa-home"></i>
-                        &nbsp; dashboard
-                    </a>
-
-                </li>
-                <li>
-                    <a href="followers.html">
-                        <i class="fas fa-user-plus"></i>
-                        &nbsp; followers
-                    </a>
-
-                    <div class="collapse list-unstyled" id="pageSubmenu">
-
-                    </div>
-                </li>
-                <li>
-                    <a href="following.html">
-                        <i class="fas fa-user-check"></i>
-                        &nbsp; following
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="contact.html">
-                        <i class="fas fa-paper-plane"></i>
-                        &nbsp; contact
-                    </a>
-                </li>
-            </ul>
+            
 
 
         </nav>
@@ -134,7 +104,7 @@
         </div>
 
         <div class="content-wrapper">
-
+                {{Message}}
         </div>
 
         <!-- jQuery CDN - Slim version (=without AJAX) -->
