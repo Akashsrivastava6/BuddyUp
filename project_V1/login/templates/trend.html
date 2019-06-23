@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -26,7 +27,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="{% static trend.js%}"></script>
-
 </head>
 
 <body>
@@ -68,7 +68,6 @@
                     </a>
                 </li>
             </ul>
-
 
         </nav>
 
@@ -146,7 +145,7 @@
                        <div class="row m-b-1">
                            <div class="col-lg-6">
                                <div class="card shadow">
-                                   {{Message}}
+                                <div class="data-container" value="{{Message}}"></div>
                                    <h4 class="card-header">Product Wise Revenue</h4>
                                    <div class="card-block">
                                        <div id="products-revenue-pie-chart"></div>
@@ -166,32 +165,46 @@
             </div>
       
                         
-
+            <script>
+                window.onload = function () {
+                    var data = "{{Message}}";
+                    var res = data.replace(/&quot;/g, '"');
+                    var new_date = res.replace(/datetime.date/g, "new Date");
+                    var obj = JSON.parse(new_date)
+                    var chart = new CanvasJS.Chart("chartContainer", {
+                        theme: "light2", // "light1", "light2", "dark1", "dark2"
+                        animationEnabled: true,
+                        title: {
+                            
+                            text: "{{friend}}'s Trend"
+                        },
+                        axisX: {
+                            interval: 1,
+                            intervalType: "month",
+                            valueFormatString: "MMM"
+                        },
+                        axisY: {
+                            title: "Price (in USD)",
+                            valueFormatString: "$#0"
+                        },
+                        data: [{
+                            type: "line",
+                            markerSize: 12,
+                            xValueFormatString: "MMM, YYYY",
+                            yValueFormatString: "$###.#",
+                            dataPoints: obj,
+                        }]
+                    });
+                    console.log(new_date);
+                    chart.render();
+                }
+            </script>
 
 
 
                 <!-- jQuery CDN - Slim version (=without AJAX) -->
                 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
                 <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $('#sidebarCollapse').on('click', function () {
-                            $('#sidebar').toggleClass('active');
-                        });
-                    });
-                    // Add active class to the current button (highlight it)
-                    var header = document.getElementById("sidebar");
-                    var btns = header.getElementById("btn");
-                    for (var i = 0; i < btns.length; i++) {
-                        btns[i].addEventListener("click", function () {
-                            var current = document.getElementById("active");
-                            if (current.length > 0) {
-                                current[0].className = current[0].className.replace(" active", "");
-                            }
-                            this.className += " active";
-                        });
-                    }
-                </script>
 
 </body>
 

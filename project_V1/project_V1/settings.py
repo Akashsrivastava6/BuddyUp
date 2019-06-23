@@ -97,7 +97,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Project',
         'USER': 'root',
-        'PASSWORD' : 'akashsri',
+        'PASSWORD' : '1234',
         'HOST': '127.0.0.1',
         'PORT':'3306',
         'OPTIONS':{'charset':'utf8mb4'}
@@ -158,3 +158,4 @@ LOGIN_REDIRECT_URL = 'login/submit'
 SOCIAL_AUTH_TWITTER_KEY = 'twVFhyS2oNaSjcUUVaYVnTBpH'
 SOCIAL_AUTH_TWITTER_SECRET = 'GlvJcYHsfeT6szx7oLuVBiWgtwAg2SCEEzhJpyUuWslooI61cn'
 
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
