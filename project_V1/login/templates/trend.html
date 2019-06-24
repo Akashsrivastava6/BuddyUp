@@ -163,6 +163,7 @@
                            <div class="col-12">
                                <div class="card shadow">
                                   <div class="chart-area" id="chartContainer" style="height: 400px; width: 100%;"></div>
+
                                    {%csrf_token%}
                                    {%block content%}
                                    {%for c in friend_handle%}
@@ -176,6 +177,7 @@
                                     {%endblock %}
                                    
                                    </div>
+                                   {{obj2}}
                                </div>
                            </div>
                        </div> <!-- row -->
@@ -203,14 +205,23 @@
                         
             <script>
                 window.onload = function () {
-                    var data = "{{Message}}";
-                    var res = data.replace(/&quot;/g, '"');
+                    var data = "{{obj1}}";
+                    var data2 = "{{obj2}}";
+                    var res1 = data.replace(/&quot;/g, '"');
+                    var res2 = data2.replace(/&quot;/g, '"');
                     //var new_date = res.replace(/datetime.date/g, "new Date");
-                    var obj = JSON.parse(res)
+                    var obj1 = JSON.parse(res1)
+                    var obj2 = JSON.parse(res2)
+
                    // alert(typeof(obj[0]['x']));
-                    for(var i=0;i<obj.length;i++){
+                    for(var i=0;i<obj1.length;i++){
                         
-                        obj[i]['x'] = new Date(obj[i]['x']);
+                        obj1[i]['x'] = new Date(obj1[i]['x']);
+                     //   obj[i]['x']=obj[i]['x'].replace('"',")");
+                    }
+                    for(var i=0;i<obj2.length;i++){
+                        
+                        obj2[i]['x'] = new Date(obj2[i]['x']);
                      //   obj[i]['x']=obj[i]['x'].replace('"',")");
                     }
 
@@ -224,25 +235,34 @@
                         axisX: {
                             title: "Date",
                             interval: 0,
-                            intervalType: "Day",
-                            valueFormatString: "DD, MMM, YYYY",
+                            intervalType: "Day", 
+                            valueFormatString: "DD, MMM, YY",
                             labelAutoFit: true,
+                            tickLength: 5,
                             labelFontSize: 12,
                         },
                         axisY: {
                             title: "Sentiment",
-                            interval: 0.1,
-                            valueFormatString: "#.##"
+                            interval: 1,
+                            valueFormatString: "##"
                         },
                         data: [{
                             type: "splineArea",
+                            name: "postive",
                             markerSize: 12,
                             xValueType: "datetime",
-                            xValueFormatString: "DD, MMM, YYYY",
-                            dataPoints: obj
+                            xValueFormatString: "DD, MMM, YY",
+                            dataPoints: obj1
+                        },
+                        {
+                        type: "splineArea",
+                        name: "negative",
+                        markerSize: 12,
+                        xValueType: "datetime",
+                        xValueFormatString: "DD, MMM, YYYY",
+                        dataPoints: obj2
                         }]
                     });
-                    console.log(obj);
                     chart.render();
                 }
             </script>

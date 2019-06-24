@@ -9,6 +9,7 @@ from . import Preprocess
 import pickle
 import datetime
 import json
+from django.db.models import Count
 
 # Create your views here.
 
@@ -128,7 +129,8 @@ def json_serial(obj):
 def trend(request):
     twitter_handle=request.POST.get("friend")
     tweet_data=tweets_data.objects.filter(twitter_handle=twitter_handle)
-
+    t_d1=tweets_data.objects.filter(twitter_handle=twitter_handle).filter(class_label=0).values('tweet_date').annotate(count=Count('tweet_date'))
+    t_d2=tweets_data.objects.filter(twitter_handle=twitter_handle).filter(class_label=1).values('tweet_date').annotate(count=Count('tweet_date'))
     twt_date=[]
     twt_str = []
     for d in tweet_data:
@@ -138,6 +140,13 @@ def trend(request):
             "y": d.class_label,
         })
         twt_str.append({"id": d.tweet_id, "tweets": d.tweet_data})
+    chk1=[]
+    chk2=[]
+    for d in t_d1:
+        #  twt_date.append({'date': d.tweet_date,'tweet': d.tweet_data,'label': d.class_label})
+        chk1.append({"x":d['tweet_date'],"y":d['count'],'class_label':0}) 
 
+    for d in t_d2:
+        chk2.append({"x":d['tweet_date'],"y":d['count'],'class_label':1}) 
 
-    return render(request, 'trend.html', {"Message": json.dumps(twt_date, default=json_serial), "tweet_data":twt_str, "friend": twitter_handle})
+    return render(request, 'trend.html', {"Message": json.dumps(twt_date, default=json_serial), "tweet_data":twt_str, "friend": twitter_handle,'obj1':json.dumps(chk1,default=json_serial),'obj2':json.dumps(chk2,default=json_serial)})
