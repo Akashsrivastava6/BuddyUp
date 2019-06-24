@@ -142,7 +142,7 @@
                                </div>
                            </div>
                        </div> <!-- row -->
-                       <div class="row m-b-1">
+            <!--           <div class="row m-b-1">
                            <div class="col-lg-6">
                                <div class="card shadow">
                                 <div class="data-container" value="{{Message}}"></div>
@@ -169,33 +169,40 @@
                 window.onload = function () {
                     var data = "{{Message}}";
                     var res = data.replace(/&quot;/g, '"');
-                    var new_date = res.replace(/datetime.date/g, "new Date");
-                    var obj = JSON.parse(new_date)
+                    //var new_date = res.replace(/datetime.date/g, "new Date");
+                    var obj = JSON.parse(res)
+                    alert(typeof(obj[0]['x']));
+                    for(var i=0;i<obj.length;i++){
+                        
+                        obj[i]['x'] = new Date(obj[i]['x']);
+                     //   obj[i]['x']=obj[i]['x'].replace('"',")");
+                    }
+
                     var chart = new CanvasJS.Chart("chartContainer", {
                         theme: "light2", // "light1", "light2", "dark1", "dark2"
                         animationEnabled: true,
                         title: {
-                            
                             text: "{{friend}}'s Trend"
                         },
                         axisX: {
+                            title: "Date",
                             interval: 1,
-                            intervalType: "month",
-                            valueFormatString: "MMM"
+                            intervalType: "Day",
+                            valueFormatString: "DD MMM"
                         },
                         axisY: {
-                            title: "Price (in USD)",
-                            valueFormatString: "$#0"
+                            title: "Sentiment",
+                            valueFormatString: "0.5"
                         },
                         data: [{
-                            type: "line",
+                            type: "splineArea",
                             markerSize: 12,
                             xValueFormatString: "MMM, YYYY",
-                            yValueFormatString: "$###.#",
+                            yValueFormatString: "#",
                             dataPoints: obj,
                         }]
                     });
-                    console.log(new_date);
+                    console.log(obj);
                     chart.render();
                 }
             </script>
