@@ -139,7 +139,10 @@ def trend(request):
             "x": d.tweet_date,
             "y": d.class_label,
         })
-        twt_str.append({"id": d.tweet_id, "tweets": d.tweet_data})
+        if(d.class_label==0):
+            twt_str.append({"id": d.tweet_id, "tweets": d.tweet_data,'class':"Negative"})
+        else:
+            twt_str.append({"id": d.tweet_id, "tweets": d.tweet_data,'class':"Positive"})
     chk1=[]
     chk2=[]
     for d in t_d1:
