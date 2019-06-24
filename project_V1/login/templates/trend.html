@@ -15,8 +15,32 @@
     <!-- Our Custom CSS -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+
+        <link rel="icon" type="image/png" href="{%static 'images/icons/favicon.ico'%}" />
+        <!--===============================================================================================-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
+
+        <!--===============================================================================================-->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+        <!--Animsition CSS-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
+        <!--CSS-Hamburgers-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.1.3/hamburgers.min.css">
+        <!--===============================================================================================-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="{% static style.css%}">
+    <link rel="stylesheet" href="{% static 'style.css'%}">
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
@@ -110,7 +134,7 @@
                         </li>
                         <li class="nav-item dropdown d-none d-xl-inline-block">
                             <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                Jon Doe &nbsp;
+                                {{ friend}} &nbsp;
                                 <img class="img-xs rounded-circle" src="../Dashboard/assets/images/faces/face8.jpg"
                                     alt="Profile image" style="height: 50px; width: 50px;"> </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
@@ -122,7 +146,8 @@
                                 <a class="dropdown-item">Activity<i
                                         class="dropdown-item-icon ti-location-arrow"></i></a>
                                 <a class="dropdown-item">FAQ<i class="dropdown-item-icon ti-help-alt"></i></a>
-                                <a class="dropdown-item">Sign Out<i class="dropdown-item-icon ti-power-off"></i></a>
+                                <a class="dropdown-item" href="/logout/logout">Sign Out<i
+                                        class="dropdown-item-icon ti-power-off"></i></a>
                             </div>
                         </li>
                     </ul>
@@ -133,21 +158,23 @@
                 </div>
             </nav>
             <div class="content-wrapper">
-                <h2>Trend</h2>
+                <h2>{{friend}}'s Trend</u> </h2>
                        <div class="row m-b-1">
                            <div class="col-12">
                                <div class="card shadow">
-                                  <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+                                  <div class="chart-area" id="chartContainer" style="height: 400px; width: 100%;"></div>
                                    {%csrf_token%}
                                    {%block content%}
-                                   {% for c in tweet_data%}
+                                   {%for c in friend_handle%}
+                                   {%for d in tweet_data%}
                                   <div id="tweet_data">{{c}} &nbsp; 
-                                <input type="radio" name="Positive" id="rd1">Yes
-                                <input type="radio" name="Positive" id="rd2">No
+                                <input type="checkbox" class="radio" value="1" name="Positive" id="rd1">Yes
+                                <input type="checkbox" class="radio" value="1" name="Negative" id="rd2">No
                                   </div>
                                     {%endfor%}
+                                    {%endfor%}
                                     {%endblock %}
-                                    <input type="submit" value="Submit">
+                                   
                                    </div>
                                </div>
                            </div>
@@ -173,7 +200,6 @@
                            </div>
                        </div> <!-- row -->
             </div>
-      
                         
             <script>
                 window.onload = function () {
@@ -189,29 +215,31 @@
                     }
 
                     var chart = new CanvasJS.Chart("chartContainer", {
-                        theme: "light2", // "light1", "light2", "dark1", "dark2"
+                        theme: "dark2", // "light1", "light2", "dark1", "dark2"
                         animationEnabled: true,
                         title: {
-                            text: "{{friend}}'s Trend"
+                            text: "Trend - Postive/Negative",
+                            titleFontSize: 15,
                         },
                         axisX: {
-                            valueFormatString: "DD, MMM",
                             title: "Date",
-                            interval: 1,
+                            interval: 0,
                             intervalType: "Day",
+                            valueFormatString: "DD, MMM, YYYY",
+                            labelAutoFit: true,
+                            labelFontSize: 12,
                         },
                         axisY: {
                             title: "Sentiment",
-                            interval: 1,
-                            valueFormatString: "0"
+                            interval: 0.1,
+                            valueFormatString: "#.##"
                         },
                         data: [{
                             type: "splineArea",
                             markerSize: 12,
                             xValueType: "datetime",
-                            xValueFormatString: "DD, MMM",
-                            yValueFormatString: "#",
-                            dataPoints: obj,
+                            xValueFormatString: "DD, MMM, YYYY",
+                            dataPoints: obj
                         }]
                     });
                     console.log(obj);
