@@ -13,23 +13,20 @@ h2 {
     color: #f8f9fa;
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
-    display: block;
+    display: block; 
 }
 
 h3 {
     color: #1D2228;
     font-family: 'Open Sans', sans-serif;
     font-weight: 800;
-
     display: block;
 }
 
 h4 {
-    color: #FB8122;
+    color: #1D2228;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 800;
-    padding: 10px;
-
+    font-weight: 400;
     text-align: center;
 }
 
@@ -78,7 +75,7 @@ a:focus {
     perspective: 1500px;
 }
 
-.content-wrapper h2 {
+.content-wrapper h2{
     padding: 70px;
     text-align: center;
 }
@@ -96,8 +93,8 @@ a:focus {
 #sidebar.active {
     margin-left: -250px;
     transform: rotateY(100deg);
-    color: #f8f9fa;
-    background: #1D2228;
+        color: #f8f9fa;
+        background: #1D2228;
 }
 
 #sidebar .sidebar-header {
@@ -468,7 +465,7 @@ ul ul a {
     position: absolute;
     right: 0;
     left: auto;
-    border: 1px solid;
+    border: 1px solid ;
     padding: 10 10 10px;
     min-width: 100%;
     border-radius: 2px;
@@ -604,10 +601,10 @@ ul ul a {
     align-items: center;
 }
 
-.navbar.default-layout .navbar-menu-wrapper :focus,
+.navbar.default-layout .navbar-menu-wrapper :focus, 
 .navbar.default-layout .navbar-menu-wrapper :visited {
     padding: 6px;
-    background-color: rgb(255, 255, 255);
+    background-color:rgb(255, 255, 255); 
 }
 
 
@@ -644,7 +641,6 @@ ul ul a {
 .navbar.default-layout .navbar-menu-wrapper .navbar-nav .nav-item.language-dropdown .flag-icon-holder i {
     font-size: 25px;
 }
-
 @media (max-width: 991px) {
     .navbar.default-layout {
         -webkit-box-orient: horizontal;
@@ -663,7 +659,6 @@ ul ul a {
 
 
 }
-
 input[type=text],
 select {
     position: inherit;
@@ -691,7 +686,7 @@ input[type=submit] {
     border: #1D2228;
     border-radius: 4px;
     cursor: pointer;
-    display: block;
+    display:block;
 
 }
 
@@ -774,24 +769,4 @@ input[type=submit] {
 #orders-spline-chart {
     height: 300px;
     width: 100%;
-}
-
-.feedback-form {
-    position: relative;
-    text-align: center;
-    width: 100%;
-    border: 1px solid #FB8122;
-    border-width: 1px solid;
-    display: block;
-    color: #FB8122;
-    border-collapse: collapse;
-
-}
-
-.feedback-table {
-    width: 100%;
-    border: 1px solid #FB8122;
-    border-width: 1px;
-    border-collapse: collapse;
-
 }
