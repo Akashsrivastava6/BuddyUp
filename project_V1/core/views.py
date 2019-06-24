@@ -130,13 +130,14 @@ def trend(request):
     tweet_data=tweets_data.objects.filter(twitter_handle=twitter_handle)
 
     twt_date=[]
+    twt_str = []
     for d in tweet_data:
         #  twt_date.append({'date': d.tweet_date,'tweet': d.tweet_data,'label': d.class_label})
         twt_date.append({
             "x": d.tweet_date,
-            "y": d.class_label
+            "y": d.class_label,
         })
+        twt_str.append({"id": d.tweet_id, "tweets": d.tweet_data})
 
 
-
-    return render(request, 'trend.html', {"Message": json.dumps(twt_date, default=json_serial), "friend": twitter_handle})
+    return render(request, 'trend.html', {"Message": json.dumps(twt_date, default=json_serial), "tweet_data":twt_str, "friend": twitter_handle})
