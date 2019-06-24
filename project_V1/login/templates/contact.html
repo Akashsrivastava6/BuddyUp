@@ -15,7 +15,7 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="{% static style.css%}">
+    <link rel="stylesheet" href="{% static 'style.css'%}">
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
@@ -79,9 +79,7 @@
                         </li>
                         <li class="nav-item dropdown d-none d-xl-inline-block">
                             <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                Jon Doe &nbsp;
-                                <img class="img-xs rounded-circle" src="../Dashboard/assets/images/faces/face8.jpg"
-                                    alt="Profile image" style="height: 50px; width: 50px;"> </a>
+                               
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                                 aria-labelledby="UserDropdown">
                                 <a class="dropdown-item">My Profile <span
@@ -101,11 +99,12 @@
                     </button>
                 </div>
             </nav>
+             <div class="content-wrapper">
+                 <h2>{{Message}}</h2>
+            </div>
         </div>
 
-        <div class="content-wrapper">
-                {{Message}}
-        </div>
+      
 
         <!-- jQuery CDN - Slim version (=without AJAX) -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

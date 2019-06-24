@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -16,29 +15,28 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
 
-        <link rel="icon" type="image/png" href="{%static 'images/icons/favicon.ico'%}" />
-        <!--===============================================================================================-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
+    <link rel="icon" type="image/png" href="{%static 'images/icons/favicon.ico'%}" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
 
-        <!--===============================================================================================-->
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-        <!--Animsition CSS-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
-        <!--CSS-Hamburgers-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.1.3/hamburgers.min.css">
-        <!--===============================================================================================-->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <!--Animsition CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
+    <!--CSS-Hamburgers-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.1.3/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
 
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css"
-            href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="{% static 'style.css'%}">
     <!-- Font Awesome JS -->
@@ -48,9 +46,9 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
     </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script src="{% static trend.js%}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="{% static trend.js%}"></script>
 </head>
 
 <body>
@@ -69,7 +67,7 @@
                     </a>
 
                 </li>
-                <li >
+                <li>
                     <a href="">
                         <i class="fas fa-user-plus"></i>
                         &nbsp; followers
@@ -134,7 +132,7 @@
                         </li>
                         <li class="nav-item dropdown d-none d-xl-inline-block">
                             <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                {{ friend}} &nbsp;
+                                {{friend}} &nbsp;
                                 <img class="img-xs rounded-circle" src="../Dashboard/assets/images/faces/face8.jpg"
                                     alt="Profile image" style="height: 50px; width: 50px;"> </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
@@ -159,28 +157,56 @@
             </nav>
             <div class="content-wrapper">
                 <h2>{{friend}}'s Trend</u> </h2>
-                       <div class="row m-b-1">
-                           <div class="col-12">
-                               <div class="card shadow">
-                                  <div class="chart-area" id="chartContainer" style="height: 400px; width: 100%;"></div>
+                <div class="row m-b-1">
+                    <div class="col-12">
+                        <div class="card shadow">
+                            <div class="chart-area" id="chartContainer" style="height: 400px; width: 100%;"></div>
+                        </div>
+                        <div class="feedback-form">
+                            <h4>User Feedback</h4>
+                            {%block content%}
+                            {%if tweet_data%}
 
-                                   {%csrf_token%}
-                                   {%block content%}
-                                   {%for c in friend_handle%}
-                                   {%for d in tweet_data%}
-                                  <div id="tweet_data">{{c}} &nbsp; 
-                                <input type="checkbox" class="radio" value="1" name="Positive" id="rd1">Yes
-                                <input type="checkbox" class="radio" value="1" name="Negative" id="rd2">No
-                                  </div>
-                                    {%endfor%}
-                                    {%endfor%}
-                                    {%endblock %}
-                                   
-                                   </div>
-                                   {{obj2}}
-                               </div>
-                           </div>
-                       </div> <!-- row -->
+                            <table class="feedback-table">
+                                <tr>
+                                <th mat-header-cell *matHeaderCellDef> Tweet Id </th>
+                                <th>Tweet </th>
+                                <th>
+                                    Class Label 
+                                </th>
+                                <th>
+                                    Correctly Classified?
+                                </th>
+                                </tr>  
+                                {%for d in tweet_data%}
+                            <tr>
+                                <td>
+                                    {{d.id}}
+                                </td>
+                                <td>
+                                    {{d.tweets}}
+                                </td>
+                                <td>
+                                    {{d.class}}
+                                </td>
+                                <td>
+                                    <form>
+                                        <input type="radio" name="selection">Yes
+                                        <input type="radio" name="selection">No
+                                    </form>
+                                    </td>
+
+                            </tr>
+                            {%endfor%}
+                            {%endif%}
+                            {%endblock %}                                            
+
+                                                    </table>
+ <input type="submit" value="submit">
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- row -->
             <!--           <div class="row m-b-1">
                            <div class="col-lg-6">
                                <div class="card shadow">
@@ -201,50 +227,51 @@
                                </div>
                            </div>
                        </div> <!-- row -->
-            </div>
-                        
-            <script>
-                window.onload = function () {
-                    var data = "{{obj1}}";
-                    var data2 = "{{obj2}}";
-                    var res1 = data.replace(/&quot;/g, '"');
-                    var res2 = data2.replace(/&quot;/g, '"');
-                    //var new_date = res.replace(/datetime.date/g, "new Date");
-                    var obj1 = JSON.parse(res1)
-                    var obj2 = JSON.parse(res2)
+        </div>
 
-                   // alert(typeof(obj[0]['x']));
-                    for(var i=0;i<obj1.length;i++){
-                        
-                        obj1[i]['x'] = new Date(obj1[i]['x']);
-                     //   obj[i]['x']=obj[i]['x'].replace('"',")");
-                    }
-                    for(var i=0;i<obj2.length;i++){
-                        
-                        obj2[i]['x'] = new Date(obj2[i]['x']);
-                     //   obj[i]['x']=obj[i]['x'].replace('"',")");
-                    }
+        <script>
+            window.onload = function () {
+                var data = "{{obj1}}";
+                var data2 = "{{obj2}}";
+                var res1 = data.replace(/&quot;/g, '"');
+                var res2 = data2.replace(/&quot;/g, '"');
+                //var new_date = res.replace(/datetime.date/g, "new Date");
+                var obj1 = JSON.parse(res1)
+                var obj2 = JSON.parse(res2)
 
-                    var chart = new CanvasJS.Chart("chartContainer", {
-                        theme: "dark2", // "light1", "light2", "dark1", "dark2"
-                        animationEnabled: true,
-                        title: {
-                            text: "Trend - Postive/Negative",
-                            titleFontSize: 15,
-                        },
-                        axisX: {
-                            title: "Date",
-                            interval:0,
-                            intervalType: "month", 
-                            valueFormatString: "DD MMM, YY",
-                            labelFontSize: 13,
-                        },
-                        axisY: {
-                            title: "Sentiment",
-                            interval: 3,
-                            valueFormatString: "##"
-                        },
-                        data: [{
+                // alert(typeof(obj[0]['x']));
+                for (var i = 0; i < obj1.length; i++) {
+
+                    obj1[i]['x'] = new Date(obj1[i]['x']);
+                    //   obj[i]['x']=obj[i]['x'].replace('"',")");
+                }
+                for (var i = 0; i < obj2.length; i++) {
+
+                    obj2[i]['x'] = new Date(obj2[i]['x']);
+                    //   obj[i]['x']=obj[i]['x'].replace('"',")");
+                }
+
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    theme: "dark2", // "light1", "light2", "dark1", "dark2"
+                    animationEnabled: true,
+                    title: {
+                        text: "Trend - Postive/Negative",
+                        titleFontSize: 15,
+                    },
+                    axisX: {
+                        title: "Date",
+                        interval: 0,
+                        intervalType: "month",
+                        minimum: new Date("16, June, 2019"),
+                        valueFormatString: "DD MMM, YY",
+                        labelFontSize: 13,
+                    },
+                    axisY: {
+                        title: "Tweet Count",
+                        interval: 0,
+                        valueFormatString: "##"
+                    },
+                    data: [{
                             type: "splineArea",
                             name: "postive",
                             fillOpacity: .3,
@@ -255,25 +282,26 @@
                             dataPoints: obj1
                         },
                         {
-                        type: "splineArea",
-                        name: "negative",
-                        color:"#10ce13",
-                        fillOpacity: .3,
-                        markerSize: 12,
-                        xValueType: "datetime",
-                        xValueFormatString: "DD, MMM, YYYY",
-                        dataPoints: obj2
-                        }]
-                    });
-                    chart.render();
-                }
-            </script>
+                            type: "splineArea",
+                            name: "negative",
+                            color: "#10ce13",
+                            fillOpacity: .3,
+                            markerSize: 12,
+                            xValueType: "datetime",
+                            xValueFormatString: "DD, MMM, YYYY",
+                            dataPoints: obj2
+                        }
+                    ]
+                });
+                chart.render();
+            }
+        </script>
 
 
 
-                <!-- jQuery CDN - Slim version (=without AJAX) -->
-                <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-                <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+        <!-- jQuery CDN - Slim version (=without AJAX) -->
+        <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+        <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 
 </body>
 
