@@ -137,7 +137,17 @@
                        <div class="row m-b-1">
                            <div class="col-12">
                                <div class="card shadow">
-                                  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                                  <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+                                   {%csrf_token%}
+                                   {%block content%}
+                                   {% for c in tweet_data%}
+                                  <div id="tweet_data">{{c}} &nbsp; 
+                                <input type="radio" name="Positive" id="rd1">Yes
+                                <input type="radio" name="Positive" id="rd2">No
+                                  </div>
+                                    {%endfor%}
+                                    {%endblock %}
+                                    <input type="submit" value="Submit">
                                    </div>
                                </div>
                            </div>
@@ -171,7 +181,7 @@
                     var res = data.replace(/&quot;/g, '"');
                     //var new_date = res.replace(/datetime.date/g, "new Date");
                     var obj = JSON.parse(res)
-                    alert(typeof(obj[0]['x']));
+                   // alert(typeof(obj[0]['x']));
                     for(var i=0;i<obj.length;i++){
                         
                         obj[i]['x'] = new Date(obj[i]['x']);
@@ -185,19 +195,21 @@
                             text: "{{friend}}'s Trend"
                         },
                         axisX: {
+                            valueFormatString: "DD, MMM",
                             title: "Date",
                             interval: 1,
                             intervalType: "Day",
-                            valueFormatString: "DD MMM"
                         },
                         axisY: {
                             title: "Sentiment",
-                            valueFormatString: "0.5"
+                            interval: 1,
+                            valueFormatString: "0"
                         },
                         data: [{
                             type: "splineArea",
                             markerSize: 12,
-                            xValueFormatString: "MMM, YYYY",
+                            xValueType: "datetime",
+                            xValueFormatString: "DD, MMM",
                             yValueFormatString: "#",
                             dataPoints: obj,
                         }]
