@@ -234,21 +234,21 @@
                         },
                         axisX: {
                             title: "Date",
-                            interval: 0,
-                            intervalType: "Day", 
-                            valueFormatString: "DD, MMM, YY",
-                            labelAutoFit: true,
-                            tickLength: 5,
-                            labelFontSize: 12,
+                            interval:0,
+                            intervalType: "month", 
+                            valueFormatString: "DD MMM, YY",
+                            labelFontSize: 13,
                         },
                         axisY: {
                             title: "Sentiment",
-                            interval: 1,
+                            interval: 3,
                             valueFormatString: "##"
                         },
                         data: [{
                             type: "splineArea",
                             name: "postive",
+                            fillOpacity: .3,
+                            color: "#e51212",
                             markerSize: 12,
                             xValueType: "datetime",
                             xValueFormatString: "DD, MMM, YY",
@@ -257,6 +257,8 @@
                         {
                         type: "splineArea",
                         name: "negative",
+                        color:"#10ce13",
+                        fillOpacity: .3,
                         markerSize: 12,
                         xValueType: "datetime",
                         xValueFormatString: "DD, MMM, YYYY",
