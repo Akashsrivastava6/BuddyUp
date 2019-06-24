@@ -138,6 +138,8 @@
                            <div class="col-12">
                                <div class="card shadow">
                                   <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+                                  {{obj1}}
+                                
                                    {%csrf_token%}
                                    {%block content%}
                                    {% for c in tweet_data%}
@@ -149,6 +151,7 @@
                                     {%endblock %}
                                     <input type="submit" value="Submit">
                                    </div>
+                                   {{obj2}}
                                </div>
                            </div>
                        </div> <!-- row -->
