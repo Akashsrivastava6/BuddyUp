@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from login.models import User_detail,Registration
-from passlib.hash import pbkdf2_sha256
 from django.contrib.auth.decorators import login_required
 from core.models import following
+from login import task 
 
 @login_required
 def home(request):
@@ -10,20 +10,18 @@ def home(request):
 
 # Create your views here.
 def loginPage(request):
+
     if request.session.has_key('username'):
         request.session.set_expiry(180)
         usr=request.session['username']
-        data3=following.objects.filter(user_id=usr)
-        t_handle=[]
-        for d in data3:
-            t_handle.append(d.twitter_handle)
+        t_handle=task.getFriends(usr)
         return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
     return render(request,'index.html')
 
 def logoutRequest(request):
     try:
         del request.session['username']
-        
+        request.session.set_expiry(1)
     except KeyError:
         pass
    # return render(request,'index.html',{"Message":"Logout Successful!"})
@@ -39,37 +37,20 @@ def loginRequest(request):
     if request.session.has_key('username'):
         request.session.set_expiry(180)
         usr=request.session['username']
-        data3=following.objects.filter(user_id=usr)
-        t_handle=[]
-        for d in data3:
-            t_handle.append(d.twitter_handle)
+        t_handle=task.getFriends(usr)
         return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
     request.session.clear_expired()
-
     usr=request.POST.get("username")
     pwd=request.POST.get('password')
-    if usr==None:
-        return render(request,'index.html',{'Message':"Please enter Username"})
-    if pwd==None:
-        return render(request,'index.html',{'Message':"Please enter Password"})
-    
-    try:
-        data=User_detail.objects.get(username=usr)
-        data2=Registration.objects.get(username=data.username)
-        #
-
-    except:
-        return render(request,'index.html',{'Message':"Username not registered!"})
-    if pbkdf2_sha256.verify(pwd,data.password):
+    status,message=task.checkUserPassword(usr,pwd)
+    if status=="fail":
+        return render(request,'index.html',{'Message':message})
+    elif status=="success":
         request.session.set_expiry(180)
         request.session['username']=usr
-        data3=following.objects.filter(user_id=usr)
-        t_handle=[]
-        for d in data3:
-            t_handle.append(d.twitter_handle)
+        t_handle=task.getFriends(usr)
         return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
-    else:
-        return render(request,'index.html',{'Message':"Incorrect Password!"})
+        
 
 def RegisterUser(request):
     
@@ -78,19 +59,8 @@ def RegisterUser(request):
     fname=request.POST.get("fname")
     lname=request.POST.get("lname")
     dob=request.POST.get("dob")
-    pwd=pbkdf2_sha256.encrypt(pwd,rounds=10000)
-
-    try:
-        data=User_detail.objects.get(username=usr)
-    except:
-        
-        user_login_details=User_detail(username=usr,password=pwd)
-        
-        user_registration_details=Registration(username_id=usr,FirstName=fname,LastName=lname,dateOfBirth=dob)
-        user_login_details.save()
-        user_registration_details.save()
-        
-        return render(request,'signup.html',{'Message':"You have been registered!!"})
-    return render(request,'signup.html',{'Message':"Email already registered"})    
+    message=task.registerNewUser(usr,pwd,fname,lname,dob)
+    return render(request,'signup.html',{'Message':message})
+    
 
     

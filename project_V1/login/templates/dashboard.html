@@ -50,14 +50,14 @@
 
             <ul class="list-unstyled components">
                 <li class="active" id="1">
-                    <a href="submit">
+                    <a href="/login/submit">
                         <i class="fas fa-home"></i>
                         &nbsp; dashboard
                     </a>
 
                 </li>
                 <li id="2">
-                    <a href="">
+                    <a href="/core/follower">
                         <i class="fas fa-user-plus"></i>
                         &nbsp; followers
                     </a>
@@ -87,7 +87,7 @@
         <div id="content">
             <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
                 <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-                    <a class="navbar-brand brand-logo" href="submit">
+                    <a class="navbar-brand brand-logo" href="/login/submit">
                         <u>BUDDY|UP</u>
                         <a class="navbar-brand brand-logo-mini" href="/login/submit">
                             <img src="#" alt="logo" /> </a>
@@ -155,7 +155,7 @@
                                  {%if data%}
                                  {% for c in data%}
                         <form class="form-inline" id="friends-list"
-                                                                 action='/addfriend/trendpage' method="post">
+                                                                 action='/core/trendpage' method="post">
                                                                                                  {%csrf_token%}
 
                                 <div class="mx-sm-3 mb-2">
@@ -174,11 +174,12 @@
                     </div>
                     <div class="col-xs-6 col-md-4" id="col2">
                         <div class="following-container">
-                            <h3>Add user by email</h3>
-                            <form action="/addfriend/addfriend" method="post">
+                            <h3>Add Friend by email</h3>
+                            <form action="/core/addfriend" method="post">
                                 {%csrf_token%}
-                            <input type="text" id="fname" name="twitter_handle" placeholder="Enter Name">
-                            <input type="text" id="fname" name="email" placeholder="Enter Email">
+                            <input type="text" id="fname" name="twitter_handle" placeholder="Enter Name" required>
+                            <input type="text" id="fname" name="email" placeholder="Enter Email" required>
+                            {{msg}}
                             <input type="submit" value="Send Email" >
                         </form>
                         </div>
