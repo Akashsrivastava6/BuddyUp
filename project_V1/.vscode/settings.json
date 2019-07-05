@@ -1,4 +1,4 @@
 {
     "python.pythonPath": "C:\\Users\\Akash Srivastava\\Anaconda3\\envs\\project\\python.exe",
-    "python.formatting.provider": "yapf"
+    "python.formatting.provider": "black"
 }

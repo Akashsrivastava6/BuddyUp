@@ -21,4 +21,5 @@ urlpatterns = [
     #path('verifyFriend',views.VerifyFriend),
     path('login/submit',views.Checking),
     path('trendpage',views.trend),
+    path('follower',views.Followers),
 ]
