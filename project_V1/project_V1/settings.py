@@ -159,3 +159,14 @@ SOCIAL_AUTH_TWITTER_KEY = 'twVFhyS2oNaSjcUUVaYVnTBpH'
 SOCIAL_AUTH_TWITTER_SECRET = 'GlvJcYHsfeT6szx7oLuVBiWgtwAg2SCEEzhJpyUuWslooI61cn'
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+
+
+
+# CELERY STUFF
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+#CELERY_TIMEZONE = 'Africa/Nairobi'
