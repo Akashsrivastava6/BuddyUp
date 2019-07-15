@@ -1,7 +1,6 @@
 import pandas as pd
 import re
-
-
+  
 
 def preprocess(twt):
    
@@ -60,3 +59,64 @@ def remove_emoticon_replacement(df):
    return tweets,ind
 # df_processed = pd.DataFrame()
 # df_processed['tweets'] = tweets
+
+def preprocess1(tmp3):
+   words=pd.read_csv("EmotionLookupTableGeneral.txt",sep="\\t",header=None,names=['word','score'])
+   neg_words=pd.read_csv("NegatingWordList.txt",sep="\\t",header=None,names=['word'])
+
+ 
+
+
+   str1=""
+   for a in range(len(words['word'])):
+      if a != len(words['word'])-1:
+         str1=str1+"^[#]*"+words.iloc[a]['word']+"$,"
+      else:
+         str1=str1+"^[#]*"+words.iloc[a]['word']+"$"
+   str1=str1.split(",")
+
+
+
+
+
+   tmp4=[]
+
+   for a in range(len(tmp3)):
+      sum_score=0
+      counter=0
+      sum_list=""
+      #regex = re.compile('[%s]' % re.escape(string.punctuation))
+      regex=re.compile('[!.,?]')
+      aa=regex.sub(' . ', tmp3[a])
+      #print(aa)
+      ll=aa.split(" ")
+      flag=0
+      for a1 in ll:
+         a1=a1.lower()
+         
+         if neg_words['word'].isin([a1]).any():
+                  flag=1
+         elif re.match("[!,.?]$",a1):
+                  
+                  flag=0
+         #for la in l:
+         for ans,item in enumerate(str1):
+               #print(str)
+               if re.match('%s'%item,a1):
+                  #print(re.match('%s'%str1[ans],a1))
+                  if flag==0:
+                     sum_score=sum_score+words.iloc[ans]['score']
+                     sum_list=sum_list+words.iloc[ans]['word']+" "+str(words.iloc[ans]['score'])+" "
+                     counter=counter+1  
+                  else:
+                     sum_score=sum_score+(words.iloc[ans]['score']*(-1))
+                     sum_list=sum_list+words.iloc[ans]['word']+" "+str(words.iloc[ans]['score'])+" "
+                     counter=counter+1  
+               #print(words[word])
+      if counter!=0:
+         tmp4.append([tmp3[a],sum_score,counter,sum_score/counter])
+      else:
+         tmp4.append([tmp3[a],sum_score,counter,0])
+   tmp4=pd.DataFrame(tmp4,columns=['Tweet','Sum_score','Counter','Score'])    
+
+   return tmp4
