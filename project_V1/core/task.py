@@ -188,7 +188,7 @@ def AddTweets():
             '''
             df=Preprocess.preprocess1(tmp3)
             for pos,item in df.iterrows():
-                tweet=tweets_data(twitter_handle=friend_handle,tweet_id=tmp1[pos],tweets_data=item['Tweet'],tweet_date=tmp2[j],sum_score=item['Sum_score'],score=item['Score'],counter=item['Counter'])
+                tweet=tweets_data(twitter_handle=t_handle,tweet_id=tmp1[pos],tweet_data=item['Tweet'],tweet_date=tmp2[pos],sum_score=item['Sum_score'],score=item['Score'],counter=item['Counter'])
                 tweet.save()
 
 

@@ -61,8 +61,8 @@ def remove_emoticon_replacement(df):
 # df_processed['tweets'] = tweets
 
 def preprocess1(tmp3):
-   words=pd.read_csv("EmotionLookupTableGeneral.txt",sep="\\t",header=None,names=['word','score'])
-   neg_words=pd.read_csv("NegatingWordList.txt",sep="\\t",header=None,names=['word'])
+   words=pd.read_csv("core/EmotionLookupTableGeneral.txt",sep="\\t",header=None,names=['word','score'])
+   neg_words=pd.read_csv("core/NegatingWordList.txt",sep="\\t",header=None,names=['word'])
 
  
 
