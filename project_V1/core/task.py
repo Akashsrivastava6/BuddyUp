@@ -10,7 +10,7 @@ from datetime import date, datetime
 import tweepy
 from . import Preprocess
 import pickle
-
+import pandas as pd
 
 
 def sendRequest(usr,friend_handle,friend_email,url):
@@ -57,7 +57,10 @@ def getFollower(user):
 
 def getTrend(twitter_handle):
     tweet_data=tweets_data.objects.filter(twitter_handle=twitter_handle)
-    t_d1=tweets_data.objects.filter(twitter_handle=twitter_handle).filter(class_label=0).values('tweet_date').annotate(count=Count('tweet_date'))
+    
+    # USed for mvp
+    '''
+    t_d1=tweets_data.objects.filter(twitter_handle=twitter_handle)..values('tweet_date').annotate(count=Count('tweet_date'))
     t_d2=tweets_data.objects.filter(twitter_handle=twitter_handle).filter(class_label=1).values('tweet_date').annotate(count=Count('tweet_date'))
     twt_date=[]
     twt_str = []
@@ -78,7 +81,36 @@ def getTrend(twitter_handle):
         chk1.append({"x":d['tweet_date'],"y":d['count'],'class_label':0}) 
     for d in t_d2:
         chk2.append({"x":d['tweet_date'],"y":d['count'],'class_label':1}) 
-    return json.dumps(twt_date, default=json_serial),twt_str,twitter_handle,json.dumps(chk1,default=json_serial),json.dumps(chk2,default=json_serial)
+    '''
+    t_d1=tweets_data.objects.filter(twitter_handle=twitter_handle).values('tweet_date').distinct()
+    f='%Y-%m-%d'
+    twt_date=[]
+    tweet=[]
+    date=[]
+    scores=[]
+    for a in range(len(t_d1)):
+        t_d2=tweets_data.objects.filter(twitter_handle=twitter_handle).filter(tweet_date=t_d1[a]['tweet_date'])
+        
+        score=0
+        counter=0
+        
+       
+
+        for d in t_d2:
+            tweet.append(d.tweet_data)
+            date.append(d.tweet_date)
+            scores.append(d.score)
+            score=score+d.score
+            counter=counter+d.counter
+        if counter!=0:
+            twt_date.append({"x":t_d1[a]['tweet_date'],"y":(score/counter)})
+        else:
+            twt_date.append({"x":t_d1[a]['tweet_date'],"y":0})
+        df=pd.DataFrame(tweet,columns=['Tweet'])
+        df['Date']=date
+        df['Score']=scores        
+        df.to_csv("E:\\ucd\\Final project\\testlist1.csv",encoding='utf-8-sig')
+    return json.dumps(twt_date, default=json_serial),twt_date,twitter_handle,json.dumps(twt_date,default=json_serial),json.dumps(twt_date,default=json_serial)
 
 
 def twitterCheck(username):
@@ -118,7 +150,7 @@ def twitterCheck(username):
 
 
 
-@periodic_task(run_every=(crontab(minute='*/1')), name="AddTweets_task", ignore_result=True)
+@periodic_task(run_every=(crontab(minute='*/10')), name="AddTweets_task", ignore_result=True)
 def AddTweets():
     data=following.objects.filter(isActive=1)
     
@@ -128,7 +160,7 @@ def AddTweets():
         auth=tweepy.OAuthHandler('twVFhyS2oNaSjcUUVaYVnTBpH' ,'GlvJcYHsfeT6szx7oLuVBiWgtwAg2SCEEzhJpyUuWslooI61cn')
         auth.set_access_token('1133388205372432386-zKJMvfgPa1hI5zGQgsWH7LOKBdk0wU','KYAQDWhALWNQcCF2URWtgoXNzjZkRiBueIlBGj26nQcld')
         api=tweepy.API(auth)
-        public_tweets=api.user_timeline(t_handle,since_id=str(maxid['tweet_id__max']),count=1000)
+        public_tweets=api.user_timeline(t_handle,since_id=str(maxid['tweet_id__max']),count=1000,tweet_mode='extended')
         #print(public_tweets.name)
         tmp=[]
         tmp1=[]
@@ -142,11 +174,13 @@ def AddTweets():
 
             tmp1.append(j.id)
             tmp2.append(j.created_at)
-            tmp3.append(j.text)
+            tmp3.append(j.full_text)
             #tweet=tweets_data(twitter_handle=friend_handle,tweet_id=j.id,tweet_data=j.text,tweet_date=j.created_at)
             #tweet.save()
             #print(tmp)
         if len(tmp3)>0:
+            # for mvp
+            '''
             df,ind=Preprocess.preprocess(tmp3)
             #input text
             #st=["I'm not unhappy today", "I love my country"]
@@ -165,7 +199,14 @@ def AddTweets():
 
 
             tmp4.append([tmp,tmp1,tmp2,tmp3,df,len(tmp1)])
+            '''
+            df=Preprocess.preprocess1(tmp3)
+            for pos,item in df.iterrows():
+                tweet=tweets_data(twitter_handle=t_handle,tweet_id=tmp1[pos],tweet_data=item['Tweet'],tweet_date=tmp2[pos],sum_score=item['Sum_score'],score=item['Score'],counter=item['Counter'])
+                tweet.save()
 
+
+            # for final product
 
 
 @task(name="Adding_friend_tweets")
@@ -175,7 +216,7 @@ def AddFriendTweets(friend_handle):
     auth=tweepy.OAuthHandler('twVFhyS2oNaSjcUUVaYVnTBpH' ,'GlvJcYHsfeT6szx7oLuVBiWgtwAg2SCEEzhJpyUuWslooI61cn')
     auth.set_access_token('1133388205372432386-zKJMvfgPa1hI5zGQgsWH7LOKBdk0wU','KYAQDWhALWNQcCF2URWtgoXNzjZkRiBueIlBGj26nQcld')
     api=tweepy.API(auth)
-    public_tweets=api.user_timeline(friend_handle,count=1000)
+    public_tweets=api.user_timeline(friend_handle,count=1000,tweet_mode='extended')
     #print(public_tweets.name)
     tmp=[]
     tmp1=[]
@@ -189,11 +230,13 @@ def AddFriendTweets(friend_handle):
 
         tmp1.append(j.id)
         tmp2.append(j.created_at)
-        tmp3.append(j.text)
+        tmp3.append(j.full_text)
         #tweet=tweets_data(twitter_handle=friend_handle,tweet_id=j.id,tweet_data=j.text,tweet_date=j.created_at)
         #tweet.save()
         #print(tmp)
-
+    
+    # used for mvp
+    '''
     df,ind=Preprocess.preprocess(tmp3)
     #input text
     #st=["I'm not unhappy today", "I love my country"]
@@ -212,6 +255,14 @@ def AddFriendTweets(friend_handle):
 
 
     tmp4.append([tmp,tmp1,tmp2,tmp3,df,len(tmp1)])
+    '''
+
+    # for final product
+    df=Preprocess.preprocess1(tmp3)
+    for pos,item in df.iterrows():
+        tweet=tweets_data(twitter_handle=friend_handle,tweet_id=tmp1[pos],tweet_data=item['Tweet'],tweet_date=tmp2[pos],sum_score=item['Sum_score'],score=item['Score'],counter=item['Counter'])
+        tweet.save()
+
 
 
     return tmp4
