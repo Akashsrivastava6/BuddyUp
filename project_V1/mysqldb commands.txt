@@ -1,0 +1,3 @@
+ALTER DATABASE project CHARACTER SET = utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE core_tweets_data CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE core_tweets_data CHANGE tweet_data tweet_data VARCHAR(280) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL;
