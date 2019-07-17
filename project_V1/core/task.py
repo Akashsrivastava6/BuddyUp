@@ -130,7 +130,9 @@ def twitterCheck(username):
     else:                
         adduserD=User_detail(username=username)
         # adduserR=Registration(username_id=extra,firstname=userdata.first_name,lastname=userdata.last_name)
+        
         adduserD.save()
+        return 'editprofile.html',None
         #adduserR.save()
         userfollowing=following.objects.filter(twitter_handle=username)
         if len(userfollowing)>0:
