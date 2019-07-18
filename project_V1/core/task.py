@@ -109,7 +109,7 @@ def getTrend(twitter_handle):
         df=pd.DataFrame(tweet,columns=['Tweet'])
         df['Date']=date
         df['Score']=scores        
-        df.to_csv("C:/Users/arnab/OneDrive/Documents/GitHub/testlist1.csv", encoding='utf-8-sig')
+        df.to_csv("core/testlist1.csv", encoding='utf-8-sig')
     return json.dumps(twt_date, default=json_serial),twt_date,twitter_handle,json.dumps(twt_date,default=json_serial),json.dumps(twt_date,default=json_serial)
 
 
