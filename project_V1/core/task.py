@@ -83,7 +83,7 @@ def getTrend(twitter_handle):
         chk2.append({"x":d['tweet_date'],"y":d['count'],'class_label':1}) 
     '''
     t_d1=tweets_data.objects.filter(twitter_handle=twitter_handle).values('tweet_date').distinct()
-    f='%Y-%m-%d'
+    f="%Y %m %d"
     twt_date=[]
     tweet=[]
     date=[]
@@ -103,13 +103,13 @@ def getTrend(twitter_handle):
             score=score+d.score
             counter=counter+d.counter
         if counter!=0:
-            twt_date.append({"x":t_d1[a]['tweet_date'],"y":(score/counter)})
+            twt_date.append({"date":t_d1[a]['tweet_date'],"score":(score/counter)})
         else:
-            twt_date.append({"x":t_d1[a]['tweet_date'],"y":0})
+            twt_date.append({"date":t_d1[a]['tweet_date'],"score":0})
         df=pd.DataFrame(tweet,columns=['Tweet'])
         df['Date']=date
         df['Score']=scores        
-        df.to_csv("E:\\ucd\\Final project\\testlist1.csv",encoding='utf-8-sig')
+        df.to_csv("C:/Users/arnab/OneDrive/Documents/GitHub/testlist1.csv", encoding='utf-8-sig')
     return json.dumps(twt_date, default=json_serial),twt_date,twitter_handle,json.dumps(twt_date,default=json_serial),json.dumps(twt_date,default=json_serial)
 
 
