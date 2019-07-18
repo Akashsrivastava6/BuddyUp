@@ -137,7 +137,7 @@ def preprocess1(tmp3):
       else:
          tmp4.append([tmp3[a],sum_score,counter,0])
    tmp4=pd.DataFrame(tmp4,columns=['Tweet','Sum_score','Counter','Score']) 
-   # tmp4['emo_score']=emo_list
-   # tmp4['emo_counter']=emoc_list
-   # tmp4.to_csv("E:\\ucd\\Final project\\testlist.csv")
+   tmp4['emo_score']=emo_list
+   tmp4['emo_counter']=emoc_list
+   tmp4.to_csv("core/datawithemoticons.csv")
    return tmp4
