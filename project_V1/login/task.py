@@ -29,7 +29,7 @@ def registerNewUser(usr,pwd,fname,lname,dob):
         data=User_detail.objects.get(username=usr)
     except:
         
-        user_login_details=User_detail(username=usr,password=pwd)
+        user_login_details=User_detail(username=usr,password=pwd,email=usr)
         
         user_registration_details=Registration(username_id=usr,FirstName=fname,LastName=lname,dateOfBirth=dob)
         user_login_details.save()

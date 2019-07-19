@@ -20,6 +20,7 @@ urlpatterns = [
     path('addfriend',views.AddFriend),
     #path('verifyFriend',views.VerifyFriend),
     path('login/submit',views.Checking),
+    path('login/twitterregister',views.Checkingtwitter),
     path('trendpage',views.trend),
     path('follower',views.Followers),
 ]

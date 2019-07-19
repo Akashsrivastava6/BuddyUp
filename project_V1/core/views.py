@@ -8,6 +8,7 @@ from random import randint
 from passlib.hash import pbkdf2_sha256
 from django.contrib.auth import logout
 import core.task
+import login.task
 import datetime
 # Create your views here.
 
@@ -26,15 +27,36 @@ def AddFriend(request):
     return redirect("/login?Message=Session expired")
 
 
+def Checkingtwitter(request):
+        if request.session.has_key('username'):
+                request.session.set_expiry(180)
+                usr=request.session['username']
+                email=request.POST.get("username")
+                pwd=request.POST.get('password')
+                fname=request.POST.get("fname")
+                lname=request.POST.get("lname")
+                dob=request.POST.get("dob")
+                pwd=pbkdf2_sha256.encrypt(pwd,rounds=10000)
+                d1=Registration(username_id=usr,FirstName=fname,LastName=lname,dateOfBirth=dob)
+                d1.save()
+                d=User_detail.objects.filter(username=usr).update(email=email)
+                d=User_detail.objects.filter(username=usr).update(password=pwd)
+                
+                page,t_handle=core.task.twitterCheck(usr)
+                
+                return render(request,page,{"Message":request.session['username'],'data':t_handle})
+        return redirect("/login")
+
 def Checking(request):
         if request.user.is_authenticated:
                 user=request.user#.social_auth.get(provider="twitter")
-                extra=user#.extra_data['access_token']['screen_name']
+                extra=str(user)#.extra_data['access_token']['screen_name']
                 u=User.objects.get(username=user)
                 u.delete()
                 request.session.set_expiry(180)
                 request.session['username']=extra
                 page,t_handle=core.task.twitterCheck(extra)
+
 
                 return render(request,page,{"Message":request.session['username'],'data':t_handle})
 

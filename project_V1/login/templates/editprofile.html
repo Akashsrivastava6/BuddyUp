@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>webapp</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load staticfiles %}
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--===============================================================================================-->
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+
+    <!--===============================================================================================-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'style1.css'%}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css">
+    <script>
+        //for date picker
+        $(document).ready(function () {
+            $('input[name="dob"]').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: "true"
+            });
+
+        });
+
+        //for confirm password 
+
+        $(document).ready(function () {
+            $('button[name="register"]').click(function () {
+                var fname = $('input[name="fname"]').val()
+                var lname = $('input[name="lname"]').val()
+                var username = $('input[name="username"]').val()
+                var password = $('input[name="password"]').val()
+                var cpassword = $('input[name="confirmpassword"]').val()
+
+                if ((fname.match(/^[a-zA-Z][a-zA-Z]*$/g))) {
+
+                    if (lname.match(/^[a-zA-Z][a-zA-Z]*$/g)) {
+                        // email validation needs to be added here
+                        if (password.length > 6 && password.length < 15) {
+                            if (password === cpassword) {
+                                $('form[name="signup"]').unbind('submit');
+
+
+                            } else {
+                                alert("invalid confirm password")
+                                $('form[name="signup"]').submit(function (event) {
+                                    event.preventDefault();
+                                    $(this).submit();
+                                });
+                            }
+                        } else {
+                            alert("Password length should be between 7 to 14 characters")
+                            $('form[name="signup"]').submit(function (event) {
+                                event.preventDefault();
+                                $(this).submit();
+                            });
+                        }
+                    } else {
+                        alert("invalid confirm lname")
+                        $('form[name="signup"]').submit(function (event) {
+                            event.preventDefault();
+                            $(this).submit();
+                        });
+                    }
+                } else {
+                    alert("invalid confirm fnamed")
+                    $('form[name="signup"]').submit(function (event) {
+                        event.preventDefault();
+                        $(this).submit();
+                    });
+                }
+
+
+            })
+        })
+    </script>
+
+
+
+</head>
+
+<body>
+    <div class="login-page">
+        <div class="container-login-background" style="background-image: url('/static/images/original.jpg');">
+            <div class="wrap-login100">
+                <form class="login-form validate-form" name="signup" action="twitterregister" method="post">
+                    {%csrf_token%}
+                    <!-- <span class="login-form-logo">
+                        <i class="zmdi zmdi-landscape"></i>
+                    </span>-->
+                    <span class="login-form-title">
+                        <h2>Welcome to BuddyUp</h2>
+                    </span>
+
+                    <span class="login-form-title" style="margin-top: 10px;">
+                        <h5>Update Profile</h5>
+                    </span>
+
+                    <div class="wrap-input100 validate-input" data-validate="First Name">
+                        <input class="input100" type="text" name="fname" placeholder="First Name" required>
+                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Last Name">
+                        <input class="input100" type="text" name="lname" placeholder="Last Name" required>
+                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Date of birth">
+                        <input class="input100" type="text" name="dob" placeholder=" Date of Birth (YYYY-MM-DD)"
+                            readonly required data-date-end-date="-18y">
+                        <span class="focus-input100" data-placeholder="&#xf332;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter Email">
+                        <input class="input100" type="text" name="username" placeholder="Email" required>
+                        <span class="focus-input100" data-placeholder="&#xf15a;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter Password">
+                        <input class="input100" type="password" name="password" placeholder="Password" required>
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Confirm Password">
+                        <input class="input100" type="password" name="confirmpassword" placeholder="Confirm Password"
+                            required>
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+                    <div>
+                        <br>
+                        <div class="login-form-title">
+                            <h6>
+                                {{Message}}
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="container-login-form-btn">
+                        <button class="login-form-btn" name="register">
+                            Update
+                        </button>
+                    </div>
+
+                    
+</body>
+
+</html>
