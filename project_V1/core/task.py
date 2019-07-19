@@ -12,7 +12,7 @@ import tweepy
 from . import Preprocess
 import pickle
 import pandas as pd
-
+import spacy
 
 def sendRequest(usr,friend_handle,friend_email,url):
     t_handle=login.task.getFriends(usr) 
@@ -110,7 +110,7 @@ def getTrend(twitter_handle):
         df=pd.DataFrame(tweet,columns=['Tweet'])
         df['Date']=date
         df['Score']=scores        
-        df.to_csv("C:/Users/arnab/OneDrive/Documents/GitHub/testlist1.csv", encoding='utf-8-sig')
+        df.to_csv("core/testlist1.csv", encoding='utf-8-sig')
     return json.dumps(twt_date, default=json_serial),twt_date,twitter_handle,json.dumps(twt_date,default=json_serial),json.dumps(twt_date,default=json_serial)
 
 
@@ -135,17 +135,17 @@ def twitterCheck(username):
         adduserD.save()
         return 'editprofile.html',None
         #adduserR.save()
-        userfollowing=following.objects.filter(twitter_handle=username)
-        if len(userfollowing)>0:
-            if len(userfollowing.filter(isActive=1))>0:             
-                t_handle=login.task.getFriends(username)
-                return 'dashboard.html''data',t_handle
-            else:
-                t_handle=getFollower(username)
-                return 'followers.html',t_handle
-        else:
-            t_handle=login.task.getFriends(username)
-            return 'dashboard.html',t_handle
+        # userfollowing=following.objects.filter(twitter_handle=username)
+        # if len(userfollowing)>0:
+        #     if len(userfollowing.filter(isActive=1))>0:             
+        #         t_handle=login.task.getFriends(username)
+        #         return 'dashboard.html''data',t_handle
+        #     else:
+        #         t_handle=getFollower(username)
+        #         return 'followers.html',t_handle
+        # else:
+        #     t_handle=login.task.getFriends(username)
+        #     return 'dashboard.html',t_handle
                 
 
 
@@ -266,7 +266,50 @@ def AddFriendTweets(friend_handle):
         tweet=tweets_data(twitter_handle=friend_handle,tweet_id=tmp1[pos],tweet_data=item['Tweet'],tweet_date=tmp2[pos],sum_score=item['Sum_score'],score=item['Score'],counter=item['Counter'])
         tweet.save()
 
+    sp=spacy.load('en_core_web_sm')
+    da_for_use=df[df['Score']<-1]
+    da_for_use
 
+##tokens=nltk.word_tokenize(da_for_use.iloc[5]['Tweet'])
+#tags=nltk.pos_tag(tokens)
 
+    pronounlistf=['i','me','mine','we','us','our','ours']
+    pronounlisto=['your','yours','he','him','his','she','her','hers','they','them','their','theirs' ]
+
+#print11(sen.text)
+
+    listl=[]
+    listll=[]
+    for text in da_for_use['Tweet']:
+        c1=0
+        c2=0
+    
+        sen=sp(text)
+        for word in sen:
+            if (word.tag_ =='PRP') or (word.tag_ =='PRP$'):
+                if word.text.lower() in pronounlistf:
+#                 listl.append(word.text)
+                #print(text+":"+word.text+"c1")
+                    c1=c1+1
+                elif word.text.lower() in pronounlisto:
+                #print(text+":"+word.text+"c2")
+                    c2=c2+1
+        if c1 == 0 and c2==0:
+            listl.append(text)
+            listll.append("alert")
+        elif c1>c2:
+            listl.append(text)
+            listll.append("alert")
+        else:        
+            listl.append(text)
+            listll.append("No alert")
+                
+        
+        #print(f'{word.text:{12}} {word.pos_:{10}} {word.tag_:{8}} {word.dep_:{10}} {spacy.explain(word.tag_)}')
+    dd=pd.DataFrame(listl)
+    dd['is Alert?']=listll
+    dd.columns=['Tweet','is Alert']
+
+    dd.to_csv("core/alertlist.csv")
     return tmp4
 
