@@ -1,31 +1,30 @@
 /*
-    DEMO STYLE
-*/
+#A31621 #BFDBF7 #053C5E #1F7A8C #DB222A*/
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i,800,800i&display=swap');
 
 body {
     margin-top: auto;
     font-family: 'Open Sans', sans-serif;
-    background: #1D2228;
+    background: #F7F7F7;
 }
 
 h2 {
-    color: #f8f9fa;
+    color: #000;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
+    font-weight: 900;
     display: block;
 }
 
 h3 {
-    color: #1D2228;
+    color: #F7F7F7;
     font-family: 'Open Sans', sans-serif;
     font-weight: 800;
-
+    text-align: center;
     display: block;
 }
 
 h4 {
-    color: #FB8122;
+    color: #000;
     font-family: 'Open Sans', sans-serif;
     font-weight: 800;
     padding: 10px;
@@ -38,7 +37,7 @@ p {
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #FB8122;
+    color: #000;
 }
 
 a,
@@ -55,7 +54,7 @@ a:focus {
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
-    box-shadow: 1px 1px 3px #1D2228;
+    box-shadow: 1px 1px 3px #000000;
 }
 
 
@@ -63,7 +62,9 @@ a:focus {
 .line {
     width: 100%;
     height: 1px;
-    border-bottom: 1px solid #FB8122;
+    border-bottom: 1px solid #000;
+    display: inline-block;
+    ;
     margin: 40px 0;
 }
 
@@ -87,8 +88,9 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #FB8122;
-    color: #f8f9fa;
+    background: #FDD935;
+
+    color: #000000;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
 }
@@ -97,17 +99,17 @@ a:focus {
     margin-left: -250px;
     transform: rotateY(100deg);
     color: #f8f9fa;
-    background: #1D2228;
+    background: #000000;
 }
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #FB8122;
+    background: #000000;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #FB8122;
+    border-bottom: 1px solid #000000;
 }
 
 #sidebar ul p {
@@ -122,13 +124,13 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #1D2228;
+    color: #000000;
     background: #f8f9fa;
 }
 
 #sidebar ul li.active>a {
     color: #f8f9fa;
-    background: #1D2228;
+    background: #000000;
 }
 
 .dropdown-toggle::after {
@@ -142,7 +144,7 @@ a:focus {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #FB8122;
+    background: #FDD935;
 }
 
 
@@ -161,7 +163,7 @@ ul ul a {
 #sidebarCollapse {
     width: 40px;
     height: 40px;
-    background: #FB8122;
+    background: #FDD935;
     cursor: pointer;
 }
 
@@ -170,7 +172,7 @@ ul ul a {
     height: 2px;
     margin: 0 auto;
     display: block;
-    background: #FB8122;
+    background: #FDD935;
     transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
     transition-delay: 0.2s;
 }
@@ -414,7 +416,7 @@ ul ul a {
     content: "\F140";
     font-family: "Open Sans", sans-serif;
     font-size: 20px;
-    color: #f8f9fa;
+    color: #000000;
     text-rendering: auto;
     line-height: inherit;
     vertical-align: 0;
@@ -440,8 +442,8 @@ ul ul a {
     width: 1rem;
     height: 1rem;
     border-radius: 100%;
-    background: #FB8122;
-    color: #f8f9fa;
+    background: #FDD935;
+    color: #000;
     font-size: 11px;
     top: -1px;
     font-weight: 600;
@@ -516,7 +518,7 @@ ul ul a {
 
 .navbar.default-layout {
     font-family: "Open Sans", sans-serif;
-    background: #f8f9fa;
+    background: #000000;
     font-weight: 900;
     transition: background 0.25s ease;
     -webkit-transition: background 0.25s ease;
@@ -529,13 +531,13 @@ ul ul a {
     -webkit-transition: width 0.25s ease, background 0.25s ease;
     -moz-transition: width 0.25s ease, background 0.25s ease;
     -ms-transition: width 0.25s ease, background 0.25s ease;
-    background: #FB8122;
+    background: #FDD935;
     width: 250px;
     height: 63px;
 }
 
 .navbar.default-layout .navbar-brand-wrapper .navbar-brand {
-    color: #1D2228;
+    color: #000000;
     font-family: 'Open Sans', sans-serif;
     font-size: 30px;
     font-weight: 900;
@@ -550,7 +552,7 @@ ul ul a {
 .navbar.default-layout .navbar-brand-wrapper .navbar-brand:active,
 .navbar.default-layout .navbar-brand-wrapper .navbar-brand:focus,
 .navbar.default-layout .navbar-brand-wrapper .navbar-brand:hover {
-    color: #f8f9fa;
+    color: #000000;
 }
 
 .navbar.default-layout .navbar-brand-wrapper .navbar-brand img {
@@ -576,7 +578,7 @@ ul ul a {
     -webkit-transition: width 0.25s ease;
     -moz-transition: width 0.25s ease;
     -ms-transition: width 0.25s ease;
-    color: #1D2228;
+    color: #f8f9fa;
     padding-left: 15px;
     padding-right: 15px;
     width: calc(100% - 270px);
@@ -673,7 +675,7 @@ select {
     padding: 12px 20px;
     margin: 20px auto;
     display: flex;
-    border: 1px solid #1D2228;
+    border: 1px solid #000000;
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -681,14 +683,14 @@ select {
 input[type=submit] {
     width: 40%;
     align-self: center;
-    background-color: #FB8122;
-    color: #1D2228;
+    background-color: #FDD935;
+    color: #000000;
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     font-weight: 900;
     padding: 14px 10px;
     margin: auto;
-    border: #1D2228;
+    border: #000000;
     border-radius: 4px;
     cursor: pointer;
     display: block;
@@ -696,41 +698,55 @@ input[type=submit] {
 }
 
 #col1 {
-    background: #1D2228;
+    background: transparent;
+    text-align: center;
+    align-content: center;
     border-radius: 8px;
     width: 80%;
-    color: #1D2228;
+    color: #f8f9fa;
+    align-items: center;
+    font-weight: 600;
+    display: inline-flex;
+    justify-content: center;
 }
 
 .following-container {
-    position: inherit;
-    padding: 15px 15px 15px 15px;
-    background: #f8f9fa;
+    position: -ms-page;
+    padding: 10px 10px 10px 10px;
+    background: #141414;
+    background-image: radial-gradient(to right, #434343 0%, black 100%);
     border-radius: 8px;
     width: 100%;
     height: auto;
-    color: #1D2228;
+    color: #f8f9fa;
+    justify-items: baseline;
     align-self: center;
-    display: block;
-    text-align: center;
+    align-items: flex-center;
+    display: inline-flexbox;
 }
 
 #btn-1 {
     font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
-    background: #FB8122;
-    border-color: #FB8122;
-    color: #1D2228;
+    font-weight: 800;
+    background: #FDD935;
+    border-color: #FDD935;
+    color: #000000;
 }
 
 #friends-list {
+    position: inherit;
     padding: 10px 10px 10px 10px;
     border: solid;
-    border-color: #1D2228;
+    border-color: #FDD935;
     border-width: 1px;
     border-radius: 6px;
-    margin: auto;
-    display: inline-flex;
+    margin: 20px;
+    font-weight: 600;
+
+    width: 40%;
+    display: -moz-inline-box;
+    align-content: center;
+    justify-content: center;
 }
 
 
@@ -752,7 +768,7 @@ input[type=submit] {
 }
 
 .card-header {
-    background-color: #37474F;
+    background-color: #FDD935;
     border-radius: 0 !important;
     color: white;
     margin-bottom: 50px;
@@ -760,14 +776,9 @@ input[type=submit] {
 }
 
 .card-block {
-    border: 1px solid #cccccc;
+    border: 1px solid #000;
 }
 
-.shadow {
-    box-shadow: 0 6px 10px 0 rgb(253, 253, 253),
-        0 1px 18px 0 rgb(255, 255, 255),
-        0 3px 5px -1px rgb(255, 255, 255);
-}
 
 #revenue-column-chart,
 #products-revenue-pie-chart,
@@ -780,17 +791,17 @@ input[type=submit] {
     position: relative;
     text-align: center;
     width: 100%;
-    border: 1px solid #FB8122;
+    border: 1px solid #000;
     border-width: 1px solid;
     display: block;
-    color: #FB8122;
+    color: #000;
     border-collapse: collapse;
 
 }
 
 .feedback-table {
     width: 100%;
-    border: 1px solid #FB8122;
+    border: 1px solid #000;
     border-width: 1px;
     border-collapse: collapse;
 

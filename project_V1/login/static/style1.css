@@ -40,7 +40,7 @@ a:focus {
 
 a:hover {
     text-decoration: none;
-    color: #FB8122;
+    color: #000;
 }
 
 /*====================================================================================*/
@@ -304,7 +304,7 @@ iframe {
     -moz-transition: all 0.4s;
     transition: all 0.4s;
 
-    background: #FB8122;
+    background: #000;
 }
 
 .focus-input100::after {
