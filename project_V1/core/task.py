@@ -58,7 +58,14 @@ def getFollower(user):
 
 def getTrend(twitter_handle):
     tweet_data=tweets_data.objects.filter(twitter_handle=twitter_handle)
-    
+    tweet_dat=[]
+    for a in tweet_data:
+        tweet_dat.append({"id":a.tweet_id,"tweet_data":a.tweet_data,"tweet_date":a.tweet_date,"tweet_score":a.score,"tweet_sum_score":a.sum_score,"tweet_counter":a.counter})
+
+
+
+
+
     # USed for mvp
     '''
     t_d1=tweets_data.objects.filter(twitter_handle=twitter_handle)..values('tweet_date').annotate(count=Count('tweet_date'))
@@ -82,6 +89,9 @@ def getTrend(twitter_handle):
         chk1.append({"x":d['tweet_date'],"y":d['count'],'class_label':0}) 
     for d in t_d2:
         chk2.append({"x":d['tweet_date'],"y":d['count'],'class_label':1}) 
+    '''
+    
+    
     '''
     t_d1=tweets_data.objects.filter(twitter_handle=twitter_handle).values('tweet_date').distinct()
     f = "YY-MM-DD"
@@ -111,7 +121,8 @@ def getTrend(twitter_handle):
         df['Date']=date
         df['Score']=scores        
         df.to_csv("core/testlist1.csv", encoding='utf-8-sig')
-    return json.dumps(twt_date, default=json_serial),twt_date,twitter_handle,json.dumps(twt_date,default=json_serial),json.dumps(twt_date,default=json_serial)
+    '''
+    return json.dumps(tweet_dat, default=json_serial),tweet_dat,twitter_handle,json.dumps(tweet_dat,default=json_serial),json.dumps(tweet_dat,default=json_serial)
 
 
 def twitterCheck(username):
