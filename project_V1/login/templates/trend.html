@@ -342,7 +342,7 @@
                 chart.render();
             }
        </script>
---> 
+-->
 
         <script src="https://d3js.org/d3.v4.min.js"></script>
 
@@ -638,13 +638,14 @@
             var parseTime = d3.timeParse("%Y-%m-%d");
             bisectDate = d3.bisector(function (d) {
                 return d.date;
-                
+
             }).left;
 
             var x = d3.scaleTime().range([0, width]);
             var y = d3.scaleLinear().range([height, 10]);
 
             var line = d3.line()
+                .curve(d3.curveCatmullRom.alpha(0.5))
                 .x(function (d) {
                     return x(d.date);
                 })
@@ -661,7 +662,7 @@
             });
 
             x.domain(d3.extent(data, function (d) {
-                return d.date;
+                return (d.date);
             }));
             y.domain(d3.extent(data, function (d) {
                 return d.score;
@@ -669,7 +670,7 @@
 
             g.append("g")
                 .attr("class", "axis axis--x")
-                .attr("transform", "translate(0," + height  + ")")
+                .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x));
 
 
@@ -684,7 +685,7 @@
                 .attr("y", 8)
                 .attr("dy", ".41em")
                 .style("text-anchor", "end")
-                .text("Population");
+                .text("Sentiment Score");
 
             g.append("path")
                 .datum(data)
@@ -709,7 +710,15 @@
                 .attr("r", 6);
 
             focus.append("text")
-                .attr("x", 15)
+                .attr("class", "tooltip-date")
+                .attr("x", 18)
+                .attr("y", -2)
+                .attr("dy", ".31em");
+
+            focus.append("text")
+                .attr("class", "tooltip-likes")
+                .attr("x", 60)
+                .attr("y", 18)
                 .attr("dy", ".31em");
 
             svg.append("rect")
@@ -732,12 +741,13 @@
                     d1 = data[i],
                     d = x0 - d0.date > d1.date - x0 ? d1 : d0;
                 focus.attr("transform", "translate(" + x(d.date) + "," + y(d.score) + ")");
-                focus.select("text").text(function () {
-                    return d.date + d.score;
-                });
-                focus.select(".x-hover-line").attr("y2", height - y(d.score));
+                focus.select(".tooltip-date").text("Date: " + d3.timeFormat("%B %d, %Y")(d.date));
+                focus.select(".tooltip-likes").text("Score: "+d.score);
+                focus.select(".x-hover-line").attr("y2", height +(d.score));
                 focus.select(".y-hover-line").attr("x2", width + width);
             }
+
+            
         </script>
 
 
