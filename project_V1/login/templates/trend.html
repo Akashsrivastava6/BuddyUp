@@ -185,19 +185,21 @@
                         </div>
                         <div class="feedback-form">
                             <h4>User Feedback</h4>
+                    
                             {%block content%}
                             {%if tweet_data%}
 
                             <table class="feedback-table">
                                 <tr>
-                                    <th mat-header-cell *matHeaderCellDef> Tweet Date </th>
+                                    <th mat-header-cell *matHeaderCellDef> Tweet id </th>
                                     <th>Tweet </th>
                                     <th>
-                                        Class Label
+                                        Tweet Date
                                     </th>
-                                    <th>
-                                        Correctly Classified?
-                                    </th>
+                                    <th>Tweet Score</th>
+                                    <th>tweet sum_score</th>
+                                    <th>tweet counter</th>
+                                    
                                 </tr>
                                 {%for d in tweet_data%}
                                 <tr>
@@ -205,17 +207,13 @@
                                         {{d.id}}
                                     </td>
                                     <td>
-                                        {{d.tweets}}
+                                        {{d.tweet_data}}
                                     </td>
-                                    <td>
-                                        {{d.class}}
-                                    </td>
-                                    <td>
-                                        <form>
-                                            <input type="radio" name="selection">Yes
-                                            <input type="radio" name="selection">No
-                                        </form>
-                                    </td>
+                                    <td>{{d.tweet_date}}</td>
+                                    <td>{{d.tweet_score}}</td>
+                                    <td>{{d.tweet_sum_score}}</td>
+                                    <td>{{d.tweet_counter}}</td>
+                                    
 
                                 </tr>
                                 {%endfor%}
@@ -228,7 +226,10 @@
                     </div>
                 </div>
             </div> <!-- row -->
-            <!--           <div class="row m-b-1">
+            <!--
+
+                
+                       <div class="row m-b-1">
                            <div class="col-lg-6">
                                <div class="card shadow">
                                 <div class="data-container" value="{{Message}}"></div>
