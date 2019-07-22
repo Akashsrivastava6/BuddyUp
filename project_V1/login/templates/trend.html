@@ -40,10 +40,13 @@
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="{% static 'style.css'%}">
     <!-- Font Awesome JS -->
+    <script src='https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js'></script>
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
     </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
+
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
     </script>
@@ -52,11 +55,30 @@
 
     <style>
         text {
+            position: absolute;
             font-family: 'Fira Sans', sans-serif;
-            font-weight: 500;
-            font-size: 15px;
-            color: #081F2C;
+            font-weight: 700;
+            margin-left: 50px;
+            padding: 60px;
+            font-size: 18px;
+            color: #FDD935;
         }
+
+        svg rect {
+            background: #081F2C;
+            padding: 10px;
+            border: 5px solid #FDD935;
+            color: #FDD935;
+        }
+
+        circle {
+            fill: #000;
+            stroke: #FDD935;
+            stroke-width: 2px;
+        }
+
+
+
 
         .axis path,
         .axis line {
@@ -73,25 +95,28 @@
 
         .line {
             fill: none;
-            stroke: #6F257F;
+            stroke: #FDD935;
             stroke-width: 5px;
         }
 
         .overlay {
             fill: none;
+            margin: 30px;
             pointer-events: all;
         }
 
-        .focus circle {
-            fill: #F1F3F3;
-            stroke: #6F257F;
-            stroke-width: 5px;
-        }
-
         .hover-line {
-            stroke: #6F257F;
+            stroke: #000;
             stroke-width: 2px;
             stroke-dasharray: 2, 4;
+        }
+
+        .focus {
+            background: #081F2C;
+            background-color: #081F2C;
+            padding: 10px;
+            border: 5px solid #FDD935;
+            color: #FDD935;
         }
     </style>
 
@@ -206,11 +231,12 @@
                 <div class="row m-b-1">
                     <div class="col-12">
                         <div class="card shadow">
-                            <svg style="width:100%; height:100%;" width="1580" height="500"></svg>
+                            <svg style="width:100%; height:100%;" width="1450" height="500" viewBox="0 0 1500 500"
+                                preserveAspectRatio="xMidYMid meet"></svg>
                         </div>
                         <div class="feedback-form">
                             <h4>User Feedback</h4>
-                    
+
                             {%block content%}
                             {%if tweet_data%}
 
@@ -224,7 +250,7 @@
                                     <th>Tweet Score</th>
                                     <th>tweet sum_score</th>
                                     <th>tweet counter</th>
-                                    
+
                                 </tr>
                                 {%for d in tweet_data%}
                                 <tr>
@@ -238,7 +264,7 @@
                                     <td>{{d.tweet_score}}</td>
                                     <td>{{d.tweet_sum_score}}</td>
                                     <td>{{d.tweet_counter}}</td>
-                                    
+
 
                                 </tr>
                                 {%endfor%}
@@ -348,17 +374,104 @@
         <script src="https://d3js.org/d3.v4.min.js"></script>
 
         <script>
-            var data1 = "{{obj1}}";
-            //  console.log((data1));
-            // var data2 = "{{obj2}}";
-            var res1 = data1.replace(/&quot;/g, '"');
-            //   console.log(typeof (res1));
-            // var res2 = data2.replace(/&quot;/g, '"');
+            var data1 = {{obj1 | safe}};
+            // console.log(data1)
 
+
+            var data2 = _.groupBy(data1, function (obj1) {
+
+                //  for((key,value) in obj1.tweet_date) {
+                //     score = score+obj1.tweet_score;
+                //      count = count+obj1.tweet_counter;
+                //  }
+                return obj1.tweet_date;
+            });
+            console.log(data2);
+            var myFormat = d3.timeFormat("%Y-%m-%d")
+            var parseTime = d3.timeParse(myFormat);
+            data = []
+            Object.keys(data2).forEach(function (key) {
+                // console.log(key, data[key]);
+                var score = 0;
+                var count = 0;
+                data2[key].forEach(function (d) {
+                    score = (score + d.tweet_score);
+                    count = count + d.tweet_counter;
+                });
+                if (count == 0) {
+                    data.push({
+                        "date": parseTime(key),
+                        "score": 0
+                    });
+                } else {
+                    data.push({
+                        "date": parseTime(key),
+                        "score": (score / count)
+                    });
+                }
+            });
+            console.log(data)
+
+
+            //keys[i] for key //dictionary[keys[i]] for the value 
+            // var score = 0;
+            // var count = 0;
+            // var aa = 0
+            // for (const [key, value] of data.entries()) {
+            //     score = score + obj1.tweet_score;
+            //     count = count + obj1.tweet_counter;
+            //     console.log(key, score, count)
+            // }
+            //   console.log(data)
+            //  console.log(typeof data);
+
+
+
+            //    / console.log(typeof data1)
+            // console.log((data1));
+            // var data2 = "{{obj2}}";z
+            // var res1 = data1.replace(/[\[\]']+/g, '')
+            //     .replace(/&quot;/g, '"');
+            // // .replace(/\\n/g, "\\n")
+            // // .replace(/\\'/g, "\\'")
+            // // .replace(/\\"/g, '\\"')
+            // // .replace(/\\&/g, "\\&")
+            // // .replace(/\\r/g, "\\r")
+            // // .replace(/\\t/g, "\\t")
+            // // .replace(/\\b/g, "\\b")
+            // // .replace(/\\f/g, "\\f");
+            // // remove non-printable and other non-valid JSON chars
+            // //  res1 = res1.replace(/[\u0000-\u001F]+/g, "");
+            // //res1 = res1.replace(/[\u0000-\u0019]+/g, "");
+            // res1 = [res1]
+            // console.log(res1)
+
+
+            // //   console.log(res2[1])
+            // // console.log(res1)
+            // res1 = JSON.parse(res1);
+
+            // console.log(obj1)
+            // remove non-printable and other non-valid JSON chars
+
+            // var res2 = data2.replace(/&quot;/g, '"');
+            //  var obj1 = res1;
+            // console.log(obj1)
             //var new_date = res.replace(/datetime.Date/g, "new Date");
-            var obj1 = JSON.parse(res1);
-            console.log((obj1));
-            var data = obj1;
+            //  res1.map(id => ({ id }))
+
+            //console.log(obj1)
+            //             var obj1 = res1.forEach(function (obj, v) {
+            //                 obj[v] = 0;
+            //                 return obj;
+            //             }, {})
+
+            // console.log(grouped);
+            // var data = jsonObject;
+            //  console.log(typeof data)
+            //    console.log(result);
+
+            // var data = obj1;
 
             /*
                         var objarr = [];
@@ -625,130 +738,155 @@
                                                     return "translate(" + mouse[0] + "," + pos.y + ")";
                                                 })
                                         });*/
-
-            var svg = d3.select("svg"),
-                margin = {
-                    top: 20,
-                    right: 80,
-                    bottom: 40,
-                    left: 40
-                },
-                width = +svg.attr("width") - margin.left - margin.right,
-                height = +svg.attr("height") - margin.top - margin.bottom;
-
-            var parseTime = d3.timeParse("%Y-%m-%d");
-            bisectDate = d3.bisector(function (d) {
-                return d.date;
-
-            }).left;
-
-            var x = d3.scaleTime().range([0, width]);
-            var y = d3.scaleLinear().range([height, 10]);
-
-            var line = d3.line()
-                .curve(d3.curveCatmullRom.alpha(0.5))
-                .x(function (d) {
-                    return x(d.date);
-                })
-                .y(function (d) {
-                    return y(d.score);
-                });
-
-            var g = svg.append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-            data.forEach(function (d) {
-                d.date = parseTime(d.date);
-                d.score = +d.score;
-            });
-
-            x.domain(d3.extent(data, function (d) {
-                return (d.date);
-            }));
-            y.domain(d3.extent(data, function (d) {
-                return d.score;
-            }));
-
-            g.append("g")
-                .attr("class", "axis axis--x")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
+            function trend() {
 
 
-            g.append("g")
-                .attr("class", "axis axis--y")
-                .call(d3.axisLeft(y).ticks(5).tickFormat(function (d) {
-                    return parseInt(d);
-                }))
-                .append("text")
-                .attr("class", "axis-title")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 8)
-                .attr("dy", ".41em")
-                .style("text-anchor", "end")
-                .text("Sentiment Score");
+                var svg = d3.select("svg"),
+                    margin = {
+                        top: 20,
+                        right: 80,
+                        bottom: 80,
+                        left: 40
+                    },
+                    width = +svg.attr("width") - margin.left - margin.right,
+                    height = +svg.attr("height") - margin.top - margin.bottom + 30;
 
-            g.append("path")
-                .datum(data)
-                .attr("class", "line")
-                .attr("d", line);
 
-            var focus = g.append("g")
-                .attr("class", "focus")
-                .style("display", "none");
 
-            focus.append("line")
-                .attr("class", "x-hover-line hover-line")
-                .attr("y1", 1)
-                .attr("y2", height);
 
-            focus.append("line")
-                .attr("class", "y-hover-line hover-line")
-                .attr("x1", width)
-                .attr("x2", width);
+                // data.forEach(function (d) {
+                //   d.date = parseTime(d.key);
+                //     console.log()
+                //     d.score = +d.score;
+                // });
 
-            focus.append("circle")
-                .attr("r", 6);
+                bisectDate = d3.bisector(function (d) {
+                    return d.date;
+                }).left;
 
-            focus.append("text")
-                .attr("class", "tooltip-date")
-                .attr("x", 18)
-                .attr("y", -2)
-                .attr("dy", ".31em");
+                var x = d3.scaleTime().range([0, width]);
+                var y = d3.scaleLinear().range([height, 30]);
 
-            focus.append("text")
-                .attr("class", "tooltip-likes")
-                .attr("x", 60)
-                .attr("y", 18)
-                .attr("dy", ".31em");
+                var line = d3.line()
+                    .curve(d3.curveCatmullRom.alpha(0.5))
+                    .x(function (d) {
+                        return x(d.date);
+                    })
+                    .y(function (d) {
+                        return y(d.score);
+                    });
 
-            svg.append("rect")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                .attr("class", "overlay")
-                .attr("width", width)
-                .attr("height", height)
-                .on("mouseover", function () {
-                    focus.style("display", null);
-                })
-                .on("mouseout", function () {
-                    focus.style("display", "none");
-                })
-                .on("mousemove", mousemove);
+                var selectCircle = svg.selectAll(".circle")
+                    .data(data)
 
-            function mousemove() {
-                var x0 = x.invert(d3.mouse(this)[0]),
-                    i = bisectDate(data, x0, 0),
-                    d0 = data[i - 1],
-                    d1 = data[i],
-                    d = x0 - d0.date > d1.date - x0 ? d1 : d0;
-                focus.attr("transform", "translate(" + x(d.date) + "," + y(d.score) + ")");
-                focus.select(".tooltip-date").text("Date: " + d3.timeFormat("%B %d, %Y")(d.date));
-                focus.select(".tooltip-likes").text("Score: "+d.score);
-                focus.select(".x-hover-line").attr("y2", height +(d.score));
-                focus.select(".y-hover-line").attr("x2", width + width);
+                var g = svg.append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+                x.domain(d3.extent(data, function (d) {
+                    return (d.date);
+                }));
+                y.domain(d3.extent(data, function (d) {
+                    return d.score;
+                }));
+
+                g.append("g")
+                    .attr("class", "axis axis--x")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(d3.axisBottom(x));
+
+                g.append("g")
+                    .attr("class", "axis axis--y")
+                    .call(d3.axisLeft(y).ticks(12).tickFormat(function (d) {
+                        return parseFloat(d);
+                    }))
+                    .append("text")
+                    .attr("class", "axis-title")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 8)
+                    .attr("dy", ".41em")
+                    .style("text-anchor", "end")
+                    .text("Sentiment Score");
+
+                g.append("path")
+                    .datum(data)
+                    .attr("class", "line")
+                    .attr("d", line)
+
+
+                g.selectAll('circle')
+                    .data(data).enter()
+                    .append('circle')
+                    .attr('cx', d => x(d.date))
+                    .attr('cy', d => y(d.score))
+                    .attr('r', 8);
+
+                g.selectAll("text").data(data).enter()
+                    .append("text")
+                    .attr("x", function (d) {
+                        return x(d.date);
+                    })
+                    .attr("y", function (d) {
+                        return y(d.score);
+                    })
+
+                var focus = g.append("g")
+                    .attr("class", "focus")
+                    .style("display", "none")
+                    .style("background-color", "#FDD935");
+
+                focus.append("line")
+                    .attr("class", "x-hover-line hover-line")
+                    .attr("y1", 1)
+                    .attr("y2", height);
+
+                focus.append("line")
+                    .attr("class", "y-hover-line hover-line")
+                    .attr("x1", width)
+                    .attr("x2", width);
+
+                focus.append("text")
+                    .attr("class", "tooltip-date")
+                    .attr("x", 18)
+                    .attr("y", -30)
+                    .attr("dy", ".31em");
+
+                focus.append("text")
+                    .attr("class", "tooltip-likes")
+                    .attr("x", 18)
+                    .attr("y", -10)
+                    .attr("cy", "5px");
+                    // .style("fill", function (d) {
+                    // if (d.score <= 0.2) { return "red" } else { return "#green" } });
+
+                var rect = svg.append("rect")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                    .attr("class", "overlay")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .on("mouseover", function () {
+                        focus.style("display", null);
+                    })
+                    .on("mouseout", function () {
+                        focus.style("display", "none");
+                    })
+                    .on("mousemove", mousemove);
+
+                function mousemove() {
+                    var x0 = x.invert(d3.mouse(this)[0]),
+                        i = bisectDate(data, x0, 0),
+                        d0 = data[i - 1],
+                        d1 = data[i],
+                        d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+                    focus.attr("transform", "translate(" + x(d.date) + "," + y(d.score) + ")");
+                    focus.select(".tooltip-date").text("Date: " + myFormat(d.date))
+                    focus.select(".tooltip-likes").text("Score: " + (d.score).toFixed(2))
+                    focus.select(".x-hover-line").attr("y2", height - y(d.score));
+                    focus.select(".y-hover-line").attr("x2", width + width);
+                }
             }
-
-            
+            trend();
         </script>
 
 

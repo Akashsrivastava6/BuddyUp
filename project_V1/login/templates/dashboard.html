@@ -11,11 +11,12 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
     <!-- Our Custom CSS -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="{%static 'style.css'%}">
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
@@ -38,6 +39,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
     </script>
+
 </head>
 
 <body>
@@ -122,7 +124,7 @@
                         </li>
                         <li class="nav-item dropdown d-none d-xl-inline-block">
                             <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                               {{ Message}} &nbsp;
+                                {{ Message}} &nbsp;
                                 <img class="img-xs rounded-circle" src="../Dashboard/assets/images/faces/face8.jpg"
                                     alt="Profile image" style="height: 50px; width: 50px;"> </a>
                             <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
@@ -134,7 +136,8 @@
                                 <a class="dropdown-item">Activity<i
                                         class="dropdown-item-icon ti-location-arrow"></i></a>
                                 <a class="dropdown-item">FAQ<i class="dropdown-item-icon ti-help-alt"></i></a>
-                                <a class="dropdown-item" href="/logout/logout">Sign Out<i class="dropdown-item-icon ti-power-off"></i></a>
+                                <a class="dropdown-item" href="/logout/logout">Sign Out<i
+                                        class="dropdown-item-icon ti-power-off"></i></a>
                             </div>
                         </li>
                     </ul>
@@ -151,24 +154,24 @@
                     <div class="col-xs-12 col-sm-6 col-md-8" id="col1" style="text-align: center">
                         <div class="following-container">
                             <h3>Following</h3>
-                                 {%block content%}
-                                 {%if data%}
-                                 {% for c in data%}
-                        <form class="form-inline" id="friends-list"
-                                                                 action='/core/trendpage' method="post">
-                                                                                                 {%csrf_token%}
+                            {%block content%}
+                            {%if data%}
+                            {% for c in data%}
+                            <form class="form-inline" id="friends-list" action='/core/trendpage' method="post">
+                                {%csrf_token%}
 
                                 <div class="mx-sm-3 mb-2">
-                                    <input type="text" style="padding: 2px; text-align: center;" name="friend" value={{c}} readonly>
+                                    <input type="text" style="padding: 2px; text-align: center;" name="friend"
+                                        value={{c}} readonly>
                                 </div>
                                 <button class="btn btn-primary mx-sm-3 mb-2" id="btn-1">View
                                     Trend</button>
                             </form>
-                                    {%endfor%}
-                                 {%else%}
-                                 <h4>Please add a friend to see the trend</h4>
-                                 {%endif%}
-                                 {%endblock %}
+                            {%endfor%}
+                            {%else%}
+                            <h4>Please add a friend to see the trend</h4>
+                            {%endif%}
+                            {%endblock %}
                         </div>
 
                     </div>
@@ -177,11 +180,11 @@
                             <h3>Add Friend by email</h3>
                             <form action="/core/addfriend" method="post">
                                 {%csrf_token%}
-                            <input type="text" id="fname" name="twitter_handle" placeholder="Enter Name" required>
-                            <input type="text" id="fname" name="email" placeholder="Enter Email" required>
-                            {{msg}}
-                            <input type="submit" value="Send Email" >
-                        </form>
+                                <input type="text" id="fname" name="twitter_handle" placeholder="Enter Name" required>
+                                <input type="text" id="fname" name="email" placeholder="Enter Email" required>
+                                {{msg}}
+                                <input type="submit" value="Send Email">
+                            </form>
                         </div>
                     </div>
                     <div class="search-field">
@@ -192,28 +195,28 @@
         </div>
     </div>
 
-                <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
 
 
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $('#sidebarCollapse').on('click', function () {
-                            $('#sidebar').toggleClass('active');
-                        });
-                    });
-                    // Add active class to the current button (highlight it)
-                    var header = document.getElementById("sidebar");
-                    
-                    for (var i = 0; i < btns.length; i++) {
-                        btns[i].addEventListener("click", function () {
-                            var current = document.getElementById("active");
-                            if (current.length > 0) {
-                                current[0].className = current[0].className.replace(" active", "");
-                            }
-                            this.className += " active";
-                        });
-                    }
-                </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+        // Add active class to the current button (highlight it)
+        var header = document.getElementById("sidebar");
+
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function () {
+                var current = document.getElementById("active");
+                if (current.length > 0) {
+                    current[0].className = current[0].className.replace(" active", "");
+                }
+                this.className += " active";
+            });
+        }
+    </script>
 
 
 </body>
