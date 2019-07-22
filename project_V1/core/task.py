@@ -6,6 +6,7 @@ from core.models import following,tweets_data
 from login.models import User_detail,Registration
 import login.task
 import json
+import datetime
 from datetime import date, datetime
 import tweepy
 from . import Preprocess
@@ -93,7 +94,7 @@ def getTrend(twitter_handle):
     
     '''
     t_d1=tweets_data.objects.filter(twitter_handle=twitter_handle).values('tweet_date').distinct()
-    f="%Y %m %d"
+    f = "YY-MM-DD"
     twt_date=[]
     tweet=[]
     date=[]
