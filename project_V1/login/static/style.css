@@ -706,12 +706,12 @@ input[type=submit] {
     color: #f8f9fa;
     align-items: center;
     font-weight: 600;
-    display: inline-flex;
+    display: inline-block;
     justify-content: center;
 }
 
 .following-container {
-    position: -ms-page;
+    position: relative;
     padding: 10px 10px 10px 10px;
     background: #141414;
     background-image: radial-gradient(to right, #434343 0%, black 100%);
@@ -719,10 +719,10 @@ input[type=submit] {
     width: 100%;
     height: auto;
     color: #f8f9fa;
-    justify-items: baseline;
+    justify-items: center;
     align-self: center;
-    align-items: flex-center;
-    display: inline-flexbox;
+    align-items: center;
+    display: block;
 }
 
 #btn-1 {
@@ -734,18 +734,17 @@ input[type=submit] {
 }
 
 #friends-list {
-    position: inherit;
+    position: relative;
     padding: 10px 10px 10px 10px;
     border: solid;
     border-color: #FDD935;
     border-width: 1px;
     border-radius: 6px;
-    margin: 20px;
+    margin: 10px;
     font-weight: 600;
-
     width: 40%;
-    display: -moz-inline-box;
-    align-content: center;
+    display:-webkit-inline-flex ;
+    align-content: inherit;
     justify-content: center;
 }
 

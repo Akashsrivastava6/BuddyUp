@@ -22,7 +22,6 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
-
     <!--===============================================================================================-->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
@@ -34,7 +33,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.1.3/hamburgers.min.css">
     <!--===============================================================================================-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.15.1/tingle.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <!-- Our Custom CSS -->
@@ -50,6 +49,10 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
     </script>
+    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.15.1/tingle.min.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <!--<script src="{% static 'trend.js' %}"></script>-->
 
@@ -78,12 +81,18 @@
         }
 
 
+        .axisRed path {
+            stroke: green;
+        }
 
+        .axisBot path {
+            stroke: red;
+        }
 
         .axis path,
         .axis line {
             fill: none;
-            stroke: #D4D8DA;
+            stroke: rgb(143, 143, 143);
             stroke-width: 2px;
             shape-rendering: crispEdges;
         }
@@ -301,75 +310,6 @@
                            </div>
                        </div> <!-- row -->
         </div>
-        <!--
-        <script>
-            window.onload = function () {
-                var data = "{{obj1}}";
-                var data2 = "{{obj2}}";
-                var res1 = data.replace(/&quot;/g, '"');
-                var res2 = data2.replace(/&quot;/g, '"');
-                //var new_date = res.replace(/datetime.Date/g, "new Date");
-                var obj1 = JSON.parse(res1)
-                var obj2 = JSON.parse(res2)
-
-                // alert(typeof(obj[0]['x']));
-                for (var i = 0; i < obj1.length; i++) {
-
-                    obj1[i]['x'] = new Date(obj1[i]['x']);
-                    //   obj[i]['x']=obj[i]['x'].replace('"',")");
-                }
-                for (var i = 0; i < obj2.length; i++) {
-
-                    obj2[i]['x'] = new Date(obj2[i]['x']);
-                    //   obj[i]['x']=obj[i]['x'].replace('"',")");
-                }
-
-                var chart = new CanvasJS.Chart("chartContainer", {
-                    theme: "dark2", // "light1", "light2", "dark1", "dark2"
-                    animationEnabled: true,
-                    title: {
-                        text: "Trend - Postive/Negative",
-                        titleFontSize: 15,
-                    },
-                    axisX: {
-                        title: "Date",
-                        interval: 0,
-                        intervalType: "month",
-                        minimum: new Date("16, June, 2019"),
-                        valueFormatString: "DD MMM, YY",
-                        labelFontSize: 13,
-                    },
-                    axisY: {
-                        title: "Tweet Count",
-                        interval: 0,
-                        valueFormatString: "##"
-                    },
-                    data: [{
-                            type: "splineArea",
-                            name: "postive",
-                            fillOpacity: .3,
-                            color: "#e51212",
-                            markerSize: 12,
-                            xValueType: "datetime",
-                            xValueFormatString: "DD, MMM, YY",
-                            dataPoints: obj1
-                        },
-                        {
-                            type: "splineArea",
-                            name: "negative",
-                            color: "#10ce13",
-                            fillOpacity: .3,
-                            markerSize: 12,
-                            xValueType: "datetime",
-                            xValueFormatString: "DD, MMcd M, YYYY",
-                            dataPoints: obj2
-                        }
-                    ]
-                });
-                chart.render();
-            }
-       </script>
--->
 
         <script src="https://d3js.org/d3.v4.min.js"></script>
 
@@ -740,7 +680,6 @@
                                         });*/
             function trend() {
 
-
                 var svg = d3.select("svg"),
                     margin = {
                         top: 20,
@@ -751,21 +690,17 @@
                     width = +svg.attr("width") - margin.left - margin.right,
                     height = +svg.attr("height") - margin.top - margin.bottom + 30;
 
-
-
-
-                // data.forEach(function (d) {
-                //   d.date = parseTime(d.key);
-                //     console.log()
-                //     d.score = +d.score;
-                // });
-
                 bisectDate = d3.bisector(function (d) {
                     return d.date;
                 }).left;
 
-                var x = d3.scaleTime().range([0, width]);
-                var y = d3.scaleLinear().range([height, 30]);
+                var x = d3.scaleTime()
+                    .domain(d3.extent(data, function (d) {
+                        return new Date(d.date)
+                    }))
+                    .range([0, width]);
+
+                var y = d3.scaleLinear().domain([-5, 5]).range([height, 30]);
 
                 var line = d3.line()
                     .curve(d3.curveCatmullRom.alpha(0.5))
@@ -784,17 +719,38 @@
 
 
 
-                x.domain(d3.extent(data, function (d) {
-                    return (d.date);
-                }));
-                y.domain(d3.extent(data, function (d) {
-                    return d.score;
-                }));
-
                 g.append("g")
                     .attr("class", "axis axis--x")
                     .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x));
+                    .call(d3.axisBottom(x)
+                        .tickFormat(d3.timeFormat("%b-%d")));
+
+                g.append("g")
+                    .attr("class", "axisMid")
+                    .attr("transform", "translate(0," + height / 1.87 + ")")
+                    .style("stroke-dasharray", ("4,6"))
+
+                    .call(d3.axisBottom(x)
+                        .tickSize(0)
+                        .tickFormat(""))
+                    .style("opacity", "0.3");
+
+
+                // g.append("g")
+                //     .attr("class", "axisRed")
+                //     .attr("transform", "translate(0," + height / 3.9 + ")")
+                //     .style("stroke-dasharray", ("4,6"))
+                //     .call(d3.axisBottom(x)
+                //         .tickSize(0)
+                //         .tickFormat(""));
+
+                // g.append("g")
+                //     .attr("class", "axisBot")
+                //     .attr("transform", "translate(0," + height / 1.23 + ")")
+                //     .style("stroke-dasharray", ("4,6"))
+                //     .call(d3.axisBottom(x)
+                //         .tickSize(0)
+                //         .tickFormat(""));
 
                 g.append("g")
                     .attr("class", "axis axis--y")
@@ -804,8 +760,8 @@
                     .append("text")
                     .attr("class", "axis-title")
                     .attr("transform", "rotate(-90)")
-                    .attr("y", 8)
-                    .attr("dy", ".41em")
+                    .attr("y", "8px")
+                    .attr("dy", "10px")
                     .style("text-anchor", "end")
                     .text("Sentiment Score");
 
@@ -849,7 +805,7 @@
                 focus.append("text")
                     .attr("class", "tooltip-date")
                     .attr("x", 18)
-                    .attr("y", -30)
+                    .attr("y", -35)
                     .attr("dy", ".31em");
 
                 focus.append("text")
@@ -857,12 +813,13 @@
                     .attr("x", 18)
                     .attr("y", -10)
                     .attr("cy", "5px");
-                    // .style("fill", function (d) {
-                    // if (d.score <= 0.2) { return "red" } else { return "#green" } });
+                // .style("fill", function (d) {
+                // if (d.score <= 0.2) { return "red" } else { return "#green" } });
 
                 var rect = svg.append("rect")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
                     .attr("class", "overlay")
+                    .attr("id", "line01")
                     .attr("width", width)
                     .attr("height", height)
                     .on("mouseover", function () {
@@ -871,7 +828,23 @@
                     .on("mouseout", function () {
                         focus.style("display", "none");
                     })
-                    .on("mousemove", mousemove);
+                    .on("mousemove", mousemove)
+                    .on("click", onClickEvent);
+
+                svg.append("rect")
+                    .attr("width", "89%")
+                    .attr("transform", "translate(40," + height / 8.9 + ")")
+                    .attr("height", height / 5.3)
+                    .attr("fill", "green")
+                    .attr("opacity", 0.4);
+
+                svg.append("rect")
+                    .attr("width", "89%")
+                    .attr("transform", "translate(40," + height / 1.165 + ")")
+                    .attr("height", height / 5.3)
+                    .attr("fill", "red")
+                    .attr("opacity", 0.4);
+
 
                 function mousemove() {
                     var x0 = x.invert(d3.mouse(this)[0]),
@@ -880,10 +853,15 @@
                         d1 = data[i],
                         d = x0 - d0.date > d1.date - x0 ? d1 : d0;
                     focus.attr("transform", "translate(" + x(d.date) + "," + y(d.score) + ")");
-                    focus.select(".tooltip-date").text("Date: " + myFormat(d.date))
+                    focus.select(".tooltip-date").text("Date: " + d3.timeFormat("%b-%d")(d.date))
                     focus.select(".tooltip-likes").text("Score: " + (d.score).toFixed(2))
                     focus.select(".x-hover-line").attr("y2", height - y(d.score));
                     focus.select(".y-hover-line").attr("x2", width + width);
+                }
+
+                function onClickEvent() {
+
+                    bootbox.alert("Hello world!")
                 }
             }
             trend();
