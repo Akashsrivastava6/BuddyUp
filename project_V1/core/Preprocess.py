@@ -106,6 +106,7 @@ def preprocess1(tmp3):
       #regex = re.compile('[%s]' % re.escape(string.punctuation))
       regex=re.compile('[!.,?]')
       aa=regex.sub(' . ', tmp3[a])
+      aa=aa.replace('\n',' ')
       #print(aa)
       ll=aa.split(" ")
       flag=0
@@ -119,18 +120,18 @@ def preprocess1(tmp3):
                   flag=0
          
          #for la in l:
-         for ans,item in word_dict.items():
-               #print(str)
-               if re.match('%s'%ans,a1):
-                  #print(re.match('%s'%str1[ans],a1))
-                  if flag==0:
-                     sum_score=sum_score+item
-                     sum_list=sum_list+ans+" "+str(item)+" "
-                     counter=counter+1  
-                  else:
-                     sum_score=sum_score+(item*(-1))
-                     sum_list=sum_list+ans+" "+str(item)+" "
-                     counter=counter+1  
+         for ans,item in enumerate(str1):
+            #print(str)
+            if re.match('%s'%item,a1):
+                #print(re.match('%s'%str1[ans],a1))
+                if flag==0:
+                    sum_score=sum_score+words.iloc[ans]['score']
+                    sum_list=sum_list+words.iloc[ans]['word']+" "+str(words.iloc[ans]['score'])+" "
+                    counter=counter+1  
+                else:
+                    sum_score=sum_score+(words.iloc[ans]['score']*(-1))
+                    sum_list=sum_list+words.iloc[ans]['word']+" "+str(words.iloc[ans]['score'])+" "
+                    counter=counter+1  
                #print(words[word])
       if counter!=0:
          tmp4.append([tmp3[a],sum_score,counter,sum_score/counter])

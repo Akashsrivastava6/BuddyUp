@@ -12,6 +12,9 @@ import login.task
 import datetime
 # Create your views here.
 
+
+
+
 def AddFriend(request):
     if request.session.has_key('username'):
         request.session.set_expiry(180)
