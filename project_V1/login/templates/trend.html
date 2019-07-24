@@ -96,7 +96,7 @@
         }
 
         .axis-title {
-            fill: #5B6770;
+            fill: 5B6770#;
             letter-spacing: 1px;
         }
 
@@ -313,7 +313,7 @@
 
         <script>
             var data1 = {{obj1 | safe}};
-            // console.log(data1)
+             console.log(data1)
 
 
             var data2 = _.groupBy(data1, function (obj1) {
@@ -698,7 +698,7 @@
                     },
                     width = +svg.attr("width") - margin.left - margin.right,
                     height = +svg.attr("height") - margin.top - margin.bottom + 30;
-
+                    
                 bisectDate = d3.bisector(function (d) {
                     return d.date;
                 }).left;
