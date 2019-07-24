@@ -40,20 +40,18 @@
     <link rel="stylesheet" href="{% static 'style.css'%}">
     <!-- Font Awesome JS -->
     <script src='https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js'></script>
-
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
     </script>
-    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.15.1/tingle.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <!--<script src="{% static 'trend.js' %}"></script>-->
 
     <style>
@@ -327,28 +325,39 @@
                 return obj1.tweet_date;
             });
             console.log(data2);
+            
             var myFormat = d3.timeFormat("%Y-%m-%d")
             var parseTime = d3.timeParse(myFormat);
             data = []
+            tweet_data = []
             Object.keys(data2).forEach(function (key) {
                 // console.log(key, data[key]);
                 var score = 0;
                 var count = 0;
+                var tweets = [];
                 data2[key].forEach(function (d) {
-                    score = (score + d.tweet_score);
+                    score = (score + d.tweet_sum_score);
                     count = count + d.tweet_counter;
+                    tweets.push(d.tweet_data);
                 });
                 if (count == 0) {
                     data.push({
                         "date": parseTime(key),
-                        "score": 0
+                        "score": 0,
+                        "tweet": tweets
                     });
                 } else {
                     data.push({
                         "date": parseTime(key),
-                        "score": (score / count)
+                        "score": (score / count),
+                        "tweet": tweets
                     });
                 }
+                data2[key].forEach(function (d) {
+                    tweet_data.push({
+                        "date": parseTime(key),
+                        "tweet":d.tweet_data})                
+                        })
             });
             console.log(data)
 
@@ -828,7 +837,7 @@
                     .on("mouseout", function () {
                         focus.style("display", "none");
                     })
-                    .on("mousemove", mousemove)
+                    //.on("mousemove", mousemove)
                     .on("click", onClickEvent);
 
                 svg.append("rect")
@@ -854,14 +863,20 @@
                         d = x0 - d0.date > d1.date - x0 ? d1 : d0;
                     focus.attr("transform", "translate(" + x(d.date) + "," + y(d.score) + ")");
                     focus.select(".tooltip-date").text("Date: " + d3.timeFormat("%b-%d")(d.date))
+                    focus.select(".tooltip-likes").text("Tweet: " + (d.tweet))
                     focus.select(".tooltip-likes").text("Score: " + (d.score).toFixed(2))
                     focus.select(".x-hover-line").attr("y2", height - y(d.score));
-                    focus.select(".y-hover-line").attr("x2", width + width);
                 }
 
                 function onClickEvent() {
 
-                    bootbox.alert("Hello world!")
+                    var x0 = x.invert(d3.mouse(this)[0]),
+                    i = bisectDate(data, x0, 0),
+                    d0 = data[i - 1],
+                    d1 = data[i],
+                    d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+                    $('<div class="card" style="display:none">'+ d3.timeFormat("%b-%d")(d.date) + ',' + d.tweet + '</div>').appendTo('.overlay').dialog(); //return tweet_data[key], tweet_data.tweet;
+            
                 }
             }
             trend();
