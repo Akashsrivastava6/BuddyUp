@@ -367,7 +367,7 @@
                 //     score = score+obj1.tweet_score;
                 //      count = count+obj1.tweet_counter;
                 //  }
-                return obj1.tweet_date;
+                return obj1.tweet_date.substring(0, 10);
             });
             //  console.log(data2); 
 
@@ -386,6 +386,7 @@
                     count = count + d.tweet_counter;
                     tweets.push(d.tweet_data);
                     tweet_score.push(d.tweet_score)
+                    
                 });
                 if (count == 0) {
                     data.push({
