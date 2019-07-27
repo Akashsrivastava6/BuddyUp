@@ -131,13 +131,13 @@
         }
 
         .y.axi line {
-            stroke:red;
-        }
-        .y.axis text {
-        font-size: 14px;
-        font-weight: 500;
+            stroke: red;
         }
 
+        .y.axis text {
+            font-size: 14px;
+            font-weight: 500;
+        }
     </style>
 
 </head>
@@ -146,7 +146,7 @@
 
     <div class="wrapper">
         <!-- Sidebar  -->
-         <nav id="sidebar">
+        <nav id="sidebar">
             <div class="sidebar-header text-align-center">
             </div>
 
@@ -182,7 +182,7 @@
                 </li>
             </ul>
 
-        </nav> 
+        </nav>
 
         <!-- Page Content  -->
         <div id="content">
@@ -284,14 +284,13 @@
                             </svg>
                         </div>
                         <div class="feedback-form">
-                            <h4>User Feedback</h4>
 
-                            {%block content%}
+                            <!-- {%block content%}
                             {%if tweet_data%}
 
                             <table class="feedback-table">
                                 <tr>
-                                    <th mat-header-cell *matHeaderCellDef> Tweet id </th>
+                                <th mat-header-cell *matHeaderCellDef> Tweet id </th>
                                     <th>Tweet </th>
                                     <th>
                                         Tweet Date
@@ -321,7 +320,7 @@
                                 {%endblock %}
 
                             </table>
-                            <input type="submit" value="submit">
+                            <input type="submit" value="submit"> -->
                         </div>
                     </div>
                 </div>
@@ -369,7 +368,7 @@
                 //  }
                 return obj1.tweet_date.substring(0, 10);
             });
-            //  console.log(data2); 
+            console.log(data2);
 
             var myFormat = d3.timeFormat("%Y-%m-%d")
             var parseTime = d3.timeParse(myFormat);
@@ -403,6 +402,8 @@
                         "t_score": tweet_score
                     });
                 }
+
+                console.log(typeof data)
                 // data2[key].forEach(function (d) {
                 // data = [{
                 //         "date": parseTime("2019-07-12"),
@@ -940,18 +941,40 @@
                 //         .tickSize(0)
                 //         .tickFormat(""));
 
-                                var sentiment = [
-                                {"5": "Positve"},
-                                {"4": "Positve"},
-                                {"3": "Positve"},
-                                {"2": "Positve"},
-                                {"1": "Positve"},
-                                {"0": "Positve"},
-                                {"-1": "Positve"},
-                                {"-2": "Positve"},
-                                {"-3": "Positve"},
-                                {"-4": "Positve"},
-                                {"-5": "Positve"}]
+                var sentiment = [{
+                        "5": "Positve"
+                    },
+                    {
+                        "4": "Positve"
+                    },
+                    {
+                        "3": "Positve"
+                    },
+                    {
+                        "2": "Positve"
+                    },
+                    {
+                        "1": "Positve"
+                    },
+                    {
+                        "0": "Positve"
+                    },
+                    {
+                        "-1": "Positve"
+                    },
+                    {
+                        "-2": "Positve"
+                    },
+                    {
+                        "-3": "Positve"
+                    },
+                    {
+                        "-4": "Positve"
+                    },
+                    {
+                        "-5": "Positve"
+                    }
+                ]
 
                 g.append("g")
                     .attr("class", "axis axis--y")
@@ -1032,56 +1055,59 @@
                     focus.style("color", "white");
                 }
 
-                function onClickEvent() {
+                function onClickEvent(name) {
 
+                    console.log(name)
+                    //loading tweets into array
                     var x0 = x.invert(d3.mouse(this)[0]),
                         i = bisectDate(data, x0, 0),
                         d0 = data[i - 1],
                         d1 = data[i],
+                        //loaded tweets
                         d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+                    //     console.log(d.date)
                     var color = 'black';
-                    $('<div class="card" style="display:none">' + d3.timeFormat("%b-%d")(d.date) + '<br>' +
-                        Object.keys(data).map(function (key) {
-                            if (d.t_score <= 1) {
-                                color = 'red';
-                            }
-                            d.tweet.forEach(function (i) {
-                                console.log(i)
-                                tweet_data = `<div class='card-panel' style='color:${color}'>
-                                <br> ${i} </div>
-                            </div>`;
-                            })
-                            return tweet_data
-                        }) +
-                        '</div>').appendTo('.overlay').dialog({
-                        width: 600,
-                        height: 400,
-                        title: "Tweets"
-                    });
+                    //generating popup dynamically showing all tweets
+                    //capture array only for date key
+                    $(('<h4>' + "Tweets" + '</h4>')).appendTo(".feedback-form");
+                    $(('<div id="test" style="text-align:center; font-size:24px; font-weight:700">' + d3.timeFormat("%b-%d")(d.date) + '<br>')).appendTo(".feedback-form");
+         
+                    for (i = 0; i <= d.tweet.length - 1; i++) {
+                        if (d.t_score[i] <= -3) {
+                        $(('<div id="test" style="color:red">' + [i+1] + '. ' + d.tweet[i] + '<br>')).appendTo(".feedback-form");
+                        } else {
+                        $(('<div id="test" style="color:black">' + [i+1] + '. ' + d.tweet[i] + '<br>')).appendTo(".feedback-form");
+                        }
+                    }
+                    $('html, body').animate({
+                        scrollTop: $(".feedback-form").offset().top
+                        }, 2000);
 
-                }; //return tweet_data[key], tweet_data.tweet;
+                };
 
-                  var w = 104,
-                  h = 140;
 
-                    var colorScale = d3.scaleLinear()
-                    .domain([-5,5])
-                   
-                  var legend = svg.append("defs").append("svg:linearGradient").attr("id", "gradient").attr("x1",
-                  "100%").attr("y1", "0%").attr("x2", "100%").attr("y2", "100%").attr("spreadMethod", "pad");
 
-                  legend.append("stop").attr("offset", "0%").attr("stop-color", "#111").attr("stop-opacity", 1);
+                var w = 104,
+                    h = 140;
 
-                  legend.append("stop").attr("offset", "100%").attr("stop-color", "#111").attr("stop-opacity", 1);
+                var colorScale = d3.scaleLinear()
+                    .domain([-5, 5])
 
-                  svg.append("text")
-                  .attr("class", "legendTitle")
-                  .attr("x", 1140)
-                  .attr("y", 77)
-                  .style("text-anchor", "left")
-                  .style("font-size","15px")
-                  .style("font-weight", "700")
-                  .text("Tweets Trend");
+                var legend = svg.append("defs").append("svg:linearGradient").attr("id", "gradient").attr("x1",
+                    "100%").attr("y1", "0%").attr("x2", "100%").attr("y2", "100%").attr("spreadMethod", "pad");
+
+                legend.append("stop").attr("offset", "0%").attr("stop-color", "#111").attr("stop-opacity", 1);
+
+                legend.append("stop").attr("offset", "100%").attr("stop-color", "#111").attr("stop-opacity", 1);
+
+                svg.append("text")
+                    .attr("class", "legendTitle")
+                    .attr("x", 1140)
+                    .attr("y", 77)
+                    .style("text-anchor", "left")
+                    .style("font-size", "15px")
+                    .style("font-weight", "700")
+                    .text("Tweets Trend");
 
                 //   svg.append("text")
                 //   .attr("class", "legendTitle")
@@ -1092,84 +1118,89 @@
                 //   .style("font-weight", "700")
                 //   .text("Legend");
 
-                  svg.append("text")
-                  .attr("class", "legendTitle")
-                  .attr("x", -150)
-                  .attr("y", 54)
-                  .style("text-anchor", "left")
-                  .style("font-size","17px")
-                  .style("font-weight", "700")
-                  .text("(Extremely Positive)");
+                svg.append("text")
+                    .attr("class", "legendTitle")
+                    .attr("x", -150)
+                    .attr("y", 54)
+                    .style("text-anchor", "left")
+                    .style("font-size", "17px")
+                    .style("font-weight", "700")
+                    .text("(Extremely Positive)");
 
-    svg.append("text")
-    .attr("class", "legendTitle")
-    .attr("x", -64)
-    .attr("y", 167)
-    .style("text-anchor", "left")
-    .style("font-size","17px")
-    .style("font-weight", "700")
-    .text("(Positive)");
+                svg.append("text")
+                    .attr("class", "legendTitle")
+                    .attr("x", -64)
+                    .attr("y", 167)
+                    .style("text-anchor", "left")
+                    .style("font-size", "17px")
+                    .style("font-weight", "700")
+                    .text("(Positive)");
 
 
-                  svg.append("text")
-                  .attr("class", "legendTitle")
-                  .attr("x", -106)
-                  .attr("y", 283)
-                  .style("text-anchor", "left")
-                  .style("font-size","17px")
-                  .style("font-weight", "700")
-                  .text("(Less Positive)");
-                  
-svg.append("text")
-.attr("class", "legendTitle")
-.attr("x", -59)
-.attr("y", 340)
-.style("text-anchor", "left")
-.style("font-size","17px")
-.style("font-weight", "700")
-.text("(Neutral)");
+                svg.append("text")
+                    .attr("class", "legendTitle")
+                    .attr("x", -106)
+                    .attr("y", 283)
+                    .style("text-anchor", "left")
+                    .style("font-size", "17px")
+                    .style("font-weight", "700")
+                    .text("(Less Positive)");
 
-                  svg.append("text")
-                  .attr("class", "legendTitle")
-                  .attr("x", -115)
-                  .attr("y", 397)
-                  .style("text-anchor", "left")
-                  .style("font-size","17px")
-                  .style("font-weight", "700")
-                  .text("(Less Negative)");
+                svg.append("text")
+                    .attr("class", "legendTitle")
+                    .attr("x", -59)
+                    .attr("y", 340)
+                    .style("text-anchor", "left")
+                    .style("font-size", "17px")
+                    .style("font-weight", "700")
+                    .text("(Neutral)");
 
-                  svg.append("text")
-                  .attr("class", "legendTitle")
-                  .attr("x", -71)
-                  .attr("y", 511)
-                  .style("text-anchor", "left")
-                  .style("font-size","17px")
-                  .style("font-weight", "700")
-                  .text("(Negative)");
+                svg.append("text")
+                    .attr("class", "legendTitle")
+                    .attr("x", -115)
+                    .attr("y", 397)
+                    .style("text-anchor", "left")
+                    .style("font-size", "17px")
+                    .style("font-weight", "700")
+                    .text("(Less Negative)");
 
-                  svg.append("text")
-                  .attr("class", "legendTitle")
-                  .attr("x", -156)
-                  .attr("y", 625)
-                  .style("text-anchor", "left")
-                  .style("font-size","17px")
-                  .style("font-weight", "700")
-                  .text("(Extremely Negative)");
-                  
+                svg.append("text")
+                    .attr("class", "legendTitle")
+                    .attr("x", -71)
+                    .attr("y", 511)
+                    .style("text-anchor", "left")
+                    .style("font-size", "17px")
+                    .style("font-weight", "700")
+                    .text("(Negative)");
 
-                  svg.append("rect").attr("width", w - 100).attr("height", h - 100).attr("y", -1120).attr("x",70).style("fill",
-                  "url(#gradient)").attr("transform", "translate(200,30)").attr("transform", "rotate(90)");
-                  
-                var y1 = d3.scaleLinear().range([298, 0]).domain([-5,0]);
+                svg.append("text")
+                    .attr("class", "legendTitle")
+                    .attr("x", -156)
+                    .attr("y", 625)
+                    .style("text-anchor", "left")
+                    .style("font-size", "17px")
+                    .style("font-weight", "700")
+                    .text("(Extremely Negative)");
 
-                 var yAxis = d3.axisBottom(y1).ticks(5).tickSize(1)
 
-            			// svg.append("g").attr("class", "y axis").attr("transform",
-            			// "translate(1400,10)").attr("transform", "rotate(90)").call(yAxis).append("text").attr("y", 100).attr("dy", 30).style("text-anchor", "end").text("axis title");
+                svg.append("rect").attr("width", w - 100).attr("height", h - 100).attr("y", -1120).attr("x", 70).style(
+                    "fill",
+                    "url(#gradient)").attr("transform", "translate(200,30)").attr("transform", "rotate(90)");
+
+                var y1 = d3.scaleLinear().range([298, 0]).domain([-5, 0]);
+
+                var yAxis = d3.axisBottom(y1).ticks(5).tickSize(1)
+
+                // svg.append("g").attr("class", "y axis").attr("transform",
+                // "translate(1400,10)").attr("transform", "rotate(90)").call(yAxis).append("text").attr("y", 100).attr("dy", 30).style("text-anchor", "end").text("axis title");
 
             }
             trend();
         </script>
+        <script>
+
+        </script>
+
 
 </body>
 
