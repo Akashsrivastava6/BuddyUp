@@ -58,51 +58,43 @@
         text {
             position: absolute;
             font-family: 'Fira Sans', sans-serif;
+            color: #fff;
             font-weight: 700;
             margin-left: 50px;
             padding: 60px;
             font-size: 18px;
-            color: #FDD935;
         }
 
         svg rect {
-            background: #081F2C;
+            background: #fff;
             padding: 10px;
-            border: 5px solid #FDD935;
-            color: #FDD935;
+            border: 5px solid #fff;
+            color: rgb(255, 255, 255);
         }
 
         circle {
-            fill: #000;
-            stroke: #FDD935;
-            stroke-width: 2px;
-        }
-
-
-        .axisRed path {
-            stroke: green;
-        }
-
-        .axisBot path {
-            stroke: red;
+            fill: rgb(26, 60, 253);
+            stroke: rgb(0, 0, 0);
+            stroke-width: 1.5px;
         }
 
         .axis path,
         .axis line {
             fill: none;
-            stroke: rgb(143, 143, 143);
+            color: #111;
+            stroke: #111;
             stroke-width: 2px;
             shape-rendering: crispEdges;
         }
 
         .axis-title {
-            fill: 5B6770#;
+            fill: #111;
             letter-spacing: 1px;
         }
 
         .line {
             fill: none;
-            stroke: #FDD935;
+            stroke: #111;
             stroke-width: 5px;
         }
 
@@ -113,18 +105,39 @@
         }
 
         .hover-line {
-            stroke: #000;
+            stroke: #111;
             stroke-width: 2px;
             stroke-dasharray: 2, 4;
         }
 
         .focus {
-            background: #081F2C;
-            background-color: #081F2C;
+            background: #fff;
+            background-color: #fff;
             padding: 10px;
-            border: 5px solid #FDD935;
-            color: #FDD935;
+            border: 5px solid #fff;
+            color: #fff;
         }
+
+        .legend .series {
+            cursor: pointer;
+        }
+
+        .legend circle {
+            stroke-width: 2px;
+        }
+
+        .legend .disabled circle {
+            fill-opacity: 0;
+        }
+
+        .y.axi line {
+            stroke:red;
+        }
+        .y.axis text {
+        font-size: 14px;
+        font-weight: 500;
+        }
+
     </style>
 
 </head>
@@ -133,7 +146,7 @@
 
     <div class="wrapper">
         <!-- Sidebar  -->
-        <nav id="sidebar">
+         <nav id="sidebar">
             <div class="sidebar-header text-align-center">
             </div>
 
@@ -169,7 +182,7 @@
                 </li>
             </ul>
 
-        </nav>
+        </nav> 
 
         <!-- Page Content  -->
         <div id="content">
@@ -181,65 +194,94 @@
                             <img src="#" alt="logo" /> </a>
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-center">
-                    <ul class="navbar-nav">
-                        <bold>Help: +050 2992 709</bold>
-                    </ul>
-                    <form class="ml-auto search-form d-none d-md-block" action="#">
-                        <div class="form-group">
-                            <input type="search" class="form-control" placeholder="Search Friends">
-                        </div>
-                    </form>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link count-indicator" id="messageDropdown" href="#" data-toggle="dropdown"
-                                aria-expanded="false">
-                                <i class="fas fa-bell"></i>
-                                <span class="count">7</span>
-                            </a>
-                        </li>
+                    <div class="navbar-menu-wrapper d-flex align-items-center">
+                        <div class="sidebar-header text-align-center">
+                            <!-- <ul class="navbar-nav ml-auto">
+                                <li class="active" id="1">
+                                    <a href="/login/submit">
+                                        <i class="fas fa-home"></i>
+                                        &nbsp; dashboard &nbsp; |
+                                    </a>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link count-indicator" id="notificationDropdown" href="#"
-                                data-toggle="dropdown">
-                                <i class="fas fa-envelope"></i>
-                                <span class="count">3</span>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <h3>|</h3>
-                        </li>
-                        <li class="nav-item dropdown d-none d-xl-inline-block">
-                            <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                {{usr}} &nbsp;
-                                <img class="img-xs rounded-circle" src="../Dashboard/assets/images/faces/face8.jpg"
-                                    alt="Profile image" style="height: 50px; width: 50px;"> </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                                aria-labelledby="UserDropdown">
-                                <a class="dropdown-item">My Profile <span
-                                        class="badge badge-pill badge-danger"></span><i
-                                        class="dropdown-item-icon ti-dashboard"></i></a>
-                                <a class="dropdown-item">Messages<i class="dropdown-item-icon ti-comment-alt"></i></a>
-                                <a class="dropdown-item">Activity<i
-                                        class="dropdown-item-icon ti-location-arrow"></i></a>
-                                <a class="dropdown-item">FAQ<i class="dropdown-item-icon ti-help-alt"></i></a>
-                                <a class="dropdown-item" href="/logout/logout">Sign Out<i
-                                        class="dropdown-item-icon ti-power-off"></i></a>
-                            </div>
-                        </li>
-                    </ul>
-                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-                        data-toggle="offcanvas">
-                        <span class="mdi mdi-menu"></span>
-                    </button>
-                </div>
+                                </li>
+                                <li id="2">
+                                    <a href="/core/follower">
+                                        <i class="fas fa-user-plus"></i>
+                                        &nbsp; followers &nbsp; |
+                                    </a>
+
+                                    <div class="collapse list-unstyled" id="pageSubmenu">
+
+                                    </div>
+                                </li>
+                                <li id="3">
+                                    <a href="">
+                                        <i class="fas fa-user-check"></i>
+                                        &nbsp; following &nbsp; |
+                                    </a>
+                                </li>
+                                <li id="4">
+                                    <a href="">
+                                        <i class="fas fa-paper-plane"></i>
+                                        &nbsp; contact
+                                    </a>
+                                </li>
+                            </ul> -->
+                        </div>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link count-indicator" id="messageDropdown" href="#" data-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="count">7</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link count-indicator" id="notificationDropdown" href="#"
+                                    data-toggle="dropdown">
+                                    <i class="fas fa-envelope"></i>
+                                    <span class="count">3</span>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <h3>|</h3>
+                            </li>
+                            <li class="nav-item dropdown d-none d-xl-inline-block">
+                                <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown"
+                                    aria-expanded="false">
+                                    {{usr}} &nbsp;
+                                    <img class="img-xs rounded-circle" src="../Dashboard/assets/images/faces/face8.jpg"
+                                        alt="Profile image" style="height: 50px; width: 50px;"> </a>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                    aria-labelledby="UserDropdown">
+                                    <a class="dropdown-item">My Profile <span
+                                            class="badge badge-pill badge-danger"></span><i
+                                            class="dropdown-item-icon ti-dashboard"></i></a>
+                                    <a class="dropdown-item">Messages<i
+                                            class="dropdown-item-icon ti-comment-alt"></i></a>
+                                    <a class="dropdown-item">Activity<i
+                                            class="dropdown-item-icon ti-location-arrow"></i></a>
+                                    <a class="dropdown-item">FAQ<i class="dropdown-item-icon ti-help-alt"></i></a>
+                                    <a class="dropdown-item" href="/logout/logout">Sign Out<i
+                                            class="dropdown-item-icon ti-power-off"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                            data-toggle="offcanvas">
+                            <span class="mdi mdi-menu"></span>
+                        </button>
+                    </div>
             </nav>
             <div class="content-wrapper">
-                <h2>{{friend}}'s Trend</u> </h2>
+                <h2>{{friend}}'s twitter analysis</u> </h2>
                 <div class="row m-b-1">
                     <div class="col-12">
                         <div class="card shadow">
-                            <svg style="width:100%; height:100%;" width="1450" height="500" viewBox="0 0 1500 500"
-                                preserveAspectRatio="xMidYMid meet"></svg>
+                            <svg style="width:100%; height:100%;background:#f7f7f7 ;border: 2px solid #111; box-shadow: 2px #111"
+                                width="1320" height="700" viewBox="-40 0 1200 700" preserveAspectRatio="xMidYMid meet">
+                            </svg>
                         </div>
                         <div class="feedback-form">
                             <h4>User Feedback</h4>
@@ -310,10 +352,13 @@
         </div>
 
         <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="https://d3js.org/d3-color.v1.min.js"></script>
+        <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
         <script>
             var data1 = {{obj1 | safe}};
-             console.log(data1)
+            console.log(data1)
 
 
             var data2 = _.groupBy(data1, function (obj1) {
@@ -324,8 +369,8 @@
                 //  }
                 return obj1.tweet_date;
             });
-            console.log(data2);
-            
+            //  console.log(data2); 
+
             var myFormat = d3.timeFormat("%Y-%m-%d")
             var parseTime = d3.timeParse(myFormat);
             data = []
@@ -335,30 +380,78 @@
                 var score = 0;
                 var count = 0;
                 var tweets = [];
+                var tweet_score = [];
                 data2[key].forEach(function (d) {
                     score = (score + d.tweet_sum_score);
                     count = count + d.tweet_counter;
                     tweets.push(d.tweet_data);
+                    tweet_score.push(d.tweet_score)
                 });
-                if (count == 0) {
-                    data.push({
-                        "date": parseTime(key),
-                        "score": 0,
-                        "tweet": tweets
-                    });
-                } else {
-                    data.push({
-                        "date": parseTime(key),
-                        "score": (score / count),
-                        "tweet": tweets
-                    });
-                }
-                data2[key].forEach(function (d) {
-                    tweet_data.push({
-                        "date": parseTime(key),
-                        "tweet":d.tweet_data})                
-                        })
+                // if (count == 0) {
+                //     data.push({
+                //         "date": parseTime(key),
+                //         "score": 0,
+                //         "tweet": tweets,
+                //         "t_score": tweet_score
+                //     });
+                // } else {
+                //     data.push({
+                //         "date": parseTime(key),
+                //         "score": (score / count),
+                //         "tweet": tweets,
+                //         "t_score": tweet_score
+                //     });
+                // }
+                // data2[key].forEach(function (d) {
+                data = [{
+                        "date": parseTime("2019-07-12"),
+                        "score": 1.33
+                    },
+                    {
+                        "date": parseTime("2019-07-15"),
+                        "score": 1.53
+                    },
+                    {
+                        "date": parseTime("2019-07-23"),
+                        "score": 2.43
+                    },
+                    {
+                        "date": parseTime("2019-07-24"),
+                        "score": 1.83
+                    },
+                    {
+                        "date": parseTime("2019-07-25"),
+                        "score": 0.625
+                    },
+                    {
+                        "date": parseTime("2019-07-26"),
+                        "score": -1.5
+                    },
+                    {
+                        "date": parseTime("2019-07-27"),
+                        "score": -2.22
+                    },
+                    {
+                        "date": parseTime("2019-07-28"),
+                        "score": -3.16
+                    },
+                    {
+                        "date": parseTime("2019-07-29"),
+                        "score": -1
+                    },
+                    {
+                        "date": parseTime("2019-07-30"),
+                        "score": 1.5
+                    }
+                ]
+                // tweet_data.push({
+                //     "date": parseTime(key),
+                //     "tweet": d.tweet_data
+                // })
+                // })
             });
+
+
             console.log(data)
 
 
@@ -696,12 +789,16 @@
                         bottom: 80,
                         left: 40
                     },
+
                     width = +svg.attr("width") - margin.left - margin.right,
-                    height = +svg.attr("height") - margin.top - margin.bottom + 30;
-                    
+                    height = +svg.attr("height") - margin.top - margin.bottom;
+
                 bisectDate = d3.bisector(function (d) {
                     return d.date;
                 }).left;
+
+
+                var colour = d3.scaleOrdinal(d3.schemeCategory10);
 
                 var x = d3.scaleTime()
                     .domain(d3.extent(data, function (d) {
@@ -710,6 +807,52 @@
                     .range([0, width]);
 
                 var y = d3.scaleLinear().domain([-5, 5]).range([height, 30]);
+
+
+
+                svg.append("rect")
+                    .attr("width", "100%")
+                    .attr("transform", "translate(40," + height / 1.54 + ")")
+                    .attr("height", height / 10.3)
+                    .attr("fill", "#FF2700")
+                    .attr("opacity", 0.2);
+                svg.append("rect")
+                    .attr("width", "100%")
+                    .attr("transform", "translate(40," + height / 1.343 + ")")
+                    .attr("height", height / 10.3)
+                    .attr("fill", "#FF2700")
+                    .attr("opacity", 0.5);
+                svg.append("rect")
+                    .attr("width", "100%")
+                    .attr("transform", "translate(40," + height / 1.188 + ")")
+                    .attr("height", height / 10.3)
+                    .attr("fill", "#FF2700")
+                    .attr("opacity", 0.7);
+                svg.append("rect")
+                    .attr("width", "100%")
+                    .attr("transform", "translate(40," + height / 1.067 + ")")
+                    .attr("height", height / 10.75)
+                    .attr("fill", "#FF0000")
+                    .attr("opacity", 0.8);
+
+
+                var rect = svg.append("rect")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                    .attr("class", "overlay")
+                    .attr("id", "line01")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .style("fill", "url(#linear-gradient)")
+                    .order("", 10)
+                    .on("mouseover", function () {
+                        focus.style("display", null)
+                        focus.style("color", "white");
+                    })
+                    .on("mouseout", function () {
+                        focus.style("display", "none");
+                    })
+                    .on("mousemove", mousemove)
+                    .on("click", onClickEvent);
 
                 var line = d3.line()
                     .curve(d3.curveCatmullRom.alpha(0.5))
@@ -722,6 +865,7 @@
 
                 var selectCircle = svg.selectAll(".circle")
                     .data(data)
+                    .style("hover", "rgb(26, 60, 253)")
 
                 var g = svg.append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -732,17 +876,51 @@
                     .attr("class", "axis axis--x")
                     .attr("transform", "translate(0," + height + ")")
                     .call(d3.axisBottom(x)
-                        .tickFormat(d3.timeFormat("%b-%d")));
+                        .tickFormat(d3.timeFormat("%b-%d")))
+                    .style("color", "white")
+                    .append("text")
+                    .attr("class", "axis-title")
+                    .attr("x", width - 700)
+                    .attr("y", height - 540)
+                    .text("Time");
+
+
+                g.append("g")
+                    .attr("class", "axis axis--x")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(d3.axisBottom(x)
+                        .tickFormat(d3.timeFormat("%b-%d")))
+                    .style("color", "white")
+                    .append("text")
+                    .attr("class", "axis-title")
+                    .attr("x", width - 750)
+                    .attr("y", height - 1170)
+                    .text("Tweet Sentiment Level vs Time").style("font-size", "24px").style("color", "rgb(26, 60,253)");
+
+                g.append("g")
+                    .attr("class", "axis axis--x")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(d3.axisBottom(x)
+                        .tickFormat(d3.timeFormat("%b-%d")))
+                    .style("color", "white")
+                    .append("text")
+                    .attr("class", "axis-title")
+                    .attr("x", width - 750)
+                    .attr("y", height - 1150)
+                    .text("(Click circle to view Tweet)").style("font-size", "12px").style("color", "rgb(26, 60,253)");
+
+
+
 
                 g.append("g")
                     .attr("class", "axisMid")
-                    .attr("transform", "translate(0," + height / 1.87 + ")")
-                    .style("stroke-dasharray", ("4,6"))
+                    .attr("transform", "translate(0," + height / 1.908 + ")")
+                    .style("stroke-dasharray", ("4"))
 
                     .call(d3.axisBottom(x)
                         .tickSize(0)
                         .tickFormat(""))
-                    .style("opacity", "0.3");
+                    .style("opacity", "0.7");
 
 
                 // g.append("g")
@@ -761,23 +939,40 @@
                 //         .tickSize(0)
                 //         .tickFormat(""));
 
+                                var sentiment = [
+                                {"5": "Positve"},
+                                {"4": "Positve"},
+                                {"3": "Positve"},
+                                {"2": "Positve"},
+                                {"1": "Positve"},
+                                {"0": "Positve"},
+                                {"-1": "Positve"},
+                                {"-2": "Positve"},
+                                {"-3": "Positve"},
+                                {"-4": "Positve"},
+                                {"-5": "Positve"}]
+
                 g.append("g")
                     .attr("class", "axis axis--y")
-                    .call(d3.axisLeft(y).ticks(12).tickFormat(function (d) {
+                    .call(d3.axisLeft(y).ticks(10).tickFormat(function (d) {
                         return parseFloat(d);
                     }))
                     .append("text")
                     .attr("class", "axis-title")
                     .attr("transform", "rotate(-90)")
-                    .attr("y", "8px")
-                    .attr("dy", "10px")
-                    .style("text-anchor", "end")
-                    .text("Sentiment Score");
+                    .attr("x", -250)
+                    .attr("y", height - 800)
+                    .text("Sentiment Level");
+
 
                 g.append("path")
                     .datum(data)
                     .attr("class", "line")
                     .attr("d", line)
+                    .attr("data-legend", function (d) {
+                        return d.date
+                    })
+
 
 
                 g.selectAll('circle')
@@ -799,12 +994,11 @@
                 var focus = g.append("g")
                     .attr("class", "focus")
                     .style("display", "none")
-                    .style("background-color", "#FDD935");
 
                 focus.append("line")
                     .attr("class", "x-hover-line hover-line")
                     .attr("y1", 1)
-                    .attr("y2", height);
+                    .attr("y2", height)
 
                 focus.append("line")
                     .attr("class", "y-hover-line hover-line")
@@ -822,38 +1016,6 @@
                     .attr("x", 18)
                     .attr("y", -10)
                     .attr("cy", "5px");
-                // .style("fill", function (d) {
-                // if (d.score <= 0.2) { return "red" } else { return "#green" } });
-
-                var rect = svg.append("rect")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                    .attr("class", "overlay")
-                    .attr("id", "line01")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .on("mouseover", function () {
-                        focus.style("display", null);
-                    })
-                    .on("mouseout", function () {
-                        focus.style("display", "none");
-                    })
-                    //.on("mousemove", mousemove)
-                    .on("click", onClickEvent);
-
-                svg.append("rect")
-                    .attr("width", "89%")
-                    .attr("transform", "translate(40," + height / 8.9 + ")")
-                    .attr("height", height / 5.3)
-                    .attr("fill", "green")
-                    .attr("opacity", 0.4);
-
-                svg.append("rect")
-                    .attr("width", "89%")
-                    .attr("transform", "translate(40," + height / 1.165 + ")")
-                    .attr("height", height / 5.3)
-                    .attr("fill", "red")
-                    .attr("opacity", 0.4);
-
 
                 function mousemove() {
                     var x0 = x.invert(d3.mouse(this)[0]),
@@ -865,24 +1027,148 @@
                     focus.select(".tooltip-date").text("Date: " + d3.timeFormat("%b-%d")(d.date))
                     focus.select(".tooltip-likes").text("Tweet: " + (d.tweet))
                     focus.select(".tooltip-likes").text("Score: " + (d.score).toFixed(2))
-                    focus.select(".x-hover-line").attr("y2", height - y(d.score));
+                    focus.select(".x-hover-line").attr("y2", height - y(d.score)).style("border", "solid");
+                    focus.style("color", "white");
                 }
 
                 function onClickEvent() {
 
                     var x0 = x.invert(d3.mouse(this)[0]),
-                    i = bisectDate(data, x0, 0),
-                    d0 = data[i - 1],
-                    d1 = data[i],
-                    d = x0 - d0.date > d1.date - x0 ? d1 : d0;
-                    $('<div class="card" style="display:none">'+ d3.timeFormat("%b-%d")(d.date) + ',' + d.tweet + '</div>').appendTo('.overlay').dialog(); //return tweet_data[key], tweet_data.tweet;
-            
-                }
+                        i = bisectDate(data, x0, 0),
+                        d0 = data[i - 1],
+                        d1 = data[i],
+                        d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+                    var color = 'black';
+                    $('<div class="card" style="display:none">' + d3.timeFormat("%b-%d")(d.date) + '<br>' +
+                        Object.keys(data).map(function (key) {
+                            if (d.t_score <= 1) {
+                                color = 'red';
+                            }
+                            d.tweet.forEach(function (i) {
+                                console.log(i)
+                                tweet_data = `<div class='card-panel' style='color:${color}'>
+                                <br> ${i} </div>
+                            </div>`;
+                            })
+                            return tweet_data
+                        }) +
+                        '</div>').appendTo('.overlay').dialog({
+                        width: 600,
+                        height: 400,
+                        title: "Tweets"
+                    });
+
+                }; //return tweet_data[key], tweet_data.tweet;
+
+                  var w = 104,
+                  h = 140;
+
+                    var colorScale = d3.scaleLinear()
+                    .domain([-5,5])
+                   
+                  var legend = svg.append("defs").append("svg:linearGradient").attr("id", "gradient").attr("x1",
+                  "100%").attr("y1", "0%").attr("x2", "100%").attr("y2", "100%").attr("spreadMethod", "pad");
+
+                  legend.append("stop").attr("offset", "0%").attr("stop-color", "#111").attr("stop-opacity", 1);
+
+                  legend.append("stop").attr("offset", "100%").attr("stop-color", "#111").attr("stop-opacity", 1);
+
+                  svg.append("text")
+                  .attr("class", "legendTitle")
+                  .attr("x", 1140)
+                  .attr("y", 77)
+                  .style("text-anchor", "left")
+                  .style("font-size","15px")
+                  .style("font-weight", "700")
+                  .text("Tweets Trend");
+
+                //   svg.append("text")
+                //   .attr("class", "legendTitle")
+                //   .attr("x", 1130)
+                //   .attr("y", 50)
+                //   .style("text-anchor", "left")
+                //   .style("font-size","17px")
+                //   .style("font-weight", "700")
+                //   .text("Legend");
+
+                  svg.append("text")
+                  .attr("class", "legendTitle")
+                  .attr("x", -150)
+                  .attr("y", 54)
+                  .style("text-anchor", "left")
+                  .style("font-size","17px")
+                  .style("font-weight", "700")
+                  .text("(Extremely Positive)");
+
+    svg.append("text")
+    .attr("class", "legendTitle")
+    .attr("x", -64)
+    .attr("y", 167)
+    .style("text-anchor", "left")
+    .style("font-size","17px")
+    .style("font-weight", "700")
+    .text("(Positive)");
+
+
+                  svg.append("text")
+                  .attr("class", "legendTitle")
+                  .attr("x", -106)
+                  .attr("y", 283)
+                  .style("text-anchor", "left")
+                  .style("font-size","17px")
+                  .style("font-weight", "700")
+                  .text("(Less Positive)");
+                  
+svg.append("text")
+.attr("class", "legendTitle")
+.attr("x", -59)
+.attr("y", 340)
+.style("text-anchor", "left")
+.style("font-size","17px")
+.style("font-weight", "700")
+.text("(Neutral)");
+
+                  svg.append("text")
+                  .attr("class", "legendTitle")
+                  .attr("x", -115)
+                  .attr("y", 397)
+                  .style("text-anchor", "left")
+                  .style("font-size","17px")
+                  .style("font-weight", "700")
+                  .text("(Less Negative)");
+
+                  svg.append("text")
+                  .attr("class", "legendTitle")
+                  .attr("x", -71)
+                  .attr("y", 511)
+                  .style("text-anchor", "left")
+                  .style("font-size","17px")
+                  .style("font-weight", "700")
+                  .text("(Negative)");
+
+                  svg.append("text")
+                  .attr("class", "legendTitle")
+                  .attr("x", -156)
+                  .attr("y", 625)
+                  .style("text-anchor", "left")
+                  .style("font-size","17px")
+                  .style("font-weight", "700")
+                  .text("(Extremely Negative)");
+                  
+
+                  svg.append("rect").attr("width", w - 100).attr("height", h - 100).attr("y", -1120).attr("x",70).style("fill",
+                  "url(#gradient)").attr("transform", "translate(200,30)").attr("transform", "rotate(90)");
+                  
+                var y1 = d3.scaleLinear().range([298, 0]).domain([-5,0]);
+
+                 var yAxis = d3.axisBottom(y1).ticks(5).tickSize(1)
+
+            			// svg.append("g").attr("class", "y axis").attr("transform",
+            			// "translate(1400,10)").attr("transform", "rotate(90)").call(yAxis).append("text").attr("y", 100).attr("dy", 30).style("text-anchor", "end").text("axis title");
+
             }
             trend();
         </script>
-
-
 
 </body>
 
