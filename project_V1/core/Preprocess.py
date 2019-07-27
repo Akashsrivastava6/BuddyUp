@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+from autocorrect import spell
   
 
 def preprocess(twt):
@@ -61,48 +62,37 @@ def remove_emoticon_replacement(df):
 # df_processed['tweets'] = tweets
 
 def preprocess1(tmp3):
-   words=pd.read_csv("core/EmotionLookupTableGeneral.txt",sep="\\t",header=None,names=['word','score'])
+   words=pd.read_csv("core/impdata3.csv")
    neg_words=pd.read_csv("core/NegatingWordList.txt",sep="\\t",header=None,names=['word'])
    emo=pd.read_csv("core/emoticons.csv",sep=",")
  
-   emo_dict=dict(zip(emo['Char'],emo['score']))
+   emo_dict=dict(zip(emo['Char'],emo['score2']))
 
-   str1=""
-   for a in range(len(words['word'])):
-      if a != len(words['word'])-1:
-         str1=str1+"^[#]*"+words.iloc[a]['word']+"$,"
-      else:
-         str1=str1+"^[#]*"+words.iloc[a]['word']+"$"
-   str1=str1.split(",")
+   
 
 
    word_dict=dict(zip(words['word'],words['score']))
 
 
    tmp4=[]
-   emo_list=[]
-   emoc_list=[]
+   
    
    for a in range(len(tmp3)):
       sum_score=0
-      
-      #emoticons
-      
-      emo_score=0
-      emo_counter=0
-      
-      for j in tmp3[a]:
-         
-         for k,val in emo_dict.items():
-            if j==k:
-               
-               emo_counter=emo_counter+1
-               emo_score=emo_score+val
-      emo_list.append(emo_score)
-      emoc_list.append(emo_counter)      
-      
       counter=0
       sum_list=""
+    
+    
+      for j in tmp3[a]:
+            
+         for k,val in emo_dict.items():
+            if j==k:
+               sum_score=sum_score+val
+               counter=counter+1
+                     
+      
+      
+      
       #regex = re.compile('[%s]' % re.escape(string.punctuation))
       regex=re.compile('[!.,?]')
       aa=regex.sub(' . ', tmp3[a])
@@ -110,35 +100,56 @@ def preprocess1(tmp3):
       #print(aa)
       ll=aa.split(" ")
       flag=0
+      pl=[]
+      cl=0
       for a1 in ll:
+        
          a1=a1.lower()
-         
+         if a1.startswith("#"):
+            a1=a1[1:]
+         if len(a1)>2:
+    
+            for i in range(2,len(a1)):
+               if (a1[i-2]==a1[i-1] and a1[i-1]==a1[i]):
+                  a1=a1.replace(a1[i]," ",1)
+            
+            
+         a1=a1.replace(" ","")
+        
          if neg_words['word'].isin([a1]).any():
-                  flag=1
+            flag=1
+                
          elif re.match("[!,.?]$",a1):
-                  
-                  flag=0
-         
-         #for la in l:
-         for ans,item in enumerate(str1):
-            #print(str)
-            if re.match('%s'%item,a1):
+                
+            flag=0
+        
+        #for la in l:
+        
+         if a1 in word_dict.keys():
                 #print(re.match('%s'%str1[ans],a1))
-                if flag==0:
-                    sum_score=sum_score+words.iloc[ans]['score']
-                    sum_list=sum_list+words.iloc[ans]['word']+" "+str(words.iloc[ans]['score'])+" "
-                    counter=counter+1  
-                else:
-                    sum_score=sum_score+(words.iloc[ans]['score']*(-1))
-                    sum_list=sum_list+words.iloc[ans]['word']+" "+str(words.iloc[ans]['score'])+" "
-                    counter=counter+1  
-               #print(words[word])
+            if flag==0:
+               
+               sum_score=sum_score+word_dict[a1]
+               sum_list=sum_list+a1+" "+str(word_dict[a1])+" "
+               counter=counter+1  
+                #print(words.iloc[ans]['word']+" "+str(words.iloc[ans]['score'])+" ")
+            else:
+               sum_score=sum_score+(word_dict[a1]*(-1))
+               sum_list=sum_list+a1+" "+str(word_dict[a1])+" "+" "
+               counter=counter+1  
+                #print(words.iloc[ans]['word']+" "+str(words.iloc[ans]['score']*(-1))+" ")
+            #print(words[word])
+         if flag==1:
+            cl=cl+1
+         if cl==4:
+            #print("  "+a1)
+            flag=0;
+            cl=0;      #print(words[word])
+
       if counter!=0:
          tmp4.append([tmp3[a],sum_score,counter,sum_score/counter])
       else:
          tmp4.append([tmp3[a],sum_score,counter,0])
    tmp4=pd.DataFrame(tmp4,columns=['Tweet','Sum_score','Counter','Score']) 
-   tmp4['emo_score']=emo_list
-   tmp4['emo_counter']=emoc_list
-   tmp4.to_csv("core/datawithemoticons.csv")
+  
    return tmp4
