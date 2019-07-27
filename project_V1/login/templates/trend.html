@@ -387,64 +387,64 @@
                     tweets.push(d.tweet_data);
                     tweet_score.push(d.tweet_score)
                 });
-                // if (count == 0) {
-                //     data.push({
-                //         "date": parseTime(key),
-                //         "score": 0,
-                //         "tweet": tweets,
-                //         "t_score": tweet_score
-                //     });
-                // } else {
-                //     data.push({
-                //         "date": parseTime(key),
-                //         "score": (score / count),
-                //         "tweet": tweets,
-                //         "t_score": tweet_score
-                //     });
-                // }
+                if (count == 0) {
+                    data.push({
+                        "date": parseTime(key),
+                        "score": 0,
+                        "tweet": tweets,
+                        "t_score": tweet_score
+                    });
+                } else {
+                    data.push({
+                        "date": parseTime(key),
+                        "score": (score / count),
+                        "tweet": tweets,
+                        "t_score": tweet_score
+                    });
+                }
                 // data2[key].forEach(function (d) {
-                data = [{
-                        "date": parseTime("2019-07-12"),
-                        "score": 1.33
-                    },
-                    {
-                        "date": parseTime("2019-07-15"),
-                        "score": 1.53
-                    },
-                    {
-                        "date": parseTime("2019-07-23"),
-                        "score": 2.43
-                    },
-                    {
-                        "date": parseTime("2019-07-24"),
-                        "score": 1.83
-                    },
-                    {
-                        "date": parseTime("2019-07-25"),
-                        "score": 0.625
-                    },
-                    {
-                        "date": parseTime("2019-07-26"),
-                        "score": -1.5
-                    },
-                    {
-                        "date": parseTime("2019-07-27"),
-                        "score": -2.22
-                    },
-                    {
-                        "date": parseTime("2019-07-28"),
-                        "score": -3.16
-                    },
-                    {
-                        "date": parseTime("2019-07-29"),
-                        "score": -1
-                    },
-                    {
-                        "date": parseTime("2019-07-30"),
-                        "score": 1.5
-                    }
-                ]
-                // tweet_data.push({
+                // data = [{
+                //         "date": parseTime("2019-07-12"),
+                //         "score": 1.33
+                //     },
+                //     {
+                //         "date": parseTime("2019-07-15"),
+                //         "score": 1.53
+                //     },
+                //     {
+                //         "date": parseTime("2019-07-23"),
+                //         "score": 2.43
+                //     },
+                //     {
+                //         "date": parseTime("2019-07-24"),
+                //         "score": 1.83
+                //     },
+                //     {
+                //         "date": parseTime("2019-07-25"),
+                //         "score": 0.625
+                //     },
+                //     {
+                //         "date": parseTime("2019-07-26"),
+                //         "score": -1.5
+                //     },
+                //     {
+                //         "date": parseTime("2019-07-27"),
+                //         "score": -2.22
+                //     },
+                //     {
+                //         "date": parseTime("2019-07-28"),
+                //         "score": -3.16
+                //     },
+                //     {
+                //         "date": parseTime("2019-07-29"),
+                //         "score": -1
+                //     },
+                //     {
+                //         "date": parseTime("2019-07-30"),
+                //         "score": 1.5
+                //     }
+                // ]
+                // // tweet_data.push({
                 //     "date": parseTime(key),
                 //     "tweet": d.tweet_data
                 // })
