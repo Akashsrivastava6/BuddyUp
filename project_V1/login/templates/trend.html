@@ -740,8 +740,10 @@
                     $(('<h4>' + "Tweets" + '</h4>')).appendTo(".feedback-form");
                     // $(('<div id="test" style="text-align:center; font-size:24px; font-weight:700">' +
                     //     d3.timeFormat("%b-%d")(d.date)  ).appendTo(".feedback-form");
-                    for (i = 0; i <= d.tweet.length - 1; i++) {
+                    
+                    for (i = 0; i <= d.tweet.length-1 ; i++) {
                         tweets_data += d.tweet[i]
+                        console.log("printing tweet" + d.tweet[i])
                         if (d.t_score[i] <= -3) {
                             $(('<div id="test" style="color:red; display: inline">' + [i + 1] + '. ' + d.tweet[i] +
                                 +
