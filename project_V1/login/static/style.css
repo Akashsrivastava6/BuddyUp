@@ -843,3 +843,11 @@ input[type=submit] {
     background: transparent;
     padding: 0 5px 0 38px;
 }
+
+.notification {
+    display: block;
+    padding: 10px 10px 10px 10px;
+    border: 2px solid #1751cc;
+    border-radius: 5px;
+    margin: 10px auto;
+}
