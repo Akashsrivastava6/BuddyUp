@@ -802,11 +802,12 @@ input[type=submit] {
 }
 
 .feedback-form {
-    position: relative;
-    text-align: center;
-    width: 100%;
-    border: 1px solid #1751cc;
-    display: block;
+    position: static;
+    text-align: justify;
+    width: 50%;
+    font-size: 18px;
+    font-weight: 600;
+    display: inline-block;
     color: #000;
     border-collapse: collapse;
 
@@ -814,6 +815,31 @@ input[type=submit] {
 
 .feedback-table {
     width: 100%;
-    border: 1px solid #1751cc;
 
+}
+
+.wrap-input100 {
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 50%;
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.input100 {
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #1D2228;
+    line-height: 1.2;
+
+    display: inline-block;
+    width: 50%;
+    height: 45px;
+    background: transparent;
+    padding: 0 5px 0 38px;
 }
