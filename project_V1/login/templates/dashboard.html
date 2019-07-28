@@ -30,7 +30,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 
-    </script>
+    <script src='https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js'></script>
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
@@ -125,7 +125,6 @@
                     <div class="col-xs-12 col-sm-6 col-md-8" id="col1" style="text-align: center">
                         <div class="following-container">
                             <h3>Following</h3>
-                            {{noti}}
                             {%block content%}
                             
                             {%if data%}
@@ -144,14 +143,42 @@
                             {%else%}
                             <h4>Please add a friend to see the trend</h4>
                             {%endif%}
-                            {%endblock %}
+                            {%endblock%}
                         </div>
 
                     </div>
                     <div class="col-xs-6 col-md-4" id="col2">
-                         <div class="notification" >
+                         <div class="notification" style="text-align: center;">
                              <h3>Notifications</h3>
-                            
+                                <div class="test"></div>
+                                          <script>
+                                              data1 = {{noti | safe}}
+                                            //  console.log(data1)
+                                              var notification = _.groupBy(data1, function (noti) {
+                                                  return noti.handle;
+                                              });
+                                              console.log(notification)
+
+                                              var div = document.getElementById('notification');
+                                              Object.keys(notification).forEach(function (key) {
+                                                 // console.log(notification[key])   
+                                            notification[key].forEach(function (d) {
+                                              //  console.log(key)
+                                                     $(`<div class="panel-heading" style:"padding: 10px">
+                                                         <h5 class="panel-title"><a data-toggle="collapse"
+                                                                 class="handle" href="#collapse${key}">` + d.handle +
+                                                                 `</a></h5>
+                                                                 </div>` + `<div id="collapse${key}"
+                                                                     class="panel-collapse collapse"
+                                                                     style="text-align: justify; padding:5px">` + d.tweet + `
+                                                                 </div>`).appendTo('.test');
+                                                   //  console.log(d.handle)
+                                                    // console.log(d.tweet)
+                                                    });
+                                                  });
+
+                                             
+                                          </script>
                          </div>
                         <div class="following-container">
                             <h3>Add Friend by email</h3>
