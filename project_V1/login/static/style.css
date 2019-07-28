@@ -32,6 +32,13 @@ h4 {
     text-align: center;
 }
 
+h5 {
+    color: #000;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    text-align: center;
+}
+
 p {
     font-family: 'Open Sans', sans-serif;
     font-size: 1.1em;
@@ -845,9 +852,18 @@ input[type=submit] {
 }
 
 .notification {
-    display: block;
-    padding: 10px 10px 10px 10px;
-    border: 2px solid #1751cc;
-    border-radius: 5px;
-    margin: 10px auto;
+        position: relative;
+        padding: 10px 10px 10px 10px;
+        background: #dbd8d8;
+        background-image: radial-gradient(to right, #eeebeb 0%, black 100%);
+        border-radius: 8px;
+        width: 100%;
+        border: 2px solid #1751cc;
+        height: auto;
+        color: #222222;
+        justify-items: center;
+        align-self: center;
+        align-items: center;
+        display: block;
+        margin-bottom: 20px;
 }
