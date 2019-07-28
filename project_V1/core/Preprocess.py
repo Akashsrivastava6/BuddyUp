@@ -94,7 +94,7 @@ def preprocess1(tmp3):
       
       
       #regex = re.compile('[%s]' % re.escape(string.punctuation))
-      regex=re.compile('[!.,?]')
+      regex=re.compile('[!.,?:;]')
       aa=regex.sub(' . ', tmp3[a])
       aa=aa.replace('\n',' ')
       #print(aa)

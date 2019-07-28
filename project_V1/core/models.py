@@ -16,6 +16,7 @@ class tweets_data(models.Model):
     tweet_id=models.BigIntegerField("tweets_id",primary_key=True)
     tweet_data=models.TextField("tweet_data",max_length=1000)
     tweet_date=models.DateTimeField("date")
+    is_notification=models.BooleanField(default=False)
     score=models.FloatField("score",default=0)
     sum_score=models.IntegerField("sum_score",default=0)
     counter=models.IntegerField("counter",default=0)
