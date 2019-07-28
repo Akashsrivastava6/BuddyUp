@@ -307,7 +307,7 @@
             </div>
 
         </div>
-
+        
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="https://d3js.org/d3-color.v1.min.js"></script>
         <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
@@ -738,22 +738,22 @@
                     $('#container').empty();
 
                     $(('<h4>' + "Tweets" + '</h4>')).appendTo(".feedback-form");
-                    // $(('<div id="test" style="text-align:center; font-size:24px; font-weight:700">' +
-                    //     d3.timeFormat("%b-%d")(d.date)  ).appendTo(".feedback-form");
-                    
-                    for (i = 0; i <= d.tweet.length-1 ; i++) {
+                     $(('<div id="test" style="text-align:center; font-size:24px; font-weight:700">' +
+                         d3.timeFormat("%b-%d")(d.date)  )).appendTo(".feedback-form");
+                    $(("<table>")).appendTo(".feedback-form")
+                    for (i = 0; i <= d.tweet.length -1 ; i++) {
                         tweets_data += d.tweet[i]
                         console.log("printing tweet" + d.tweet[i])
                         if (d.t_score[i] <= -3) {
-                            $(('<div id="test" style="color:red; display: inline">' + [i + 1] + '. ' + d.tweet[i] +
-                                +
-                                '<br>')).appendTo(".feedback-form");
+                            $(('<div id="test" style="color:red; display: inline"><tr>' + [i + 1] + '. ' + d.tweet[i] +'<br> </tr>')).appendTo(".feedback-form");
                         } else {
-                            $(('<div id="test" style="color:black">' + [i + 1] + '. ' + d.tweet[i] + '<br>')).appendTo(
+                            $(('<div id="test" style="color:black"><tr>' + [i + 1] + '. ' + d.tweet[i] + '<br></tr>')).appendTo(
                                 ".feedback-form");
                         }
 
+                    
                     }
+                    $(("</table>")).appendTo(".feedback-form")
                     $(('<br>' + '<div id="container" style:"display: inline-flex">' + "</div>")).appendTo(
                         ".feedback-form");
                     //console.log(tweets_data)
