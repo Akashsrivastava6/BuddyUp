@@ -160,7 +160,7 @@ def twitterCheck(username):
         #     return 'dashboard.html',t_handle
                 
 
-@periodic_task(run_every=(crontab(minute='*/120')), name="noti_task", ignore_result=True)
+@periodic_task(run_every=(crontab(minute='*/1')), name="noti_task", ignore_result=True)
 def noti_task():
     t_handles=following.objects.filter(isActive=1)
     
@@ -201,7 +201,7 @@ def noti_task():
 
 
 
-@periodic_task(run_every=(crontab(minute='*/10')), name="AddTweets_task", ignore_result=True)
+@periodic_task(run_every=(crontab(minute='*/2')), name="AddTweets_task", ignore_result=True)
 def AddTweets():
     data=following.objects.filter(isActive=1)
     dep_list=pd.read_csv("core\\dep_list.csv")
@@ -231,28 +231,28 @@ def AddTweets():
             #print(tmp)
         if len(tmp3)>0:
             # for mvp
-           
+            sp=spacy.load('en_core_web_sm')           
             df=Preprocess.preprocess1(tmp3)
             for pos,item in df.iterrows():
                 tweet=tweets_data(twitter_handle=t_handle,tweet_id=tmp1[pos],tweet_data=item['Tweet'],tweet_date=tmp2[pos],sum_score=item['Sum_score'],score=item['Score'],counter=item['Counter'])
                 tweet.save()
 
 
-            sp=spacy.load('en_core_web_sm')
-            da_for_use=df[df['Score']<-1]
-            da_for_use
+            
+            # da_for_use=df[df['Score']<-1]
+            # da_for_use
 
         ##tokens=nltk.word_tokenize(da_for_use.iloc[5]['Tweet'])
         #tags=nltk.pos_tag(tokens)
 
-            pronounlistf=['i','me','mine','we','us','our','ours','my','myself']
-            pronounlisto=['your','yours','he','him','his','she','her','hers','they','them','their','theirs' ]
-            d_flag=0
+                pronounlistf=['i','me','mine','we','us','our','ours','my','myself']
+                pronounlisto=['your','yours','he','him','his','she','her','hers','they','them','their','theirs' ]
+                d_flag=0
         #print11(sen.text)
 
-            listl=[]
-            listll=[]
-            for text in da_for_use['Tweet']:
+                listl=[]
+                listll=[]
+                text = item['Tweet']
                 c1=0
                 c2=0
                 d_flag=0       
@@ -278,6 +278,7 @@ def AddTweets():
                                     d_flag=2
                 if d_flag==2:
                     print(t_handle+"  "+text+" "+str(date.today))
+                    d=tweets_data.objects.filter(twitter_handle=t_handle).filter(tweet_id=tmp1[pos]).update(is_notification=1)
                     not_data=notification_data(twitter_handle=t_handle,tweet_data=text,noti_date=datetime.now())
                     not_data.save()
                 

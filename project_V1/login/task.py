@@ -1,5 +1,5 @@
 from login.models import User_detail,Registration
-from core.models import following
+from core.models import following,notification_data
 from passlib.hash import pbkdf2_sha256
 
 def getFriends(usr):
@@ -37,3 +37,15 @@ def registerNewUser(usr,pwd,fname,lname,dob):
         
         return "You have been registered!!"
     return "Email already registered"    
+
+def notificationdata(usr):
+    data3=following.objects.filter(user_id=usr).filter(isActive=1)
+    noti_list=[]
+    for d in data3:
+        # t_handle.append(d.twitter_handle)
+        noti_data= notification_data.objects.filter(twitter_handle=d.twitter_handle) 
+        for row in noti_data:
+            noti_list.append({"handle":d.twitter_handle,"tweet":row.tweet_data})
+
+
+    return noti_list

@@ -40,7 +40,8 @@ def loginRequest(request):
         request.session.set_expiry(180)
         usr=request.session['username']
         t_handle=task.getFriends(usr)
-        return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
+        noti_list=task.notificationdata(usr)
+        return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle,'noti':noti_list})
     request.session.clear_expired()
     usr=request.POST.get("username")
     pwd=request.POST.get('password')
@@ -51,7 +52,8 @@ def loginRequest(request):
         request.session.set_expiry(180)
         request.session['username']=usr
         t_handle=task.getFriends(usr)
-        return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
+        noti_list=task.notificationdata(usr)
+        return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle,'noti':noti_list})
         
 
 def RegisterUser(request):
