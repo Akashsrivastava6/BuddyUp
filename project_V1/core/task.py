@@ -2,12 +2,12 @@ from django.db.models import Count,Max
 from celery.decorators import task,periodic_task
 from celery.task.schedules import crontab
 from django.core.mail import send_mail
-from core.models import following,tweets_data
+from core.models import following,tweets_data,notification_data
 from login.models import User_detail,Registration
 import login.task
 import json
 import datetime
-from datetime import date, datetime
+from datetime import date, datetime,timezone
 import tweepy
 from . import Preprocess
 import pickle
@@ -160,15 +160,51 @@ def twitterCheck(username):
         #     return 'dashboard.html',t_handle
                 
 
+@periodic_task(run_every=(crontab(minute='*/120')), name="noti_task", ignore_result=True)
+def noti_task():
+    t_handles=following.objects.filter(isActive=1)
+    
+    for a in t_handles:
+        twts=notification_data.objects.filter(twitter_handle=a.twitter_handle)
+        
+        friendlist=[]
+        frienddata=following.objects.filter(twitter_handle=a.twitter_handle)
+        
+        
+        for ab in frienddata:
+            friendlist.append(ab.user_id)        
+        if len(twts)>0:
+           # print("length is 1"+friendlist[0])
+            cur_date=datetime.now(timezone.utc)
+            max_date=notification_data.objects.filter(twitter_handle=a.twitter_handle).values('noti_date').annotate(mx_date=Max('noti_date'))
+            for abc in max_date:
+                #print(abc)
+                #print(abc['mx_date'])
+                #print("printing mx_date : "+mx_date)
+                dt=cur_date-abc['mx_date']
+                print(str((dt.seconds/60/60)>2))
+                if ((dt.seconds/60/60)<2):
+                    for email in friendlist:
+                        print(email)
+                #       send_mail("test mail","127.0.0.1:8000/oauth/login/twitter/","a.team.ucd.5@gmail.com",[email])
+
+        # if len(twts)>1:
+        #     print("no notification")
+
+        # elif len(twts)==1:
+
+
+        #     send_mail("test mail","127.0.0.1:8000/oauth/login/twitter/","a.team.ucd.5@gmail.com",[friend_email])
+        # else:
+        #     print("No tweet")
 
 
 
 
-
-@periodic_task(run_every=(crontab(minute='*/1')), name="AddTweets_task", ignore_result=True)
+@periodic_task(run_every=(crontab(minute='*/10')), name="AddTweets_task", ignore_result=True)
 def AddTweets():
     data=following.objects.filter(isActive=1)
-    
+    dep_list=pd.read_csv("core\\dep_list.csv")
     for d in data:
         t_handle=d.twitter_handle
         maxid=tweets_data.objects.filter(twitter_handle=t_handle).aggregate(Max('tweet_id'))    
@@ -195,26 +231,7 @@ def AddTweets():
             #print(tmp)
         if len(tmp3)>0:
             # for mvp
-            '''
-            df,ind=Preprocess.preprocess(tmp3)
-            #input text
-            #st=["I'm not unhappy today", "I love my country"]
-            #transform our input text for prediction
-            #unpickle the tfidf vectorizer
-            vectorizer_new = pickle.load(open("C:/Users/Akash Srivastava/Documents/GitHub/Buddyup/project_V1/core/x_result.pkl", "rb" ) )
-            classifier_new = pickle.load(open("C:/Users/Akash Srivastava/Documents/GitHub/Buddyup/project_V1/core/classifier.pkl", "rb" ) )
-            B_ok=vectorizer_new.transform(df).toarray()
-            #predict label for unseen data
-            df=classifier_new.predict(B_ok)
-            val=len(tmp1)+1
-            for j in range(0,len(tmp1)):
-                if j not in ind:
-                    tweet=tweets_data(twitter_handle=t_handle,tweet_id=tmp1[j],tweet_data=tmp3[j],tweet_date=tmp2[j],class_label=df[j])
-                    tweet.save()
-
-
-            tmp4.append([tmp,tmp1,tmp2,tmp3,df,len(tmp1)])
-            '''
+           
             df=Preprocess.preprocess1(tmp3)
             for pos,item in df.iterrows():
                 tweet=tweets_data(twitter_handle=t_handle,tweet_id=tmp1[pos],tweet_data=item['Tweet'],tweet_date=tmp2[pos],sum_score=item['Sum_score'],score=item['Score'],counter=item['Counter'])
@@ -228,9 +245,9 @@ def AddTweets():
         ##tokens=nltk.word_tokenize(da_for_use.iloc[5]['Tweet'])
         #tags=nltk.pos_tag(tokens)
 
-            pronounlistf=['i','me','mine','we','us','our','ours']
+            pronounlistf=['i','me','mine','we','us','our','ours','my','myself']
             pronounlisto=['your','yours','he','him','his','she','her','hers','they','them','their','theirs' ]
-
+            d_flag=0
         #print11(sen.text)
 
             listl=[]
@@ -238,34 +255,34 @@ def AddTweets():
             for text in da_for_use['Tweet']:
                 c1=0
                 c2=0
-            
+                d_flag=0       
                 sen=sp(text)
                 for word in sen:
                     if (word.tag_ =='PRP') or (word.tag_ =='PRP$'):
                         if word.text.lower() in pronounlistf:
-        #                 listl.append(word.text)
-                        #print(text+":"+word.text+"c1")
+                    #                 listl.append(word.text)
+                                    #print(text+":"+word.text+"c1")
                             c1=c1+1
                         elif word.text.lower() in pronounlisto:
-                        #print(text+":"+word.text+"c2")
+                                    #print(text+":"+word.text+"c2")
                             c2=c2+1
-                if c1 == 0 and c2==0:
-                    listl.append(text)
-                    listll.append("alert")
-                elif c1>c2:
-                    listl.append(text)
-                    listll.append("alert")
-                else:        
-                    listl.append(text)
-                    listll.append("No alert")
-                        
+                        if c1 == 0 and c2==0:
+                            d_flag=1
+                        elif c1>c2:
+                            d_flag=2
+                        else:        
+                            pass
+                        if d_flag==1:    
+                            for word in sen:
+                                if word in dep_list['WORD']:
+                                    d_flag=2
+                if d_flag==2:
+                    print(t_handle+"  "+text+" "+str(date.today))
+                    not_data=notification_data(twitter_handle=t_handle,tweet_data=text,noti_date=datetime.now())
+                    not_data.save()
                 
                 #print(f'{word.text:{12}} {word.pos_:{10}} {word.tag_:{8}} {word.dep_:{10}} {spacy.explain(word.tag_)}')
-            dd=pd.DataFrame(listl)
-            dd['is Alert?']=listll
-            dd.columns=['Tweet','is Alert']
-
-            dd.to_csv("core/alertlist.csv")
+      
 
             # for final product
 
