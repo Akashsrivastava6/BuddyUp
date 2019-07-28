@@ -41,11 +41,14 @@ def registerNewUser(usr,pwd,fname,lname,dob):
 def notificationdata(usr):
     data3=following.objects.filter(user_id=usr).filter(isActive=1)
     noti_list=[]
+    dd1 = []
     for d in data3:
+        dd = []
         # t_handle.append(d.twitter_handle)
         noti_data= notification_data.objects.filter(twitter_handle=d.twitter_handle) 
         for row in noti_data:
             noti_list.append({"handle":d.twitter_handle,"tweet":row.tweet_data})
+            dd.append(row.tweet_data)            
+        dd1.append({"handle": d.twitter_handle, "tweet_arr": dd})
 
-
-    return noti_list
+    return noti_list, dd1

@@ -83,7 +83,7 @@
             </ul>
 
 
-        </nav> 
+        </nav>
 
         <!-- Page Content  -->
         <div id="content">
@@ -95,21 +95,21 @@
                             <img src="#" alt="logo" /> </a>
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-center">
-                        
+
                     <ul class="navbar-nav ml-auto">
-                       
+
                         <li class="nav-item dropdown"></li>
                         <li class="nav-item dropdown d-none d-xl-inline-block">
                             <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                                 {{ Message}} &nbsp;
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                                aria-labelledby="UserDropdown">
-                                <a class="dropdown-item" href="myprofile">My Profile <span
-                                        class="badge badge-pill badge-danger"></span><i
-                                        class="dropdown-item-icon ti-dashboard"></i></a>
-                                <a class="dropdown-item" href="/logout/logout">Sign Out<i
-                                        class="dropdown-item-icon ti-power-off"></i></a>
-                            </div>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                    aria-labelledby="UserDropdown">
+                                    <a class="dropdown-item" href="myprofile">My Profile <span
+                                            class="badge badge-pill badge-danger"></span><i
+                                            class="dropdown-item-icon ti-dashboard"></i></a>
+                                    <a class="dropdown-item" href="/logout/logout">Sign Out<i
+                                            class="dropdown-item-icon ti-power-off"></i></a>
+                                </div>
                         </li>
                     </ul>
                     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
@@ -126,7 +126,7 @@
                         <div class="following-container">
                             <h3>Following</h3>
                             {%block content%}
-                            
+
                             {%if data%}
                             {% for c in data%}
                             <form class="form-inline" id="friends-list" action='/core/trendpage' method="post">
@@ -143,43 +143,38 @@
                             {%else%}
                             <h4>Please add a friend to see the trend</h4>
                             {%endif%}
-                            {%endblock%}
                         </div>
 
                     </div>
                     <div class="col-xs-6 col-md-4" id="col2">
-                         <div class="notification" style="text-align: center;">
-                             <h3>Notifications</h3>
-                                <div class="test"></div>
-                                          <script>
-                                              data1 = {{noti | safe}}
-                                            //  console.log(data1)
-                                              var notification = _.groupBy(data1, function (noti) {
-                                                  return noti.handle;
-                                              });
-                                              console.log(notification)
-
-                                              var div = document.getElementById('notification');
-                                              Object.keys(notification).forEach(function (key) {
-                                                 // console.log(notification[key])   
-                                            notification[key].forEach(function (d) {
-                                              //  console.log(key)
-                                                     $(`<div class="panel-heading" style:"padding: 10px">
-                                                         <h5 class="panel-title"><a data-toggle="collapse"
-                                                                 class="handle" href="#collapse${key}">` + d.handle +
-                                                                 `</a></h5>
-                                                                 </div>` + `<div id="collapse${key}"
-                                                                     class="panel-collapse collapse"
-                                                                     style="text-align: justify; padding:5px">` + d.tweet + `
-                                                                 </div>`).appendTo('.test');
-                                                   //  console.log(d.handle)
-                                                    // console.log(d.tweet)
-                                                    });
-                                                  });
-
-                                             
-                                          </script>
-                         </div>
+                        <div class="notification" style="text-align: center;">
+                            <h3>Notifications</h3>
+                            <div class="test">
+                                {% for c in dd1%}
+                                <div class="panel-group">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" style:"padding: 10px">
+                                            <h5 class="panel-title">
+                                                <a data-toggle="collapse" class="handle" href="#{{c.handle}}">
+                                                    {{c.handle}}
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div id={{c.handle}}>
+                                            {% for d in c.tweet_arr%}
+                                            <div id="tweets-arr">
+                                                {{d}} <br>
+                                            </div>
+                                            {%endfor%}
+                                        </div>
+                                        {%endfor%}
+                                        {%endblock%}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                         <div class="following-container">
                             <h3>Add Friend by email</h3>
                             <form action="/core/addfriend" method="post">
