@@ -40,11 +40,14 @@
     <link rel="stylesheet" href="{% static 'style.css'%}">
     <!-- Font Awesome JS -->
     <script src='https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js'></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -229,43 +232,19 @@
                             </ul> -->
                         </div>
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link count-indicator" id="messageDropdown" href="#" data-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="fas fa-bell"></i>
-                                    <span class="count">7</span>
-                                </a>
-                            </li>
 
-                            <li class="nav-item dropdown">
-                                <a class="nav-link count-indicator" id="notificationDropdown" href="#"
-                                    data-toggle="dropdown">
-                                    <i class="fas fa-envelope"></i>
-                                    <span class="count">3</span>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <h3>|</h3>
-                            </li>
                             <li class="nav-item dropdown d-none d-xl-inline-block">
                                 <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown"
                                     aria-expanded="false">
                                     {{usr}} &nbsp;
-                                    <img class="img-xs rounded-circle" src="../Dashboard/assets/images/faces/face8.jpg"
-                                        alt="Profile image" style="height: 50px; width: 50px;"> </a>
-                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                                    aria-labelledby="UserDropdown">
-                                    <a class="dropdown-item">My Profile <span
-                                            class="badge badge-pill badge-danger"></span><i
-                                            class="dropdown-item-icon ti-dashboard"></i></a>
-                                    <a class="dropdown-item">Messages<i
-                                            class="dropdown-item-icon ti-comment-alt"></i></a>
-                                    <a class="dropdown-item">Activity<i
-                                            class="dropdown-item-icon ti-location-arrow"></i></a>
-                                    <a class="dropdown-item">FAQ<i class="dropdown-item-icon ti-help-alt"></i></a>
-                                    <a class="dropdown-item" href="/logout/logout">Sign Out<i
-                                            class="dropdown-item-icon ti-power-off"></i></a>
-                                </div>
+                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                        aria-labelledby="UserDropdown">
+                                        <a class="dropdown-item" href="myprofile">My Profile <span
+                                                class="badge badge-pill badge-danger"></span><i
+                                                class="dropdown-item-icon ti-dashboard"></i></a>
+                                        <a class="dropdown-item" href="/logout/logout">Sign Out<i
+                                                class="dropdown-item-icon ti-power-off"></i></a>
+                                    </div>
                             </li>
                         </ul>
                         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
@@ -284,6 +263,7 @@
                             </svg>
                         </div>
                         <div class="feedback-form">
+
 
                             <!-- {%block content%}
                             {%if tweet_data%}
@@ -324,48 +304,95 @@
                         </div>
                     </div>
                 </div>
-            </div> <!-- row -->
-            <!--
+            </div>
 
-                
-                       <div class="row m-b-1">
-                           <div class="col-lg-6">
-                               <div class="card shadow">
-                                <div class="data-container" value="{{Message}}"></div>
-                                   <h4 class="card-header">Product Wise Revenue</h4>
-                                   <div class="card-block">
-                                       <div id="products-revenue-pie-chart"></div>
-                                   </div>
-                               </div>
-                           </div>
-
-                           <div class="col-lg-6">
-                               <div class="card shadow">
-                                   <h4 class="card-header">Orders</h4>
-                                   <div class="card-block">
-                                       <div id="orders-spline-chart"></div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div> <!-- row -->
         </div>
 
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="https://d3js.org/d3-color.v1.min.js"></script>
         <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
         <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-
         <script>
-            var data1 = {{obj1 | safe}};
+            String.prototype.removeStopWords = function () {
+                var x;
+                var y;
+                var word;
+                var stop_word;
+                var regex_str;
+                var regex;
+                var cleansed_string = this.valueOf();
+                var stop_words = new Array("a", "about", "above", "after", "again", "against", "all", "am", "an",
+                    "and",
+                    "any", "are", "aren't", "as", "at", "be", "because", "been", "before", "being", "below",
+                    "between", "both", "but", "by", "can't", "cannot", "could", "couldn't", "did", "didn't",
+                    "do", "does", "doesn't", "doing", "don't", "down", "during", "each", "few", "for", "from",
+                    "further", "had", "hadn't", "has", "hasn't", "have", "haven't", "having", "he", "he'd",
+                    "he'll", "he's", "her", "here", "here's", "hers", "herself", "him", "himself", "his", "how",
+                    "how's", "i", "i'd", "i'll", "i'm", "i've", "if", "in", "into", "is", "isn't", "it", "it's",
+                    "its", "itself", "let's", "me", "more", "most", "mustn't", "my", "myself", "no", "nor",
+                    "not", "of", "off", "on", "once", "only", "or", "other", "ought", "our", "ours",
+                    "ourselves", "out", "over", "own", "same", "shan't", "she", "she'd", "she'll", "she's",
+                    "should", "shouldn't", "so", "some", "such", "than", "that", "that's", "the", "their",
+                    "theirs", "them", "themselves", "then", "there", "there's", "these", "they", "they'd",
+                    "they'll", "they're", "they've", "this", "those", "through", "to", "too", "under", "until",
+                    "up", "very", "was", "wasn't", "we", "we'd", "we'll", "we're", "we've", "were", "weren't",
+                    "what", "what's", "when", "when's", "where", "where's", "which", "while", "who", "who's",
+                    "whom", "why", "why's", "with", "won't", "would", "wouldn't", "you", "you'd", "you'll",
+                    "you're", "you've", "your", "yours", "yourself", "yourselves");
+                // Split out all the individual words in the phrase
+                // Split out all the individual words in the phrase
+                words = cleansed_string.match(/[^\s]+|\s+[^\s+]$/g)
+
+                // Review all the words
+                for (x = 0; x < words.length; x++) { // For each word, check all the stop words 
+                    for (y = 0; y < stop_words.length; y++) { // Get the current word 
+                        word = words[x].replace(/\s+|[^a-z]+/ig, ""); // Trim the word and remove non-alpha //
+                        // Get the stop word 
+                        stop_word = stop_words[y]; // If the word matches the stop word, remove it from the keywords
+                        if (word.toLowerCase() == stop_word) { // Build the regex 
+                            regex_str = "^\\s*" + stop_word + "\\s*$"; // Only word
+                            regex_str += "|^\\s*" + stop_word + "\\s+"; // First word 
+                            regex_str += "|\\s+" + stop_word + "\\s*$"; // Last word
+                            regex_str += "|\\s+" + stop_word + "\\s+"; // Word somewhere in the middle 
+                            regex = new RegExp(regex_str, "ig"); //
+                            //Remove the word from the keywords 
+                            cleansed_string = cleansed_string.replace(regex, " ");
+                        }
+                    }
+                }
+                return cleansed_string.replace(/^\s+|\s+$/g, "");
+            }
+
+
+            function wordFreq(string) {
+                var words = string.replace(/[.]/g, '').split(/\s/);
+                var freqMap = {};
+                words.forEach(function (w) {
+                    if (!freqMap[w]) {
+                        freqMap[w] = 0;
+                    }
+                    freqMap[w] += 1;
+                });
+                return freqMap;
+            }
+
+
+            //wordfrequency.push({"x": w, })
+            var wordfrequency = [];
+            Object.keys(new_bar).forEach(function (key) {
+                wordfrequency.push({
+                    "x": key,
+                    "value": new_bar[key]
+                })
+            });
+            console.log(wordfrequency);
+        </script>
+        <script>
+            var data1 = {{obj1|safe}};
             console.log(data1)
 
 
             var data2 = _.groupBy(data1, function (obj1) {
-
-                //  for((key,value) in obj1.tweet_date) {
-                //     score = score+obj1.tweet_score;
-                //      count = count+obj1.tweet_counter;
-                //  }
                 return obj1.tweet_date.substring(0, 10);
             });
             console.log(data2);
@@ -385,7 +412,6 @@
                     count = count + d.tweet_counter;
                     tweets.push(d.tweet_data);
                     tweet_score.push(d.tweet_score)
-                    
                 });
                 if (count == 0) {
                     data.push({
@@ -456,332 +482,6 @@
 
             console.log(data)
 
-
-            //keys[i] for key //dictionary[keys[i]] for the value 
-            // var score = 0;
-            // var count = 0;
-            // var aa = 0
-            // for (const [key, value] of data.entries()) {
-            //     score = score + obj1.tweet_score;
-            //     count = count + obj1.tweet_counter;
-            //     console.log(key, score, count)
-            // }
-            //   console.log(data)
-            //  console.log(typeof data);
-
-
-
-            //    / console.log(typeof data1)
-            // console.log((data1));
-            // var data2 = "{{obj2}}";z
-            // var res1 = data1.replace(/[\[\]']+/g, '')
-            //     .replace(/&quot;/g, '"');
-            // // .replace(/\\n/g, "\\n")
-            // // .replace(/\\'/g, "\\'")
-            // // .replace(/\\"/g, '\\"')
-            // // .replace(/\\&/g, "\\&")
-            // // .replace(/\\r/g, "\\r")
-            // // .replace(/\\t/g, "\\t")
-            // // .replace(/\\b/g, "\\b")
-            // // .replace(/\\f/g, "\\f");
-            // // remove non-printable and other non-valid JSON chars
-            // //  res1 = res1.replace(/[\u0000-\u001F]+/g, "");
-            // //res1 = res1.replace(/[\u0000-\u0019]+/g, "");
-            // res1 = [res1]
-            // console.log(res1)
-
-
-            // //   console.log(res2[1])
-            // // console.log(res1)
-            // res1 = JSON.parse(res1);
-
-            // console.log(obj1)
-            // remove non-printable and other non-valid JSON chars
-
-            // var res2 = data2.replace(/&quot;/g, '"');
-            //  var obj1 = res1;
-            // console.log(obj1)
-            //var new_date = res.replace(/datetime.Date/g, "new Date");
-            //  res1.map(id => ({ id }))
-
-            //console.log(obj1)
-            //             var obj1 = res1.forEach(function (obj, v) {
-            //                 obj[v] = 0;
-            //                 return obj;
-            //             }, {})
-
-            // console.log(grouped);
-            // var data = jsonObject;
-            //  console.log(typeof data)
-            //    console.log(result);
-
-            // var data = obj1;
-
-            /*
-                        var objarr = [];
-                        for (var i = 0; i < obj1.length; i++) {
-                            objarr.push(obj1[i]);
-                        }
-            */
-            /*
-
-                        var margin = {
-                                top: 20,
-                                right: 80,
-                                bottom: 30,
-                                left: 50
-                            },
-                            width = 900 - margin.left - margin.right,
-                            height = 500 - margin.top - margin.bottom;
-
-                        var parseDate = d3.time.format("%Y-%m-%d").parse;
-
-
-                        var svg = d3.select("svg"),
-                            margin = {
-                                top: 20,
-                                right: 20,
-                                bottom: 30,
-                                left: 40
-                            },
-                            width = +svg.attr("width") - margin.left - margin.right,
-                            height = +svg.attr("height") - margin.top - margin.bottom;
-
-                        var x = d3.time.scale()
-                            .range([0, width]);
-
-                        var y = d3.scale.linear()
-                            .range([height, 0]);
-
-                        var color = d3.scale.category10();
-
-                        var xAxis = d3.svg.axis()
-                            .scale(x)
-                            .orient("bottom");
-
-                        var yAxis = d3.svg.axis()
-                            .scale(y)
-                            .orient("left");
-
-                        var line = d3.svg.line()
-                            .interpolate("basis")
-                            .x(function (d) {
-                                return x(d.date);
-                            })
-                            .y(function (d) {
-                                return y(d.score);
-                            });
-
-                        var svg = d3.select("svg")
-                            .attr("width", width + margin.left + margin.right)
-                            .attr("height", height + margin.top + margin.bottom)
-                            .append("g")
-                            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-
-                        color.domain(d3.keys(data[0]).filter(function (key) {
-                            return key !== "date";
-                        }));
-
-                        data.forEach(function (d) {
-                            d.date = parseDate(d.date);
-                        });
-
-                        var scores = color.domain().map(function (score) {
-                            return {
-                                score: score,
-                                values: data.map(function (d) {
-                                    return {
-                                        date: d.date,
-                                        score: +d[score]
-                                    };
-                                })
-                            };
-                        });
-
-                        console.log(scores)
-
-                        x.domain(d3.extent(data, function (d) {
-                            return d.date;
-                        }));
-
-                        y.domain([
-                            d3.min(scores, function (c) {
-                                return d3.min(c.values, function (v) {
-                                    return v.score;
-                                });
-                            }),
-                            d3.max(scores, function (c) {
-                                return d3.max(c.values, function (v) {
-                                    return v.score;
-                                });
-                            })
-                        ]);
-
-                        var legend = svg.selectAll('g')
-                            .data(scores)
-                            .enter()
-                            .append('g')
-                            .attr('class', 'legend');
-
-
-                        legend.append('rect')
-                            .attr('x', width - 20)
-                            .attr('y', function (d, i) {
-                                return i * 20;
-                            })
-                            .attr('width', 10)
-                            .attr('height', 10)
-                            .style('fill', function (d) {
-                                return color(d.score);
-                            });
-
-                        legend.append('text')
-                            .attr('x', width - 8)
-                            .attr('y', function (d, i) {
-                                return (i * 20) + 9;
-                            })
-                            .text(function (d) {
-                                return d.score;
-                            });
-
-                        svg.append("g")
-                            .attr("class", "x axis")
-                            .attr("transform", "translate(0," + height + ")")
-                            .call(xAxis);
-
-                        svg.append("g")
-                            .attr("class", "y axis")
-                            .call(yAxis)
-                            .append("text")
-                            .attr("transform", "rotate(-90)")
-                            .attr("y", 6)
-                            .attr("dy", ".71em")
-                            .style("text-anchor", "end")
-                            .text("Sentiment Score");
-
-                        var scr = svg.selectAll(".score")
-                            .data(scores)
-                            .enter().append("g")
-                            .attr("class", "score");
-
-                        scr.append("path")
-                            .attr("class", "line")
-                            .attr("d", function (d) {
-                                return line(d.values);
-                            })
-                            .style("stroke", function (d) {
-                                return color(d.score);
-                            });
-
-                        scr.append("text")
-                            .datum(function (d) {
-                                return {
-                                    score: d.score,
-                                    value: d.values[d.values.length - 1]
-                                };
-                            })
-                            .attr("transform", function (d) {
-                                return "translate(" + x(d.value.date) + "," + y(d.value.score) + ")";
-                            })
-                            .attr("x", 3)
-                            .attr("dy", ".35em")
-                            .text(function (d) {
-                                return d.score;
-                            });
-
-                        var mouseG = svg.append("g")
-                            .attr("class", "mouse-over-effects");
-
-                        mouseG.append("path") // this is the black vertical line to follow mouse
-                            .attr("class", "mouse-line")
-                            .style("stroke", "black")
-                            .style("stroke-width", "1px")
-                            .style("opacity", "0");
-
-                        var lines = document.getElementsByClassName('line');
-
-                        var mousePerLine = mouseG.selectAll('.mouse-per-line')
-                            .data(scores)
-                            .enter()
-                            .append("g")
-                            .attr("class", "mouse-per-line");
-
-                        mousePerLine.append("circle")
-                            .attr("r", 7)
-                            .style("stroke", function (d) {
-                                return color(d.score);
-                            })
-                            .style("fill", "none")
-                            .style("stroke-width", "1px")
-                            .style("opacity", "0");
-
-
-                        mousePerLine.append("text")
-                            .attr("transform", "translate(10,3)");
-
-                        mouseG.append('svg:rect') // append a rect to catch mouse movements on canvas
-                            .attr('width', width) // can't catch mouse events on a g element
-                            .attr('height', height)
-                            .attr('fill', 'none')
-                            .attr('pointer-events', 'all')
-                            .on('mouseout', function () { // on mouse out hide line, circles and text
-                                d3.select(".mouse-line")
-                                    .style("opacity", "0");
-                                d3.selectAll(".mouse-per-line circle")
-                                    .style("opacity", "0");
-                                d3.selectAll(".mouse-per-line text")
-                                    .style("opacity", "0");
-                            })
-
-                            .on('mouseover', function () { // on mouse in show line, circles and text
-                                d3.select(".mouse-line")
-                                    .style("opacity", "1");
-                                d3.selectAll(".mouse-per-line circle")
-                                    .style("opacity", "1");
-                                d3.selectAll(".mouse-per-line text")
-                                    .style("opacity", "1");
-                            })
-                            .on('mousemove', function () { // mouse moving over canvas
-                                    var mouse = d3.mouse(this);
-                                    d3.select(".mouse-line")
-                                        .attr("d", function () {
-                                            var d = "M" + mouse[0] + "," + height;
-                                            d += " " + mouse[0] + "," + 0;
-                                            return d;
-                                        });
-
-                                    d3.selectAll(".mouse-per-line")
-                                        .attr("transform", function (d, i) {
-                                                console.log(width / mouse[0])
-                                                var xDate = x.invert(mouse[0]),
-                                                    bisect = d3.bisector(function (d) {
-                                                        return d.date;
-                                                    }).right;
-                                                idx = bisect(d.values, xDate);
-
-                                                var beginning = 0,
-                                                    end = lines[i].getTotalLength(),
-                                                    target = null;
-
-                                                while (true) {
-                                                    target = Math.floor((beginning + end) / 2);
-                                                    pos = lines[i].getPointAtLength(target);
-                                                    if ((target === end || target === beginning) && pos.x !== mouse[0]) {
-                                                        break;
-                                                    }
-                                                    if (pos.x > mouse[0]) end = target;
-                                                    else if (pos.x < mouse[0]) beginning = target;
-                                                    else break; //position found 
-                                                    }
-
-                                                    d3.select(this).select('text')
-                                                        .text(y.invert(pos.y).toFixed(2));
-
-                                                    return "translate(" + mouse[0] + "," + pos.y + ")";
-                                                })
-                                        });*/
             function trend() {
 
                 var svg = d3.select("svg"),
@@ -941,41 +641,6 @@
                 //         .tickSize(0)
                 //         .tickFormat(""));
 
-                var sentiment = [{
-                        "5": "Positve"
-                    },
-                    {
-                        "4": "Positve"
-                    },
-                    {
-                        "3": "Positve"
-                    },
-                    {
-                        "2": "Positve"
-                    },
-                    {
-                        "1": "Positve"
-                    },
-                    {
-                        "0": "Positve"
-                    },
-                    {
-                        "-1": "Positve"
-                    },
-                    {
-                        "-2": "Positve"
-                    },
-                    {
-                        "-3": "Positve"
-                    },
-                    {
-                        "-4": "Positve"
-                    },
-                    {
-                        "-5": "Positve"
-                    }
-                ]
-
                 g.append("g")
                     .attr("class", "axis axis--y")
                     .call(d3.axisLeft(y).ticks(10).tickFormat(function (d) {
@@ -996,8 +661,6 @@
                     .attr("data-legend", function (d) {
                         return d.date
                     })
-
-
 
                 g.selectAll('circle')
                     .data(data).enter()
@@ -1055,10 +718,12 @@
                     focus.style("color", "white");
                 }
 
-                function onClickEvent(name) {
 
-                    console.log(name)
+
+                function onClickEvent(name) {
+                    //  console.log(name)
                     //loading tweets into array
+                    var tweets_data = "";
                     var x0 = x.invert(d3.mouse(this)[0]),
                         i = bisectDate(data, x0, 0),
                         d0 = data[i - 1],
@@ -1069,22 +734,140 @@
                     var color = 'black';
                     //generating popup dynamically showing all tweets
                     //capture array only for date key
+                    $('.feedback-form').empty();
+                    $('#container').empty();
+
                     $(('<h4>' + "Tweets" + '</h4>')).appendTo(".feedback-form");
-                    $(('<div id="test" style="text-align:center; font-size:24px; font-weight:700">' + d3.timeFormat("%b-%d")(d.date) + '<br>')).appendTo(".feedback-form");
-         
+                    // $(('<div id="test" style="text-align:center; font-size:24px; font-weight:700">' +
+                    //     d3.timeFormat("%b-%d")(d.date)  ).appendTo(".feedback-form");
                     for (i = 0; i <= d.tweet.length - 1; i++) {
-                        if (d.t_score[i] <= -1.5) {
-                        $(('<div id="test" style="color:red">' + [i+1] + '. ' + d.tweet[i] + '<br>')).appendTo(".feedback-form");
+                        tweets_data += d.tweet[i]
+                        if (d.t_score[i] <= -3) {
+                            $(('<div id="test" style="color:red; display: inline">' + [i + 1] + '. ' + d.tweet[i] +
+                                +
+                                '<br>')).appendTo(".feedback-form");
                         } else {
-                        $(('<div id="test" style="color:black">' + [i+1] + '. ' + d.tweet[i] + '<br>')).appendTo(".feedback-form");
+                            $(('<div id="test" style="color:black">' + [i + 1] + '. ' + d.tweet[i] + '<br>')).appendTo(
+                                ".feedback-form");
                         }
+
                     }
+                    $(('<br>' + '<div id="container" style:"display: inline-flex">' + "</div>")).appendTo(
+                        ".feedback-form");
+                    //console.log(tweets_data)
+                    // var new_bar = wordFreq(tweets_data)
+                    // //  console.log(new_bar + "1")
+                    // var wordfrequency = [];
+                    // Object.keys(new_bar).forEach(function (key) {
+                    //     wordfrequency.push({
+                    //         "x": key,
+                    //         "value": new_bar[key]
+                    //     })
+                    // });
+
+                    // var wordchart = anychart.onDocumentReady(function () {
+                    // var datacloud = wordfrequency;
+                    // console.log("printing" + datacloud)
+                    // var chart = anychart.tagCloud(datacloud);
+                    // console.log(chart)
+
+                    // // set a chart title
+                    // chart.title('15 most spoken languages')
+                    // // set an array of angles at which the words will be laid out
+                    // chart.angles([0])
+                    // // enable a color range
+                    // chart.colorRange(true);
+                    // // set the color range length
+                    // chart.colorRange().length('80%');
+
+                    // // display the word cloud chart
+                    // chart.container("container");
+                    // chart.draw();
+                    // });
+                    console.log(tweets_data.removeStopWords());
+
+                    zingchart.MODULESDIR = 'https://cdn.zingchart.com/modules/';
+                    let chartConfig = {
+                        type: 'wordcloud',
+                        options: {
+                            text: tweets_data,
+                            aspect: 'spiral',
+                            colorType: 'palette',
+                            ignore: ["a", "about", "above", "after", "again", "against", "all", "am", "an",
+                                "and",
+                                "any", "are", "aren't", "as", "at", "be", "because", "been", "before", "being",
+                                "below",
+                                "between", "both", "but", "by", "can't", "cannot", "could", "couldn't", "did",
+                                "didn't",
+                                "do", "does", "doesn't", "doing", "don't", "down", "during", "each", "few",
+                                "for", "from",
+                                "further", "had", "hadn't", "has", "hasn't", "have", "haven't", "having", "he",
+                                "he'd",
+                                "he'll", "he's", "her", "here", "here's", "hers", "herself", "him", "himself",
+                                "his", "how",
+                                "how's", "i", "i'd", "i'll", "i'm", "i've", "if", "in", "into", "is", "isn't",
+                                "it", "it's",
+                                "its", "itself", "let's", "me", "more", "most", "mustn't", "my", "myself", "no",
+                                "nor",
+                                "not", "of", "off", "on", "once", "only", "or", "other", "ought", "our", "ours",
+                                "ourselves", "out", "over", "own", "same", "shan't", "she", "she'd", "she'll",
+                                "she's",
+                                "should", "shouldn't", "so", "some", "such", "than", "that", "that's", "the",
+                                "their",
+                                "theirs", "them", "themselves", "then", "there", "there's", "these", "they",
+                                "they'd",
+                                "they'll", "they're", "they've", "this", "those", "through", "to", "too",
+                                "under", "until",
+                                "up", "very", "was", "wasn't", "we", "we'd", "we'll", "we're", "we've", "were",
+                                "weren't",
+                                "what", "what's", "when", "when's", "where", "where's", "which", "while", "who",
+                                "who's",
+                                "whom", "why", "why's", "with", "won't", "would", "wouldn't", "you", "you'd",
+                                "you'll",
+                                "you're", "you've", "your", "yours", "yourself", "yourselves"
+                            ],
+                            maxItems: 50,
+                            minLength: '4px',
+                            palette: ['#D32F2F', '#1976D2', '#9E9E9E', '#E53935', '#1E88E5', '#7E57C2',
+                                '#F44336', '#2196F3', '#A1887F'
+                            ],
+                            rotate: true,
+                            style: {
+                                tooltip: {
+                                    padding: '5px',
+                                    alpha: 0.9,
+                                    backgroundColor: '#D32F2F',
+                                    borderColor: 'none',
+                                    borderRadius: '3px',
+                                    fontColor: 'white',
+                                    fontFamily: 'Georgia',
+                                    textAlpha: 1,
+                                    visible: true,
+                                    width: '400px',
+                                    wrapText: true
+                                },
+                                fontFamily: 'Merriweather',
+                                hoverState: {
+                                    backgroundColor: '#1976D2',
+                                    borderColor: 'none',
+                                    borderRadius: '3px',
+                                    fontColor: 'white'
+                                }
+                            }
+                        }
+                    };
+
+                    zingchart.render({
+                        id: 'container',
+                        data: chartConfig
+                    });
+
+                    console.log(wordfrequency);
                     $('html, body').animate({
                         scrollTop: $(".feedback-form").offset().top
-                        }, 2000);
+                    }, 1000);
 
                 };
-
 
 
                 var w = 104,
@@ -1197,10 +980,11 @@
             }
             trend();
         </script>
+
         <script>
 
-        </script>
 
+        </script>
 
 </body>
 
