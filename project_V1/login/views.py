@@ -31,6 +31,8 @@ def logoutRequest(request):
 def signupUser(request):
     return render(request,'signup.html')
 
+def myprofile(request):
+    return render(request,'myprofile.html')
 
 def loginRequest(request):
 
