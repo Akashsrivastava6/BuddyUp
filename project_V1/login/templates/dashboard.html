@@ -147,23 +147,31 @@
 
                     </div>
                     <div class="col-xs-6 col-md-4" id="col2">
-                        <div class="notification" style="text-align: center;">
+                        <div class="notification" >
                             <h3>Notifications</h3>
                             <div class="test">
                                 {% for c in dd1%}
                                 <div class="panel-group">
                                     <div class="panel panel-default">
-                                        <div class="panel-heading" style:"padding: 10px">
-                                            <h5 class="panel-title">
-                                                <a data-toggle="collapse" class="handle" href="#{{c.handle}}">
-                                                    {{c.handle}}
+                                        <div class="panel-heading">
+                                            <h5 class="panel-title" >
+                                               
+                                                 <a class="btn btn-primary" data-toggle="collapse"
+                                                    aria-expanded="false" href="#{{c.handle}}"
+                                                     aria-controls="collapseExample">
+                                                       {{c.handle}}
                                                 </a>
+                                               
                                             </h5>
                                         </div>
-                                        <div id={{c.handle}}>
+                                      
+                                        <div id={{c.handle}} class="collapse">
+                                              <hr>
                                             {% for d in c.tweet_arr%}
+                                          
                                             <div id="tweets-arr">
-                                                {{d}} <br>
+                                                {{d}} 
+                                                  <hr>
                                             </div>
                                             {%endfor%}
                                         </div>
