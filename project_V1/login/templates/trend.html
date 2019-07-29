@@ -458,7 +458,6 @@
                         bottom: 80,
                         left: 40
                     },
-
                     width = +svg.attr("width") - margin.left - margin.right,
                     height = +svg.attr("height") - margin.top - margin.bottom;
 
@@ -476,7 +475,6 @@
                     .range([0, width]);
 
                 var y = d3.scaleLinear().domain([-5, 5]).range([height, 30]);
-
 
 
                 svg.append("rect")
@@ -520,8 +518,13 @@
                     .on("mouseout", function () {
                         focus.style("display", "none");
                     })
-                    .on("mousemove", mousemove)
-                    .on("click", onClickEvent);
+                                        .on("click", onClickEvent)
+
+                    .on("mousemove", mousemove);
+
+                                  
+
+                    
 
                 var line = d3.line()
                     .curve(d3.curveCatmullRom.alpha(0.5))
@@ -532,9 +535,7 @@
                         return y(d.score);
                     });
 
-                var selectCircle = svg.selectAll(".circle")
-                    .data(data)
-                    .style("hover", "rgb(26, 60, 253)")
+        
 
                 var g = svg.append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -634,7 +635,16 @@
                     .append('circle')
                     .attr('cx', d => x(d.date))
                     .attr('cy', d => y(d.score))
-                    .attr('r', 8);
+                    .attr('r', 8)
+                    .on("mouseover", function () {
+                    focus.style("display", null)
+                    focus.style("color", "white");
+                    })
+                    .on("mouseout", function () {
+                    focus.style("display", "none");
+                    })
+                    .on("mousemove", mousemove)
+                    .on("click", onClickEvent);
 
                 g.selectAll("text").data(data).enter()
                     .append("text")
@@ -669,7 +679,9 @@
                     .attr("class", "tooltip-likes")
                     .attr("x", 18)
                     .attr("y", -10)
-                    .attr("cy", "5px");
+                    .attr("dy", "7px");
+
+                      
 
                 function mousemove() {
                     var x0 = x.invert(d3.mouse(this)[0]),
@@ -681,7 +693,7 @@
                     focus.select(".tooltip-date").text("Date: " + d3.timeFormat("%b-%d")(d.date))
                     focus.select(".tooltip-likes").text("Tweet: " + (d.tweet))
                     focus.select(".tooltip-likes").text("Score: " + (d.score).toFixed(2))
-                    focus.select(".x-hover-line").attr("y2", height - y(d.score)).style("border", "solid");
+                    focus.select(".x-hover-line").attr("y2", height- y(d.score)).style("border", "solid");
                     focus.style("color", "white");
                 }
 
