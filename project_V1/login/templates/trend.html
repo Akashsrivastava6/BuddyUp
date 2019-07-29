@@ -713,9 +713,9 @@
                         console.log("printing tweet" + d.tweet[i])
                         if (d.t_score[i] <= -3) {
                             $(('<div id="test" style="color:red; display: inline"><tr>' + [i + 1] + '. ' + d.tweet[i] +
-                                '<br> </tr>')).appendTo(".feedback-form");
+                                '<br><hr></tr>')).appendTo(".feedback-form");
                         } else {
-                            $(('<div id="test" style="color:black"><tr>' + [i + 1] + '. ' + d.tweet[i] + '<br></tr>'))
+                            $(('<div id="test" style="color:black"><tr>' + [i + 1] + '. ' + d.tweet[i] + '<br><hr></tr>'))
                                 .appendTo(
                                     ".feedback-form");
                         }
@@ -785,7 +785,7 @@
                                 "not", "of", "off", "on", "once", "only", "or", "other", "ought", "our", "ours",
                                 "ourselves", "out", "over", "own", "same", "shan't", "she", "she'd", "she'll",
                                 "she's",
-                                "should", "shouldn't", "so", "some", "such", "than", "that", "that's", "the",
+                                "should", "shouldn't", "so", "some", "such", "than", "that", "that's", "the", "The", 
                                 "their",
                                 "theirs", "them", "themselves", "then", "there", "there's", "these", "they",
                                 "they'd",
@@ -962,7 +962,7 @@
            window.onscroll = function() {scrollFunction()};
 
            function scrollFunction() {
-           if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+           if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
            document.getElementById("top").style.display = "block";
            } else {
            document.getElementById("top").style.display = "none";
