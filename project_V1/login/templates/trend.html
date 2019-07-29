@@ -262,52 +262,19 @@
                                 width="1320" height="700" viewBox="-40 0 1200 700" preserveAspectRatio="xMidYMid meet">
                             </svg>
                         </div>
-                        <div class="feedback-form">
+                    <div class="onclick-container">
+                        <div class="feedback-form"></div>
+                        <div class="wordcloud"></div>
+                    </div>
+                                            <button class="btn btn-primary" id="top" onclick="topFunction()"
+                                                type="button">Scroll Top</button>
 
-
-                            <!-- {%block content%}
-                            {%if tweet_data%}
-
-                            <table class="feedback-table">
-                                <tr>
-                                <th mat-header-cell *matHeaderCellDef> Tweet id </th>
-                                    <th>Tweet </th>
-                                    <th>
-                                        Tweet Date
-                                    </th>
-                                    <th>Tweet Score</th>
-                                    <th>tweet sum_score</th>
-                                    <th>tweet counter</th>
-
-                                </tr>
-                                {%for d in tweet_data%}
-                                <tr>
-                                    <td>
-                                        {{d.id}}
-                                    </td>
-                                    <td>
-                                        {{d.tweet_data}}
-                                    </td>
-                                    <td>{{d.tweet_date}}</td>
-                                    <td>{{d.tweet_score}}</td>
-                                    <td>{{d.tweet_sum_score}}</td>
-                                    <td>{{d.tweet_counter}}</td>
-
-
-                                </tr>
-                                {%endfor%}
-                                {%endif%}
-                                {%endblock %}
-
-                            </table>
-                            <input type="submit" value="submit"> -->
-                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
-        
+
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="https://d3js.org/d3-color.v1.min.js"></script>
         <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
@@ -388,7 +355,7 @@
             console.log(wordfrequency);
         </script>
         <script>
-            var data1 = {{obj1|safe}};
+            var data1 = {{obj1 | safe}};
             console.log(data1)
 
 
@@ -720,7 +687,7 @@
 
 
 
-                function onClickEvent(name) {
+                function onClickEvent() {
                     //  console.log(name)
                     //loading tweets into array
                     var tweets_data = "";
@@ -734,28 +701,30 @@
                     var color = 'black';
                     //generating popup dynamically showing all tweets
                     //capture array only for date key
-                    $('.feedback-form').empty();
-                    $('#container').empty();
+                    $('.feedback-form').html('');
+                    $('.wordcloud').html('');
 
                     $(('<h4>' + "Tweets" + '</h4>')).appendTo(".feedback-form");
-                     $(('<div id="test" style="text-align:center; font-size:24px; font-weight:700">' +
-                         d3.timeFormat("%b-%d")(d.date)  )).appendTo(".feedback-form");
+                    $(('<div id="test" style="text-align:center; font-size:24px; font-weight:700">' +
+                        d3.timeFormat("%b-%d")(d.date))).appendTo(".feedback-form");
                     $(("<table>")).appendTo(".feedback-form")
-                    for (i = 0; i <= d.tweet.length -1 ; i++) {
+                    for (i = 0; i <= d.tweet.length - 1; i++) {
                         tweets_data += d.tweet[i]
                         console.log("printing tweet" + d.tweet[i])
                         if (d.t_score[i] <= -3) {
-                            $(('<div id="test" style="color:red; display: inline"><tr>' + [i + 1] + '. ' + d.tweet[i] +'<br> </tr>')).appendTo(".feedback-form");
+                            $(('<div id="test" style="color:red; display: inline"><tr>' + [i + 1] + '. ' + d.tweet[i] +
+                                '<br> </tr>')).appendTo(".feedback-form");
                         } else {
-                            $(('<div id="test" style="color:black"><tr>' + [i + 1] + '. ' + d.tweet[i] + '<br></tr>')).appendTo(
-                                ".feedback-form");
+                            $(('<div id="test" style="color:black"><tr>' + [i + 1] + '. ' + d.tweet[i] + '<br></tr>'))
+                                .appendTo(
+                                    ".feedback-form");
                         }
 
-                    
+
                     }
                     $(("</table>")).appendTo(".feedback-form")
-                    $(('<br>' + '<div id="container" style:"display: inline-flex">' + "</div>")).appendTo(
-                        ".feedback-form");
+                     $(('<h4>' + "Wordcloud" + '</h4>')).appendTo(".wordcloud");
+                    $(('<br>' + '<div id="container" style:"background: #dbd8d8;display: inline-flex">' + "</div>")).appendTo(".wordcloud");
                     //console.log(tweets_data)
                     // var new_bar = wordFreq(tweets_data)
                     // //  console.log(new_bar + "1")
@@ -791,6 +760,8 @@
                     zingchart.MODULESDIR = 'https://cdn.zingchart.com/modules/';
                     let chartConfig = {
                         type: 'wordcloud',
+                          backgroundColor: '#111',
+
                         options: {
                             text: tweets_data,
                             aspect: 'spiral',
@@ -829,39 +800,45 @@
                                 "you're", "you've", "your", "yours", "yourself", "yourselves"
                             ],
                             maxItems: 50,
-                            minLength: '4px',
+                            minLength: '3px',
                             palette: ['#D32F2F', '#1976D2', '#9E9E9E', '#E53935', '#1E88E5', '#7E57C2',
                                 '#F44336', '#2196F3', '#A1887F'
                             ],
                             rotate: true,
+                                                                fontSize: '30px',
+
+
                             style: {
                                 tooltip: {
-                                    padding: '5px',
-                                    alpha: 0.9,
+                                    padding: '1px',
+                                    alpha: 3.9,
                                     backgroundColor: '#D32F2F',
                                     borderColor: 'none',
                                     borderRadius: '3px',
                                     fontColor: 'white',
-                                    fontFamily: 'Georgia',
-                                    textAlpha: 1,
+                                    fontFamily: 'Open Sans',
+                                    textAlpha: 6,
+                                    fontSize: '20px',
                                     visible: true,
-                                    width: '400px',
-                                    wrapText: true
+                                    width: '300px',
+                                    wrapText: false
                                 },
-                                fontFamily: 'Merriweather',
+                                fontFamily: 'Open Sans',
                                 hoverState: {
-                                    backgroundColor: '#1976D2',
+                                    backgroundColor: '#111',
                                     borderColor: 'none',
                                     borderRadius: '3px',
                                     fontColor: 'white'
                                 }
                             }
                         }
+
                     };
 
                     zingchart.render({
                         id: 'container',
-                        data: chartConfig
+                        data: chartConfig,
+                        fontWeight:'bold',
                     });
 
                     console.log(wordfrequency);
@@ -981,6 +958,24 @@
 
             }
             trend();
+            
+           window.onscroll = function() {scrollFunction()};
+
+           function scrollFunction() {
+           if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+           document.getElementById("top").style.display = "block";
+           } else {
+           document.getElementById("top").style.display = "none";
+           }
+           }
+
+           // When the user clicks on the button, scroll to the top of the document
+           function topFunction() {
+           document.body.scrollTop = 0;
+           document.documentElement.scrollTop = 0;
+           }
+           </script>
+
         </script>
 
         <script>

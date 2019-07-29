@@ -808,15 +808,36 @@ input[type=submit] {
     width: 100%;
 }
 
+.onclick-container {
+    display: flex;
+}
+
 .feedback-form {
     position: static;
     text-align: justify;
     width: 50%;
+    margin-right: 2em;
     font-size: 18px;
     font-weight: 600;
     display: inline-block;
     color: #000;
     border-collapse: collapse;
+
+}
+
+.wordcloud {
+    background: rgb(230, 226, 226);
+    position: static;
+    text-align: center;
+    width: 50%;
+    font-size: 18px;
+    font-weight: 600;
+    display: block;
+    color: #000;
+    border-collapse: collapse;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 
 }
 
@@ -866,4 +887,31 @@ input[type=submit] {
         align-items: center;
         display: block;
         margin-bottom: 20px;
+}
+
+.chart--container {
+    background: #f8f9fa;
+    height: 100%;
+    width: 100%;
+    min-height: 150px;
+}
+
+.zc-ref {
+    display: none;
+}
+
+#top {
+   display: none;
+   position: absolute;
+   bottom: 10px;
+   right: 20px;
+   z-index: 99;
+   font-size: 15px;
+   border: none;
+   outline: none;
+   background-color: #1751cc;
+   color: white;
+   cursor: pointer;
+   padding: 10px;
+   border-radius: 4px;
 }
