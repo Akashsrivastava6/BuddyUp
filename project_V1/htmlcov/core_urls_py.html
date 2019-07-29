@@ -92,6 +92,8 @@
 <p id="n23" class="pln"><a href="#n23">23</a></p>
 <p id="n24" class="pln"><a href="#n24">24</a></p>
 <p id="n25" class="pln"><a href="#n25">25</a></p>
+<p id="n26" class="pln"><a href="#n26">26</a></p>
+<p id="n27" class="pln"><a href="#n27">27</a></p>
 
             </td>
             <td class="text">
@@ -114,12 +116,14 @@
 <p id="t17" class="stm run hide_run"><span class="key">from</span> <span class="nam">django</span><span class="op">.</span><span class="nam">urls</span> <span class="key">import</span> <span class="nam">path</span><span class="strut">&nbsp;</span></p>
 <p id="t18" class="stm run hide_run"><span class="key">from</span> <span class="op">.</span> <span class="key">import</span> <span class="nam">views</span><span class="strut">&nbsp;</span></p>
 <p id="t19" class="stm run hide_run"><span class="nam">urlpatterns</span> <span class="op">=</span> <span class="op">[</span><span class="strut">&nbsp;</span></p>
-<p id="t20" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'addfriend'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">AddFriend</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t20" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'addfriend'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">AddFriend</span><span class="op">,</span> <span class="nam">name</span><span class="op">=</span><span class="str">'addfriend'</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
 <p id="t21" class="pln">    <span class="com">#path('verifyFriend',views.VerifyFriend),</span><span class="strut">&nbsp;</span></p>
-<p id="t22" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'login/submit'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">Checking</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t23" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'trendpage'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">trend</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t24" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'follower'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">Followers</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t25" class="pln"><span class="op">]</span><span class="strut">&nbsp;</span></p>
+<p id="t22" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'login/submit'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">Checking</span><span class="op">,</span> <span class="nam">name</span><span class="op">=</span><span class="str">'login'</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t23" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'trendpage'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">trend</span><span class="op">,</span><span class="nam">name</span><span class="op">=</span><span class="str">'trend'</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t24" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'follower'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">Followers</span><span class="op">,</span><span class="nam">name</span><span class="op">=</span><span class="str">'follower'</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t25" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'login/twitterregister'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">Checkingtwitter</span><span class="op">,</span><span class="nam">name</span> <span class="op">=</span><span class="str">'twitter_check'</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t26" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t27" class="pln"><span class="op">]</span><span class="strut">&nbsp;</span></p>
 
             </td>
         </tr>
@@ -130,7 +134,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.3</a>,
-            created at 2019-07-04 18:31
+            created at 2019-07-29 18:31
         </p>
     </div>
 </div>

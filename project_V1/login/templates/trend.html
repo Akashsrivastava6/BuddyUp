@@ -357,7 +357,8 @@
         <script>
             var data1 = {{obj1 | safe}};
             console.log(data1)
-
+            var obj2={{obj2|safe}}
+            console.log(obj2)
 
             var data2 = _.groupBy(data1, function (obj1) {
                 return obj1.tweet_date.substring(0, 10);

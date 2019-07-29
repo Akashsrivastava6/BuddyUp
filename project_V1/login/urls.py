@@ -18,10 +18,10 @@ from django.urls import path
 from . import views
 urlpatterns = [
     path('',views.loginPage),
-    path('logout',views.logoutRequest),
-    path('submit',views.loginRequest),
-    path('signup',views.signupUser),
-    path('register',views.RegisterUser),
-    path('myprofile', views.myprofile),
+    path('logout',views.logoutRequest, name="logout"),
+    path('submit',views.loginRequest,name="login"),
+    path('signup',views.signupUser,name="signup"),
+    path('register',views.RegisterUser,name="register"),
+    path('myprofile', views.myprofile,name="myprofile"),
 ]
 

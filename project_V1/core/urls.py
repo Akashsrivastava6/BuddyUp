@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 urlpatterns = [
-    path('addfriend',views.AddFriend),
+    path('addfriend',views.AddFriend, name='addfriend'),
     #path('verifyFriend',views.VerifyFriend),
-    path('login/submit',views.Checking),
-    path('login/twitterregister',views.Checkingtwitter),
-    path('trendpage',views.trend),
-    path('follower',views.Followers),
+    path('login/submit',views.Checking, name='login'),
+    path('trendpage',views.trend,name='trend'),
+    path('follower',views.Followers,name='follower'),
+    path('login/twitterregister',views.Checkingtwitter,name ='twitter_check'),
+   
 ]

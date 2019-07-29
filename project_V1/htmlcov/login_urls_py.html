@@ -117,11 +117,11 @@
 <p id="t18" class="stm run hide_run"><span class="key">from</span> <span class="op">.</span> <span class="key">import</span> <span class="nam">views</span><span class="strut">&nbsp;</span></p>
 <p id="t19" class="stm run hide_run"><span class="nam">urlpatterns</span> <span class="op">=</span> <span class="op">[</span><span class="strut">&nbsp;</span></p>
 <p id="t20" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">''</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">loginPage</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t21" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'logout'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">logoutRequest</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t22" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'submit'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">loginRequest</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t23" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'signup'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">signupUser</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t24" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'register'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">RegisterUser</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
-<p id="t25" class="pln"><span class="strut">&nbsp;</span></p>
+<p id="t21" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'logout'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">logoutRequest</span><span class="op">,</span> <span class="nam">name</span><span class="op">=</span><span class="str">"logout"</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t22" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'submit'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">loginRequest</span><span class="op">,</span><span class="nam">name</span><span class="op">=</span><span class="str">"login"</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t23" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'signup'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">signupUser</span><span class="op">,</span><span class="nam">name</span><span class="op">=</span><span class="str">"signup"</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t24" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'register'</span><span class="op">,</span><span class="nam">views</span><span class="op">.</span><span class="nam">RegisterUser</span><span class="op">,</span><span class="nam">name</span><span class="op">=</span><span class="str">"register"</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t25" class="pln">    <span class="nam">path</span><span class="op">(</span><span class="str">'myprofile'</span><span class="op">,</span> <span class="nam">views</span><span class="op">.</span><span class="nam">myprofile</span><span class="op">,</span><span class="nam">name</span><span class="op">=</span><span class="str">"myprofile"</span><span class="op">)</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
 <p id="t26" class="pln"><span class="op">]</span><span class="strut">&nbsp;</span></p>
 <p id="t27" class="pln"><span class="strut">&nbsp;</span></p>
 
@@ -134,7 +134,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.3</a>,
-            created at 2019-07-04 18:31
+            created at 2019-07-29 18:31
         </p>
     </div>
 </div>
