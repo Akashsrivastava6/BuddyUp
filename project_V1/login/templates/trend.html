@@ -262,12 +262,17 @@
                                 width="1320" height="700" viewBox="-40 0 1200 700" preserveAspectRatio="xMidYMid meet">
                             </svg>
                         </div>
-                    <div class="onclick-container">
-                        <div class="feedback-form"></div>
-                        <div class="wordcloud"></div>
-                    </div>
-                                            <button class="btn btn-primary" id="top" onclick="topFunction()"
-                                                type="button">Scroll Top</button>
+                        <div class="onclick-container">
+                            <div class="feedback-form"></div>
+                            <div class="wordchart-container" style="justify-content: center; align-items: center">
+                                <div id="wordcloud"></div>
+                                <div class="tweet-chart" id="chartContainer" style="height: 400px; width: 90%;"></div>
+                            </div>
+                        </div>
+
+
+                        <button class="btn btn-primary" id="top" onclick="topFunction()" type="button">Scroll
+                            Top</button>
 
                     </div>
                 </div>
@@ -279,6 +284,8 @@
         <script src="https://d3js.org/d3-color.v1.min.js"></script>
         <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
         <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
         <script>
             String.prototype.removeStopWords = function () {
                 var x;
@@ -352,21 +359,21 @@
                     "value": new_bar[key]
                 })
             });
-            console.log(wordfrequency);
+            //    console.log(wordfrequency);
         </script>
         <script>
             var data1 = {{obj1 | safe}};
-            console.log(data1)
-            var obj2={{obj2|safe}}
-            console.log(obj2)
+            //      console.log(data1.length)
+
 
             var data2 = _.groupBy(data1, function (obj1) {
                 return obj1.tweet_date.substring(0, 10);
             });
-            console.log(data2);
 
             var myFormat = d3.timeFormat("%Y-%m-%d")
+            var myFormat2 = d3.timeFormat("%X");
             var parseTime = d3.timeParse(myFormat);
+            var parseTime2 = d3.timeParse(myFormat2)
             data = []
             tweet_data = []
             Object.keys(data2).forEach(function (key) {
@@ -375,29 +382,33 @@
                 var count = 0;
                 var tweets = [];
                 var tweet_score = [];
+                var time = [];
                 data2[key].forEach(function (d) {
                     score = (score + d.tweet_sum_score);
                     count = count + d.tweet_counter;
                     tweets.push(d.tweet_data);
                     tweet_score.push(d.tweet_score)
+                    time.push(d.tweet_date)
                 });
                 if (count == 0) {
                     data.push({
                         "date": parseTime(key),
                         "score": 0,
                         "tweet": tweets,
-                        "t_score": tweet_score
+                        "t_score": tweet_score,
+                        "time": time
                     });
                 } else {
                     data.push({
                         "date": parseTime(key),
                         "score": (score / count),
                         "tweet": tweets,
-                        "t_score": tweet_score
+                        "t_score": tweet_score,
+                        "time": time
                     });
                 }
-
-                console.log(typeof data)
+                //    console.log(tweets)
+                //      console.log(data2)
                 // data2[key].forEach(function (d) {
                 // data = [{
                 //         "date": parseTime("2019-07-12"),
@@ -448,7 +459,7 @@
             });
 
 
-            console.log(data)
+            //  console.log(data)
 
             function trend() {
 
@@ -519,13 +530,12 @@
                     .on("mouseout", function () {
                         focus.style("display", "none");
                     })
-                                        .on("click", onClickEvent)
+                    .on("click", onClickEvent)
 
-                    .on("mousemove", mousemove);
 
-                                  
 
-                    
+
+
 
                 var line = d3.line()
                     .curve(d3.curveCatmullRom.alpha(0.5))
@@ -536,7 +546,7 @@
                         return y(d.score);
                     });
 
-        
+
 
                 var g = svg.append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -637,15 +647,13 @@
                     .attr('cx', d => x(d.date))
                     .attr('cy', d => y(d.score))
                     .attr('r', 8)
-                    .on("mouseover", function () {
-                    focus.style("display", null)
-                    focus.style("color", "white");
-                    })
-                    .on("mouseout", function () {
-                    focus.style("display", "none");
-                    })
                     .on("mousemove", mousemove)
+                    .on("mouseover", function () {
+                        focus.style("display", null)
+                        focus.style("color", "white");
+                    })
                     .on("click", onClickEvent);
+
 
                 g.selectAll("text").data(data).enter()
                     .append("text")
@@ -682,7 +690,7 @@
                     .attr("y", -10)
                     .attr("dy", "7px");
 
-                      
+
 
                 function mousemove() {
                     var x0 = x.invert(d3.mouse(this)[0]),
@@ -694,7 +702,7 @@
                     focus.select(".tooltip-date").text("Date: " + d3.timeFormat("%b-%d")(d.date))
                     focus.select(".tooltip-likes").text("Tweet: " + (d.tweet))
                     focus.select(".tooltip-likes").text("Score: " + (d.score).toFixed(2))
-                    focus.select(".x-hover-line").attr("y2", height- y(d.score)).style("border", "solid");
+                    focus.select(".x-hover-line").attr("y2", height - y(d.score)).style("border", "solid");
                     focus.style("color", "white");
                 }
 
@@ -712,10 +720,11 @@
                         d = x0 - d0.date > d1.date - x0 ? d1 : d0;
                     //     console.log(d.date)
                     var color = 'black';
+                    console.log(d.t_score)
                     //generating popup dynamically showing all tweets
                     //capture array only for date key
                     $('.feedback-form').html('');
-                    $('.wordcloud').html('');
+                    $('#wordcloud').html('');
 
                     $(('<h4>' + "Tweets" + '</h4>')).appendTo(".feedback-form");
                     $(('<div id="test" style="text-align:center; font-size:24px; font-weight:700">' +
@@ -723,12 +732,13 @@
                     $(("<table>")).appendTo(".feedback-form")
                     for (i = 0; i <= d.tweet.length - 1; i++) {
                         tweets_data += d.tweet[i]
-                        console.log("printing tweet" + d.tweet[i])
+                        //      console.log("printing tweet" + d.tweet[i])
                         if (d.t_score[i] <= -3) {
                             $(('<div id="test" style="color:red; display: inline"><tr>' + [i + 1] + '. ' + d.tweet[i] +
                                 '<br><hr></tr>')).appendTo(".feedback-form");
                         } else {
-                            $(('<div id="test" style="color:black"><tr>' + [i + 1] + '. ' + d.tweet[i] + '<br><hr></tr>'))
+                            $(('<div id="test" style="color:black"><tr>' + [i + 1] + '. ' + d.tweet[i] +
+                                    '<br><hr></tr>'))
                                 .appendTo(
                                     ".feedback-form");
                         }
@@ -736,8 +746,9 @@
 
                     }
                     $(("</table>")).appendTo(".feedback-form")
-                     $(('<h4>' + "Wordcloud" + '</h4>')).appendTo(".wordcloud");
-                    $(('<br>' + '<div id="container" style:"background: #dbd8d8;display: inline-flex">' + "</div>")).appendTo(".wordcloud");
+                    $('<h4>' + "Wordcloud" + '</h4>' + '<br>' +
+                            '<div id="container" style:"background: #dbd8d8;display: inline-flex;">' + "</div>")
+                        .appendTo("#wordcloud");
                     //console.log(tweets_data)
                     // var new_bar = wordFreq(tweets_data)
                     // //  console.log(new_bar + "1")
@@ -768,12 +779,12 @@
                     // chart.container("container");
                     // chart.draw();
                     // });
-                    console.log(tweets_data.removeStopWords());
+                    //   console.log(tweets_data.removeStopWords());
 
                     zingchart.MODULESDIR = 'https://cdn.zingchart.com/modules/';
                     let chartConfig = {
                         type: 'wordcloud',
-                          backgroundColor: '#111',
+                        backgroundColor: '#111',
 
                         options: {
                             text: tweets_data,
@@ -798,7 +809,8 @@
                                 "not", "of", "off", "on", "once", "only", "or", "other", "ought", "our", "ours",
                                 "ourselves", "out", "over", "own", "same", "shan't", "she", "she'd", "she'll",
                                 "she's",
-                                "should", "shouldn't", "so", "some", "such", "than", "that", "that's", "the", "The", 
+                                "should", "shouldn't", "so", "some", "such", "than", "that", "that's", "the",
+                                "The",
                                 "their",
                                 "theirs", "them", "themselves", "then", "there", "there's", "these", "they",
                                 "they'd",
@@ -818,7 +830,7 @@
                                 '#F44336', '#2196F3', '#A1887F'
                             ],
                             rotate: true,
-                                                                fontSize: '30px',
+                            fontSize: '30px',
 
 
                             style: {
@@ -851,10 +863,50 @@
                     zingchart.render({
                         id: 'container',
                         data: chartConfig,
-                        fontWeight:'bold',
+                        fontWeight: 'bold',
+                        width: '80%',
+                        height: '90%',
+                        x: '500'
                     });
 
-                    console.log(wordfrequency);
+                    var tweet_time = []
+                    for (i = 0; i <= d.time.length - 1; i++) {
+                        tweet_time.push({
+                            "x": new Date(d.time[i]),
+                            "y": d.t_score[i],
+                            "tweet": d.tweet[i]
+                        })
+                    }
+                    console.log(tweet_time)
+
+                    $('<h4>' + "Day's Tweet TimeLine" + '</h4>').appendTo("#wordcloud");
+
+                    var chart = new CanvasJS.Chart("chartContainer", {
+                        animationEnabled: true,
+                        zoomEnabled: true,
+                        backgroundColor: null,
+     
+                        axisX: {
+                            title: "Time",
+                            gridThickness: 1
+                        },
+                        axisY: {
+                            title: "Score",
+                            minimum: -5,
+                            maximum: 5,
+                            gridThickness: 1
+                        },
+                        data: [{
+                            type: "scatter",
+                            toolTipContent: "<b>Tweet </b>{tweet}<br /><b>Time: </b>{x} <br /><b>Score: </b>{y}",
+                            dataPoints: tweet_time,
+                            markerSize: 20,
+                        }]
+                    });
+                    chart.render();
+
+
+                    //  console.log(wordfrequency);
                     $('html, body').animate({
                         scrollTop: $(".feedback-form").offset().top
                     }, 1000);
@@ -971,23 +1023,25 @@
 
             }
             trend();
-            
-           window.onscroll = function() {scrollFunction()};
 
-           function scrollFunction() {
-           if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-           document.getElementById("top").style.display = "block";
-           } else {
-           document.getElementById("top").style.display = "none";
-           }
-           }
+            window.onscroll = function () {
+                scrollFunction()
+            };
 
-           // When the user clicks on the button, scroll to the top of the document
-           function topFunction() {
-           document.body.scrollTop = 0;
-           document.documentElement.scrollTop = 0;
-           }
-           </script>
+            function scrollFunction() {
+                if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                    document.getElementById("top").style.display = "block";
+                } else {
+                    document.getElementById("top").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        </script>
 
         </script>
 

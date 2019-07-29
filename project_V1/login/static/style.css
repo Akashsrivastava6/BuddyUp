@@ -825,25 +825,28 @@ input[type=submit] {
 
 }
 
-.wordcloud {
-    background: rgb(230, 226, 226);
+.wordchart-container {
+background: rgb(230, 226, 226);
     position: static;
     text-align: center;
     width: 50%;
     font-size: 18px;
     font-weight: 600;
-    display: block;
     color: #000;
     border-collapse: collapse;
     justify-content: center;
     align-content: center;
     align-items: center;
+}
 
+#container-wrapper {
+    align-content: center;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .feedback-table {
     width: 100%;
-
 }
 
 .wrap-input100 {
