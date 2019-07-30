@@ -21,10 +21,10 @@
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
-    </script>
+        </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -34,11 +34,11 @@
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
-    </script>
+        </script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
-    </script>
+        </script>
 
 </head>
 
@@ -147,31 +147,30 @@
 
                     </div>
                     <div class="col-xs-6 col-md-4" id="col2">
-                        <div class="notification" >
+                        <div class="notification">
                             <h3>Notifications</h3>
                             <div class="test">
                                 {% for c in dd1%}
                                 <div class="panel-group">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h5 class="panel-title" >
-                                               
-                                                 <a class="btn btn-primary" data-toggle="collapse"
-                                                    aria-expanded="false" href="#{{c.handle}}"
-                                                     aria-controls="collapseExample">
-                                                       {{c.handle}}
+                                            <h5 class="panel-title">
+
+                                                <a class="btn btn-primary" data-toggle="collapse" aria-expanded="false"
+                                                    href="#{{c.handle}}" aria-controls="collapseExample">
+                                                    {{c.handle}}
                                                 </a>
-                                               
+
                                             </h5>
                                         </div>
-                                      
+
                                         <div id={{c.handle}} class="collapse">
-                                              <hr>
+                                            <hr>
                                             {% for d in c.tweet_arr%}
-                                          
+
                                             <div id="tweets-arr">
-                                                {{d}} 
-                                                  <hr>
+                                                {{d}}
+                                                <hr>
                                             </div>
                                             {%endfor%}
                                         </div>
@@ -183,23 +182,23 @@
                         </div>
                     </div>
                 </div>
-                        <div class="following-container">
-                            <h3>Add Friend by email</h3>
-                            <form action="/core/addfriend" method="post">
-                                {%csrf_token%}
-                                <input type="text" id="fname" name="twitter_handle" placeholder="Enter Name" required>
-                                <input type="text" id="fname" name="email" placeholder="Enter Email" required>
-                                {{msg}}
-                                <input type="submit" value="Send Email">
-                            </form>
-                        </div>
-                    </div>
-                    <div class="search-field">
-                    </div>
-
+                <div class="following-container">
+                    <h3>Add Friend by email</h3>
+                    <form action="/core/addfriend" method="post">
+                        {%csrf_token%}
+                        <input type="text" id="fname" name="twitter_handle" placeholder="Enter Name" required>
+                        <input type="text" id="fname" name="email" placeholder="Enter Email" required>
+                        {{msg}}
+                        <input type="submit" value="Send Email">
+                    </form>
                 </div>
             </div>
+            <div class="search-field">
+            </div>
+
         </div>
+    </div>
+    </div>
     </div>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->

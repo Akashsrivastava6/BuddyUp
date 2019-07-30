@@ -46,14 +46,14 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
-    </script>
+        </script>
 
     <!--<script src="{% static 'trend.js' %}"></script>-->
 
@@ -196,62 +196,30 @@
                         <a class="navbar-brand brand-logo-mini" href="/login/submit">
                             <img src="#" alt="logo" /> </a>
                 </div>
+
                 <div class="navbar-menu-wrapper d-flex align-items-center">
-                    <div class="navbar-menu-wrapper d-flex align-items-center">
-                        <div class="sidebar-header text-align-center">
-                            <!-- <ul class="navbar-nav ml-auto">
-                                <li class="active" id="1">
-                                    <a href="/login/submit">
-                                        <i class="fas fa-home"></i>
-                                        &nbsp; dashboard &nbsp; |
-                                    </a>
 
-                                </li>
-                                <li id="2">
-                                    <a href="/core/follower">
-                                        <i class="fas fa-user-plus"></i>
-                                        &nbsp; followers &nbsp; |
-                                    </a>
+                    <ul class="navbar-nav ml-auto">
 
-                                    <div class="collapse list-unstyled" id="pageSubmenu">
-
-                                    </div>
-                                </li>
-                                <li id="3">
-                                    <a href="">
-                                        <i class="fas fa-user-check"></i>
-                                        &nbsp; following &nbsp; |
-                                    </a>
-                                </li>
-                                <li id="4">
-                                    <a href="">
-                                        <i class="fas fa-paper-plane"></i>
-                                        &nbsp; contact
-                                    </a>
-                                </li>
-                            </ul> -->
-                        </div>
-                        <ul class="navbar-nav ml-auto">
-
-                            <li class="nav-item dropdown d-none d-xl-inline-block">
-                                <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown"
-                                    aria-expanded="false">
-                                    {{usr}} &nbsp;
-                                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                                        aria-labelledby="UserDropdown">
-                                        <a class="dropdown-item" href="myprofile">My Profile <span
-                                                class="badge badge-pill badge-danger"></span><i
-                                                class="dropdown-item-icon ti-dashboard"></i></a>
-                                        <a class="dropdown-item" href="/logout/logout">Sign Out<i
-                                                class="dropdown-item-icon ti-power-off"></i></a>
-                                    </div>
-                            </li>
-                        </ul>
-                        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-                            data-toggle="offcanvas">
-                            <span class="mdi mdi-menu"></span>
-                        </button>
-                    </div>
+                        <li class="nav-item dropdown"></li>
+                        <li class="nav-item dropdown d-none d-xl-inline-block">
+                            <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                                {{usr}} &nbsp;
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                    aria-labelledby="UserDropdown">
+                                    <a class="dropdown-item" href="myprofile">My Profile <span
+                                            class="badge badge-pill badge-danger"></span><i>
+                                            class="dropdown-item-icon ti-dashboard"></i></a>
+                                    <a class="dropdown-item" href="/logout/logout">Sign Out<i
+                                            class="dropdown-item-icon ti-power-off"></i></a>
+                                </div>
+                        </li>
+                    </ul>
+                    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                        data-toggle="offcanvas">
+                        <span class="mdi mdi-menu"></span>
+                    </button>
+                </div>
             </nav>
             <div class="content-wrapper">
                 <h2>{{friend}}'s twitter analysis</u> </h2>
@@ -362,7 +330,7 @@
             //    console.log(wordfrequency);
         </script>
         <script>
-            var data1 = {{obj1 | safe}};
+            var data1 = {{ obj1 | safe}};
             //      console.log(data1.length)
 
 
@@ -738,7 +706,7 @@
                                 '<br><hr></tr>')).appendTo(".feedback-form");
                         } else {
                             $(('<div id="test" style="color:black"><tr>' + [i + 1] + '. ' + d.tweet[i] +
-                                    '<br><hr></tr>'))
+                                '<br><hr></tr>'))
                                 .appendTo(
                                     ".feedback-form");
                         }
@@ -747,7 +715,7 @@
                     }
                     $(("</table>")).appendTo(".feedback-form")
                     $('<h4>' + "Wordcloud" + '</h4>' + '<br>' +
-                            '<div id="container" style:"background: #dbd8d8;display: inline-flex;">' + "</div>")
+                        '<div id="container" style:"background: #dbd8d8;display: inline-flex;">' + "</div>")
                         .appendTo("#wordcloud");
                     //console.log(tweets_data)
                     // var new_bar = wordFreq(tweets_data)
@@ -885,7 +853,7 @@
                         animationEnabled: true,
                         zoomEnabled: true,
                         backgroundColor: null,
-     
+
                         axisX: {
                             title: "Time",
                             gridThickness: 1
