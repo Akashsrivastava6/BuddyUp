@@ -44,6 +44,8 @@
 
 <body>
 
+
+
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
@@ -51,14 +53,14 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li class="active" id="1">
+                <li class="active">
                     <a href="/login/submit">
                         <i class="fas fa-home"></i>
                         &nbsp; dashboard
                     </a>
 
                 </li>
-                <li id="2">
+                <li>
                     <a href="/core/follower">
                         <i class="fas fa-user-plus"></i>
                         &nbsp; followers
@@ -68,16 +70,11 @@
 
                     </div>
                 </li>
-                <li id="3">
+
+                <li>
                     <a href="">
-                        <i class="fas fa-user-check"></i>
-                        &nbsp; following
-                    </a>
-                </li>
-                <li id="4">
-                    <a href="">
-                        <i class="fas fa-paper-plane"></i>
-                        &nbsp; contact
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        &nbsp; about
                     </a>
                 </li>
             </ul>
@@ -98,10 +95,10 @@
 
                     <ul class="navbar-nav ml-auto">
 
-                        <li class="nav-item dropdown"></li>
                         <li class="nav-item dropdown d-none d-xl-inline-block">
                             <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                {{ Message}} &nbsp;
+                                <i class="fa fa-user-circle" aria-hidden="true"></i> &nbsp;{{ Message}} &nbsp;<i
+                                    class="fa fa-angle-down" aria-hidden="true"></i>
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                                     aria-labelledby="UserDropdown">
                                     <a class="dropdown-item" href="myprofile">My Profile <span
@@ -146,57 +143,55 @@
                         </div>
 
                     </div>
-                    <div class="col-xs-6 col-md-4" id="col2">
-                        <div class="notification" >
+                    <div class="col-xs-6 col-md-4">
+                        <div class="notification">
                             <h3>Notifications</h3>
                             <div class="test">
+                                {%if dd1%}
                                 {% for c in dd1%}
                                 <div class="panel-group">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h5 class="panel-title" >
-                                               
-                                                 <a class="btn btn-primary" data-toggle="collapse"
-                                                    aria-expanded="false" href="#{{c.handle}}"
-                                                     aria-controls="collapseExample">
-                                                       {{c.handle}}
+                                            <h5 class="panel-title">
+                                                <a class="toggle" data-toggle="collapse" aria-expanded="false"
+                                                    href="#{{c.handle}}" aria-controls="collapseExample">
+                                                    {{c.handle}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                                                 </a>
-                                               
                                             </h5>
                                         </div>
-                                      
-                                        <div id={{c.handle}} class="collapse">
-                                              <hr>
+                                        <div id={{c.handle}} class="collapse" aria-expanded="false"
+                                            style="overflow-y:scroll;" aria-controls="collapseExample">
+                                            <hr>
                                             {% for d in c.tweet_arr%}
-                                          
                                             <div id="tweets-arr">
-                                                {{d}} 
-                                                  <hr>
+                                                {{d}}
+                                                <hr>
                                             </div>
                                             {%endfor%}
                                         </div>
                                         {%endfor%}
-                                        {%endblock%}
                                     </div>
+                                    {%else%}
+                                    <div class="no-noti">
+                                        <h5>You don't have any notifications.</h5>
+                                        {%endif%}
+                                    </div>
+                                </div>
+                                {%endblock%}
+                                <div class="following-container-2">
+                                    <h3>Add Friend by email</h3>
+                                    <form action="/core/addfriend" method="post">
+                                        {%csrf_token%}
+                                        <input type="text" id="fname" name="twitter_handle" placeholder="Enter Name"
+                                            required>
+                                        <input type="text" id="fname" name="email" placeholder="Enter Email" required>
+                                        {{msg}}
+                                        <input type="submit" value="Send Email">
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                        <div class="following-container">
-                            <h3>Add Friend by email</h3>
-                            <form action="/core/addfriend" method="post">
-                                {%csrf_token%}
-                                <input type="text" id="fname" name="twitter_handle" placeholder="Enter Name" required>
-                                <input type="text" id="fname" name="email" placeholder="Enter Email" required>
-                                {{msg}}
-                                <input type="submit" value="Send Email">
-                            </form>
-                        </div>
-                    </div>
-                    <div class="search-field">
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -206,23 +201,13 @@
 
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-        // Add active class to the current button (highlight it)
-        var header = document.getElementById("sidebar");
 
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].addEventListener("click", function () {
-                var current = document.getElementById("active");
-                if (current.length > 0) {
-                    current[0].className = current[0].className.replace(" active", "");
-                }
-                this.className += " active";
-            });
-        }
+        $('.collapse').click(function () {
+            if (!$(this).next().hasClass('in')) {
+                $(this).parent().children('.collapse.in').collapse('hide');
+            }
+            $(this).next().collapse('toggle');
+        });
     </script>
 
 

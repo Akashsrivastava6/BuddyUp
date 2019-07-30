@@ -58,7 +58,7 @@ p {
 }
 
 ul, li {
-    margin: 0px;
+    margin-right: none;
     list-style-type: none;
 }
 
@@ -150,7 +150,7 @@ label {
 button {
     outline: none !important;
     border: none;
-    background: #FB8122;
+    background: #1DA1F2;
     color: #1D2228;
 }
 
@@ -262,7 +262,7 @@ iframe {
 .wrap-input100 {
     width: 100%;
     position: relative;
-    border-bottom: 2px solid #FB8122;
+    border-bottom: 2px solid #1DA1F2;
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -310,7 +310,7 @@ iframe {
 .focus-input100::after {
     font-family: Material-Design-Iconic-Font;
     font-size: 22px;
-    color: #FB8122;
+    color: #1DA1F2;
 
     content: attr(data-placeholder);
     display: block;
@@ -391,7 +391,7 @@ iframe {
     width: 16px;
     height: 16px;
     border-radius: 2px;
-    background: #FB8122;
+    background: #1DA1F2;
     left: 0;
     top: 50%;
     -webkit-transform: translateY(-50%);
@@ -435,7 +435,7 @@ iframe {
     height: 40px;
     border-radius: 0px;
 
-    background: #FB8122;
+    background: #1DA1F2;
     position: relative;
     z-index: 1;
 
@@ -453,7 +453,7 @@ iframe {
     width: 100%;
     height: 100%;
     border-radius: 0px;
-    background-color: #FB8122;
+    background-color: #1DA1F2;
     top: 0;
     left: 0;
     opacity: 1;
@@ -484,7 +484,7 @@ iframe {
 }
 
 .form-sign-up.a:hover {
-    color: #FB8122;
+    color: #1DA1F2;
 }
 
 .form-sign-up .a:hover:before {
@@ -511,7 +511,7 @@ iframe {
     height: 40px;
     border-radius: 0px;
 
-    background: #FB8122;
+    background: #1DA1F2;
     position: relative;
     z-index: 1;
 
@@ -529,7 +529,7 @@ iframe {
     width: 100%;
     height: 100%;
     border-radius: 0px;
-    background-color: #FB8122;
+    background-color: #1DA1F2;
     top: 0;
     left: 0;
     opacity: 1;
