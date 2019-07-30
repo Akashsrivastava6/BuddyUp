@@ -133,7 +133,8 @@ def Followers(request):
                         d=following.objects.filter(twitter_handle=usr).filter(user_id=friend).update(isActive=0)
 
                 t_handle=core.task.getFollower(usr)
-                return render(request,'followers.html',{'Message':request.session['username'],'data':t_handle})
+                noti_list, dd1=login.task.notificationdata(usr)
+                return render(request,'followers.html',{'Message':request.session['username'],'data':t_handle,'noti':noti_list,'dd1':dd1})
 
         return redirect("/login")
 
