@@ -886,6 +886,22 @@ div.feedback-form:empty {
     align-items: center;
 }
 
+.tweet-chart {
+     background: rgb(255, 255, 255);
+    position: static;
+        margin-left: 30px;
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    border-collapse: collapse;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
 div.wordchart-container:empty {
     display: none
 }
