@@ -772,8 +772,8 @@ input[type=submit] {
 
 
 
-#trend2 {
-    position: fixed;
+#trend {
+    
 }
 
 
@@ -784,13 +784,13 @@ input[type=submit] {
 
 .card {
     border: 0rem;
-    border-radius: 0rem;
-    margin-bottom: 50px;
+    border-radius: 3px;
+    margin-bottom: 20px;
 }
 
 .card-header {
     background-color: #1751cc;
-    border-radius: 0 !important;
+    border-radius: 4px !important;
     color: white;
     margin-bottom: 50px;
     padding: 1rem;
@@ -798,6 +798,7 @@ input[type=submit] {
 
 .card-block {
     border: 1px solid #000;
+    border-radius: 5px;
 }
 
 
@@ -810,6 +811,10 @@ input[type=submit] {
 
 .onclick-container {
     display: flex;
+}
+
+#wordcloud {
+    width: 50%;
 }
 
 .feedback-form {
@@ -828,8 +833,9 @@ input[type=submit] {
 .wordchart-container {
 background: rgb(230, 226, 226);
     position: static;
+    display: block;
     text-align: center;
-    width: 50%;
+    width: 100%;
     font-size: 18px;
     font-weight: 600;
     color: #000;
