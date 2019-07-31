@@ -21,10 +21,10 @@
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
-    </script>
+        </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -34,16 +34,38 @@
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
-    </script>
+        </script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
-    </script>
+        </script>
+        
 
 </head>
 
 <body>
+<script>
+    $(document).ready(function(){
+        $('.sendbutton').click(function(){
+            var email=$('input[name="email"]').val()
+            
 
+            if (email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+                $('form[name="sendemail"]').unbind('submit');
+            
+            }
+            else{
+                 alert("invalid Email")
+                $('form[name="sendemail"]').submit(function (event) {
+                    event.preventDefault();
+                    $(this).submit();
+                });
+            }
+        })
+    })
+
+
+</script>
 
 
     <div class="wrapper">
@@ -180,13 +202,13 @@
                                 {%endblock%}
                                 <div class="following-container-2">
                                     <h3>Add Friend by email</h3>
-                                    <form action="/core/addfriend" method="post">
+                                    <form action="/core/addfriend" name="sendemail" method="post">
                                         {%csrf_token%}
                                         <input type="text" id="fname" name="twitter_handle" placeholder="Enter Twitter Name"
                                             required>
                                         <input type="text" id="fname" name="email" placeholder="Enter Email" required>
                                         {{msg}}
-                                        <input type="submit" value="Send Email">
+                                        <input type="submit" class="sendbutton" value="Send Email">
                                     </form>
                                 </div>
                             </div>
@@ -194,7 +216,12 @@
                     </div>
                 </div>
             </div>
+            <div class="search-field">
+            </div>
+
         </div>
+    </div>
+    </div>
     </div>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->

@@ -191,6 +191,7 @@
                         <a class="navbar-brand brand-logo-mini" href="/login/submit">
                             <img src="#" alt="logo" /> </a>
                 </div>
+
                 <div class="navbar-menu-wrapper d-flex align-items-center">
 
                     <ul class="navbar-nav ml-auto">
@@ -370,6 +371,7 @@
                         "time": time
                     });
                 }
+                console.log(data)
                 //    console.log(tweets)
                 //      console.log(data2)
                 // data2[key].forEach(function (d) {
@@ -707,8 +709,7 @@
                     //capture array only for date key
 
                     $(('<div><h4>' + "Tweets" + '</h4></div>')).appendTo(".feedback-form");
-                    $(('<div id="test" style="text-align:center; font-size:24px; font-weight:700">' +
-                        d3.timeFormat("%b-%d")(d.date))).appendTo(".feedback-form");
+                    $(('<div id="test" style="text-align:center; font-size:24px; font-weight:700">'+ d3.timeFormat("%b-%d")(d.date))).appendTo(".feedback-form");
                     $(("<table>")).appendTo(".feedback-form")
                     for (i = 0; i <= d.tweet.length - 1; i++) {
                         tweets_data += d.tweet[i]

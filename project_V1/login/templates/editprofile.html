@@ -51,54 +51,69 @@
         //for confirm password 
 
         $(document).ready(function () {
-            $('button[name="register"]').click(function () {
-                var fname = $('input[name="fname"]').val()
-                var lname = $('input[name="lname"]').val()
-                var username = $('input[name="username"]').val()
-                var password = $('input[name="password"]').val()
-                var cpassword = $('input[name="confirmpassword"]').val()
+                $('button[name="register"]').click(function () {
+                    var fname = $('input[name="fname"]').val()
+                    var lname = $('input[name="lname"]').val()
+                    var email = $('input[name="username"]').val()
+                    var username = $('input[name="username"]').val()
+                    var password = $('input[name="password"]').val()
+                    var cpassword = $('input[name="confirmpassword"]').val()
 
-                if ((fname.match(/^[a-zA-Z][a-zA-Z]*$/g))) {
+                    if ((fname.match(/^[a-zA-Z][a-zA-Z]*$/g))) {
 
-                    if (lname.match(/^[a-zA-Z][a-zA-Z]*$/g)) {
-                        // email validation needs to be added here
-                        if (password.length > 6 && password.length < 15) {
-                            if (password === cpassword) {
-                                $('form[name="signup"]').unbind('submit');
+                        if (lname.match(/^[a-zA-Z][a-zA-Z]*$/g)) {
+                            // email validation needs to be added here
+                            if (email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+                                if (password.length > 6 && password.length < 15) {
+                                    if (password === cpassword) {
+                                        $('form[name="signup"]').unbind('submit');
 
 
-                            } else {
-                                alert("invalid confirm password")
+                                    }
+                                    else {
+                                        alert("invalid confirm password")
+                                        $('form[name="signup"]').submit(function (event) {
+                                            event.preventDefault();
+                                            $(this).submit();
+                                        });
+                                    }
+                                }
+                                else {
+                                    alert("Password length should be between 7 to 14 characters")
+                                    $('form[name="signup"]').submit(function (event) {
+                                        event.preventDefault();
+                                        $(this).submit();
+                                    });
+                                }
+
+                            }
+                            else {
+                                alert("invalid Email")
                                 $('form[name="signup"]').submit(function (event) {
                                     event.preventDefault();
                                     $(this).submit();
                                 });
                             }
-                        } else {
-                            alert("Password length should be between 7 to 14 characters")
+                        }
+                        else {
+                            alert("invalid  last name")
                             $('form[name="signup"]').submit(function (event) {
                                 event.preventDefault();
                                 $(this).submit();
                             });
                         }
-                    } else {
-                        alert("invalid confirm lname")
+                    }
+                    else {
+                        alert("invalid first name")
                         $('form[name="signup"]').submit(function (event) {
                             event.preventDefault();
                             $(this).submit();
                         });
                     }
-                } else {
-                    alert("invalid confirm fnamed")
-                    $('form[name="signup"]').submit(function (event) {
-                        event.preventDefault();
-                        $(this).submit();
-                    });
-                }
 
 
+                })
             })
-        })
     </script>
 
 

@@ -141,7 +141,7 @@ def twitterCheck(username):
             t_handle=login.task.getFriends(username)
             return 'dashboard.html',t_handle       
     else:                
-        adduserD=User_detail(username=username)
+        adduserD=User_detail(username=username.lower())
         # adduserR=Registration(username_id=extra,firstname=userdata.first_name,lastname=userdata.last_name)
         
         adduserD.save()
