@@ -45,7 +45,7 @@ def Checkingtwitter(request):
                 d=User_detail.objects.filter(username=usr).update(email=email)
                 d=User_detail.objects.filter(username=usr).update(password=pwd)
                 
-                page,t_handle=core.task.twitterCheck(usr)
+                page,t_handle=core.task.twitterCheck(usr.lower())
                 
                 return render(request,page,{"Message":request.session['username'],'data':t_handle})
         return redirect("/login")

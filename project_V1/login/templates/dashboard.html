@@ -39,11 +39,33 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
         </script>
+        
 
 </head>
 
 <body>
+<script>
+    $(document).ready(function(){
+        $('.sendbutton').click(function(){
+            var email=$('input[name="email"]').val()
+            
 
+            if (email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+                $('form[name="sendemail"]').unbind('submit');
+            
+            }
+            else{
+                 alert("invalid Email")
+                $('form[name="sendemail"]').submit(function (event) {
+                    event.preventDefault();
+                    $(this).submit();
+                });
+            }
+        })
+    })
+
+
+</script>
 
 
     <div class="wrapper">
@@ -180,13 +202,13 @@
                                 {%endblock%}
                                 <div class="following-container-2">
                                     <h3>Add Friend by email</h3>
-                                    <form action="/core/addfriend" method="post">
+                                    <form action="/core/addfriend" name="sendemail" method="post">
                                         {%csrf_token%}
                                         <input type="text" id="fname" name="twitter_handle" placeholder="Enter Name"
                                             required>
                                         <input type="text" id="fname" name="email" placeholder="Enter Email" required>
                                         {{msg}}
-                                        <input type="submit" value="Send Email">
+                                        <input type="submit" class="sendbutton" value="Send Email">
                                     </form>
                                 </div>
                             </div>

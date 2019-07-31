@@ -182,4 +182,6 @@ class TestCoreViews(TestCase):
     #     self.assertTemplateUsed(response,"dashboard.html")   
 
 
-    
+   
+
+        
