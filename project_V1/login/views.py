@@ -34,6 +34,9 @@ def signupUser(request):
 def myprofile(request):
     return render(request,'myprofile.html')
 
+def about(request):
+    return render(request, 'about.html')
+
 def loginRequest(request):
 
     if request.session.has_key('username'):

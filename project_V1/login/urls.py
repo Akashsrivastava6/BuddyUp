@@ -23,5 +23,6 @@ urlpatterns = [
     path('signup',views.signupUser,name="signup"),
     path('register',views.RegisterUser,name="register"),
     path('myprofile', views.myprofile,name="myprofile"),
+    path('about', views.about, name='about'),
 ]
 

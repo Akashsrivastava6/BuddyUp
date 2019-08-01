@@ -94,7 +94,7 @@
                 </li>
 
                 <li>
-                    <a href="">
+                    <a href="/login/about">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
                         &nbsp; about
                     </a>
@@ -204,7 +204,7 @@
                                     <h3>Add Friend by email</h3>
                                     <form action="/core/addfriend" name="sendemail" method="post">
                                         {%csrf_token%}
-                                        <input type="text" id="fname" name="twitter_handle" placeholder="Enter Name"
+                                        <input type="text" id="fname" name="twitter_handle" placeholder="Enter Twitter Name"
                                             required>
                                         <input type="text" id="fname" name="email" placeholder="Enter Email" required>
                                         {{msg}}
