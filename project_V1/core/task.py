@@ -182,11 +182,11 @@ def noti_task():
                 #print(abc['mx_date'])
                 #print("printing mx_date : "+mx_date)
                 dt=cur_date-abc['mx_date']
-                print(str((dt.seconds/60/60)>2))
-                if ((dt.seconds/60/60)<2):
+              
+                if ((dt.seconds/(60*60))<2):
                     for email in friendlist:
                         print(email)
-                #       send_mail("test mail","127.0.0.1:8000/oauth/login/twitter/","a.team.ucd.5@gmail.com",[email])
+                        # send_mail("test mail","127.0.0.1:8000/oauth/login/twitter/","a.team.ucd.5@gmail.com",[email])
 
         # if len(twts)>1:
         #     print("no notification")
@@ -233,10 +233,11 @@ def AddTweets():
             # for mvp
             sp=spacy.load('en_core_web_sm')           
             df=Preprocess.preprocess1(tmp3)
+             # added on 31 july to check. this needs to be tested.
             for pos,item in df.iterrows():
                 tweet=tweets_data(twitter_handle=t_handle,tweet_id=tmp1[pos],tweet_data=item['Tweet'],tweet_date=tmp2[pos],sum_score=item['Sum_score'],score=item['Score'],counter=item['Counter'])
                 tweet.save()
-
+                
 
             
             # da_for_use=df[df['Score']<-1]
@@ -244,44 +245,44 @@ def AddTweets():
 
         ##tokens=nltk.word_tokenize(da_for_use.iloc[5]['Tweet'])
         #tags=nltk.pos_tag(tokens)
+                if item['Score']<-1:
+                    pronounlistf=['i','me','mine','we','us','our','ours','my','myself']
+                    pronounlisto=['your','yours','he','him','his','she','her','hers','they','them','their','theirs' ]
+                    d_flag=0
+            #print11(sen.text)
 
-                pronounlistf=['i','me','mine','we','us','our','ours','my','myself']
-                pronounlisto=['your','yours','he','him','his','she','her','hers','they','them','their','theirs' ]
-                d_flag=0
-        #print11(sen.text)
-
-                listl=[]
-                listll=[]
-                text = item['Tweet']
-                c1=0
-                c2=0
-                d_flag=0       
-                sen=sp(text)
-                for word in sen:
-                    if (word.tag_ =='PRP') or (word.tag_ =='PRP$'):
-                        if word.text.lower() in pronounlistf:
-                    #                 listl.append(word.text)
-                                    #print(text+":"+word.text+"c1")
-                            c1=c1+1
-                        elif word.text.lower() in pronounlisto:
-                                    #print(text+":"+word.text+"c2")
-                            c2=c2+1
-                        if c1 == 0 and c2==0:
-                            d_flag=1
-                        elif c1>c2:
-                            d_flag=2
-                        else:        
-                            pass
-                        if d_flag==1:    
-                            for word in sen:
-                                if word in dep_list['WORD']:
-                                    d_flag=2
-                if d_flag==2:
-                    print(t_handle+"  "+text+" "+str(date.today))
-                    d=tweets_data.objects.filter(twitter_handle=t_handle).filter(tweet_id=tmp1[pos]).update(is_notification=1)
-                    not_data=notification_data(twitter_handle=t_handle,tweet_data=text,noti_date=datetime.now())
-                    not_data.save()
-                
+                    listl=[]
+                    listll=[]
+                    text = item['Tweet']
+                    c1=0
+                    c2=0
+                    d_flag=0       
+                    sen=sp(text)
+                    for word in sen:
+                        if (word.tag_ =='PRP') or (word.tag_ =='PRP$'):
+                            if word.text.lower() in pronounlistf:
+                        #                 listl.append(word.text)
+                                        #print(text+":"+word.text+"c1")
+                                c1=c1+1
+                            elif word.text.lower() in pronounlisto:
+                                        #print(text+":"+word.text+"c2")
+                                c2=c2+1
+                            if c1 == 0 and c2==0:
+                                d_flag=1
+                            elif c1>c2:
+                                d_flag=2
+                            else:        
+                                pass
+                            if d_flag==1:    
+                                for word in sen:
+                                    if word in dep_list['WORD']:
+                                        d_flag=2
+                    if d_flag==2:
+                        # print(t_handle+"  "+text+" "+str(date.today))
+                        d=tweets_data.objects.filter(twitter_handle=t_handle).filter(tweet_id=tmp1[pos]).update(is_notification=1)
+                        not_data=notification_data(twitter_handle=t_handle,tweet_data=text,noti_date=datetime.now(timezone.utc))
+                        not_data.save()
+                    
                 #print(f'{word.text:{12}} {word.pos_:{10}} {word.tag_:{8}} {word.dep_:{10}} {spacy.explain(word.tag_)}')
       
 
