@@ -35,7 +35,12 @@ def myprofile(request):
     return render(request,'myprofile.html')
 
 def about(request):
-    return render(request, 'about.html')
+    if request.session.has_key('username'):
+        request.session.set_expiry(180)
+        usr=request.session['username']
+        return render(request, 'about.html',{'Message':usr})
+    return redirect("/login")
+
 
 def loginRequest(request):
 
