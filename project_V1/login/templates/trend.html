@@ -1,64 +1,50 @@
 <!DOCTYPE html>
 <html>
-    
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        
-        <title>Trend</title>
-        {% load staticfiles %}
-        <!-- Bootstrap CSS CDN -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Trend</title>
+    {% load staticfiles %}
+    <!-- Bootstrap CSS CDN -->
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
         integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-        <!-- Our Custom CSS -->
-        <link rel="stylesheet"
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-        
-        <link rel="icon" type="image/png" href="{%static 'images/icons/favicon.ico'%}" />
-        <!--===============================================================================================-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
-        <!--===============================================================================================-->
-        <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-        <!--Animsition CSS-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animsition/4.0.2/css/animsition.min.css">
-        <!--CSS-Hamburgers-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.1.3/hamburgers.min.css">
-        <!--===============================================================================================-->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.15.1/tingle.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-        <!-- Our Custom CSS -->
-        <link rel="stylesheet" href="{% static 'style.css' %}">
-        <!-- Font Awesome JS -->
-        <script src='https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js'></script>
-        <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
-        <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+    <!-- Our Custom CSS -->
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
-        </script>
-    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
+    </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
-        </script>
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
-<!--<script src="{% static 'trend.js' %}"></script>-->
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js'></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
+    </script>
+    <!-- Our Custom CSS -->
+    <!-- Font Awesome JS -->
 
-<style>
-    text {
+    <!--<script src="{% static 'trend.js' %}"></script>-->
+
+    <style>
+        text {
             position: absolute;
             font-family: 'Fira Sans', sans-serif;
             color: #fff;
@@ -154,14 +140,14 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li class="active" id="1">
+                <li class="active">
                     <a href="/login/submit">
                         <i class="fas fa-home"></i>
                         &nbsp; dashboard
                     </a>
 
                 </li>
-                <li id="2">
+                <li>
                     <a href="/core/follower">
                         <i class="fas fa-user-plus"></i>
                         &nbsp; followers
@@ -171,7 +157,8 @@
 
                     </div>
                 </li>
-                <li id="4">
+
+                <li>
                     <a href="/login/about">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
                         &nbsp; about
@@ -191,20 +178,20 @@
                         <a class="navbar-brand brand-logo-mini" href="/login/submit">
                             <img src="#" alt="logo" /> </a>
                 </div>
-
                 <div class="navbar-menu-wrapper d-flex align-items-center">
 
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown">
+
+                        <li class="nav-item dropdown d-none d-xl-inline-block">
                             <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-user-circle" aria-hidden="true"></i> &nbsp;{{ usr}} &nbsp; <i
+                                <i class="fa fa-user-circle" aria-hidden="true"></i> &nbsp;{{ usr}} &nbsp;<i
                                     class="fa fa-angle-down" aria-hidden="true"></i>
+                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                    aria-labelledby="UserDropdown">
+                                    <a class="dropdown-item" href="/logout/logout">Sign Out<i
+                                            class="dropdown-item-icon ti-power-off"></i></a>
+                                </div>
                         </li>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                            <a class="dropdown-item" href="myprofile">My Profile <span
-                                    class="badge badge-pill badge-danger"></span></a>
-                            <a class="dropdown-item" href="/logout/logout">Sign Out</a>
-                        </div>
                     </ul>
                     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
                         data-toggle="offcanvas">
@@ -238,795 +225,792 @@
                     </div>
                 </div>
             </div>
-            </div>
-    </div>
         </div>
+    </div>
+    </div>
 
-        <script src="https://d3js.org/d3.v4.min.js"></script>
-        <script src="https://d3js.org/d3-color.v1.min.js"></script>
-        <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-        <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
 
 
-        <script>
-            String.prototype.removeStopWords = function () {
-                var x;
-                var y;
-                var word;
-                var stop_word;
-                var regex_str;
-                var regex;
-                var cleansed_string = this.valueOf();
-                var stop_words = new Array("a", "about", "above", "after", "again", "against", "all", "am", "an",
-                    "and",
-                    "any", "are", "aren't", "as", "at", "be", "because", "been", "before", "being", "below",
-                    "between", "both", "but", "by", "can't", "cannot", "could", "couldn't", "did", "didn't",
-                    "do", "does", "doesn't", "doing", "don't", "down", "during", "each", "few", "for", "from",
-                    "further", "had", "hadn't", "has", "hasn't", "have", "haven't", "having", "he", "he'd",
-                    "he'll", "he's", "her", "here", "here's", "hers", "herself", "him", "himself", "his", "how",
-                    "how's", "i", "i'd", "i'll", "i'm", "i've", "if", "in", "into", "is", "isn't", "it", "it's",
-                    "its", "itself", "let's", "me", "more", "most", "mustn't", "my", "myself", "no", "nor",
-                    "not", "of", "off", "on", "once", "only", "or", "other", "ought", "our", "ours",
-                    "ourselves", "out", "over", "own", "same", "shan't", "she", "she'd", "she'll", "she's",
-                    "should", "shouldn't", "so", "some", "such", "than", "that", "that's", "the", "their",
-                    "theirs", "them", "themselves", "then", "there", "there's", "these", "they", "they'd",
-                    "they'll", "they're", "they've", "this", "those", "through", "to", "too", "under", "until",
-                    "up", "very", "was", "wasn't", "we", "we'd", "we'll", "we're", "we've", "were", "weren't",
-                    "what", "what's", "when", "when's", "where", "where's", "which", "while", "who", "who's",
-                    "whom", "why", "why's", "with", "won't", "would", "wouldn't", "you", "you'd", "you'll",
-                    "you're", "you've", "your", "yours", "yourself", "yourselves");
-                // Split out all the individual words in the phrase
-                // Split out all the individual words in the phrase
-                words = cleansed_string.match(/[^\s]+|\s+[^\s+]$/g)
+    <script>
+        String.prototype.removeStopWords = function () {
+            var x;
+            var y;
+            var word;
+            var stop_word;
+            var regex_str;
+            var regex;
+            var cleansed_string = this.valueOf();
+            var stop_words = new Array("a", "about", "above", "after", "again", "against", "all", "am", "an",
+                "and",
+                "any", "are", "aren't", "as", "at", "be", "because", "been", "before", "being", "below",
+                "between", "both", "but", "by", "can't", "cannot", "could", "couldn't", "did", "didn't",
+                "do", "does", "doesn't", "doing", "don't", "down", "during", "each", "few", "for", "from",
+                "further", "had", "hadn't", "has", "hasn't", "have", "haven't", "having", "he", "he'd",
+                "he'll", "he's", "her", "here", "here's", "hers", "herself", "him", "himself", "his", "how",
+                "how's", "i", "i'd", "i'll", "i'm", "i've", "if", "in", "into", "is", "isn't", "it", "it's",
+                "its", "itself", "let's", "me", "more", "most", "mustn't", "my", "myself", "no", "nor",
+                "not", "of", "off", "on", "once", "only", "or", "other", "ought", "our", "ours",
+                "ourselves", "out", "over", "own", "same", "shan't", "she", "she'd", "she'll", "she's",
+                "should", "shouldn't", "so", "some", "such", "than", "that", "that's", "the", "their",
+                "theirs", "them", "themselves", "then", "there", "there's", "these", "they", "they'd",
+                "they'll", "they're", "they've", "this", "those", "through", "to", "too", "under", "until",
+                "up", "very", "was", "wasn't", "we", "we'd", "we'll", "we're", "we've", "were", "weren't",
+                "what", "what's", "when", "when's", "where", "where's", "which", "while", "who", "who's",
+                "whom", "why", "why's", "with", "won't", "would", "wouldn't", "you", "you'd", "you'll",
+                "you're", "you've", "your", "yours", "yourself", "yourselves");
+            // Split out all the individual words in the phrase
+            // Split out all the individual words in the phrase
+            words = cleansed_string.match(/[^\s]+|\s+[^\s+]$/g)
 
-                // Review all the words
-                for (x = 0; x < words.length; x++) { // For each word, check all the stop words 
-                    for (y = 0; y < stop_words.length; y++) { // Get the current word 
-                        word = words[x].replace(/\s+|[^a-z]+/ig, ""); // Trim the word and remove non-alpha //
-                        // Get the stop word 
-                        stop_word = stop_words[y]; // If the word matches the stop word, remove it from the keywords
-                        if (word.toLowerCase() == stop_word) { // Build the regex 
-                            regex_str = "^\\s*" + stop_word + "\\s*$"; // Only word
-                            regex_str += "|^\\s*" + stop_word + "\\s+"; // First word 
-                            regex_str += "|\\s+" + stop_word + "\\s*$"; // Last word
-                            regex_str += "|\\s+" + stop_word + "\\s+"; // Word somewhere in the middle 
-                            regex = new RegExp(regex_str, "ig"); //
-                            //Remove the word from the keywords 
-                            cleansed_string = cleansed_string.replace(regex, " ");
-                        }
+            // Review all the words
+            for (x = 0; x < words.length; x++) { // For each word, check all the stop words 
+                for (y = 0; y < stop_words.length; y++) { // Get the current word 
+                    word = words[x].replace(/\s+|[^a-z]+/ig, ""); // Trim the word and remove non-alpha //
+                    // Get the stop word 
+                    stop_word = stop_words[y]; // If the word matches the stop word, remove it from the keywords
+                    if (word.toLowerCase() == stop_word) { // Build the regex 
+                        regex_str = "^\\s*" + stop_word + "\\s*$"; // Only word
+                        regex_str += "|^\\s*" + stop_word + "\\s+"; // First word 
+                        regex_str += "|\\s+" + stop_word + "\\s*$"; // Last word
+                        regex_str += "|\\s+" + stop_word + "\\s+"; // Word somewhere in the middle 
+                        regex = new RegExp(regex_str, "ig"); //
+                        //Remove the word from the keywords 
+                        cleansed_string = cleansed_string.replace(regex, " ");
                     }
                 }
-                return cleansed_string.replace(/^\s+|\s+$/g, "");
             }
+            return cleansed_string.replace(/^\s+|\s+$/g, "");
+        }
 
 
-            function wordFreq(string) {
-                var words = string.replace(/[.]/g, '').split(/\s/);
-                var freqMap = {};
-                words.forEach(function (w) {
-                    if (!freqMap[w]) {
-                        freqMap[w] = 0;
-                    }
-                    freqMap[w] += 1;
-                });
-                return freqMap;
-            }
-
-
-            //wordfrequency.push({"x": w, })
-            var wordfrequency = [];
-            Object.keys(new_bar).forEach(function (key) {
-                wordfrequency.push({
-                    "x": key,
-                    "value": new_bar[key]
-                })
-            });
-            //    console.log(wordfrequency);
-        </script>
-        <script>
-            var data1 = {{ obj1 | safe}};
-            //      console.log(data1.length)
-
-
-            var data2 = _.groupBy(data1, function (obj1) {
-                return obj1.tweet_date.substring(0, 10);
-            });
-
-            var myFormat = d3.timeFormat("%Y-%m-%d")
-            var myFormat2 = d3.timeFormat("%X");
-            var parseTime = d3.timeParse(myFormat);
-            var parseTime2 = d3.timeParse(myFormat2)
-            data = []
-            tweet_data = []
-            Object.keys(data2).forEach(function (key) {
-                // console.log(key, data[key]);
-                var score = 0;
-                var count = 0;
-                var tweets = [];
-                var tweet_score = [];
-                var time = [];
-                data2[key].forEach(function (d) {
-                    score = (score + d.tweet_sum_score);
-                    count = count + d.tweet_counter;
-                    tweets.push(d.tweet_data);
-                    tweet_score.push(d.tweet_score)
-                    time.push(d.tweet_date)
-                });
-                if (count == 0) {
-                    data.push({
-                        "date": parseTime(key),
-                        "score": 0,
-                        "tweet": tweets,
-                        "t_score": tweet_score,
-                        "time": time
-                    });
-                } else {
-                    data.push({
-                        "date": parseTime(key),
-                        "score": (score / count),
-                        "tweet": tweets,
-                        "t_score": tweet_score,
-                        "time": time
-                    });
+        function wordFreq(string) {
+            var words = string.replace(/[.]/g, '').split(/\s/);
+            var freqMap = {};
+            words.forEach(function (w) {
+                if (!freqMap[w]) {
+                    freqMap[w] = 0;
                 }
-                console.log(data)
-                //    console.log(tweets)
-                //      console.log(data2)
-                // data2[key].forEach(function (d) {
-                // data = [{
-                //         "date": parseTime("2019-07-12"),
-                //         "score": 1.33
-                //     },
-                //     {
-                //         "date": parseTime("2019-07-15"),
-                //         "score": 1.53
-                //     },
-                //     {
-                //         "date": parseTime("2019-07-23"),
-                //         "score": 2.43
-                //     },
-                //     {
-                //         "date": parseTime("2019-07-24"),
-                //         "score": 1.83
-                //     },
-                //     {
-                //         "date": parseTime("2019-07-25"),
-                //         "score": 0.625
-                //     },
-                //     {
-                //         "date": parseTime("2019-07-26"),
-                //         "score": -1.5
-                //     },
-                //     {
-                //         "date": parseTime("2019-07-27"),
-                //         "score": -2.22
-                //     },
-                //     {
-                //         "date": parseTime("2019-07-28"),
-                //         "score": -3.16
-                //     },
-                //     {
-                //         "date": parseTime("2019-07-29"),
-                //         "score": -1
-                //     },
-                //     {
-                //         "date": parseTime("2019-07-30"),
-                //         "score": 1.5
-                //     }
-                // ]
-                // // tweet_data.push({
-                //     "date": parseTime(key),
-                //     "tweet": d.tweet_data
-                // })
-                // })
+                freqMap[w] += 1;
             });
+            return freqMap;
+        }
 
 
-            //  console.log(data)
-
-            function trend() {
-
-                var svg = d3.select("svg"),
-                    margin = {
-                        top: 20,
-                        right: 80,
-                        bottom: 80,
-                        left: 40
-                    },
-                    width = +svg.attr("width") - margin.left - margin.right,
-                    height = +svg.attr("height") - margin.top - margin.bottom;
-
-                bisectDate = d3.bisector(function (d) {
-                    return d.date;
-                }).left;
+        //wordfrequency.push({"x": w, })
+        var wordfrequency = [];
+        Object.keys(new_bar).forEach(function (key) {
+            wordfrequency.push({
+                "x": key,
+                "value": new_bar[key]
+            })
+        });
+        //    console.log(wordfrequency);
+    </script>
+    <script>
+        var data1 = {{obj1 | safe}};
+        //      console.log(data1.length)
 
 
-                var colour = d3.scaleOrdinal(d3.schemeCategory10);
+        var data2 = _.groupBy(data1, function (obj1) {
+            return obj1.tweet_date.substring(0, 10);
+        });
 
-                var x = d3.scaleTime()
-                    .domain(d3.extent(data, function (d) {
-                        return d.date
-                    }))
-                    .range([0, width]);
-
-                var y = d3.scaleLinear().domain([-5, 5]).range([height, 30]);
-
-                svg.append("circle")
-                    .attr("width", 10)
-                    .attr("height", 10)
-                    .attr("cx", 1103)
-                    .attr("cy", 95)
-                    .attr("r", 7)
-                    .style("fill", "rgb(26, 60,253)");
-
-                svg.append("text")
-                    .attr("class", "legendTitle")
-                    .attr("x", 1140)
-                    .attr("y", 100)
-                    .style("text-anchor", "left")
-                    .style("font-size", "15px")
-                    .style("font-weight", "700")
-                    .text("Days Tweeted");
-
-
-                svg.append("rect")
-                    .attr("width", "100%")
-                    .attr("transform", "translate(40," + height / 1.54 + ")")
-                    .attr("height", height / 10.3)
-                    .attr("fill", "#FF2700")
-                    .attr("opacity", 0.2);
-                svg.append("rect")
-                    .attr("width", "100%")
-                    .attr("transform", "translate(40," + height / 1.343 + ")")
-                    .attr("height", height / 10.3)
-                    .attr("fill", "#FF2700")
-                    .attr("opacity", 0.5);
-                svg.append("rect")
-                    .attr("width", "100%")
-                    .attr("transform", "translate(40," + height / 1.188 + ")")
-                    .attr("height", height / 10.3)
-                    .attr("fill", "#FF2700")
-                    .attr("opacity", 0.7);
-                svg.append("rect")
-                    .attr("width", "100%")
-                    .attr("transform", "translate(40," + height / 1.067 + ")")
-                    .attr("height", height / 10.75)
-                    .attr("fill", "#FF0000")
-                    .attr("opacity", 0.8);
-
-
-                var rect = svg.append("rect")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                    .attr("class", "overlay")
-                    .attr("id", "line01")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .style("fill", "url(#linear-gradient)")
-                    .order("", 10)
-                    .on("mouseover", function () {
-                        focus.style("display", null)
-                        focus.style("color", "white");
-                    })
-                    .on("mouseout", function () {
-                        focus.style("display", "none");
-                    })
-                    .on("click", onClickEvent)
-
-
-
-
-
-
-
-                var line = d3.line()
-                    .curve(d3.curveCatmullRom.alpha(0.5))
-                    .x(function (d) {
-                        return x(d.date);
-                    })
-                    .y(function (d) {
-                        return y(d.score);
-                    })
-
-                var g = svg.append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-
-                g.append("g")
-                    .attr("class", "axis axis--x")
-                    .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x)
-                        .tickFormat(d3.timeFormat("%b-%d")))
-                    .style("color", "white")
-                    .append("text")
-                    .attr("class", "axis-title")
-                    .attr("x", width - 700)
-                    .attr("y", height - 540)
-                    .text("Time");
+        var myFormat = d3.timeFormat("%Y-%m-%d")
+        var myFormat2 = d3.timeFormat("%X");
+        var parseTime = d3.timeParse(myFormat);
+        var parseTime2 = d3.timeParse(myFormat2)
+        data = []
+        tweet_data = []
+        Object.keys(data2).forEach(function (key) {
+            // console.log(key, data[key]);
+            var score = 0;
+            var count = 0;
+            var tweets = [];
+            var tweet_score = [];
+            var time = [];
+            data2[key].forEach(function (d) {
+                score = (score + d.tweet_sum_score);
+                count = count + d.tweet_counter;
+                tweets.push(d.tweet_data);
+                tweet_score.push(d.tweet_score)
+                time.push(d.tweet_date)
+            });
+            if (count == 0) {
+                data.push({
+                    "date": parseTime(key),
+                    "score": 0,
+                    "tweet": tweets,
+                    "t_score": tweet_score,
+                    "time": time
+                });
+            } else {
+                data.push({
+                    "date": parseTime(key),
+                    "score": (score / count),
+                    "tweet": tweets,
+                    "t_score": tweet_score,
+                    "time": time
+                });
+            }
+            console.log(data)
+            //    console.log(tweets)
+            //      console.log(data2)
+            // data2[key].forEach(function (d) {
+            // data = [{
+            //         "date": parseTime("2019-07-12"),
+            //         "score": 1.33
+            //     },
+            //     {
+            //         "date": parseTime("2019-07-15"),
+            //         "score": 1.53
+            //     },
+            //     {
+            //         "date": parseTime("2019-07-23"),
+            //         "score": 2.43
+            //     },
+            //     {
+            //         "date": parseTime("2019-07-24"),
+            //         "score": 1.83
+            //     },
+            //     {
+            //         "date": parseTime("2019-07-25"),
+            //         "score": 0.625
+            //     },
+            //     {
+            //         "date": parseTime("2019-07-26"),
+            //         "score": -1.5
+            //     },
+            //     {
+            //         "date": parseTime("2019-07-27"),
+            //         "score": -2.22
+            //     },
+            //     {
+            //         "date": parseTime("2019-07-28"),
+            //         "score": -3.16
+            //     },
+            //     {
+            //         "date": parseTime("2019-07-29"),
+            //         "score": -1
+            //     },
+            //     {
+            //         "date": parseTime("2019-07-30"),
+            //         "score": 1.5
+            //     }
+            // ]
+            // // tweet_data.push({
+            //     "date": parseTime(key),
+            //     "tweet": d.tweet_data
+            // })
+            // })
+        });
 
 
-                g.append("g")
-                    .attr("class", "axis axis--x")
-                    .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x)
-                        .tickFormat(d3.timeFormat("%b-%d")))
-                    .style("color", "white")
-                    .append("text")
-                    .attr("class", "axis-title")
-                    .attr("x", width - 550)
-                    .attr("y", height - 1170)
-                    .text("Tweet Sentiment Level vs Time").style("font-size", "24px").style("color", "rgb(26, 60,253)");
+        //  console.log(data)
 
-                g.append("g")
-                    .attr("class", "axis axis--x")
-                    .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x)
-                        .tickFormat(d3.timeFormat("%b-%d")))
-                    .style("color", "white")
-                    .append("text")
-                    .attr("class", "axis-title")
-                    .attr("x", width - 550)
-                    .attr("y", height - 1150)
-                    .text("(Click circle to view Tweet)").style("font-size", "13px").style("color", "rgb(26, 60,253)");
+        function trend() {
+
+            var svg = d3.select("svg"),
+                margin = {
+                    top: 20,
+                    right: 80,
+                    bottom: 80,
+                    left: 40
+                },
+                width = +svg.attr("width") - margin.left - margin.right,
+                height = +svg.attr("height") - margin.top - margin.bottom;
+
+            bisectDate = d3.bisector(function (d) {
+                return d.date;
+            }).left;
 
 
+            var colour = d3.scaleOrdinal(d3.schemeCategory10);
+
+            var x = d3.scaleTime()
+                .domain(d3.extent(data, function (d) {
+                    return d.date
+                }))
+                .range([0, width]);
+
+            var y = d3.scaleLinear().domain([-5, 5]).range([height, 30]);
+
+            svg.append("circle")
+                .attr("width", 10)
+                .attr("height", 10)
+                .attr("cx", 1103)
+                .attr("cy", 95)
+                .attr("r", 7)
+                .style("fill", "rgb(26, 60,253)");
+
+            svg.append("text")
+                .attr("class", "legendTitle")
+                .attr("x", 1140)
+                .attr("y", 100)
+                .style("text-anchor", "left")
+                .style("font-size", "15px")
+                .style("font-weight", "700")
+                .text("Days Tweeted");
 
 
-                g.append("g")
-                    .attr("class", "axisMid")
-                    .attr("transform", "translate(0," + height / 1.908 + ")")
-                    .style("stroke-dasharray", ("4"))
-
-                    .call(d3.axisBottom(x)
-                        .tickSize(0)
-                        .tickFormat(""))
-                    .style("opacity", "0.7");
-
-
-                // g.append("g")
-                //     .attr("class", "axisRed")
-                //     .attr("transform", "translate(0," + height / 3.9 + ")")
-                //     .style("stroke-dasharray", ("4,6"))
-                //     .call(d3.axisBottom(x)
-                //         .tickSize(0)
-                //         .tickFormat(""));
-
-                // g.append("g")
-                //     .attr("class", "axisBot")
-                //     .attr("transform", "translate(0," + height / 1.23 + ")")
-                //     .style("stroke-dasharray", ("4,6"))
-                //     .call(d3.axisBottom(x)
-                //         .tickSize(0)
-                //         .tickFormat(""));
-
-                g.append("g")
-                    .attr("class", "axis axis--y")
-                    .call(d3.axisLeft(y).ticks(10).tickFormat(function (d) {
-                        return parseFloat(d);
-                    }))
-                    .append("text")
-                    .attr("class", "axis-title")
-                    .attr("transform", "rotate(-90)")
-                    .attr("x", -250)
-                    .attr("y", height - 800)
-                    .text("Sentiment Level");
+            svg.append("rect")
+                .attr("width", "100%")
+                .attr("transform", "translate(40," + height / 1.54 + ")")
+                .attr("height", height / 10.3)
+                .attr("fill", "#FF2700")
+                .attr("opacity", 0.2);
+            svg.append("rect")
+                .attr("width", "100%")
+                .attr("transform", "translate(40," + height / 1.343 + ")")
+                .attr("height", height / 10.3)
+                .attr("fill", "#FF2700")
+                .attr("opacity", 0.5);
+            svg.append("rect")
+                .attr("width", "100%")
+                .attr("transform", "translate(40," + height / 1.188 + ")")
+                .attr("height", height / 10.3)
+                .attr("fill", "#FF2700")
+                .attr("opacity", 0.7);
+            svg.append("rect")
+                .attr("width", "100%")
+                .attr("transform", "translate(40," + height / 1.067 + ")")
+                .attr("height", height / 10.75)
+                .attr("fill", "#FF0000")
+                .attr("opacity", 0.8);
 
 
-                g.append("path")
-                    .datum(data)
-                    .attr("class", "line")
-                    .attr("d", line)
-                    .attr("data-legend", function (d) {
-                        return d.date
-                    })
-
-                g.selectAll('circle')
-                    .data(data).enter()
-                    .append('circle')
-                    .attr('cx', d => x(d.date))
-                    .attr('cy', d => y(d.score))
-                    .attr('r', 8)
-                    .on("mousemove", mousemove)
-                    .on("mouseover", function () {
-                        focus.style("display", null)
-                        focus.style("color", "white");
-                    })
-                    .on("click", onClickEvent);
-
-
-                g.selectAll("text").data(data).enter()
-                    .append("text")
-                    .attr("x", function (d) {
-                        return x(d.date);
-                    })
-                    .attr("y", function (d) {
-                        return y(d.score);
-                    })
-
-                var focus = g.append("g")
-                    .attr("class", "focus")
-                    .style("display", "none")
-
-                focus.append("line")
-                    .attr("class", "x-hover-line hover-line")
-                    .attr("y1", 1)
-                    .attr("y2", height)
-
-                focus.append("line")
-                    .attr("class", "y-hover-line hover-line")
-                    .attr("x1", width)
-                    .attr("x2", width);
-
-                focus.append("text")
-                    .attr("class", "tooltip-date")
-                    .attr("x", 18)
-                    .attr("y", -35)
-                    .attr("dy", ".31em");
-
-                focus.append("text")
-                    .attr("class", "tooltip-likes")
-                    .attr("x", 18)
-                    .attr("y", -10)
-                    .attr("dy", "7px");
-
-
-
-                function mousemove() {
-                    var x0 = x.invert(d3.mouse(this)[0]),
-                        i = bisectDate(data, x0, 0),
-                        d0 = data[i - 1],
-                        d1 = data[i],
-                        d = x0 - d0.date > d1.date - x0 ? d1 : d0;
-                    focus.attr("transform", "translate(" + x(d.date) + "," + y(d.score) + ")");
-                    focus.select(".tooltip-date").text("Date: " + d3.timeFormat("%b-%d")(d.date))
-                    focus.select(".tooltip-likes").text("Tweet: " + (d.tweet))
-                    focus.select(".tooltip-likes").text("Score: " + (d.score).toFixed(2))
-                    focus.select(".x-hover-line").attr("y2", height - y(d.score)).style("border", "solid");
+            var rect = svg.append("rect")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                .attr("class", "overlay")
+                .attr("id", "line01")
+                .attr("width", width)
+                .attr("height", height)
+                .style("fill", "url(#linear-gradient)")
+                .order("", 10)
+                .on("mouseover", function () {
+                    focus.style("display", null)
                     focus.style("color", "white");
-                }
+                })
+                .on("mouseout", function () {
+                    focus.style("display", "none");
+                })
+                .on("click", onClickEvent)
 
 
 
-                function onClickEvent() {
-                    //  console.log(name)
-                    //loading tweets into array
-      $('.feedback-form').empty();
-      $('.wordchart-container').empty();
-      $('#wordcloud').empty();
-                    var tweets_data = "";
-                    var x0 = x.invert(d3.mouse(this)[0]),
-                        i = bisectDate(data, x0, 0),
-                        d0 = data[i - 1],
-                        d1 = data[i],
-                        //loaded tweets
-                        d = x0 - d0.date > d1.date - x0 ? d1 : d0;
-                    //     console.log(d.date)
-                    var color = 'black';
-                    // console.log(d.t_score)
-                    //generating popup dynamically showing all tweets
-                    //capture array only for date key
 
-                    $(('<div><h4>' + "Tweets" + '</h4></div>')).appendTo(".feedback-form");
-                    $(('<div id="test" style="text-align:center; font-size:24px; font-weight:700">'+ d3.timeFormat("%b-%d")(d.date))).appendTo(".feedback-form");
-                    $(("<table>")).appendTo(".feedback-form")
-                    for (i = 0; i <= d.tweet.length - 1; i++) {
-                        tweets_data += d.tweet[i]
-                        //      console.log("printing tweet" + d.tweet[i])
-                        if (d.t_score[i] <= -3) {
-                            $(('<div id="test" style="color:red;"><tr>' + [i + 1] + '. ' + d.tweet[i] +
-                                '<br><hr></tr>')).appendTo(".feedback-form");
-                        } else {
-                            $(('<div id="test" style="color:black"><tr>' + [i + 1] + '. ' + d.tweet[i] +
+
+
+
+            var line = d3.line()
+                .curve(d3.curveCatmullRom.alpha(0.5))
+                .x(function (d) {
+                    return x(d.date);
+                })
+                .y(function (d) {
+                    return y(d.score);
+                })
+
+            var g = svg.append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+            g.append("g")
+                .attr("class", "axis axis--x")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x)
+                    .tickFormat(d3.timeFormat("%b-%d")))
+                .style("color", "white")
+                .append("text")
+                .attr("class", "axis-title")
+                .attr("x", width - 700)
+                .attr("y", height - 540)
+                .text("Time");
+
+
+            g.append("g")
+                .attr("class", "axis axis--x")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x)
+                    .tickFormat(d3.timeFormat("%b-%d")))
+                .style("color", "white")
+                .append("text")
+                .attr("class", "axis-title")
+                .attr("x", width - 550)
+                .attr("y", height - 1170)
+                .text("Tweet Sentiment Level vs Time").style("font-size", "24px").style("color", "rgb(26, 60,253)");
+
+            g.append("g")
+                .attr("class", "axis axis--x")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x)
+                    .tickFormat(d3.timeFormat("%b-%d")))
+                .style("color", "white")
+                .append("text")
+                .attr("class", "axis-title")
+                .attr("x", width - 550)
+                .attr("y", height - 1150)
+                .text("(Click circle to view Tweet)").style("font-size", "13px").style("color", "rgb(26, 60,253)");
+
+
+
+
+            g.append("g")
+                .attr("class", "axisMid")
+                .attr("transform", "translate(0," + height / 1.908 + ")")
+                .style("stroke-dasharray", ("4"))
+
+                .call(d3.axisBottom(x)
+                    .tickSize(0)
+                    .tickFormat(""))
+                .style("opacity", "0.7");
+
+
+            // g.append("g")
+            //     .attr("class", "axisRed")
+            //     .attr("transform", "translate(0," + height / 3.9 + ")")
+            //     .style("stroke-dasharray", ("4,6"))
+            //     .call(d3.axisBottom(x)
+            //         .tickSize(0)
+            //         .tickFormat(""));
+
+            // g.append("g")
+            //     .attr("class", "axisBot")
+            //     .attr("transform", "translate(0," + height / 1.23 + ")")
+            //     .style("stroke-dasharray", ("4,6"))
+            //     .call(d3.axisBottom(x)
+            //         .tickSize(0)
+            //         .tickFormat(""));
+
+            g.append("g")
+                .attr("class", "axis axis--y")
+                .call(d3.axisLeft(y).ticks(10).tickFormat(function (d) {
+                    return parseFloat(d);
+                }))
+                .append("text")
+                .attr("class", "axis-title")
+                .attr("transform", "rotate(-90)")
+                .attr("x", -250)
+                .attr("y", height - 800)
+                .text("Sentiment Level");
+
+
+            g.append("path")
+                .datum(data)
+                .attr("class", "line")
+                .attr("d", line)
+                .attr("data-legend", function (d) {
+                    return d.date
+                })
+
+            g.selectAll('circle')
+                .data(data).enter()
+                .append('circle')
+                .attr('cx', d => x(d.date))
+                .attr('cy', d => y(d.score))
+                .attr('r', 8)
+                .on("mousemove", mousemove)
+                .on("mouseover", function () {
+                    focus.style("display", null)
+                    focus.style("color", "white");
+                })
+                .on("click", onClickEvent);
+
+
+            g.selectAll("text").data(data).enter()
+                .append("text")
+                .attr("x", function (d) {
+                    return x(d.date);
+                })
+                .attr("y", function (d) {
+                    return y(d.score);
+                })
+
+            var focus = g.append("g")
+                .attr("class", "focus")
+                .style("display", "none")
+
+            focus.append("line")
+                .attr("class", "x-hover-line hover-line")
+                .attr("y1", 1)
+                .attr("y2", height)
+
+            focus.append("line")
+                .attr("class", "y-hover-line hover-line")
+                .attr("x1", width)
+                .attr("x2", width);
+
+            focus.append("text")
+                .attr("class", "tooltip-date")
+                .attr("x", 18)
+                .attr("y", -35)
+                .attr("dy", ".31em");
+
+            focus.append("text")
+                .attr("class", "tooltip-likes")
+                .attr("x", 18)
+                .attr("y", -10)
+                .attr("dy", "7px");
+
+
+
+            function mousemove() {
+                var x0 = x.invert(d3.mouse(this)[0]),
+                    i = bisectDate(data, x0, 0),
+                    d0 = data[i - 1],
+                    d1 = data[i],
+                    d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+                focus.attr("transform", "translate(" + x(d.date) + "," + y(d.score) + ")");
+                focus.select(".tooltip-date").text("Date: " + d3.timeFormat("%b-%d")(d.date))
+                focus.select(".tooltip-likes").text("Tweet: " + (d.tweet))
+                focus.select(".tooltip-likes").text("Score: " + (d.score).toFixed(2))
+                focus.select(".x-hover-line").attr("y2", height - y(d.score)).style("border", "solid");
+                focus.style("color", "white");
+            }
+
+
+
+            function onClickEvent() {
+                //  console.log(name)
+                //loading tweets into array
+                $('.feedback-form').empty();
+                $('.wordchart-container').empty();
+                $('#wordcloud').empty();
+                var tweets_data = "";
+                var x0 = x.invert(d3.mouse(this)[0]),
+                    i = bisectDate(data, x0, 0),
+                    d0 = data[i - 1],
+                    d1 = data[i],
+                    //loaded tweets
+                    d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+                //     console.log(d.date)
+                var color = 'black';
+                // console.log(d.t_score)
+                //generating popup dynamically showing all tweets
+                //capture array only for date key
+
+                $(('<div><h4>' + "Tweets" + '</h4></div>')).appendTo(".feedback-form");
+                $(('<div id="test" style="text-align:center; font-size:24px; font-weight:700">' + d3.timeFormat("%b-%d")
+                    (d.date))).appendTo(".feedback-form");
+                $(("<table>")).appendTo(".feedback-form")
+                for (i = 0; i <= d.tweet.length - 1; i++) {
+                    tweets_data += d.tweet[i]
+                    //      console.log("printing tweet" + d.tweet[i])
+                    if (d.t_score[i] <= -3) {
+                        $(('<div id="test" style="color:red;"><tr>' + [i + 1] + '. ' + d.tweet[i] +
+                            '<br><hr></tr>')).appendTo(".feedback-form");
+                    } else {
+                        $(('<div id="test" style="color:black"><tr>' + [i + 1] + '. ' + d.tweet[i] +
                                 '<br><hr></tr>'))
-                                .appendTo(
-                                    ".feedback-form");
-                        }
-
+                            .appendTo(
+                                ".feedback-form");
                     }
 
-                    $('<h4>' + "Day's Tweet Timeline" + '</h4>').appendTo(".wordchart-container");
-                    $(("</table>")).appendTo(".feedback-form")
-                    $('<h4>' + "Wordcloud" + '</h4>').appendTo("#wordcloud");
-                    $('<br>' + '<div id="container" style:"background: #dbd8d8;">' + "</div>")
-                        .appendTo("#wordcloud");
-                    //console.log(tweets_data)
-                    // var new_bar = wordFreq(tweets_data)
-                    // //  console.log(new_bar + "1")
-                    // var wordfrequency = [];
-                    // Object.keys(new_bar).forEach(function (key) {
-                    //     wordfrequency.push({
-                    //         "x": key,
-                    //         "value": new_bar[key]
-                    //     })
-                    // });
+                }
 
-                    // var wordchart = anychart.onDocumentReady(function () {
-                    // var datacloud = wordfrequency;
-                    // console.log("printing" + datacloud)
-                    // var chart = anychart.tagCloud(datacloud);
-                    // console.log(chart)
+                $('<h4>' + "Day's Tweet Timeline" + '</h4>').appendTo(".wordchart-container");
+                $(("</table>")).appendTo(".feedback-form")
+                $('<h4>' + "Wordcloud" + '</h4>').appendTo("#wordcloud");
+                $('<br>' + '<div id="container" style:"background: #dbd8d8;">' + "</div>")
+                    .appendTo("#wordcloud");
+                //console.log(tweets_data)
+                // var new_bar = wordFreq(tweets_data)
+                // //  console.log(new_bar + "1")
+                // var wordfrequency = [];
+                // Object.keys(new_bar).forEach(function (key) {
+                //     wordfrequency.push({
+                //         "x": key,
+                //         "value": new_bar[key]
+                //     })
+                // });
 
-                    // // set a chart title
-                    // chart.title('15 most spoken languages')
-                    // // set an array of angles at which the words will be laid out
-                    // chart.angles([0])
-                    // // enable a color range
-                    // chart.colorRange(true);
-                    // // set the color range length
-                    // chart.colorRange().length('80%');
+                // var wordchart = anychart.onDocumentReady(function () {
+                // var datacloud = wordfrequency;
+                // console.log("printing" + datacloud)
+                // var chart = anychart.tagCloud(datacloud);
+                // console.log(chart)
 
-                    // // display the word cloud chart
-                    // chart.container("container");
-                    // chart.draw();
-                    // });
-                    //   console.log(tweets_data.removeStopWords());
+                // // set a chart title
+                // chart.title('15 most spoken languages')
+                // // set an array of angles at which the words will be laid out
+                // chart.angles([0])
+                // // enable a color range
+                // chart.colorRange(true);
+                // // set the color range length
+                // chart.colorRange().length('80%');
 
-                    zingchart.MODULESDIR = 'https://cdn.zingchart.com/modules/';
-                    let chartConfig = {
-                        type: 'wordcloud',
-                        backgroundColor: '#111',
-                        fontColor: '#111',
-                        aspect: "spiral",
-                        options: {
-                            text: tweets_data,
-                            aspect: 'spiral',
-                            colorType: 'palette',
-                            ignore: ["a", "about", "above", "after", "again", "against", "all", "am", "an",
-                                "and",
-                                "any", "are", "aren't", "as", "at", "be", "because", "been", "before", "being",
-                                "below",
-                                "between", "both", "but", "by", "can't", "cannot", "could", "couldn't", "did",
-                                "didn't",
-                                "do", "does", "doesn't", "doing", "don't", "down", "during", "each", "few",
-                                "for", "from",
-                                "further", "had", "hadn't", "has", "hasn't", "have", "haven't", "having", "he",
-                                "he'd",
-                                "he'll", "he's", "her", "here", "here's", "hers", "herself", "him", "himself",
-                                "his", "how",
-                                "how's", "i", "i'd", "i'll", "i'm", "i've", "if", "in", "into", "is", "isn't",
-                                "it", "it's",
-                                "its", "itself", "let's", "me", "more", "most", "mustn't", "my", "myself", "no",
-                                "nor",
-                                "not", "of", "off", "on", "once", "only", "or", "other", "ought", "our", "ours",
-                                "ourselves", "out", "over", "own", "same", "shan't", "she", "she'd", "she'll",
-                                "she's",
-                                "should", "shouldn't", "so", "some", "such", "than", "that", "that's", "the",
-                                "The",
-                                "their",
-                                "theirs", "them", "themselves", "then", "there", "there's", "these", "they",
-                                "they'd",
-                                "they'll", "they're", "they've", "this", "those", "through", "to", "too",
-                                "under", "until",
-                                "up", "very", "was", "wasn't", "we", "we'd", "we'll", "we're", "we've", "were",
-                                "weren't",
-                                "what", "what's", "when", "when's", "where", "where's", "which", "while", "who",
-                                "who's",
-                                "whom", "why", "why's", "with", "won't", "would", "wouldn't", "you", "you'd",
-                                "you'll",
-                                "you're", "you've", "your", "yours", "yourself", "yourselves"
-                            ],
-                            maxItems: 50,
-                            minLength: '3px',
-                            palette: ['#D32F2F', '#1976D2', '#9E9E9E', '#E53935', '#1E88E5', '#7E57C2',
-                                '#F44336', '#2196F3', '#A1887F'
-                            ],
-                            rotate: true,
-                            fontSize: '30px',
+                // // display the word cloud chart
+                // chart.container("container");
+                // chart.draw();
+                // });
+                //   console.log(tweets_data.removeStopWords());
+
+                zingchart.MODULESDIR = 'https://cdn.zingchart.com/modules/';
+                let chartConfig = {
+                    type: 'wordcloud',
+                    backgroundColor: '#111',
+                    fontColor: '#111',
+                    aspect: "spiral",
+                    options: {
+                        text: tweets_data,
+                        aspect: 'spiral',
+                        colorType: 'palette',
+                        ignore: ["a", "about", "above", "after", "again", "against", "all", "am", "an",
+                            "and",
+                            "any", "are", "aren't", "as", "at", "be", "because", "been", "before", "being",
+                            "below",
+                            "between", "both", "but", "by", "can't", "cannot", "could", "couldn't", "did",
+                            "didn't",
+                            "do", "does", "doesn't", "doing", "don't", "down", "during", "each", "few",
+                            "for", "from",
+                            "further", "had", "hadn't", "has", "hasn't", "have", "haven't", "having", "he",
+                            "he'd",
+                            "he'll", "he's", "her", "here", "here's", "hers", "herself", "him", "himself",
+                            "his", "how",
+                            "how's", "i", "i'd", "i'll", "i'm", "i've", "if", "in", "into", "is", "isn't",
+                            "it", "it's",
+                            "its", "itself", "let's", "me", "more", "most", "mustn't", "my", "myself", "no",
+                            "nor",
+                            "not", "of", "off", "on", "once", "only", "or", "other", "ought", "our", "ours",
+                            "ourselves", "out", "over", "own", "same", "shan't", "she", "she'd", "she'll",
+                            "she's",
+                            "should", "shouldn't", "so", "some", "such", "than", "that", "that's", "the",
+                            "The",
+                            "their",
+                            "theirs", "them", "themselves", "then", "there", "there's", "these", "they",
+                            "they'd",
+                            "they'll", "they're", "they've", "this", "those", "through", "to", "too",
+                            "under", "until",
+                            "up", "very", "was", "wasn't", "we", "we'd", "we'll", "we're", "we've", "were",
+                            "weren't",
+                            "what", "what's", "when", "when's", "where", "where's", "which", "while", "who",
+                            "who's",
+                            "whom", "why", "why's", "with", "won't", "would", "wouldn't", "you", "you'd",
+                            "you'll",
+                            "you're", "you've", "your", "yours", "yourself", "yourselves"
+                        ],
+                        maxItems: 50,
+                        minLength: '3px',
+                        palette: ['#D32F2F', '#1976D2', '#9E9E9E', '#E53935', '#1E88E5', '#7E57C2',
+                            '#F44336', '#2196F3', '#A1887F'
+                        ],
+                        rotate: true,
+                        fontSize: '30px',
 
 
-                            style: {
-                                tooltip: {
-                                    padding: '1px',
-                                    alpha: 3.9,
-                                    backgroundColor: '#D32F2F',
-                                    borderColor: 'none',
-                                    borderRadius: '3px',
-                                    fontColor: 'white',
-                                    fontFamily: 'Open Sans',
-                                    textAlpha: 6,
-                                    fontSize: '20px',
-                                    visible: true,
-                                    width: '300px',
-                                    wrapText: false
-                                },
+                        style: {
+                            tooltip: {
+                                padding: '1px',
+                                alpha: 3.9,
+                                backgroundColor: '#D32F2F',
+                                borderColor: 'none',
+                                borderRadius: '3px',
+                                fontColor: 'white',
                                 fontFamily: 'Open Sans',
-                                hoverState: {
-                                    backgroundColor: '#111',
-                                    borderColor: 'none',
-                                    borderRadius: '3px',
-                                    fontColor: 'white'
-                                }
+                                textAlpha: 6,
+                                fontSize: '20px',
+                                visible: true,
+                                width: '300px',
+                                wrapText: false
+                            },
+                            fontFamily: 'Open Sans',
+                            hoverState: {
+                                backgroundColor: '#111',
+                                borderColor: 'none',
+                                borderRadius: '3px',
+                                fontColor: 'white'
                             }
                         }
-
-                    };
-
-                    zingchart.render({
-                        id: 'container',
-                        data: chartConfig,
-                        fontWeight: 'bold',
-                        width: '80%',
-                        height: '90%',
-                        x: '500'
-                    });
-
-                    var tweet_time = []
-                    for (i = 0; i <= d.time.length - 1; i++) {
-                        tweet_time.push({
-                            "x": new Date(d.time[i]),
-                            "y": d.t_score[i],
-                            "tweet": d.tweet[i]
-                        })
                     }
-                    console.log(tweet_time)
-
-
-                    var chart = new CanvasJS.Chart("chartContainer", {
-                        animationEnabled: true,
-                        zoomEnabled: true,
-                        backgroundColor: null,
-                        fontColor: "#111",
-                        axisX: {
-                            title: "Time",
-                            gridThickness: 0.5,
-                                    intervalType: "hour",
-
-
-                        },
-                        axisY: {
-                            title: "Score",
-                            minimum: -5,
-                            maximum: 5,
-                            gridThickness: 0.5,
-                        },
-                        data: [{
-                            type: "scatter",
-                            toolTipContent: "<b>Tweet </b>{tweet}<br /><b>Time: </b>{x} <br /><b>Score: </b>{y}",
-                            dataPoints: tweet_time,
-                            markerSize: 20,
-                        }]
-                    });
-                    chart.render();
-
-
-
-                    //  console.log(wordfrequency);
-                    $('html, body').animate({
-                        scrollTop: $(".feedback-form").offset().top
-                    }, 1000);
 
                 };
 
-                var w = 104,
-                    h = 140;
+                zingchart.render({
+                    id: 'container',
+                    data: chartConfig,
+                    fontWeight: 'bold',
+                    width: '80%',
+                    height: '90%',
+                    x: '500'
+                });
 
-                var colorScale = d3.scaleLinear()
-                    .domain([-5, 5])
-
-                var legend = svg.append("defs").append("svg:linearGradient").attr("id", "gradient").attr("x1",
-                    "100%").attr("y1", "0%").attr("x2", "100%").attr("y2", "100%").attr("spreadMethod", "pad");
-
-                legend.append("stop").attr("offset", "0%").attr("stop-color", "#111").attr("stop-opacity", 1);
-
-                legend.append("stop").attr("offset", "100%").attr("stop-color", "#111").attr("stop-opacity", 1);
-
-                svg.append("text")
-                    .attr("class", "legendTitle")
-                    .attr("x", 1140)
-                    .attr("y", 77)
-                    .style("text-anchor", "left")
-                    .style("font-size", "15px")
-                    .style("font-weight", "700")
-                    .text("Tweets Trend");
-
-                svg.append("text")
-                    .attr("class", "legendTitle")
-                    .attr("x", -150)
-                    .attr("y", 54)
-                    .style("text-anchor", "left")
-                    .style("font-size", "17px")
-                    .style("font-weight", "700")
-                    .text("(Extremely Positive)");
-
-                svg.append("text")
-                    .attr("class", "legendTitle")
-                    .attr("x", -64)
-                    .attr("y", 167)
-                    .style("text-anchor", "left")
-                    .style("font-size", "17px")
-                    .style("font-weight", "700")
-                    .text("(Positive)");
+                var tweet_time = []
+                for (i = 0; i <= d.time.length - 1; i++) {
+                    tweet_time.push({
+                        "x": new Date(d.time[i]),
+                        "y": d.t_score[i],
+                        "tweet": d.tweet[i]
+                    })
+                }
+                console.log(tweet_time)
 
 
-                svg.append("text")
-                    .attr("class", "legendTitle")
-                    .attr("x", -106)
-                    .attr("y", 283)
-                    .style("text-anchor", "left")
-                    .style("font-size", "17px")
-                    .style("font-weight", "700")
-                    .text("(Less Positive)");
-
-                svg.append("text")
-                    .attr("class", "legendTitle")
-                    .attr("x", -59)
-                    .attr("y", 340)
-                    .style("text-anchor", "left")
-                    .style("font-size", "17px")
-                    .style("font-weight", "700")
-                    .text("(Neutral)");
-
-                svg.append("text")
-                    .attr("class", "legendTitle")
-                    .attr("x", -115)
-                    .attr("y", 397)
-                    .style("text-anchor", "left")
-                    .style("font-size", "17px")
-                    .style("font-weight", "700")
-                    .text("(Less Negative)");
-
-                svg.append("text")
-                    .attr("class", "legendTitle")
-                    .attr("x", -71)
-                    .attr("y", 511)
-                    .style("text-anchor", "left")
-                    .style("font-size", "17px")
-                    .style("font-weight", "700")
-                    .text("(Negative)");
-
-                svg.append("text")
-                    .attr("class", "legendTitle")
-                    .attr("x", -156)
-                    .attr("y", 625)
-                    .style("text-anchor", "left")
-                    .style("font-size", "17px")
-                    .style("font-weight", "700")
-                    .text("(Extremely Negative)");
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    zoomEnabled: true,
+                    backgroundColor: null,
+                    fontColor: "#111",
+                    axisX: {
+                        title: "Time",
+                        gridThickness: 0.5,
+                        intervalType: "hour",
 
 
-                svg.append("rect").attr("width", w - 100).attr("height", h - 100).attr("y", -1120).attr("x", 70).style(
-                    "fill",
-                    "url(#gradient)").attr("transform", "translate(200,30)").attr("transform", "rotate(90)");
+                    },
+                    axisY: {
+                        title: "Score",
+                        minimum: -5,
+                        maximum: 5,
+                        gridThickness: 0.5,
+                    },
+                    data: [{
+                        type: "scatter",
+                        toolTipContent: "<b>Tweet </b>{tweet}<br /><b>Time: </b>{x} <br /><b>Score: </b>{y}",
+                        dataPoints: tweet_time,
+                        markerSize: 20,
+                    }]
+                });
+                chart.render();
 
-                var y1 = d3.scaleLinear().range([298, 0]).domain([-5, 0]);
 
-                var yAxis = d3.axisBottom(y1).ticks(5).tickSize(1)
 
-                // svg.append("g").attr("class", "y axis").attr("transform",
-                // "translate(1400,10)").attr("transform", "rotate(90)").call(yAxis).append("text").attr("y", 100).attr("dy", 30).style("text-anchor", "end").text("axis title");
-      $('.feedback-form').empty();
-      $('.wordchart-container').empty();
-      $('#wordcloud').empty();
-            }
-            trend();
+                //  console.log(wordfrequency);
+                $('html, body').animate({
+                    scrollTop: $(".feedback-form").offset().top
+                }, 1000);
 
-            window.onscroll = function () {
-                scrollFunction()
             };
 
-            function scrollFunction() {
-                if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-                    document.getElementById("top").style.display = "block";
-                } else {
-                    document.getElementById("top").style.display = "none";
-                }
+            var w = 104,
+                h = 140;
+
+            var colorScale = d3.scaleLinear()
+                .domain([-5, 5])
+
+            var legend = svg.append("defs").append("svg:linearGradient").attr("id", "gradient").attr("x1",
+                "100%").attr("y1", "0%").attr("x2", "100%").attr("y2", "100%").attr("spreadMethod", "pad");
+
+            legend.append("stop").attr("offset", "0%").attr("stop-color", "#111").attr("stop-opacity", 1);
+
+            legend.append("stop").attr("offset", "100%").attr("stop-color", "#111").attr("stop-opacity", 1);
+
+            svg.append("text")
+                .attr("class", "legendTitle")
+                .attr("x", 1140)
+                .attr("y", 77)
+                .style("text-anchor", "left")
+                .style("font-size", "15px")
+                .style("font-weight", "700")
+                .text("Tweets Trend");
+
+            svg.append("text")
+                .attr("class", "legendTitle")
+                .attr("x", -150)
+                .attr("y", 54)
+                .style("text-anchor", "left")
+                .style("font-size", "17px")
+                .style("font-weight", "700")
+                .text("(Extremely Positive)");
+
+            svg.append("text")
+                .attr("class", "legendTitle")
+                .attr("x", -64)
+                .attr("y", 167)
+                .style("text-anchor", "left")
+                .style("font-size", "17px")
+                .style("font-weight", "700")
+                .text("(Positive)");
+
+
+            svg.append("text")
+                .attr("class", "legendTitle")
+                .attr("x", -106)
+                .attr("y", 283)
+                .style("text-anchor", "left")
+                .style("font-size", "17px")
+                .style("font-weight", "700")
+                .text("(Less Positive)");
+
+            svg.append("text")
+                .attr("class", "legendTitle")
+                .attr("x", -59)
+                .attr("y", 340)
+                .style("text-anchor", "left")
+                .style("font-size", "17px")
+                .style("font-weight", "700")
+                .text("(Neutral)");
+
+            svg.append("text")
+                .attr("class", "legendTitle")
+                .attr("x", -115)
+                .attr("y", 397)
+                .style("text-anchor", "left")
+                .style("font-size", "17px")
+                .style("font-weight", "700")
+                .text("(Less Negative)");
+
+            svg.append("text")
+                .attr("class", "legendTitle")
+                .attr("x", -71)
+                .attr("y", 511)
+                .style("text-anchor", "left")
+                .style("font-size", "17px")
+                .style("font-weight", "700")
+                .text("(Negative)");
+
+            svg.append("text")
+                .attr("class", "legendTitle")
+                .attr("x", -156)
+                .attr("y", 625)
+                .style("text-anchor", "left")
+                .style("font-size", "17px")
+                .style("font-weight", "700")
+                .text("(Extremely Negative)");
+
+
+            svg.append("rect").attr("width", w - 100).attr("height", h - 100).attr("y", -1120).attr("x", 70).style(
+                "fill",
+                "url(#gradient)").attr("transform", "translate(200,30)").attr("transform", "rotate(90)");
+
+            var y1 = d3.scaleLinear().range([298, 0]).domain([-5, 0]);
+
+            var yAxis = d3.axisBottom(y1).ticks(5).tickSize(1)
+
+            // svg.append("g").attr("class", "y axis").attr("transform",
+            // "translate(1400,10)").attr("transform", "rotate(90)").call(yAxis).append("text").attr("y", 100).attr("dy", 30).style("text-anchor", "end").text("axis title");
+            $('.feedback-form').empty();
+            $('.wordchart-container').empty();
+            $('#wordcloud').empty();
+        }
+        trend();
+
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                document.getElementById("top").style.display = "block";
+            } else {
+                document.getElementById("top").style.display = "none";
             }
+        }
 
-            // When the user clicks on the button, scroll to the top of the document
-            function topFunction() {
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
-            }
-        </script>
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
 
-        </script>
+    </script>
 
-        <script>
-
-
-        </script>
 
 </body>
 
