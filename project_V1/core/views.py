@@ -60,8 +60,8 @@ def Checking(request):
                 request.session.set_expiry(180)
                 request.session['username']=extra
                 page,t_handle=core.task.twitterCheck(extra)
-                fname=login.task.getFirstName(extra)
-
+                # fname=login.task.getFirstName(extra)
+                fname=extra        
                 return render(request,page,{"Message":fname,'data':t_handle})
 
                 # d1=User_detail.objects.filter(username=extra)
