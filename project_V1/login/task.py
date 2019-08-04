@@ -52,3 +52,8 @@ def notificationdata(usr):
         dd1.append({"handle": d.twitter_handle, "tweet_arr": dd})
 
     return noti_list, dd1
+
+
+def getFirstName(usr):
+    fname=Registration.objects.filter(username=usr)
+    return fname[0].FirstName
