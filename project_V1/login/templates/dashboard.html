@@ -149,8 +149,9 @@
                                 {%csrf_token%}
 
                                 <div class="mx-sm-3 mb-2">
-                                    <input type="text" style="padding: 2px; text-align: center;" name="friend"
-                                        value={{c}} readonly>
+                                    <input type="text" style="padding: 2px; text-align: center;border-width:0px;
+border:none;" name="friend"
+                                        value={{c}} disabled='disabled'>
                                 </div>
                                 <button class="btn btn-primary mx-sm-3 mb-2" id="btn-1">View
                                     Trend</button>
@@ -160,7 +161,16 @@
                             <h4>Please add a friend to see the trend</h4>
                             {%endif%}
                         </div>
-
+               <div class="following-container-2">
+                   <h3>Add Friend by email</h3>
+                   <form action="/core/addfriend" name="sendemail" method="post">
+                       {%csrf_token%}
+                       <input type="text" id="fname" name="twitter_handle" placeholder="Enter Twitter Name" required>
+                       <input type="text" id="fname" name="email" placeholder="Enter Email" required>
+                       {{msg}}
+                       <input type="submit" class="sendbutton" value="Send Email">
+                   </form>
+               </div>
                     </div>
                     <div class="col-xs-6 col-md-4">
                         <div class="notification">
@@ -197,21 +207,11 @@
                                     </div>
                                 </div>
                                 {%endblock%}
-                                <div class="following-container-2">
-                                    <h3>Add Friend by email</h3>
-                                    <form action="/core/addfriend" name="sendemail" method="post">
-                                        {%csrf_token%}
-                                        <input type="text" id="fname" name="twitter_handle" placeholder="Enter Twitter Name"
-                                            required>
-                                        <input type="text" id="fname" name="email" placeholder="Enter Email" required>
-                                        {{msg}}
-                                        <input type="submit" class="sendbutton" value="Send Email">
-                                    </form>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                     
             </div>
             <div class="search-field">
             </div>
