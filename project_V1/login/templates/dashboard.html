@@ -189,12 +189,22 @@ border:none;" name="friend"
                                             </h5>
                                         </div>
                                         <div id={{c.handle}} class="collapse" aria-expanded="false"
-                                            style="overflow-y:scroll;" aria-controls="collapseExample">
+                                             aria-controls="collapseExample">
                                             <hr>
                                             {% for d in c.tweet_arr%}
                                             <div id="tweets-arr">
-                                                {{d.tweet}},{{d.date}}
-                                                <hr>
+                                                <div>
+                                                <a class="toggle" data-toggle="collapse" aria-expanded="false"
+                                                    href="#{{c.handle}}-d" aria-controls="collapseExample">
+                                                    <center><b>{{d.date}}</b> <i class="fa fa-angle-down"
+                                                        aria-hidden="true"></i></center>
+                                                </a>
+                                                </div>
+                                                 <div id={{c.handle}}-d class="collapse" aria-expanded="false"
+                                                     style="overflow-y:scroll;" aria-controls="collapseExample">
+                                                    {{d.tweet}}
+                                                    <hr>
+                                                 </div>
                                             </div>
                                             {%endfor%}
                                         </div>
