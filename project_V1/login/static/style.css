@@ -757,13 +757,14 @@ input[type=submit] {
 
 .following-container-2 {
     position: relative;
-    float: right;
+    float: left;
+    margin-left: 20%;
     padding: 10px 10px 10px 10px;
     margin-top: 20px;
     background: #ffffff;
     background-image: radial-gradient(to right, #ffffff 0%, black 100%);
     border-radius: 8px;
-    width: 100%;
+    width: 60%;
     -moz-window-shadow: inherit;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
         0 3px 6px 0 rgba(0, 0, 0, 0.19);
