@@ -183,10 +183,10 @@ def noti_task():
                 #print("printing mx_date : "+mx_date)
                 dt=cur_date-abc['mx_date']
               
-                if ((dt.seconds/(60*60))<2):
+                if ((dt.seconds/(60))<1):
                     for email in friendlist:
                         print(email)
-                        # send_mail("test mail","127.0.0.1:8000/oauth/login/twitter/","a.team.ucd.5@gmail.com",[email])
+                        send_mail("test mail","127.0.0.1:8000/oauth/login/twitter/","a.team.ucd.5@gmail.com",[email])
 
         # if len(twts)>1:
         #     print("no notification")
