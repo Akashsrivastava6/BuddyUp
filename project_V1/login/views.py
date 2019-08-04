@@ -15,7 +15,8 @@ def loginPage(request):
         request.session.set_expiry(180)
         usr=request.session['username']
         t_handle=task.getFriends(usr)
-        return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
+        fname=task.getFirstName(usr)
+        return render(request,'dashboard.html',{'Message':fname,'data':t_handle})
     return render(request,'index.html')
 
 def logoutRequest(request):
@@ -38,7 +39,8 @@ def about(request):
     if request.session.has_key('username'):
         request.session.set_expiry(180)
         usr=request.session['username']
-        return render(request, 'about.html',{'Message':usr})
+        fname=task.getFirstName(usr)
+        return render(request, 'about.html',{'Message':fname})
     return redirect("/login")
 
 
@@ -49,7 +51,8 @@ def loginRequest(request):
         usr=request.session['username']
         t_handle=task.getFriends(usr)
         noti_list, dd1=task.notificationdata(usr)
-        return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle,'noti':noti_list,'dd1':dd1})
+        fname=task.getFirstName(usr)
+        return render(request,'dashboard.html',{'Message':fname,'data':t_handle,'noti':noti_list,'dd1':dd1})
     request.session.clear_expired()
     usr=request.POST.get("username")
     pwd=request.POST.get('password')
@@ -61,7 +64,8 @@ def loginRequest(request):
         request.session['username']=usr
         t_handle=task.getFriends(usr)
         noti_list,dd1=task.notificationdata(usr)
-        return render(request, 'dashboard.html', {'Message': request.session['username'], 'data': t_handle, 'noti': noti_list, 'dd1': dd1})
+        fname=task.getFirstName(usr)
+        return render(request, 'dashboard.html', {'Message': fname, 'data': t_handle, 'noti': noti_list, 'dd1': dd1})
         
 
 def RegisterUser(request):
