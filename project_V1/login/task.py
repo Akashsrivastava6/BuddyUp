@@ -48,7 +48,7 @@ def notificationdata(usr):
         noti_data= notification_data.objects.filter(twitter_handle=d.twitter_handle) 
         for row in noti_data:
             noti_list.append({"handle":d.twitter_handle,"tweet":row.tweet_data})
-            dd.append(row.tweet_data)            
+            dd.append({"tweet":row.tweet_data,"date":row.noti_date})            
         dd1.append({"handle": d.twitter_handle, "tweet_arr": dd})
 
     return noti_list, dd1

@@ -327,7 +327,7 @@
         </script>
         <script>
             var data1 = {{ obj1 | safe}};
-            //      console.log(data1.length)
+                //  console.log(data1)
 
 
             var data2 = _.groupBy(data1, function (obj1) {
@@ -347,12 +347,14 @@
                 var tweets = [];
                 var tweet_score = [];
                 var time = [];
+                var is_noti=[];
                 data2[key].forEach(function (d) {
                     score = (score + d.tweet_sum_score);
                     count = count + d.tweet_counter;
                     tweets.push(d.tweet_data);
                     tweet_score.push(d.tweet_score)
                     time.push(d.tweet_date)
+                    is_noti.push(d.is_noti)
                 });
                 if (count == 0) {
                     data.push({
@@ -360,7 +362,8 @@
                         "score": 0,
                         "tweet": tweets,
                         "t_score": tweet_score,
-                        "time": time
+                        "time": time,
+                        "is_noti":is_noti
                     });
                 } else {
                     data.push({
@@ -368,10 +371,11 @@
                         "score": (score / count),
                         "tweet": tweets,
                         "t_score": tweet_score,
-                        "time": time
+                        "time": time,
+                        "is_noti": is_noti
                     });
                 }
-                console.log(data)
+                //console.log(data)
                 //    console.log(tweets)
                 //      console.log(data2)
                 // data2[key].forEach(function (d) {
@@ -714,7 +718,8 @@
                     for (i = 0; i <= d.tweet.length - 1; i++) {
                         tweets_data += d.tweet[i]
                         //      console.log("printing tweet" + d.tweet[i])
-                        if (d.t_score[i] <= -3) {
+                       // console.log(d)
+                        if (d.is_noti[i] == true) {
                             $(('<div id="test" style="color:red;"><tr>' + [i + 1] + '. ' + d.tweet[i] +
                                 '<br><hr></tr>')).appendTo(".feedback-form");
                         } else {
@@ -860,7 +865,7 @@
                             "tweet": d.tweet[i]
                         })
                     }
-                    console.log(tweet_time)
+                    //console.log(tweet_time)
 
 
                     var chart = new CanvasJS.Chart("chartContainer", {
