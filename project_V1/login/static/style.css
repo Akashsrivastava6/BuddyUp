@@ -700,6 +700,10 @@ select {
     border-radius: 4px;
 }
 
+#fname::placeholder {
+    color: #000000;
+}
+
 input[type=submit] {
     width: 40%;
     align-self: center;
@@ -736,7 +740,7 @@ input[type=submit] {
 }
 
 .following-container {
-    position: static;
+    position: relative;
     padding: 10px 10px 10px 10px;
     background: #ffffff;
     background-image: radial-gradient(to right, #ffffff 0%, black 100%);
