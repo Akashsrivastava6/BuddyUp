@@ -1,6 +1,7 @@
 from login.models import User_detail,Registration
 from core.models import following,notification_data
 from passlib.hash import pbkdf2_sha256
+from datetime import date
 
 def getFriends(usr):
     data3=following.objects.filter(user_id=usr).filter(isActive=1)
@@ -48,7 +49,7 @@ def notificationdata(usr):
         noti_data= notification_data.objects.filter(twitter_handle=d.twitter_handle) 
         for row in noti_data:
             noti_list.append({"handle":d.twitter_handle,"tweet":row.tweet_data})
-            dd.append({"tweet":row.tweet_data,"date":row.noti_date})            
+            dd.append({"tweet":row.tweet_data,"date":row.noti_date.date()})            
         dd1.append({"handle": d.twitter_handle, "tweet_arr": dd})
 
     return noti_list, dd1
