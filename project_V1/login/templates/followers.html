@@ -160,8 +160,10 @@ border:none;" name="status"
                                           <hr>
                                           {% for d in c.tweet_arr%}
                                           <div id="tweets-arr">
-                                              {{d}}
-                                              <hr>
+                                             <b>{{ d.date }}</b> <br>
+                                                    {{d.tweet}}
+                                                    <hr>
+                                               
                                           </div>
                                           {%endfor%}
                                       </div>
