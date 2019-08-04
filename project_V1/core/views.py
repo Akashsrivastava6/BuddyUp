@@ -47,7 +47,7 @@ def Checkingtwitter(request):
                 d=User_detail.objects.filter(username=usr).update(password=pwd)
                 
                 page,t_handle=core.task.twitterCheck(usr.lower())
-                
+                fname=login.task.getFirstName(usr)
                 return render(request,page,{"Message":fname,'data':t_handle})
         return redirect("/login")
 
@@ -60,7 +60,7 @@ def Checking(request):
                 request.session.set_expiry(180)
                 request.session['username']=extra
                 page,t_handle=core.task.twitterCheck(extra)
-                fname=login.task.getFirstName(usr)
+                fname=login.task.getFirstName(extra)
 
                 return render(request,page,{"Message":fname,'data':t_handle})
 
