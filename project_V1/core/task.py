@@ -61,7 +61,7 @@ def getTrend(twitter_handle):
     tweet_data=tweets_data.objects.filter(twitter_handle=twitter_handle)
     tweet_dat=[]
     for a in tweet_data:
-        tweet_dat.append({"id":a.tweet_id,"tweet_data":a.tweet_data,"tweet_date":a.tweet_date,"tweet_score":a.score,"tweet_sum_score":a.sum_score,"tweet_counter":a.counter})
+        tweet_dat.append({"id":a.tweet_id,"tweet_data":a.tweet_data,"tweet_date":a.tweet_date,"tweet_score":a.score,"tweet_sum_score":a.sum_score,"tweet_counter":a.counter,"is_noti":a.is_notification})
 
 
 
@@ -275,7 +275,7 @@ def AddTweets():
                                 pass
                             if d_flag==1:    
                                 for word in sen:
-                                    if word in dep_list['WORD']:
+                                    if word.text.lower() in dep_list['WORD'].values:
                                         d_flag=2
                     if d_flag==2:
                         # print(t_handle+"  "+text+" "+str(date.today))

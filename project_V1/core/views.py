@@ -24,7 +24,8 @@ def AddFriend(request):
         if friend_handle!=None and friend_email!=None:
                 url=pbkdf2_sha256.encrypt(str(randint(1,1000)),rounds=100)
                 t_handle,msg=core.task.sendRequest(usr,friend_handle,friend_email,url)
-                return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle,'msg':msg})
+                fname=login.task.getFirstName(usr)
+                return render(request,'dashboard.html',{'Message':fname,'data':t_handle,'msg':msg})
         else:
                 return redirect("/login?Message=Session expired")                    
     return redirect("/login?Message=Session expired")
@@ -47,7 +48,7 @@ def Checkingtwitter(request):
                 
                 page,t_handle=core.task.twitterCheck(usr.lower())
                 
-                return render(request,page,{"Message":request.session['username'],'data':t_handle})
+                return render(request,page,{"Message":fname,'data':t_handle})
         return redirect("/login")
 
 def Checking(request):
@@ -59,9 +60,9 @@ def Checking(request):
                 request.session.set_expiry(180)
                 request.session['username']=extra
                 page,t_handle=core.task.twitterCheck(extra)
+                fname=login.task.getFirstName(usr)
 
-
-                return render(request,page,{"Message":request.session['username'],'data':t_handle})
+                return render(request,page,{"Message":fname,'data':t_handle})
 
                 # d1=User_detail.objects.filter(username=extra)
                 # if len(d1)>0:
@@ -134,7 +135,8 @@ def Followers(request):
 
                 t_handle=core.task.getFollower(usr)
                 noti_list, dd1=login.task.notificationdata(usr)
-                return render(request,'followers.html',{'Message':request.session['username'],'data':t_handle,'noti':noti_list,'dd1':dd1})
+                fname=login.task.getFirstName(usr)
+                return render(request,'followers.html',{'Message':fname,'data':t_handle,'noti':noti_list,'dd1':dd1})
 
         return redirect("/login")
 
@@ -167,7 +169,8 @@ def trend(request):
         twitter_handle=request.POST.get("friend")
         if twitter_handle!=None:
                 message,tweet_data,friend,obj1,obj2=core.task.getTrend(twitter_handle)
-                return render(request, 'trend.html', {"usr":usr,"Message": message, "tweet_data":tweet_data, "friend": friend,'obj1':obj1,'obj2':obj2})
+                fname=login.task.getFirstName(usr)
+                return render(request, 'trend.html', {"usr":fname,"Message": message, "tweet_data":tweet_data, "friend": friend,'obj1':obj1,'obj2':obj2})
         else:
                 return redirect("/login")        
     else:
