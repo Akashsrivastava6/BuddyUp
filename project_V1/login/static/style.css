@@ -65,7 +65,7 @@ a:focus {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
         0 6px 20px 0 rgba(0, 0, 0, 0.1);
 
-    border-radius: 15px;
+    border-radius: 0;
     margin-bottom: 40px;
 }
 
@@ -550,7 +550,6 @@ ul ul a {
     font-size: 30px;
     font-weight: 900;
     line-height: 48px;
-    border-radius: 15px;
     margin-right: 0;
     padding: 0.25rem 0;
     display: -webkit-box;
