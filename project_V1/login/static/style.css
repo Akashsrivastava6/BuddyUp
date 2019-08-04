@@ -988,3 +988,10 @@ div#wordchart:empty {
 .test {
     justify-content: left;
 }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}

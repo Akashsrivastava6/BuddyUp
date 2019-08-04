@@ -1,0 +1,29 @@
+{
+  "name": "buddyup",
+  "version": "2.0.0",
+  "description": "To detect and notify the end-user about the emotional state of friends using tweets. Based on Twitter API and built on Django.",
+  "main": "index.js",
+  "scripts": {
+    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arnabtarwani/Buddyup.git"
+  },
+  "keywords": [
+    "buddyup",
+    "sentiment",
+    "analysis",
+    "twitter",
+    "django",
+    "python",
+    "bootstrap",
+    "nlp"
+  ],
+  "author": "ATEAM UCD",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arnabtarwani/Buddyup/issues"
+  },
+  "homepage": "https://github.com/arnabtarwani/Buddyup#readme"
+}
