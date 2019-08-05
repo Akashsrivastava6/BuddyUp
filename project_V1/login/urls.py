@@ -23,6 +23,6 @@ urlpatterns = [
     path('submit',views.loginRequest),
     path('signup',views.signupUser),
     path('register',views.RegisterUser),
-    
+    path('register', views.about)
 ]
 

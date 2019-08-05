@@ -2,6 +2,11 @@
 #A31621 #BFDBF7 #053C5E #1F7A8C #DB222A*/
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i,800,800i&display=swap');
 
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 body {
     margin-top: auto;
     width: 98.8%;
@@ -28,7 +33,7 @@ h3 {
 }
 
 h4 {
-    color: rgb(29, 29, 29);
+    color: rgb(255, 255, 255);
     font-family: 'Open Sans', sans-serif;
     font-weight: 800;
     padding: 10px;
@@ -37,7 +42,7 @@ h4 {
 }
 
 h5 {
-    color: #000;
+    color: rgb(255, 255, 255);
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     text-align: center;
@@ -109,17 +114,20 @@ a:focus {
 
 #sidebar {
     width: 320px;
-    background: #f7f9fa;
+    background: #ffffff;
     font-weight: bold;
-    margin-top: 10px;
-    color: #030303;
+    color: #ffffff;
+        background-image: -webkit-linear-gradient(44deg, #0c071a -25%, #5f2ceb 110%);
+        background-image: -o-linear-gradient(44deg, #0c071a -25%, #5f2ceb 110%);
+        background-image: linear-gradient(134deg, #0c071a -25%, #5f2ceb 110%);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
         0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-right: none;
+    margin-right: 30px;
 }
 
 ul.list-unstyled.components {
-    margin: 0;
+    margin: 15px;
+    margin-left: 20px;
     justify-content: center;
 }
 
@@ -134,13 +142,13 @@ ul.list-unstyled.components {
 }
 
 #sidebar ul li a:hover {
-    color: rgb(54, 54, 54);
-    background: rgb(179, 226, 255);
+    color: rgb(255, 255, 255);
+    background: #5f2ceb;
 }
 
 #sidebar ul li.active>a {
-    color: #222222;
-    background: rgb(179, 226, 255);
+    color: #ffffff;
+    background: rgb(63, 1, 150);
 }
 
 .dropdown-toggle::after {
@@ -441,7 +449,6 @@ ul ul a {
     left: 50%;
     width: 1rem;
     height: 1rem;
-    border-radius: 100%;
     background:rgb(255, 255, 255);
     color: rgb(238, 238, 238);
     font-size: 15px;
@@ -473,7 +480,6 @@ ul ul a {
     border: 1px solid;
     padding: 10 10 10px;
     min-width: 100%;
-    border-radius: 2px;
     overflow-x: auto;
     max-height: 350px;
     overflow-y: auto;
@@ -532,7 +538,7 @@ ul ul a {
     -moz-transition: width 0.25s ease, background 0.25s ease;
     -ms-transition: width 0.25s ease, background 0.25s ease;
     background: transparent;
-    width: 250px;
+    margin: auto;
     height: 63px;
 }
 
@@ -556,9 +562,6 @@ ul ul a {
 }
 
 .navbar.default-layout .navbar-brand-wrapper .navbar-brand img {
-    width: 170px;
-    border-radius: 15px;
-    max-width: 100%;
     margin: auto;
     vertical-align: middle;
 }
@@ -686,19 +689,23 @@ select {
     width: 80%;
     padding: 12px 20px;
     margin: 20px auto;
+    border-radius: 10px;
     display: flex;
     color: #000000;
     border-radius: 4px;
 }
 
 #fname::placeholder {
-    color: #000000;
+    color: #2b2b2b;
+    text-shadow: #000;
+    scroll-margin-bottom: inherit;
+    border-radius: 20px;
 }
 
 input[type=submit] {
     width: 40%;
     align-self: center;
-    background-color:#1DA1F2;
+    background-color:#6200EE;
     color: #fff;
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
@@ -713,9 +720,7 @@ input[type=submit] {
     display: block;
 }
 
-#fname {
-    color: #111;
-}
+
 
 #col1 {
     background: transparent;
@@ -742,7 +747,8 @@ input[type=submit] {
     border-radius: 8px;
     width: 100%;
     -moz-window-shadow: inherit;
-
+   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
+   0 3px 1px 0 rgba(0, 0, 0, 0.19);
     height: auto;
     color: #ffffff;
     display: block;
@@ -751,15 +757,16 @@ input[type=submit] {
 .following-container-2 {
     position: relative;
     float: left;
-    margin-left: 20%;
-    padding: 10px 10px 10px 10px;
+    margin-left: 1%;
+    padding: 10px 140px 10px 133px;
     margin-top: 20px;
     background: transparent;
     border-radius: 8px;
-    width: 60%;
-
+    width: 100%;
+       box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
+       0 3px 1px 0 rgba(0, 0, 0, 0.19);
     height: auto;
-    color: #222222;
+    color: #ffffff;
     justify-items: center;
     align-self: center;
     align-items: center;
@@ -770,8 +777,8 @@ input[type=submit] {
     display: inline-flex;
     font-family: 'Open Sans', sans-serif;
     font-weight: 800;
-    background:#1DA1F2;
-    border-color:#1DA1F2;
+    background:#6200EE;
+    border-color:#6200EE;
     color: #fff;
 
 }
@@ -805,6 +812,7 @@ input[type=submit] {
 .card {
     margin-left: 30px;
     margin-bottom: 20px;
+    border-radius: 15px;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2),
         0 3px 3px 0 rgba(0, 0, 0, 0.19);
 }
@@ -861,13 +869,13 @@ div.feedback-form:empty {
     font-size: 18px;
     font-weight: 600;
     display: inline-block;
-    color: #000;
+    color: rgb(255, 255, 255);
     border-collapse: collapse;
 
 }
 
 .wordchart-container {
-    background: rgb(255, 255, 255);
+    background: transparent;
     position: static;
         margin-left: 30px;
     display: block;
@@ -875,7 +883,7 @@ div.feedback-form:empty {
     width: 100%;
     font-size: 18px;
     font-weight: 600;
-    color: #000;
+    color: rgb(255, 255, 255);
     border-collapse: collapse;
     justify-content: center;
     align-content: center;
@@ -944,13 +952,13 @@ div#wordchart:empty {
 
 .notification {
     padding: 10px 10px 10px 10px;
-    background: #ffffff;
+    background: transparent;
     background-image: radial-gradient(to right, #eeebeb 0%, black 100%);
     border-radius: 8px;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
         0 3px 1px 0 rgba(0, 0, 0, 0.19);
     height: auto;
-    color: #222222;
+    color: #ffffff;
 }
 
 .no-noti {

@@ -14,10 +14,11 @@
 }
 
 body, html {
-    background: #1D2228;
+    background: rgb(0, 0, 0);
     width: 100%;
     height: 100%;
     font-family: 'Open Sans', sans-serif;
+
 }
 
 /*===========================================================================================*/
@@ -150,8 +151,8 @@ label {
 button {
     outline: none !important;
     border: none;
-    background: #1DA1F2;
-    color: #1D2228;
+    background: #5f2ceb;
+    color: rgb(255, 255, 255);
 }
 
 button:hover {
@@ -182,7 +183,7 @@ iframe {
 }
 
 .container-login-background {
-    background-color: #1D2228;
+    background-color: rgb(255, 255, 255);
     color: #1D2228;
       width: 100%;
       min-height: 100vh;
@@ -213,6 +214,9 @@ iframe {
   top: 0;
   left: 0;
   background-color: #1D2228;
+       background-image: -webkit-linear-gradient(44deg, #0C0091 0%, #00A87E 100%);
+       background-image: -o-linear-gradient(44deg, #0C0091 0%, #00A87E 100%);
+       background-image: linear-gradient(134deg, #0C0091 0%, #00A87E 100%);
 }
 
 .wrap-login100 {
@@ -262,7 +266,7 @@ iframe {
 .wrap-input100 {
     width: 100%;
     position: relative;
-    border-bottom: 2px solid #1DA1F2;
+    border-bottom: 2px solid #5f2ceb;
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -310,7 +314,7 @@ iframe {
 .focus-input100::after {
     font-family: Material-Design-Iconic-Font;
     font-size: 22px;
-    color: #1DA1F2;
+    color: #5f2ceb;
 
     content: attr(data-placeholder);
     display: block;
@@ -391,7 +395,7 @@ iframe {
     width: 16px;
     height: 16px;
     border-radius: 2px;
-    background: #1DA1F2;
+    background: #5f2ceb;
     left: 0;
     top: 50%;
     -webkit-transform: translateY(-50%);
@@ -420,7 +424,7 @@ iframe {
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     font-size: 20px;
-    color: #1D2228;
+    color: rgb(255, 255, 255);
     line-height: 20px;;
     text-shadow: #1D2228;
     display: -webkit-box;
@@ -435,7 +439,7 @@ iframe {
     height: 40px;
     border-radius: 0px;
 
-    background: #1DA1F2;
+    background: #5f2ceb;
     position: relative;
     z-index: 1;
 
@@ -453,7 +457,7 @@ iframe {
     width: 100%;
     height: 100%;
     border-radius: 0px;
-    background-color: #1DA1F2;
+    background-color: #5f2ceb;
     top: 0;
     left: 0;
     opacity: 1;
@@ -484,7 +488,7 @@ iframe {
 }
 
 .form-sign-up.a:hover {
-    color: #1DA1F2;
+    color: #5f2ceb;
 }
 
 .form-sign-up .a:hover:before {
@@ -496,7 +500,7 @@ iframe {
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     font-size: 19px;
-    color: #1D2228;
+    color: rgb(255, 255, 255);
     line-height: 20px;
     text-shadow: #1D2228;
     display: -webkit-box;
@@ -511,7 +515,7 @@ iframe {
     height: 40px;
     border-radius: 0px;
 
-    background: #1DA1F2;
+    background: #5f2ceb;
     position: relative;
     z-index: 1;
 
@@ -529,7 +533,7 @@ iframe {
     width: 100%;
     height: 100%;
     border-radius: 0px;
-    background-color: #1DA1F2;
+    background-color: #5f2ceb;
     top: 0;
     left: 0;
     opacity: 1;
