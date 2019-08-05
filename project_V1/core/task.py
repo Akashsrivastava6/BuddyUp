@@ -162,31 +162,56 @@ def twitterCheck(username):
 
 @periodic_task(run_every=(crontab(minute='*/1')), name="noti_task", ignore_result=True)
 def noti_task():
-    t_handles=following.objects.filter(isActive=1)
+    # t_handles=following.objects.filter(isActive=1)
     
+    # for a in t_handles:
+    #     twts=notification_data.objects.filter(twitter_handle=a.twitter_handle)
+        
+    #     friendlist=[]
+    #     frienddata=following.objects.filter(twitter_handle=a.twitter_handle)
+        
+        
+    #     for ab in frienddata:
+    #         friendlist.append(ab.user_id)        
+    #     if len(twts)>0:
+    #        # print("length is 1"+friendlist[0])
+    #         cur_date=datetime.now(timezone.utc)
+    #         max_date=notification_data.objects.filter(twitter_handle=a.twitter_handle).values('noti_date').annotate(mx_date=Max('noti_date'))
+    #         for abc in max_date:
+    #             #print(abc)
+    #             #print(abc['mx_date'])
+    #             #print("printing mx_date : "+mx_date)
+    #             dt=cur_date-abc['mx_date']
+    #             #print(abc)
+    #             if ((dt.seconds/(60))<1):
+    #                 for email in friendlist:
+    #                     print(email)
+    #                     send_mail("test mail","127.0.0.1:8000/oauth/login/twitter/ %s"%a.twitter_handle,"a.team.ucd.5@gmail.com",[email])
+
+    
+    t_handles=following.objects.filter(isActive=1)
+
+
     for a in t_handles:
-        twts=notification_data.objects.filter(twitter_handle=a.twitter_handle)
-        
-        friendlist=[]
-        frienddata=following.objects.filter(twitter_handle=a.twitter_handle)
-        
-        
-        for ab in frienddata:
-            friendlist.append(ab.user_id)        
-        if len(twts)>0:
-           # print("length is 1"+friendlist[0])
-            cur_date=datetime.now(timezone.utc)
-            max_date=notification_data.objects.filter(twitter_handle=a.twitter_handle).values('noti_date').annotate(mx_date=Max('noti_date'))
-            for abc in max_date:
-                #print(abc)
-                #print(abc['mx_date'])
-                #print("printing mx_date : "+mx_date)
-                dt=cur_date-abc['mx_date']
-              
-                if ((dt.seconds/(60))<1):
-                    for email in friendlist:
-                        print(email)
-                        send_mail("test mail","127.0.0.1:8000/oauth/login/twitter/","a.team.ucd.5@gmail.com",[email])
+        data=notification_data.objects.filter(is_notified=0).filter(twitter_handle=a.twitter_handle)
+
+        for ad in data:
+
+            friendlist=[]
+            print(data)
+            print(ad)
+            frienddata=following.objects.filter(twitter_handle=ad.twitter_handle).filter(isActive=1)
+
+            for ab in frienddata:
+                email=User_detail.objects.filter(username=ab.user_id)
+                for abc in email:
+                    print(abc)
+                    friendlist.append(abc.email)
+                    print(ad.id)
+                    send_mail("test mail","127.0.0.1:8000/oauth/login/twitter/ %s"%ad.twitter_handle,"a.team.ucd.5@gmail.com",[abc.email])
+                    d=notification_data.objects.filter(id=ad.id).update(is_notified=1)
+
+
 
         # if len(twts)>1:
         #     print("no notification")

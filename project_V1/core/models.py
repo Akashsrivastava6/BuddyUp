@@ -25,3 +25,4 @@ class notification_data(models.Model):
     twitter_handle=models.CharField("twitter_handle",max_length=40)
     tweet_data=models.TextField("tweet_data",max_length=1000)
     noti_date=models.DateTimeField("noti_date")
+    is_notified=models.BooleanField(default=False)
