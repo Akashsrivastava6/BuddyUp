@@ -7,17 +7,20 @@ body {
     width: 98.8%;
     font-family: 'Open Sans', sans-serif;
     background: rgb(255, 255, 255);
+    background-image: -webkit-linear-gradient(44deg, #0C0091 0%, #00A87E 100%);
+    background-image: -o-linear-gradient(44deg, #0C0091 0%, #00A87E 100%);
+    background-image: linear-gradient(134deg, #0C0091 0%, #00A87E 100%);
 }
 
 h2 {
-    color: #000;
+    color: rgb(255, 255, 255);
     font-family: 'Open Sans', sans-serif;
     font-weight: 900;
     display: block;
 }
 
 h3 {
-    color: rgb(29, 29, 29);
+    color: rgb(255, 255, 255);
     font-family: 'Open Sans', sans-serif;
     font-weight: 800;
     text-align: center;
@@ -25,7 +28,7 @@ h3 {
 }
 
 h4 {
-    color: #000;
+    color: rgb(29, 29, 29);
     font-family: 'Open Sans', sans-serif;
     font-weight: 800;
     padding: 10px;
@@ -60,10 +63,9 @@ a:focus {
     position: relative;
     width: 100%;
     padding: 5px 5px;
-    background: #1a1a1a;
+    background: #ffffff;
     border-bottom: none;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-        0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  
 
     border-radius: 0;
     margin-bottom: 40px;
@@ -275,15 +277,7 @@ ul ul a {
     }
 }
 
-.dropdownAnimation,
-.nav .nav-item.dropdown .navbar-dropdown,
-.navbar-nav .nav-item.dropdown .navbar-dropdown {
-    -webkit-animation-name: dropdownAnimation;
-    animation-name: dropdownAnimation;
-    -webkit-animation-duration: 0.25s;
-    animation-duration: 0.25s;
 
-}
 
 @-webkit-keyframes fadeOut {
     from {
@@ -523,13 +517,12 @@ ul ul a {
 
 .navbar.default-layout {
     font-family: "Open Sans", sans-serif;
-    background: #1DA1F2;
+    background: transparent;
     font-weight: 900;
     transition: background 0.25s ease;
     -webkit-transition: background 0.25s ease;
     -moz-transition: background 0.25s ease;
     -ms-transition: background 0.25s ease;
-    box-shadow: #000;
     margin-bottom: 10px;
 }
 
@@ -538,10 +531,9 @@ ul ul a {
     -webkit-transition: width 0.25s ease, background 0.25s ease;
     -moz-transition: width 0.25s ease, background 0.25s ease;
     -ms-transition: width 0.25s ease, background 0.25s ease;
-    background: #1DA1F2;
+    background: transparent;
     width: 250px;
     height: 63px;
-    box-shadow: #000;
 }
 
 .navbar.default-layout .navbar-brand-wrapper .navbar-brand {
@@ -619,7 +611,6 @@ ul ul a {
     -ms-flex-align: center;
     align-items: center;
     justify-content: center;
-    box-shadow: #111111;
 }
 
 .navbar-nav li,
@@ -632,7 +623,6 @@ ul ul a {
 .navbar.default-layout .navbar-menu-wrapper :focus,
 .navbar.default-layout .navbar-menu-wrapper :visited {
     padding: 13px;
-    background-color: rgb(71, 71, 71);
     border-radius: 100px;
 }
 
@@ -747,15 +737,14 @@ input[type=submit] {
     margin-left: 10px;
     position: static;
     padding: 10px 10px 10px 10px;
-    background: #ffffff;
+    background: transparent;
     background-image: radial-gradient(to right, #ffffff 0%, black 100%);
     border-radius: 8px;
     width: 100%;
     -moz-window-shadow: inherit;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
-        0 3px 6px 0 rgba(0, 0, 0, 0.19);
+
     height: auto;
-    color: #222222;
+    color: #ffffff;
     display: block;
 }
 
@@ -765,13 +754,10 @@ input[type=submit] {
     margin-left: 20%;
     padding: 10px 10px 10px 10px;
     margin-top: 20px;
-    background: #ffffff;
-    background-image: radial-gradient(to right, #ffffff 0%, black 100%);
+    background: transparent;
     border-radius: 8px;
     width: 60%;
-    -moz-window-shadow: inherit;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
-        0 3px 6px 0 rgba(0, 0, 0, 0.19);
+
     height: auto;
     color: #222222;
     justify-items: center;
@@ -787,8 +773,7 @@ input[type=submit] {
     background:#1DA1F2;
     border-color:#1DA1F2;
     color: #fff;
-      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2),
-      0 1px 4px 0 rgba(0, 0, 0, 0.19);
+
 }
 
 #friends-list {
@@ -898,7 +883,7 @@ div.feedback-form:empty {
 }
 
 .tweet-chart {
-     background: rgb(255, 255, 255);
+     background: transparent;
     position: static;
         margin-left: 30px;
     display: block;

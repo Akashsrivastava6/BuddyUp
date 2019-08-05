@@ -9,15 +9,17 @@ def home(request):
     return render(request, 'index.html')
 
 # Create your views here.
+def login(request):
+    return render(request,'index.html')
+
 def loginPage(request):
 
     if request.session.has_key('username'):
         request.session.set_expiry(180)
         usr=request.session['username']
         t_handle=task.getFriends(usr)
-        fname=task.getFirstName(usr)
-        return render(request,'dashboard.html',{'Message':fname,'data':t_handle})
-    return render(request,'index.html')
+        return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
+    return render(request,'homepage.html')
 
 def logoutRequest(request):
     try:
@@ -26,22 +28,11 @@ def logoutRequest(request):
     except KeyError:
         pass
    # return render(request,'index.html',{"Message":"Logout Successful!"})
-    return redirect("/login")
+    return redirect("/home")
 
 
 def signupUser(request):
     return render(request,'signup.html')
-
-def myprofile(request):
-    return render(request,'myprofile.html')
-
-def about(request):
-    if request.session.has_key('username'):
-        request.session.set_expiry(180)
-        usr=request.session['username']
-        fname=task.getFirstName(usr)
-        return render(request, 'about.html',{'Message':fname})
-    return redirect("/login")
 
 
 def loginRequest(request):
@@ -50,9 +41,7 @@ def loginRequest(request):
         request.session.set_expiry(180)
         usr=request.session['username']
         t_handle=task.getFriends(usr)
-        noti_list, dd1=task.notificationdata(usr)
-        fname=task.getFirstName(usr)
-        return render(request,'dashboard.html',{'Message':fname,'data':t_handle,'noti':noti_list,'dd1':dd1})
+        return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
     request.session.clear_expired()
     usr=request.POST.get("username")
     pwd=request.POST.get('password')
@@ -63,9 +52,7 @@ def loginRequest(request):
         request.session.set_expiry(180)
         request.session['username']=usr
         t_handle=task.getFriends(usr)
-        noti_list,dd1=task.notificationdata(usr)
-        fname=task.getFirstName(usr)
-        return render(request, 'dashboard.html', {'Message': fname, 'data': t_handle, 'noti': noti_list, 'dd1': dd1})
+        return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
         
 
 def RegisterUser(request):
