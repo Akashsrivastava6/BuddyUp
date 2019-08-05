@@ -741,22 +741,21 @@ input[type=submit] {
 }
 
 .following-container {
-    position: relative;
+    justify-items: center;
+    text-align: center;
+    align-items: center;
+    margin-left: 10px;
+    position: static;
     padding: 10px 10px 10px 10px;
     background: #ffffff;
     background-image: radial-gradient(to right, #ffffff 0%, black 100%);
     border-radius: 8px;
     width: 100%;
-    margin-left:20px;
     -moz-window-shadow: inherit;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
         0 3px 6px 0 rgba(0, 0, 0, 0.19);
-
     height: auto;
     color: #222222;
-    justify-items: center;
-    align-self: center;
-    align-items: center;
     display: block;
 }
 
@@ -781,6 +780,8 @@ input[type=submit] {
 }
 
 #btn-1 {
+    position: inherit;
+    display: inline-flex;
     font-family: 'Open Sans', sans-serif;
     font-weight: 800;
     background:#1DA1F2;
@@ -795,16 +796,17 @@ input[type=submit] {
     text-align: center;
     align-content: center;
     place-content: inherit;
-    position: static;
+    position: static; 
     padding: 10px 10px 10px 10px;
     background: #ffffff;
     border-radius: 6px;
-    margin: 20px;
-    margin-left: 30%;
+    margin-top: 30px;
+    margin-left: 19%;
+    margin-bottom: 20px; 
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
         0 1px 3px 0 rgba(0, 0, 0, 0.19);
     font-weight: 600;
-    width: 40%;
+    width: 60%;
     display: flex;
 }
 

@@ -138,7 +138,7 @@
                 <h2>Welcome {{Message}}!</u> </h2>
 
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-8" id="col1" style="text-align: center">
+                    <div class="col-xs-12 col-sm-6 col-md-8" id="col1" style="text-align: center" >
                         <div class="following-container">
                             <h3>Following</h3>
                             {%block content%}
@@ -148,12 +148,12 @@
                             <form class="form-inline" id="friends-list" action='/core/trendpage' method="post">
                                 {%csrf_token%}
 
-                                <div class="mx-sm-3 mb-2">
+                                <div class="mx-sm-4 mb-2">
                                     <input type="text" style="padding: 2px; text-align: center;border-width:0px;
-border:none;" name="friend"
+border:none;font-size:19px;font-weight:700;" name="friend"
                                         value={{c}} readonly>
                                 </div>
-                                <button class="btn btn-primary mx-sm-3 mb-2" id="btn-1">View
+                                <button class="btn btn-primary mx-sm-auto mb-0" id="btn-1" style="widht: 20%;">View
                                     Trend</button>
                             </form>
                             {%endfor%}

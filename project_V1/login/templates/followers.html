@@ -90,16 +90,15 @@
                 <div class="navbar-menu-wrapper d-flex align-items-center">
                     <ul class="navbar-nav ml-auto">
 
-
+                        
                         <li class="nav-item dropdown d-none d-xl-inline-block">
                             <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-user-circle" aria-hidden="true"></i> &nbsp;{{ Message}} &nbsp; <i
                                     class="fa fa-angle-down" aria-hidden="true"></i>
-                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                                    aria-labelledby="UserDropdown">
+                                      <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                                          aria-labelledby="UserDropdown">
                                      <a class="dropdown-item" href="/logout/logout">Sign Out<i
                                             class="dropdown-item-icon ti-power-off"></i></a>
-                                </div>
                         </li>
                     </ul>
                     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
@@ -122,15 +121,15 @@
                             <form class="form-inline" id="friends-list" action='/core/follower' method="post">
                                 {%csrf_token%}
 
-                                <div class="mx-sm-3 mb-2">
+                                <div class="mx-sm-auto mb-2">
                                     <input type="text" style="width:110%;padding: 2px; text-align: center;border-width:0px;
-border:none;" name="friend"
+border:none;font-size:19px;font-weight:700" name="friend"
                                         value={{c.user}} readonly>
                                     <input type="text" style="width:20px;padding: 2px; text-align: center;border-width:0px;
 border:none;" name="status"
                                         value={{c.status}} readonly hidden>
                                 </div>
-                                <button class="btn btn-primary mx-sm-3 mb-2" id="btn-1">{{c.status}}</button>
+                                <button class="btn btn-primary mx-sm-auto mb-2" id="btn-1">{{c.status}}</button>
                             </form>
                             {%endfor%}
                             {%else%}
