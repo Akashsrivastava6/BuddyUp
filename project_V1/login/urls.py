@@ -17,12 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 urlpatterns = [
-    path('',views.loginPage),
-    path('logout',views.logoutRequest, name="logout"),
-    path('submit',views.loginRequest,name="login"),
-    path('signup',views.signupUser,name="signup"),
-    path('register',views.RegisterUser,name="register"),
-    path('myprofile', views.myprofile,name="myprofile"),
-    path('about', views.about, name='about'),
+    path('', views.loginPage),
+    path('login', views.login),
+    path('logout', views.logoutRequest),
+    path('submit', views.loginRequest),
+    path('signup', views.signupUser),
+    path('register', views.RegisterUser),
+    path('about', views.about)
 ]
-

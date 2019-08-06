@@ -8,6 +8,9 @@ from login import task
 def home(request):
     return render(request, 'index.html')
 
+
+def login(request):
+    return render(request, 'index.html')
 # Create your views here.
 def loginPage(request):
 
@@ -17,7 +20,7 @@ def loginPage(request):
         t_handle=task.getFriends(usr)
         fname=task.getFirstName(usr)
         return render(request,'dashboard.html',{'Message':fname,'data':t_handle})
-    return render(request,'index.html')
+    return render(request,'homepage.html')
 
 def logoutRequest(request):
     try:
@@ -26,7 +29,7 @@ def logoutRequest(request):
     except KeyError:
         pass
    # return render(request,'index.html',{"Message":"Logout Successful!"})
-    return redirect("/login")
+    return redirect("/home")
 
 
 def signupUser(request):
