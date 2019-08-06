@@ -816,7 +816,10 @@ input[type=submit] {
 }
 
 
-
+.ScrollStyle {
+    max-height: 150px;
+    overflow-y: scroll;
+}
 .card {
     margin-left: 30px;
     margin-bottom: 20px;

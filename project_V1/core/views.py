@@ -129,7 +129,9 @@ def Followers(request):
                 status=request.POST.get("status")
                 if status=="Grant":
                         d=following.objects.filter(twitter_handle=usr).filter(user_id=friend).update(isActive=1)
-                        tmp=core.task.AddFriendTweets.delay(str(usr))
+                        handle_data=tweets_data.objects.filter(twitter_handle=usr)
+                        if len(handle_data)==0:
+                                tmp=core.task.AddFriendTweets.delay(str(usr))
                 else:
                         d=following.objects.filter(twitter_handle=usr).filter(user_id=friend).update(isActive=0)
 
