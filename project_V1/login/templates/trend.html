@@ -729,7 +729,7 @@
                         $(('<div id="test" style="color:red;"><tr>' + [i + 1] + '. ' + d.tweet[i] +
                             '<br><hr></tr>')).appendTo(".feedback-form");
                     } else {
-                        $(('<div id="test" style="color:#341b79"><tr>' + [i + 1] + '. ' + d.tweet[i] +
+                        $(('<div id="test" style="color:#fff"><tr>' + [i + 1] + '. ' + d.tweet[i] +
                                 '<br><hr></tr>'))
                             .appendTo(
                                 ".feedback-form");
@@ -1019,7 +1019,7 @@
         };
 
         function scrollFunction() {
-            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
                 document.getElementById("top").style.display = "block";
             } else {
                 document.getElementById("top").style.display = "none";
