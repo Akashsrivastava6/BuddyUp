@@ -149,7 +149,8 @@
                                 {%csrf_token%}
 
                                 <div class="mx-sm-4 mb-2">
-                                    <input type="text" style="padding: 2px; text-align: center;border-width:0px;
+                                    <input type="text"
+                                        style="color:#000000;padding: 2px; text-align: center;border-width:0px;
 border:none;font-size:19px;font-weight:700;" name="friend"
                                         value={{c}} readonly>
                                 </div>
@@ -158,11 +159,11 @@ border:none;font-size:19px;font-weight:700;" name="friend"
                             </form>
                             {%endfor%}
                             {%else%}
-                            <h4>Please add a friend to see the trend</h4>
+                            <h5>Please add a friend to see the trend</h5>
                             {%endif%}
                         </div>
                <div class="following-container-2">
-                   <h3>Add Friend by email</h3>
+                   <h3>Add Friend</h3>
                    <form action="/core/addfriend" name="sendemail" method="post">
                        {%csrf_token%}
                        <input type="text" id="fname" name="twitter_handle" placeholder="Enter Twitter Name" required>

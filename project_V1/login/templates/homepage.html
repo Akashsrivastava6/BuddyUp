@@ -9,12 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Buddyup-Homepage</title>
-    <meta name="keywords" content="yeo">
+    <meta name="keywords" content="buddy">
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,400,700" rel="stylesheet">
     <link rel="stylesheet" href="{%static 'spectre.css'%}">
     <link rel="stylesheet" href="{%static 'spectre-icons.css'%}">
     <link rel="stylesheet" href="{%static 'spectre-exp.css'%}">
-    <link rel="stylesheet" href="{%static 'yeo.css'%}">
+    <link rel="stylesheet" href="{%static 'buddyup.css'%}">
     <meta property="og:title" content="">
     <meta property="og:url" content="">
     <meta property="og:description" content="">
@@ -24,24 +24,23 @@
 </head>
 
 <body>
-    <div class="yeo-slogan">
-        <div class="container yeo-header">
+    <div class="buddy-slogan">
+        <div class="container buddy-header">
             <div class="columns">
                 <div class="column col-12">
                     <header class="navbar">
                         <section class="navbar-section">
                             <a class="navbar-brand logo" href="./">
-                                <img class="logo-img" src="#" alt=""><span>
                                     <h3><b><u>BUDDY|UP</u></b></h3>
                                 </span>
                             </a>
                         </section>
                         <section class="navbar-section hide-sm">
-                            <a class="btn btn-link" href="#we-do">What we do</a>
+                            <a class="btn btn-link" href="#we-do">What we offer</a>
                             <a class="btn btn-link" href="#we-work">About Us</a>
                             <!-- <a class="btn btn-link" href="#price">Pricing</a> -->
                             <!-- <a class="btn btn-link" href="#team">Our Team</a> -->
-                            <a class="btn btn-link" href="#team">Contact Us</a>
+                            <a class="btn btn-link" href="#contact">Contact Us</a>
                             <a class="btn btn-primary btn-hire-me" href="/home/login" >Login</a>
                         </section>
                     </header>
@@ -50,25 +49,25 @@
         </div>
         <div class="container slogan">
             <div class="columns">
-                <div class="column col-7 col-sm-12">
+                <div class="column col-5 col-sm-12">
                     <div class="slogan-content">
                         <h1>
                             <span class="slogan-bold">Welcome</span> 
                             <span class="slogan-bold">to Buddyup</span>
                             <!-- <span class="slogan-bold">Consultant Services</span> -->
                         </h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p>Connecting you and your loved one.</p>
                         <!-- <a class="btn btn-primary btn-lg btn-start" target="_blank" href="#y">Start a project today</a> -->
                     </div>
                 </div>
-                <div class="column col-5 hide-sm">
-                    <img class="slogan-img" src="{%static 'images/PinClipart.com_analysis-clip-art_3552328.png'%}" alt="">
+                <div class="column col-7 hide-sm">
+                    <img class="slogan-img" src="{%static 'images/connection.png'%}" alt="">
                 </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="yeo-client">
-            <div class="container yeo-client-list">
+        <!-- <div class="buddy-client">
+            <div class="container buddy-client-list">
                 <div class="columns">
                     <div class="column col-12">
                         <h3 class="feature-title">
@@ -98,55 +97,55 @@
                 </div>
             </div>
         </div> -->
-        <div class="yeo-do" id="we-do">
-            <div class="container yeo-body">
+        <div class="buddy-do" id="we-do">
+            <div class="container buddy-body">
                 <div class="columns">
                     <div class="column col-12">
-                        <h2 class="feature-title">What We Do</h2>
+                        <h2 class="feature-title">What We Offer</h2>
                     </div>
                     <div class="column col-4 col-sm-12">
-                        <div class="yeo-do-content">
-                            <img src="{%static 'images/what-we-do-1.svg'%}" alt="">
+                        <div class="buddy-do-content">
+                            <img src="{%static 'images/friendship.svg'%}" alt="">
                             <h3>Add Friends</h3>
-                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                            <p>Enter Twitter Username and see the magic happen.</p>
                             <!-- <a href="">Learn more</a> -->
                         </div>
                     </div>
                     <div class="column col-4 col-sm-12">
-                        <div class="yeo-do-content">
-                            <img src="{%static 'images/what-we-do-2.svg'%}" alt="">
-                            <h3>Analyse their Tweets</h3>
-                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</p>
+                        <div class="buddy-do-content">
+                            <img src="{%static 'images/analysis.svg'%}" alt="">
+                            <h3>Analyse Tweets</h3>
+                            <p>Get a trend chart of tweets posted daily with insights on how positive and negative the tweets are. </p>
                             <!-- <a href="">Learn more</a> -->
                         </div>
                     </div>
                     <div class="column col-4 col-sm-12">
-                        <div class="yeo-do-content">
-                            <img src="{%static 'images/what-we-do-3.svg'%}" alt="">
-                            <h3>Get Notifications</h3>
-                            <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur</p>
+                        <div class="buddy-do-content">
+                            <img src="{%static 'images/notification.svg'%}" alt="">
+                            <h3>Get Notified</h3>
+                            <p>If the tweets are extremely negative, you'll be notified immediately.</p>
                             <!-- <a href="">Learn more</a> -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="yeo-work" id="we-work">
-            <div class="container yeo-body">
+        <div class="buddy-work" id="we-work">
+            <div class="container buddy-body">
                 <div class="columns">
                     <div class="column col-12 col-sm-12">
                         <h2 class="feature-title">About Us</h2>
                     </div>
                     <div class="column col-10 col-sm-12 centered">
-                        <h2 class="yeo-work-feature">
-                        We build <span class="yeo-work-feature-bold">reliable infrastructure</span>, use comprehensive in-house tools.
+                        <h2 class="buddy-work-feature">
+                        5 Enthusiastic <span class="buddy-work-feature-bold">Engineers</span> with a passion to help the community.
                     </h2>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="yeo-price" id="price">
-            <div class="container yeo-body  col-sm-12">
+        <!-- <div class="buddy-price" id="price">
+            <div class="container buddy-body  col-sm-12">
                 <div class="columns">
                     <div class="column col-4 col-sm-12">
                         <div class="panel">
@@ -217,8 +216,8 @@
                 </div>
             </div>
         </div> -->
-        <!-- <div class="yeo-team" id="team">
-            <div class="container yeo-body">
+        <!-- <div class="buddy-team" id="team">
+            <div class="container buddy-body">
                 <div class="columns">
                     <div class="column col-12">
                         <h2 class="feature-title">Meet Our Team</h2>
@@ -241,29 +240,30 @@
                 </div>
             </div>
         </div> -->
-        <div class="yeo-open-source">
-            <div class="container yeo-body">
+        <div class="buddy-open-source" id="contact">
+            <div class="container buddy-body">
                 <div class="columns">
                     <div class="column col-12">
                         <h2 class="feature-title">Contact Us</h2>
                     </div>
-                    <!-- <div class="column col-10 centered col-sm-12">
-                        <img class="open-source-img" src="./images/open-source.svg" alt="">
-                        <h2 class="open-source-feature">
+                    <div class="column col-10 centered col-sm-12">
+                        <!-- <img class="open-source-img" src="./images/open-source.svg" alt=""> -->
+                        <!-- <h2 class="open-source-feature">
                         We're making 
                         <br />
                         Open Source Software
-                    </h2>
-                        <a href="#" class="btn btn-lg btn-open-source">Follow us on Github</a>
-                    </div> -->
+                    </h2> -->Email: <a href="mailto:a.team.ucd.5@gmail.com">mail@ucd.ie</a> <br> 
+                            
+                        <!-- <a href="#" class="btn btn-lg btn-open-source">Follow us on Github</a> -->
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="yeo-footer">
+        <div class="buddy-footer">
             <div class="container">
                 <!-- <div class="columns">
                     <div class="column col-3 col-sm-6">
-                        <div class="yeo-footer-content">
+                        <div class="buddy-footer-content">
                             <h4>Services</h4>
                             <ul class="nav">
                                 <li class="nav-item">
@@ -279,7 +279,7 @@
                         </div>
                     </div> -->
                     <!-- <div class="column col-3 col-sm-6">
-                        <div class="yeo-footer-content">
+                        <div class="buddy-footer-content">
                             <h4>Clients</h4>
                             <ul class="nav">
                                 <li class="nav-item">
@@ -289,13 +289,13 @@
                                     <a href="https://www.lapa.ninja/">Noty IM</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="https://www.lapa.ninja/">Yeo Space</a>
+                                    <a href="https://www.lapa.ninja/">buddy Space</a>
                                 </li>
                             </ul>
                         </div>
                     </div> -->
                     <div class="column col-3 col-sm-6">
-                        <!-- <div class="yeo-footer-content">
+                        <!-- <div class="buddy-footer-content">
                             <h4>Contact Us</h4>
                             <ul class="nav">
                                 <li class="nav-item">
@@ -311,7 +311,7 @@
                         </div> -->
                     </div>
                     <div class="column col-3 col-sm-6">
-                        <div class="yeo-footer-content">
+                        <div class="buddy-footer-content">
                             <!-- <h4>Copyright</h4> -->
                             <ul class="nav">
                                 <li class="nav-item">

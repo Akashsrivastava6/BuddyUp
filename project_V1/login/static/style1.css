@@ -273,9 +273,7 @@ iframe {
     position: relative;
     border-bottom: 2px solid #5f2ceb;
     margin-top: 30px;
-        background-image: -webkit-linear-gradient(44deg, #0C00916e 0%, #00A87E6e 100%);
-        background-image: -o-linear-gradient(44deg, #0C00916e 0%, #00A87E6e 100%);
-        background-image: linear-gradient(134deg, #0C00916e 0%, #00A87E6e 100%);
+
     margin-bottom: 30px;
 }
 

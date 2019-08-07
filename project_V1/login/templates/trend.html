@@ -75,6 +75,8 @@
             fill: rgb(26, 60, 253);
             stroke: rgb(0, 0, 0);
             stroke-width: 1.5px;
+                        cursor: pointer;
+
         }
 
         .axis path,
@@ -669,7 +671,7 @@
                 .attr("class", "tooltip-date")
                 .attr("x", 18)
                 .attr("y", -35)
-                .attr("dy", ".31em");
+                .attr("transform", "translate(" -100 + ", " + -100 + ")"); 
 
             focus.append("text")
                 .attr("class", "tooltip-likes")
@@ -727,7 +729,7 @@
                         $(('<div id="test" style="color:red;"><tr>' + [i + 1] + '. ' + d.tweet[i] +
                             '<br><hr></tr>')).appendTo(".feedback-form");
                     } else {
-                        $(('<div id="test" style="color:white"><tr>' + [i + 1] + '. ' + d.tweet[i] +
+                        $(('<div id="test" style="color:#341b79"><tr>' + [i + 1] + '. ' + d.tweet[i] +
                                 '<br><hr></tr>'))
                             .appendTo(
                                 ".feedback-form");
@@ -904,7 +906,7 @@
 
                 //  console.log(wordfrequency);
                 $('html, body').animate({
-                    scrollTop: $(".feedback-form").offset().top
+                    scrollTop: $(".feedback-container-head").offset().top
                 }, 1000);
 
             };
