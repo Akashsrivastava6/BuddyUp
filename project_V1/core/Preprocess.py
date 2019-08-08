@@ -115,7 +115,7 @@ def preprocess1(tmp3):
             
             
          a1=a1.replace(" ","")
-        
+         a1=spell(a1)
          if neg_words['word'].isin([a1]).any():
             flag=1
                 

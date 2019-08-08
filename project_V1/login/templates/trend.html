@@ -42,7 +42,6 @@
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
             integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
         </script>
-    <script src='https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js'></script>
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
     integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
@@ -251,12 +250,12 @@
     </div>
     </div>
 
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://d3js.org/d3-color.v1.min.js"></script>
-    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
+    <script src="//d3js.org/d3.v4.min.js"></script>
+    <script src="//d3js.org/d3-color.v1.min.js"></script>
+    <script src="//d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="//d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="//canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="//rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
 
 
 
@@ -438,10 +437,7 @@
         });
 
 
-        //  console.log(data)
-
-        function trend() {
-    
+        //  console.log(data)    
             var svg = d3.select("svg")
                 margin = {
                     top: 20,
@@ -467,6 +463,23 @@
                 .range([0, width]);
 
             var y = d3.scaleLinear().domain([-5, 5]).range([height, 30]);
+
+            var rect = svg.append("rect")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                .attr("class", "overlay")
+                .attr("id", "line01")
+                .attr("width", width)
+                .style("background-color", 'white')
+                .attr("height", height)             
+                .order("", 10)
+                .on("mouseover", function () {
+                    focus.style("display", null)
+                    focus.style("color", "white");
+                })
+                .on("mouseout", function () {
+                    focus.style("display", "none");
+                })
+                .on("click", onClickEvent)
 
             svg.append("circle")
                 .attr("width", 10)
@@ -678,13 +691,13 @@
 
             focus.append("text")
                 .attr("class", "tooltip-date")
-                .attr("x", 18)
+                .attr("x", -130)
                 .attr("y", -35)
                 .attr("transform", "translate(" -100 + ", " + -100 + ")"); 
 
             focus.append("text")
                 .attr("class", "tooltip-likes")
-                .attr("x", 18)
+                .attr("x", -130)
                 .attr("y", -10)
                 .attr("dy", "7px");
 
@@ -1020,8 +1033,6 @@
             $('.feedback-form').empty();
             $('.wordchart-container').empty();
             $('#wordcloud').empty();
-        }
-        trend();
 
         window.onscroll = function () {
             scrollFunction()
