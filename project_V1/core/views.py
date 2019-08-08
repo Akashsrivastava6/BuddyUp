@@ -23,9 +23,9 @@ def AddFriend(request):
         friend_email=request.POST.get("email")
         if friend_handle!=None and friend_email!=None:
                 url=pbkdf2_sha256.encrypt(str(randint(1,1000)),rounds=100)
-                t_handle,msg=core.task.sendRequest(usr,friend_handle,friend_email,url)
+                t_handle,t_handle2,msg=core.task.sendRequest(usr,friend_handle,friend_email,url)
                 fname=login.task.getFirstName(usr)
-                return render(request,'dashboard.html',{'Message':fname,'data':t_handle,'msg':msg})
+                return render(request,'dashboard.html',{'Message':fname,'data':t_handle,'data2':t_handle2,'msg':msg})
         else:
                 return redirect("/login?Message=Session expired")                    
     return redirect("/login?Message=Session expired")
@@ -46,9 +46,9 @@ def Checkingtwitter(request):
                 d=User_detail.objects.filter(username=usr).update(email=email)
                 d=User_detail.objects.filter(username=usr).update(password=pwd)
                 
-                page,t_handle=core.task.twitterCheck(usr.lower())
+                page,t_handle,t_handle2=core.task.twitterCheck(usr.lower())
                 fname=login.task.getFirstName(usr)
-                return render(request,page,{"Message":fname,'data':t_handle})
+                return render(request,page,{"Message":fname,'data':t_handle,"data2":t_handle2})
         return redirect("/login")
 
 def Checking(request):
@@ -59,10 +59,10 @@ def Checking(request):
                 u.delete()
                 request.session.set_expiry(180)
                 request.session['username']=extra
-                page,t_handle=core.task.twitterCheck(extra)
+                page,t_handle,t_handle2=core.task.twitterCheck(extra)
                 # fname=login.task.getFirstName(extra)
                 fname=extra        
-                return render(request,page,{"Message":fname,'data':t_handle})
+                return render(request,page,{"Message":fname,'data':t_handle,"data2":t_handle2})
 
                 # d1=User_detail.objects.filter(username=extra)
                 # if len(d1)>0:
