@@ -20,7 +20,8 @@ def loginPage(request):
         usr=request.session['username']
         t_handle=task.getFriends(usr)
         fname=task.getFirstName(usr)
-        return render(request,'dashboard.html',{'Message':fname,'data':t_handle})
+        noti_list, dd1 = task.notificationdata(usr)
+        return render(request, 'dashboard.html', {'Message': fname, 'data': t_handle, 'noti': noti_list})
     return render(request,'homepage.html')
 
 def logoutRequest(request):

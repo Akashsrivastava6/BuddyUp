@@ -124,6 +124,7 @@ a:focus {
 }
 
 ul.list-unstyled.components {
+    position: sticky;
     margin: 15px;
     margin-left: 20px;
     justify-content: center;
@@ -134,6 +135,7 @@ ul.list-unstyled.components {
 }
 
 #sidebar ul li a {
+    position: sticky;
     padding: 10px 10px 10px 10px;
     font-size: 20px;
     display: block;
@@ -622,13 +624,12 @@ ul ul a {
 
 .navbar-nav li,
 #navitem::after {
-    content: "|";
-    margin-left: 8px;
     color: #fff;
 }
 
 .navbar.default-layout .navbar-menu-wrapper :focus,
 .navbar.default-layout .navbar-menu-wrapper :visited {
+
     padding: 13px;
     border-radius: 100px;
 }
@@ -644,9 +645,11 @@ ul ul a {
 }
 
 .navbar.default-layout .navbar-menu-wrapper .navbar-nav .nav-item .nav-link {
+    position: -webkit-sticky;
     color: inherit;
+        display: inline-block;
+
     font-size: 15px;
-    vertical-align: middle;
 }
 
 @media (max-width: 767px) {
@@ -1013,4 +1016,12 @@ div#wordchart:empty {
 #help {
       box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2),
       0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+div.tweets {
+    position: relative;
+    display: -moz-inline-box;
+    max-height: 280px;
+    width: 100%;
+    overflow-y: auto;
 }
