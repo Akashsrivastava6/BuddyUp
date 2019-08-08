@@ -1,3 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Welcome to Buddyup</title>
+    {% load staticfiles %}
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <!-- Our Custom CSS -->
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
+    </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
+    </script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+
+    <script src='https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js'></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
+    </script>
+
+
+</head>
+
+<body oncontextmenu="return false;">
+
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
@@ -5,14 +52,14 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="/login/submit">
+                <li class="active" id="1">
+                    <a href="/home/submit">
                         <i class="fas fa-home"></i>
                         &nbsp; dashboard
                     </a>
 
                 </li>
-                <li>
+                <li id="2">
                     <a href="/core/follower">
                         <i class="fas fa-user-plus"></i>
                         &nbsp; followers
@@ -23,10 +70,10 @@
                     </div>
                 </li>
 
-                <li>
-                    <a href="/login/about">
+                <li id="4">
+                    <a href="/home/about">
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
-                        &nbsp; about
+                        &nbsp; help
                     </a>
                 </li>
             </ul>
@@ -38,24 +85,22 @@
         <div id="content">
             <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
                 <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-                    <a class="navbar-brand brand-logo" href="/login/submit">
+                    <a class="navbar-brand brand-logo" href="/home/submit">
                         <u>BUDDY|UP</u>
-                        <a class="navbar-brand brand-logo-mini" href="/login/submit">
+                        <a class="navbar-brand brand-logo-mini" href="/home/submit">
                             <img src="#" alt="logo" /> </a>
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-center">
 
                     <ul class="navbar-nav ml-auto">
-
                         <li class="nav-item dropdown d-none d-xl-inline-block">
                             <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-user-circle" aria-hidden="true"></i> &nbsp;{{ Message}} &nbsp;<i
+                                <i class="fa fa-user-circle" aria-hidden="true"></i> &nbsp;{{ Message}} &nbsp; <i
                                     class="fa fa-angle-down" aria-hidden="true"></i>
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                                     aria-labelledby="UserDropdown">
                                     <a class="dropdown-item" href="/logout/logout">Sign Out<i
                                             class="dropdown-item-icon ti-power-off"></i></a>
-                                </div>
                         </li>
                     </ul>
                     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
@@ -64,5 +109,52 @@
                     </button>
                 </div>
             </nav>
+
+
+            <!-- Sidebar  -->
             <div class="content-wrapper">
-                <h2>!</u> </h2>
+                <h2>Help us get better!</u></h2>
+
+                <div class="feedback-form">
+                    <h4>User Feedback</h4>
+                    {%block content%}
+                    {%if tweet_data%}
+
+                    <table class="feedback-table">
+                        <tr>
+                            <th mat-header-cell *matHeaderCellDef> Tweet Date </th>
+                            <th>Tweet </th>
+                            <th>
+                                Class Label
+                            </th>
+                            <th>
+                                Correctly Classified?
+                            </th>
+                        </tr>
+                        {%for d in tweet_data%}
+                        <tr>
+                            <td>
+                                {{d.id}}
+                            </td>
+                            <td>
+                                {{d.tweet_data}}
+                            </td>
+                            <td>
+                                {{d.class}}
+                            </td>
+                            <td>
+                                <form>
+                                    <input type="radio" name="selection">Yes
+                                    <input type="radio" name="selection">No
+                                </form>
+                            </td>
+
+                        </tr>
+                        {%endfor%}
+                        {%endif%}
+                        {%endblock %}
+                    </table>
+                    <input type="submit" value="submit">
+                </div>
+            </div>
+        </div>
