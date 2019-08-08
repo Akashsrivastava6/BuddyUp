@@ -16,17 +16,18 @@ import spacy
 
 
 def sendRequest(usr,friend_handle,friend_email,url):
-    t_handle=login.task.getFriends(usr) 
+    
     data=following.objects.filter(user_id=usr).filter(twitter_handle=friend_handle)
     if len(data)>0:
         
-        return t_handle,"Request already send for this twitter handle."
+        return t_handle,t_handle2,"Request already send for this twitter handle."
     else:
         friend_tweet=following(user_id=usr,twitter_handle=friend_handle,friend_Email=friend_email,url=url)
         friend_name=login.task.getFirstName(usr)
         send_mail("Request From "+ friend_name+ " to join BuddyUp.","Hi,\n\nYour friend "+ friend_name +", wants to add you on BuddyUp. BuddyUp is a webapp which generates and shows trend based on the recent twitter activity. Please read the below privacy policy and take the action.\n\nPrivacy Notice: This notice is to inform you that as a part of a research project [name of the project] undertaken for the completion of masters’ degree Computer Science Negotiated Learning at University College Dublin. The research group shall be analyzing your twitter handle which comprises of [type of data] to understand human behavior. This information is anonymously used for the research project and does not directly or specifically identify you. To details on the processing of personal data, we wish to inform you that your personal data shall be [Process]. Please be informed that the information obtained under this research project will be erased without the possibility of reverse engineer, within 3 months from the submission of the research project. The motive of this research [elaborate on the outcome of the research]. Please note that the data obtained from this research project is purely for academic and non-commercial purpose. As we respect your right to privacy and in compliance with GDPR and ePrivacy Directives, we wish to procure a freely given, informed, unambiguous and explicit consent for processing the personal data available in your twitter handle. \n\nBy click on the link, you can provide your consent and register with us. However, you do have an option to opt out of this research project by ignoring this mail. If you need any further details on the research project, you may feel free to contact us on mail@ucd.ie. We would be happy to walk you through the research outcomes.\n\n 127.0.0.1:8000/oauth/login/twitter/ \n\n Thanks,\n BuddyUp Team","a.team.ucd.5@gmail.com",[friend_email])
         friend_tweet.save()
-        return t_handle,"An Email is send for Confirmation!"
+        t_handle,t_handle2=login.task.getFriends(usr) 
+        return t_handle,t_handle2,"An Email is send for Confirmation!"
         
 
 
@@ -133,20 +134,20 @@ def twitterCheck(username):
         userfollowing=following.objects.filter(twitter_handle=username)
         if len(userfollowing)>0:
             if len(userfollowing.filter(isActive=1))>0:
-                t_handle=login.task.getFriends(username)
-                return 'dashboard.html',t_handle
+                t_handle,t_handle2=login.task.getFriends(username)
+                return 'dashboard.html',t_handle,t_handle2
             else:
                 t_handle=getFollower(username)
-                return 'followers.html',t_handle
+                return 'followers.html',t_handle,None
         else:
-            t_handle=login.task.getFriends(username)
-            return 'dashboard.html',t_handle       
+            t_handle,t_handle2=login.task.getFriends(username)
+            return 'dashboard.html',t_handle,t_handle2       
     else:                
         adduserD=User_detail(username=username.lower())
         # adduserR=Registration(username_id=extra,firstname=userdata.first_name,lastname=userdata.last_name)
         
         adduserD.save()
-        return 'editprofile.html',None
+        return 'editprofile.html',None,None
         #adduserR.save()
         # userfollowing=following.objects.filter(twitter_handle=username)
         # if len(userfollowing)>0:
