@@ -21,10 +21,10 @@
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
-        </script>
+    </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
-        </script>
+    </script>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -34,38 +34,37 @@
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
-        </script>
+    </script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
-        </script>
-        
+    </script>
+
 
 </head>
 
 <body oncontextmenu="return false;">
-<script>
-    $(document).ready(function(){
-        $('.sendbutton').click(function(){
-            var email=$('input[name="email"]').val()
-            
+    <script>
+        $(document).ready(function () {
+            $('.sendbutton').click(function () {
+                var email = $('input[name="email"]').val()
 
-            if (email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
-                $('form[name="sendemail"]').unbind('submit');
-            
-            }
-            else{
-                 alert("invalid Email")
-                $('form[name="sendemail"]').submit(function (event) {
-                    event.preventDefault();
-                    $(this).submit();
-                });
-            }
+
+                if (email.match(
+                        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                    )) {
+                    $('form[name="sendemail"]').unbind('submit');
+
+                } else {
+                    alert("invalid Email")
+                    $('form[name="sendemail"]').submit(function (event) {
+                        event.preventDefault();
+                        $(this).submit();
+                    });
+                }
+            })
         })
-    })
-
-
-</script>
+    </script>
 
 
     <div class="wrapper">
@@ -118,7 +117,8 @@
                     <ul class="navbar-nav ml-auto">
 
                         <li class="nav-item dropdown d-none d-xl-inline-block">
-                            <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link" id="UserDropdown" data-toggle="dropdown" aria-expanded="false"
+                                style="cursor: pointer;">
                                 <i class="fa fa-user-circle" aria-hidden="true"></i> &nbsp;{{ Message}} &nbsp;<i
                                     class="fa fa-angle-down" aria-hidden="true"></i>
                                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
@@ -138,7 +138,7 @@
                 <h2>Welcome {{Message}}!</u> </h2>
 
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-8" id="col1" style="text-align: center" >
+                    <div class="col-xs-12 col-sm-6 col-md-8" id="col1" style="text-align: center">
                         <div class="following-container">
                             <h3>Following</h3>
                             {%block content%}
@@ -149,10 +149,8 @@
                                 {%csrf_token%}
 
                                 <div class="mx-sm-4 mb-2">
-                                    <input type="text"
-                                        style="color:#000000;padding: 2px; text-align: center;border-width:0px;
-border:none;font-size:19px;font-weight:700;" name="friend"
-                                        value={{c}} readonly>
+                                    <input type="text" style="color:#000000;padding: 2px; text-align: center;border-width:0px;
+border:none;font-size:19px;font-weight:700;" name="friend" value={{c}} readonly>
                                 </div>
                                 <button class="btn btn-primary mx-sm-auto mb-0" id="btn-1" style="widht: 20%;">View
                                     Trend</button>
@@ -162,16 +160,17 @@ border:none;font-size:19px;font-weight:700;" name="friend"
                             <h5>Please add a friend to see the trend</h5>
                             {%endif%}
                         </div>
-               <div class="following-container-2">
-                   <h3>Add Friend</h3>
-                   <form action="/core/addfriend" name="sendemail" method="post">
-                       {%csrf_token%}
-                       <input type="text" id="fname" name="twitter_handle" placeholder="Enter Twitter Name" required>
-                       <input type="text" id="fname" name="email" placeholder="Enter Email" required>
-                       {{msg}}
-                       <input type="submit" class="sendbutton" value="Send Email">
-                   </form>
-               </div>
+                        <div class="following-container-2">
+                            <h3>Add Friend</h3>
+                            <form action="/core/addfriend" name="sendemail" method="post">
+                                {%csrf_token%}
+                                <input type="text" id="fname" name="twitter_handle" placeholder="Enter Twitter Name"
+                                    required>
+                                <input type="text" id="fname" name="email" placeholder="Enter Email" required>
+                                {{msg}}
+                                <input type="submit" class="sendbutton" value="Send Email">
+                            </form>
+                        </div>
                     </div>
                     <div class="col-xs-6 col-md-4">
                         <div class="notification">
@@ -179,26 +178,28 @@ border:none;font-size:19px;font-weight:700;" name="friend"
                             <div class="test">
                                 {%if dd1%}
                                 {% for c in dd1%}
+                               <div class="accordion" id="accordionExample">
+
                                 <div class="panel-group">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h5 class="panel-title">
-                                                <a class="toggle" data-toggle="collapse" aria-expanded="false"
-                                                    href="#{{c.handle}}" aria-controls="collapseExample">
+                                                <a class="toggle" data-toggle="collapse" data-target="#{{c.handle}}"
+                                                    aria-expanded="false"
+                                                    href="#{{c.handle}}" aria-controls="collapse#{{c.handle}}" >
                                                     {{c.handle}} <i class="fa fa-angle-down" aria-hidden="true"></i>
                                                 </a>
                                             </h5>
                                         </div>
-                                        <div id={{c.handle}} class="collapse" aria-expanded="false"
-                                             aria-controls="collapseExample">
+                                        <div id={{c.handle}} class="collapse tweets" data-target="#{{c.handle}}"
+                                            aria-expanded="false"
+                                             data-parent="#accordionExample" >
                                             <hr>
                                             {% for d in c.tweet_arr%}
-                                            <div id="tweets-arr">
-                                                <div>
-                                                    <b>{{ d.date }}</b> <br>
-                                                    {{d.tweet}}
-                                                    <hr>
-                                                </div>
+                                            <div id="tweets-arr" class="toggle" >
+                                                <b>{{ d.date }}</b> <br>
+                                                {{d.tweet}}
+                                                <hr>
                                             </div>
                                             {%endfor%}
                                         </div>
@@ -210,16 +211,14 @@ border:none;font-size:19px;font-weight:700;" name="friend"
                                         {%endif%}
                                     </div>
                                 </div>
+                                </div>
                                 {%endblock%}
                             </div>
                         </div>
                     </div>
                 </div>
-                     
-            </div>
-            <div class="search-field">
-            </div>
 
+            </div>
         </div>
     </div>
     </div>
@@ -229,7 +228,6 @@ border:none;font-size:19px;font-weight:700;" name="friend"
 
 
     <script type="text/javascript">
-
         $('.collapse').click(function () {
             if (!$(this).next().hasClass('in')) {
                 $(this).parent().children('.collapse.in').collapse('hide');

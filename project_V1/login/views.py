@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from login.models import User_detail,Registration
 from django.contrib.auth.decorators import login_required
 from core.models import following
+import core.task
 from login import task 
 
 @login_required
@@ -19,7 +20,8 @@ def loginPage(request):
         usr=request.session['username']
         t_handle=task.getFriends(usr)
         fname=task.getFirstName(usr)
-        return render(request,'dashboard.html',{'Message':fname,'data':t_handle})
+        noti_list, dd1 = task.notificationdata(usr)
+        return render(request, 'dashboard.html', {'Message': fname, 'data': t_handle, 'noti': noti_list})
     return render(request,'homepage.html')
 
 def logoutRequest(request):
@@ -31,6 +33,16 @@ def logoutRequest(request):
    # return render(request,'index.html',{"Message":"Logout Successful!"})
     return redirect("/home")
 
+
+def personalisation(request):
+    if request.session.has_key('username'):
+        request.session.set_expiry(180)
+        usr = request.session['username']
+        fname = task.getFirstName(usr)
+        twitter_handle = request.GET.get('twitter_handle')
+        message, tweet_data, friend, obj1, obj2 = core.task.getTrend(
+            twitter_handle)
+    return render(request, 'personalisation.html', {'Message': fname, "tweet_data": tweet_data, 'twitter_handle': twitter_handle})
 
 def signupUser(request):
     return render(request,'signup.html')

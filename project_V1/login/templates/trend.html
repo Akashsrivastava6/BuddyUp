@@ -192,9 +192,19 @@
                <div class="navbar-menu-wrapper d-flex align-items-center">
 
                    <ul class="navbar-nav ml-auto">
+                      <form action="/home/personalisation?twitter_handle={{friend}}" method="GET">
+                          {%csrf_token%}
 
+                          <ul>
+                              <a href="/home/personalisation?twitter_handle={{friend}}" class="btn btn-info"
+                                  role="button">Help us get better</a>
+
+                          </ul>
+                      </form>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                        <li class="nav-item dropdown d-none d-xl-inline-block">
-                           <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                           <a class="nav-link" id="UserDropdown" data-toggle="dropdown" aria-expanded="false"
+                               style="cursor: pointer;">
                                <i class="fa fa-user-circle" aria-hidden="true"></i> &nbsp;{{ usr}} &nbsp;<i
                                    class="fa fa-angle-down" aria-hidden="true"></i>
                                <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
@@ -515,6 +525,23 @@
                 .attr("opacity", 0.8);
 
 
+            var rect = svg.append("rect")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                .attr("class", "overlay")
+                .attr("id", "line01")
+                .attr("width", width)
+                .attr("height", height)
+                    .attr('viewBox','0 0 '+Math.min(width,height)+' '+Math.min(width,height))
+                    .attr('preserveAspectRatio','xMinYMin')
+                .order("", 10)
+                .on("mouseover", function () {
+                    focus.style("display", null)
+                    focus.style("color", "white");
+                })
+                .on("mouseout", function () {
+                    focus.style("display", "none");
+                })
+                .on("click", onClickEvent)
 
 
 
