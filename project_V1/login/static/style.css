@@ -783,10 +783,12 @@ input[type=submit] {
 }
 
 #btn-1 {
-    position: inherit;
+    position: relative;
+    margin-right: 20px;
+    text-align: center;
     display: inline-flex;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 800;
+    font-weight: 700;
     background: #00A87E;
     border-color: #00A87E;
         background-image: -webkit-linear-gradient(44deg, #0C00916e 0%, #00A87E6e 100%);
@@ -801,17 +803,16 @@ input[type=submit] {
     text-align: center;
     align-content: center;
     place-content: inherit;
-    position: static;
     padding: 10px 10px 10px 10px;
     background: #ffffff;
     border-radius: 6px;
     margin-top: 30px;
-    margin-left: 19%;
+    margin-left: 18%;
     margin-bottom: 20px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
         0 1px 3px 0 rgba(0, 0, 0, 0.19);
     font-weight: 600;
-    width: 60%;
+    width: 65%;
     display: flex;
 }
 

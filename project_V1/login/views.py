@@ -42,7 +42,8 @@ def personalisation(request):
         twitter_handle = request.GET.get('twitter_handle')
         message, tweet_data, friend, obj1, obj2 = core.task.getTrend(
             twitter_handle)
-    return render(request, 'personalisation.html', {'Message': fname, "tweet_data": tweet_data, 'twitter_handle': twitter_handle})
+        
+    return render(request, 'personalisation.html', {'Message': fname, "tweet_data": tweet_data[0:10], 'twitter_handle': twitter_handle})
 
 def signupUser(request):
     return render(request,'signup.html')
