@@ -143,6 +143,7 @@
                             <h3>Following</h3>
                             {%block content%}
 
+                            {%if data or data2%}
                             {%if data%}
                             {% for c in data%}
                             <form class="form-inline" id="friends-list" action='/core/trendpage' method="post">
@@ -152,10 +153,24 @@
                                     <input type="text" style="color:#000000;padding: 2px; text-align: center;border-width:0px;
 border:none;font-size:19px;font-weight:700;" name="friend" value={{c}} readonly>
                                 </div>
-                                <button class="btn btn-primary mx-sm-auto mb-0" id="btn-1" style="widht: 20%;">View
+                                <button class="btn btn-primary mx-sm-auto mb-0" id="btn-1" style="width: 20%;">View
                                     Trend</button>
                             </form>
                             {%endfor%}
+                            {%endif%}
+                            {%if data2%}
+                            {% for c in data2%}
+                            <form class="form-inline" id="friends-list" action='/core/trendpage' method="post">
+                                {%csrf_token%}
+                            
+                                <div class="mx-sm-4 mb-2">
+                                    <input type="text" style="color:#000000;padding: 2px; text-align: center;border-width:0px;
+                            border:none;font-size:19px;font-weight:700;" name="friend" value={{c}} readonly>
+                                </div>
+                                <button class="btn btn-primary mx-sm-auto mb-0" id="btn-1" style="width: 20%;" disabled>Pending</button>
+                            </form>
+                            {%endfor%}
+                            {%endif%}
                             {%else%}
                             <h5>Please add a friend to see the trend</h5>
                             {%endif%}
@@ -177,6 +192,7 @@ border:none;font-size:19px;font-weight:700;" name="friend" value={{c}} readonly>
                             <h3>Notifications</h3>
                             <div class="test">
                                 {%if dd1%}
+                                
                                 {% for c in dd1%}
                                <div class="accordion" id="accordionExample">
 

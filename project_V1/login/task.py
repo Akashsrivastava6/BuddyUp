@@ -5,10 +5,14 @@ from datetime import date
 
 def getFriends(usr):
     data3=following.objects.filter(user_id=usr).filter(isActive=1)
+    data34=following.objects.filter(user_id=usr).filter(isActive=0)
     t_handle=[]
+    t_handle2=[]
     for d in data3:
         t_handle.append(d.twitter_handle)
-    return t_handle
+    for dd in data34:
+        t_handle2.append(dd.twitter_handle)
+    return t_handle,t_handle2
 
 def checkUserPassword(usr,pwd):
     if usr=="":
