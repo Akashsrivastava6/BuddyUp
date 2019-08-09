@@ -124,7 +124,7 @@
     <div class="login-page">
         <div class="container-login-background" style="background-image: url('/static/images/original.jpg');">
             <div class="wrap-login100">
-                <form class="login-form validate-form" name="signup" action="twitterregister" method="post">
+                <form class="login-form validate-form" name="signup" action="twitterregister?twitter_handle={{Message}}" method="post">
                     {%csrf_token%}
                     <!-- <span class="login-form-logo">
                         <i class="zmdi zmdi-landscape"></i>
@@ -180,7 +180,9 @@
                             Update
                         </button>
                     </div>
-
+                    </form>
+</div>
+      </div>
                     
 </body>
 
