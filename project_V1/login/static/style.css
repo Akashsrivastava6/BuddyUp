@@ -123,8 +123,10 @@ a:focus {
     margin-right: 30px;
 }
 
+
 ul.list-unstyled.components {
-    position: sticky;
+        position: -webkit-sticky;
+        position: sticky;
     margin: 15px;
     margin-left: 20px;
     justify-content: center;
@@ -135,7 +137,8 @@ ul.list-unstyled.components {
 }
 
 #sidebar ul li a {
-    position: sticky;
+            position: -webkit-sticky;
+            position: sticky;
     padding: 10px 10px 10px 10px;
     font-size: 20px;
     display: block;
@@ -936,7 +939,16 @@ div#wordchart:empty {
     margin-right: 10%;
 }
 
+#personalise {
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    margin-left: 8%;
+    width: 80%;
+}
+
 .feedback-table {
+    display: block;
     width: 100%;
 }
 
