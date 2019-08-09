@@ -14,166 +14,93 @@ import datetime
 
 
 
-
+# method to add friend twitter handle
 def AddFriend(request):
     if request.session.has_key('username'):
-        request.session.set_expiry(180)
-        usr=request.session['username']
-        friend_handle=request.POST.get("twitter_handle")
-        friend_email=request.POST.get("email")
+        request.session.set_expiry(180) # Updating session
+        usr=request.session['username'] # 
+        friend_handle=request.POST.get("twitter_handle") # retrieving twitter_handle
+        friend_email=request.POST.get("email") # retrieving email
         if friend_handle!=None and friend_email!=None:
                 url=pbkdf2_sha256.encrypt(str(randint(1,1000)),rounds=100)
-                t_handle,t_handle2,msg=core.task.sendRequest(usr,friend_handle,friend_email,url)
-                fname=login.task.getFirstName(usr)
-                return render(request,'dashboard.html',{'Message':fname,'data':t_handle,'data2':t_handle2,'msg':msg})
+                t_handle,t_handle2,msg=core.task.sendRequest(usr,friend_handle,friend_email,url) # method to send mail request to friend
+                fname=login.task.getFirstName(usr) # retrieving user's name
+                return render(request,'dashboard.html',{'Message':fname,'data':t_handle,'data2':t_handle2,'msg':msg}) # returing dashboard page and data
         else:
                 return redirect("/login?Message=Session expired")                    
-    return redirect("/login?Message=Session expired")
+    return redirect("/login?Message=Session expired") #if the user is not logged in or session is expired
 
-
+# method called when the user logs in by twitter for the first time
 def Checkingtwitter(request):
-        if request.session.has_key('username'):
-                request.session.set_expiry(180)
-                usr=request.session['username']
-                email=request.POST.get("username")
+        if request.session.has_key('username'): # 
+                request.session.set_expiry(180) # updating session
+                usr=request.session['username'] 
+                email=request.POST.get("username")  
                 pwd=request.POST.get('password')
                 fname=request.POST.get("fname")
                 lname=request.POST.get("lname")
                 dob=request.POST.get("dob")
-                pwd=pbkdf2_sha256.encrypt(pwd,rounds=10000)
-                d1=Registration(username_id=usr,FirstName=fname,LastName=lname,dateOfBirth=dob)
-                d1.save()
-                d=User_detail.objects.filter(username=usr).update(email=email)
-                d=User_detail.objects.filter(username=usr).update(password=pwd)
+                pwd=pbkdf2_sha256.encrypt(pwd,rounds=10000) # encrypting password
+                d1=Registration(username_id=usr,FirstName=fname,LastName=lname,dateOfBirth=dob) # Registring the user 
+                d1.save() # 
+                d=User_detail.objects.filter(username=usr).update(email=email) # updating users email
+                d=User_detail.objects.filter(username=usr).update(password=pwd) # updating users password
                 
-                page,t_handle,t_handle2=core.task.twitterCheck(usr.lower())
-                fname=login.task.getFirstName(usr)
-                return render(request,page,{"Message":fname,'data':t_handle,"data2":t_handle2})
-        return redirect("/login")
+                page,t_handle,t_handle2=core.task.twitterCheck(usr.lower()) # calling twittercheck
+                fname=login.task.getFirstName(usr) # retrieving users first name
+                return render(request,page,{"Message":fname,'data':t_handle,"data2":t_handle2}) # returning page and data
+        return redirect("/login") # if user is not logged in then redirecting to login page
 
+# method used when user signin from twitter
 def Checking(request):
-        if request.user.is_authenticated:
-                user=request.user#.social_auth.get(provider="twitter")
-                extra=str(user)#.extra_data['access_token']['screen_name']
-                u=User.objects.get(username=user)
+        if request.user.is_authenticated: # if the user is authenticated
+                user=request.user # retrieving authenticated user handle
+                extra=str(user) # 
+                u=User.objects.get(username=user) 
                 u.delete()
-                request.session.set_expiry(180)
-                request.session['username']=extra
-                page,t_handle,t_handle2=core.task.twitterCheck(extra)
+                request.session.set_expiry(180) # updating session
+                request.session['username']=extra # updating session
+                page,t_handle,t_handle2=core.task.twitterCheck(extra)  # calling twittercheck
                 # fname=login.task.getFirstName(extra)
-                fname=extra        
-                return render(request,page,{"Message":fname,'data':t_handle,"data2":t_handle2})
-
-                # d1=User_detail.objects.filter(username=extra)
-                # if len(d1)>0:
-                #         userfollowing=following.objects.filter(twitter_handle=extra)
-                #         if len(userfollowing)>0:
-                #                 if len(userfollowing.filter(isActive=1))>0:
-                #                         request.session.set_expiry(180)
-                #                         request.session['username']=extra
-                #                         t_handle=login.task.getFriends(extra)
-                #                         return render(request,'dashboard.html',{'Message': request.session['username'],'data':t_handle})
-                
-                #                 else:
-                #                         request.session.set_expiry(180)
-                #                         request.session['username']=extra
-                #                         t_handle=core.task.getFollower(extra)
-                #                         return render(request,'followers.html',{'Message': rrequest.session['username'],'data':t_handle})
-                #         else:
-                #                 request.session.set_expiry(180)
-                #                 request.session['username']=extra
-                #                 t_handle=login.task.getFriends(extra)
-                #                 return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
-                
-                # else:
-                        
-                #         adduserD=User_detail(username=extra)
-                # # adduserR=Registration(username_id=extra,firstname=userdata.first_name,lastname=userdata.last_name)
-                #         adduserD.save()
-                #         #adduserR.save()
-
-                #         userfollowing=following.objects.filter(twitter_handle=extra)
-                #         if len(userfollowing)>0:
-                #                 if len(userfollowing.filter(isActive=1))>0:
-                #                         request.session.set_expiry(180)
-                #                         request.session['username']=extra
-                #                         t_handle=login.task.getFriends(extra)
-                #                         return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
-                
-                #                 else:
-                #                         request.session.set_expiry(180)
-                #                         request.session['username']=extra
-                #                         t_handle=core.task.getFollower(extra)
-                #                         return render(request,'followers.html',{'Message':request.session['username'],'data':t_handle})
-                #         else:
-                #                 request.session.set_expiry(180)
-                #                 request.session['username']=extra
-                #                 t_handle=login.task.getFriends(extra)
-                #                 return render(request,'dashboard.html',{'Message':request.session['username'],'data':t_handle})
-                
-                        
-                # d=following.objects.get(twitter_handle=extra)
-                # d.isActive=1
-                # d.save()
-                # tmp=core.task.AddFriendTweets.delay(extra)
-
-        return redirect("/login")
+                fname=extra   
+                return render(request,page,{"Message":fname,'data':t_handle,"data2":t_handle2}) # returing page and data
+        return redirect("/login") # redireting to login page if user is not redirected
 
 
-
+# method to  get the followers list  to grant and revoke access and return follower page
 def Followers(request):
-        if request.session.has_key('username'):
-                request.session.set_expiry(180)
-                usr=request.session['username']
+        if request.session.has_key('username'): # if the user is logged in then following code is executed
+                request.session.set_expiry(180) # updating session
+                usr=request.session['username'] #retrieving logged in user
                 friend=request.POST.get("friend")
                 status=request.POST.get("status")
-                if status=="Grant":
-                        d=following.objects.filter(twitter_handle=usr).filter(user_id=friend).update(isActive=1)
-                        handle_data=tweets_data.objects.filter(twitter_handle=usr)
-                        if len(handle_data)==0:
-                                tmp=core.task.AddFriendTweets.delay(str(usr))
-                else:
-                        d=following.objects.filter(twitter_handle=usr).filter(user_id=friend).update(isActive=0)
+                if status=="Grant": 
+                        d=following.objects.filter(twitter_handle=usr).filter(user_id=friend).update(isActive=1) # granting access to a particular friend
+                        handle_data=tweets_data.objects.filter(twitter_handle=usr) 
+                        if len(handle_data)==0: # checking if the data for the twiteer handle is in database. If not then adding tweets data db. 
+                                tmp=core.task.AddFriendTweets.delay(str(usr)) 
+                        elif status=="Revoke":
+                        d=following.objects.filter(twitter_handle=usr).filter(user_id=friend).update(isActive=0) # if the status is Revoke then revonking access for that particular friend.
 
-                t_handle=core.task.getFollower(usr)
-                noti_list, dd1=login.task.notificationdata(usr)
-                fname=login.task.getFirstName(usr)
-                return render(request,'followers.html',{'Message':fname,'data':t_handle,'noti':noti_list,'dd1':dd1})
+                t_handle=core.task.getFollower(usr) # retrieving followers list from db
+                noti_list, dd1=login.task.notificationdata(usr) # retrieving notification data from db
+                fname=login.task.getFirstName(usr) # retrieving first name of the logged in user
+                return render(request,'followers.html',{'Message':fname,'data':t_handle,'noti':noti_list,'dd1':dd1}) # returning page and data
 
-        return redirect("/login")
-
-'''
-def VerifyFriend(request):
-        usr=request.GET.get("usr")
-        friend_handle=request.GET.get("friend_handle")
-        friend_email=request.GET.get("friend_email")
-        url=request.GET.get("url")
-        d=following.objects.get(url=url)
-        
-        d.isActive=1
-        d.save()
+        return redirect("/login") # i fthe user is not logged in then redirected to login page.
 
 
-        tmp=AddFriendTweets(friend_handle)
-                
-
-        print(tmp)
-        
-        return render(request,'submit.html',{'Message':friend_handle})
-
-
-'''
-
+# method to get trend page
 def trend(request):
-    if request.session.has_key('username'):
-        request.session.set_expiry(180)
-        usr=request.session['username']
-        twitter_handle=request.POST.get("friend")
+    if request.session.has_key('username'): # if the user is logged in then following code is exceuted
+        request.session.set_expiry(180) # updating session
+        usr=request.session['username'] # retrieving logged in user
+        twitter_handle=request.POST.get("friend") # retrieving the friend for which trend button is clicked
         if twitter_handle!=None:
-                message,tweet_data,friend,obj1,obj2=core.task.getTrend(twitter_handle)
-                fname=login.task.getFirstName(usr)
-                return render(request, 'trend.html', {"usr":fname,"Message": message, "tweet_data":tweet_data, "friend": friend,'obj1':obj1,'obj2':obj2})
+                message,tweet_data,friend,obj1,obj2=core.task.getTrend(twitter_handle) # get trend method is called to get the trend data from db
+                fname=login.task.getFirstName(usr) # retrieving the logged in user friest name
+                return render(request, 'trend.html', {"usr":fname,"Message": message, "tweet_data":tweet_data, "friend": friend,'obj1':obj1,'obj2':obj2}) # returning page and data 
         else:
-                return redirect("/login")        
+                return redirect("/login") 
     else:
-        return redirect("/login")
+        return redirect("/login") # if the user is not logged in or session is expired.
