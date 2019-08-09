@@ -115,9 +115,8 @@
             <!-- Sidebar  -->
             <div class="content-wrapper">
                 <h2>Help us get better!</u></h2>
+                <div class="feedback-form" id="personalise" style="text-align: center;align-content: center;align-items: center;">
 
-                <div class="feedback-form">
-                    <h4>User Feedback</h4>
                     {%block content%}
                     {%if tweet_data%}
 
@@ -125,9 +124,7 @@
                         <tr>
                             <th mat-header-cell *matHeaderCellDef> Tweet Date </th>
                             <th>Tweet </th>
-                            <th>
-                                Class Label
-                            </th>
+                            <th>Class Label</th>
                             <th>
                                 Correctly Classified?
                             </th>
@@ -135,19 +132,18 @@
                         {%for d in tweet_data%}
                         <tr>
                             <td>
-                                {{d.id}}
+                               <a href="http://twitter.com/{{twitter_handle}}/status/{{d.id}}" style="text-decoration: underline;" onclick="twitter_dialog()">{{d.id}}</a>
                             </td>
-                            <td>
+                            <td id="tweet_show" style="padding:0 30px 0 50px;">
                                 {{d.tweet_data}}
                             </td>
                             <td>
                                 {{d.class}}
                             </td>
-                            <td>
-                                <form>
-                                    <input type="radio" name="selection">Yes
-                                    <input type="radio" name="selection">No
-                                </form>
+                            <td style="display: inline-block;margin-left: 0%;padding: 10px;">
+                            <input type="radio" name="selection">Yes &nbsp;&nbsp;
+                            <input type="radio" name="selection">No
+                            
                             </td>
 
                         </tr>
@@ -155,7 +151,10 @@
                         {%endif%}
                         {%endblock %}
                     </table>
-                    <input type="submit" value="submit">
                 </div>
             </div>
+            <input type="submit" value="submit" style="width: 20%;">
         </div>
+    </div>
+</body>
+</html>
