@@ -145,6 +145,8 @@ border:none;" name="status"
                           <div class="test">
                               {%if dd1%}
                               {% for c in dd1%}
+                                                             <div class="accordion" id="accordionExample">
+
                               <div class="panel-group">
                                   <div class="panel panel-default">
                                       <div class="panel-heading">
@@ -155,11 +157,11 @@ border:none;" name="status"
                                               </a>
                                           </h5>
                                       </div>
-                                      <div id={{c.handle}} class="collapse" aria-expanded="false"
-                                          style="overflow-y:scroll;"  aria-controls="collapseExample">
+                                      <div id={{c.handle}} class="collapse tweets" data-target="#{{c.handle}}"
+                                          aria-expanded="false" data-parent="#accordionExample">
                                           <hr>
                                           {% for d in c.tweet_arr%}
-                                          <div id="tweets-arr">
+                                          <div id="tweets-arr" class="toggle">
                                              <b>{{ d.date }}</b> <br>
                                                     {{d.tweet}}
                                                     <hr>
