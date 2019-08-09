@@ -79,8 +79,8 @@ def Followers(request):
                         handle_data=tweets_data.objects.filter(twitter_handle=usr) 
                         if len(handle_data)==0: # checking if the data for the twiteer handle is in database. If not then adding tweets data db. 
                                 tmp=core.task.AddFriendTweets.delay(str(usr)) 
-                        elif status=="Revoke":
-                        d=following.objects.filter(twitter_handle=usr).filter(user_id=friend).update(isActive=0) # if the status is Revoke then revonking access for that particular friend.
+                elif status=="Revoke":
+                        d=following.objects.filter(twitter_handle=usr).filter(user_id=friend).update(isActive=0) # if the status is Revoke then revoking access for that particular friend.
 
                 t_handle=core.task.getFollower(usr) # retrieving followers list from db
                 noti_list, dd1=login.task.notificationdata(usr) # retrieving notification data from db
