@@ -800,7 +800,7 @@
                 zingchart.MODULESDIR = 'https://cdn.zingchart.com/modules/';
                 let chartConfig = {
                     type: 'wordcloud',
-                    backgroundColor: '#111',
+                    backgroundColor: '#fff',
                     fontColor: '#111',
                     aspect: "spiral",
                     options: {
@@ -1025,7 +1025,7 @@
                 .text("(Extremely Negative)");
 
 
-            svg.append("rect").attr("width", w - 100).attr("height", h - 100).attr("y", -1120).attr("x", 70).style(
+            svg.append("g").attr("width", w - 100).attr("height", h - 100).attr("y", -1120).attr("x", 70).style(
                 "fill",
                 "url(#gradient)").attr("transform", "translate(200,30)").attr("transform", "rotate(90)");
 
