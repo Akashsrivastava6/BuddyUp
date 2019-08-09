@@ -32,24 +32,26 @@ def AddFriend(request):
 
 # method called when the user logs in by twitter for the first time
 def Checkingtwitter(request):
-        if request.session.has_key('username'): # 
-                request.session.set_expiry(180) # updating session
-                usr=request.session['username'] 
-                email=request.POST.get("username")  
-                pwd=request.POST.get('password')
-                fname=request.POST.get("fname")
-                lname=request.POST.get("lname")
-                dob=request.POST.get("dob")
-                pwd=pbkdf2_sha256.encrypt(pwd,rounds=10000) # encrypting password
-                d1=Registration(username_id=usr,FirstName=fname,LastName=lname,dateOfBirth=dob) # Registring the user 
-                d1.save() # 
-                d=User_detail.objects.filter(username=usr).update(email=email) # updating users email
-                d=User_detail.objects.filter(username=usr).update(password=pwd) # updating users password
-                
-                page,t_handle,t_handle2=core.task.twitterCheck(usr.lower()) # calling twittercheck
-                fname=login.task.getFirstName(usr) # retrieving users first name
-                return render(request,page,{"Message":fname,'data':t_handle,"data2":t_handle2}) # returning page and data
-        return redirect("/login") # if user is not logged in then redirecting to login page
+        # 
+        # updating session
+        usr=request.GET.get("twitter_handle")
+        request.session['username']=usr 
+        request.session.set_expiry(180)
+        email=request.POST.get("username")  
+        pwd=request.POST.get('password')
+        fname=request.POST.get("fname")
+        lname=request.POST.get("lname")
+        dob=request.POST.get("dob")
+        pwd=pbkdf2_sha256.encrypt(pwd,rounds=10000) # encrypting password
+        d1=Registration(username_id=usr,FirstName=fname,LastName=lname,dateOfBirth=dob) # Registring the user 
+        d1.save() # 
+        d=User_detail.objects.filter(username=usr).update(email=email) # updating users email
+        d=User_detail.objects.filter(username=usr).update(password=pwd) # updating users password
+        
+        page,t_handle,t_handle2=core.task.twitterCheck(usr.lower()) # calling twittercheck
+        fname=login.task.getFirstName(usr) # retrieving users first name
+        return render(request,page,{"Message":fname,'data':t_handle,"data2":t_handle2}) # returning page and data
+       
 
 # method used when user signin from twitter
 def Checking(request):
@@ -58,8 +60,9 @@ def Checking(request):
                 extra=str(user) # 
                 u=User.objects.get(username=user) 
                 u.delete()
-                request.session.set_expiry(180) # updating session
+                
                 request.session['username']=extra # updating session
+                request.session.set_expiry(3) # updating session
                 page,t_handle,t_handle2=core.task.twitterCheck(extra)  # calling twittercheck
                 # fname=login.task.getFirstName(extra)
                 fname=extra   

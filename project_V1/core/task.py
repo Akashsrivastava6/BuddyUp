@@ -7,7 +7,7 @@ from login.models import User_detail,Registration
 import login.task
 import json
 import datetime
-from datetime import date, datetime,timezone
+from datetime import date, datetime,timezone,timedelta
 import tweepy
 from . import Preprocess
 import pickle
@@ -19,7 +19,7 @@ def sendRequest(usr,friend_handle,friend_email,url):
     
     data=following.objects.filter(user_id=usr).filter(twitter_handle=friend_handle) # checking if the user has added the friend before
     if len(data)>0: # if the friend data is already id db then following page is returned
-        
+        t_handle,t_handle2=login.task.getFriends(usr) # geting data to update followers list
         return t_handle,t_handle2,"Request already send for this twitter handle." #
     else: # if the friend is added for the first time.
         friend_tweet=following(user_id=usr,twitter_handle=friend_handle,friend_Email=friend_email,url=url) # adding friends details in db
@@ -53,7 +53,8 @@ def getFollower(user):
     return followed
 
 def getTrend(twitter_handle):
-    tweet_data=tweets_data.objects.filter(twitter_handle=twitter_handle)
+    now=datetime.now()-timedelta(days=45)
+    tweet_data=tweets_data.objects.filter(twitter_handle=twitter_handle).filter(tweet_date__gt=now)
     tweet_dat=[]
     for a in tweet_data:
         tweet_dat.append({"id":a.tweet_id,"tweet_data":a.tweet_data,"tweet_date":a.tweet_date,"tweet_score":a.score,"tweet_sum_score":a.sum_score,"tweet_counter":a.counter,"is_noti":a.is_notification})
@@ -63,17 +64,21 @@ def getTrend(twitter_handle):
 def twitterCheck(username):
     d1=User_detail.objects.filter(username=username)
     if len(d1)>0:
-        userfollowing=following.objects.filter(twitter_handle=username)
-        if len(userfollowing)>0:
-            if len(userfollowing.filter(isActive=1))>0:
+        d2=Registration.objects.filter(username_id=username)
+        if len(d2)>0:    
+            userfollowing=following.objects.filter(twitter_handle=username)
+            if len(userfollowing)>0:
+                if len(userfollowing.filter(isActive=1))>0:
+                    t_handle,t_handle2=login.task.getFriends(username)
+                    return 'dashboard.html',t_handle,t_handle2
+                else:
+                    t_handle=getFollower(username)
+                    return 'followers.html',t_handle,None
+            else:
                 t_handle,t_handle2=login.task.getFriends(username)
                 return 'dashboard.html',t_handle,t_handle2
-            else:
-                t_handle=getFollower(username)
-                return 'followers.html',t_handle,None
         else:
-            t_handle,t_handle2=login.task.getFriends(username)
-            return 'dashboard.html',t_handle,t_handle2       
+            return 'editprofile.html',None,None       
     else:                
         adduserD=User_detail(username=username.lower())
         # adduserR=Registration(username_id=extra,firstname=userdata.first_name,lastname=userdata.last_name)
@@ -181,7 +186,7 @@ def AddTweets():
                     if d_flag==2:
                         # print(t_handle+"  "+text+" "+str(date.today))
                         d=tweets_data.objects.filter(twitter_handle=t_handle).filter(tweet_id=tmp1[pos]).update(is_notification=1)
-                        not_data=notification_data(twitter_handle=t_handle,tweet_data=text,noti_date=datetime.now(timezone.utc))
+                        not_data=notification_data(twitter_handle=t_handle,tweet_data=text,noti_date=datetime.now(timezone.utc),is_notified=0)
                         not_data.save()
                     
                

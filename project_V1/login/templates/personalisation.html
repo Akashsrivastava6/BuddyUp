@@ -132,7 +132,7 @@
                         {%for d in tweet_data%}
                         <tr>
                             <td>
-                               <a href="http://twitter.com/{{twitter_handle}}/status/{{d.id}}" style="text-decoration: underline;" onclick="twitter_dialog()">{{d.id}}</a>
+                               <a href="http://twitter.com/{{twitter_handle}}/status/{{d.id}}" target="_blank" style="text-decoration: underline;" onclick="twitter_dialog()">{{d.id}}</a>
                             </td>
                             <td id="tweet_show" style="padding:0 30px 0 50px;">
                                 {{d.tweet_data}}
