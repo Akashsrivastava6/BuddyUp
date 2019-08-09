@@ -145,12 +145,12 @@
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Date of birth">
-                        <input class="input100" type="text" name="dob" placeholder=" Date of Birth (YYYY-MM-DD)" readonly required data-date-end-date="-18y" >
+                        <input class="input100" type="text" name="dob" placeholder=" Date of Birth (YYYY-MM-DD)" readonly required data-date-end-date="-18y" data-date-start-date="-100y" >
                         <span class="focus-input100" data-placeholder="&#xf332;"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter Email" >
-                        <input class="input100" type="text" name="username" placeholder="Email"required>
+                        <input class="input100" type="text" name="username" placeholder="Email/Username"required>
                         <span class="focus-input100" data-placeholder="&#xf15a;"></span>
                     </div>
 
@@ -185,7 +185,7 @@
 
                     <div class="container-login-form-btn" style="margin-top: 20px; margin-bottom: 10px;">
                         <button class="login-form-btn">
-                            <a href="#" class="twitter-btn">
+                            <a href="{% url 'social:begin' 'twitter' %}" class="twitter-btn">
                                 <i class="fa fa-twitter fa-fw" style="padding:0 20px 0 0px;"></i> Login with Twitter
                             </a> </button>
 </body>
