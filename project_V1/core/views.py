@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from core.models import following,tweets_data
 from login.models import User_detail,Registration
+from django.core.mail import send_mail
 from django.contrib.auth.models import User
 import login.task
 #import pandas as pd
@@ -62,7 +63,7 @@ def Checking(request):
                 u.delete()
                 
                 request.session['username']=extra # updating session
-                request.session.set_expiry(3) # updating session
+                request.session.set_expiry(10) # updating session
                 page,t_handle,t_handle2=core.task.twitterCheck(extra)  # calling twittercheck
                 # fname=login.task.getFirstName(extra)
                 fname=extra   
@@ -83,8 +84,11 @@ def Followers(request):
                         if len(handle_data)==0: # checking if the data for the twiteer handle is in database. If not then adding tweets data db. 
                                 tmp=core.task.AddFriendTweets.delay(str(usr)) 
                 elif status=="Revoke":
-                        d=following.objects.filter(twitter_handle=usr).filter(user_id=friend).update(isActive=0) # if the status is Revoke then revoking access for that particular friend.
-
+                        emails=User_detail.objects.filter(username=friend)
+                        d=following.objects.filter(twitter_handle=usr).filter(user_id=friend).delete() # if the status is Revoke then revoking access for that particular friend.
+                        
+                        for email in emails:
+                                send_mail("Access revoked by @"+usr,"Your friend just revoked the access. to access his twitter timeline please add him again.","a.team.ucd.5@gmail.com",[email.email]) # sending mail to the friend
                 t_handle=core.task.getFollower(usr) # retrieving followers list from db
                 noti_list, dd1=login.task.notificationdata(usr) # retrieving notification data from db
                 fname=login.task.getFirstName(usr) # retrieving first name of the logged in user
@@ -100,9 +104,16 @@ def trend(request):
         usr=request.session['username'] # retrieving logged in user
         twitter_handle=request.POST.get("friend") # retrieving the friend for which trend button is clicked
         if twitter_handle!=None:
-                message,tweet_data,friend,obj1,obj2=core.task.getTrend(twitter_handle) # get trend method is called to get the trend data from db
+                message,tweet_data,friend,obj1,obj2,summ=core.task.getTrend(twitter_handle) # get trend method is called to get the trend data from db
                 fname=login.task.getFirstName(usr) # retrieving the logged in user friest name
-                return render(request, 'trend.html', {"usr":fname,"Message": message, "tweet_data":tweet_data, "friend": friend,'obj1':obj1,'obj2':obj2}) # returning page and data 
+                sumry=""
+                if summ >2:
+                        sumry="Positive"
+                elif summ<=2 and summ>=-2:
+                        sumry="Neutral"
+                else:
+                        sumry="Negative"
+                return render(request, 'trend.html', {"usr":fname,"Message": message, "tweet_data":tweet_data, "friend": friend,'obj1':obj1,'obj2':obj2,"summ":sumry}) # returning page and data 
         else:
                 return redirect("/login") 
     else:

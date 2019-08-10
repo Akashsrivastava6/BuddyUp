@@ -53,12 +53,32 @@ def getFollower(user):
     return followed
 
 def getTrend(twitter_handle):
-    now=datetime.now()-timedelta(days=45)
+    now=datetime.now()-timedelta(days=10)
+
     tweet_data=tweets_data.objects.filter(twitter_handle=twitter_handle).filter(tweet_date__gt=now)
+            
     tweet_dat=[]
+    scores=[]
     for a in tweet_data:
         tweet_dat.append({"id":a.tweet_id,"tweet_data":a.tweet_data,"tweet_date":a.tweet_date,"tweet_score":a.score,"tweet_sum_score":a.sum_score,"tweet_counter":a.counter,"is_noti":a.is_notification})
-    return json.dumps(tweet_dat, default=json_serial),tweet_dat,twitter_handle,json.dumps(tweet_dat,default=json_serial),json.dumps(tweet_dat,default=json_serial)
+        scores.append([a.tweet_date,a.score])
+    score1=pd.DataFrame(scores,columns=['date','score'])
+
+    dd=score1.set_index('date').groupby(pd.Grouper(freq='D')).mean()
+    dd=dd.dropna()
+    mylist = dd['score']
+    N = 7
+    cumsum, moving_aves = [0], []
+
+    for i, x in enumerate(mylist, 1):
+        cumsum.append(cumsum[i-1] + x)
+        if i>=N:
+            moving_ave = (cumsum[i] - cumsum[i-N])/N
+        #can do stuff with moving_ave here
+            moving_aves.append(moving_ave)
+        
+    summ=moving_aves[-1]
+    return json.dumps(tweet_dat, default=json_serial),tweet_dat,twitter_handle,json.dumps(tweet_dat,default=json_serial),json.dumps(tweet_dat,default=json_serial),summ
 
 
 def twitterCheck(username):

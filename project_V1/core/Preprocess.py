@@ -107,14 +107,25 @@ def preprocess1(tmp3):
          a1=a1.lower()
          if a1.startswith("#"):
             a1=a1[1:]
-         if len(a1)>2:
+         if len(a1)>3:
+    
+            for i in range(3,len(a1)):
+        
+                if  (a1[i-2]==a1[i-1] and a1[i-1]==a1[i] and a1[i-3]==a1[i-2] ):
+            
+                    a1=a1.replace(a1[i]," ",1)
+        #             a1=a1.replace(a1[i-1]," ",1)
+            
+            
+            a1=a1.replace(" ","")
     
             for i in range(2,len(a1)):
-               if (a1[i-2]==a1[i-1] and a1[i-1]==a1[i]):
-                  a1=a1.replace(a1[i]," ",1)
+        
+                if  (a1[i-2]==a1[i-1] and a1[i-1]==a1[i]):
             
-            
-         a1=a1.replace(" ","")
+                    a1=a1.replace(a1[i]," ",1)
+                    a1=a1.replace(a1[i-1]," ",1)
+            a1=a1.replace(" ","")
          a1=spell(a1)
          if neg_words['word'].isin([a1]).any():
             flag=1

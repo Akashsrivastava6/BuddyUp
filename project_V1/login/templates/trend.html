@@ -190,7 +190,7 @@
                            <img src="#" alt="logo" /> </a>
                </div>
                <div class="navbar-menu-wrapper d-flex align-items-center">
-
+                {{summ}}
                    <ul class="navbar-nav ml-auto">
                       <form action="/home/personalisation?twitter_handle={{friend}}" method="GET">
                           {%csrf_token%}
@@ -260,6 +260,8 @@
 
 
     <script>
+        // var saa={{summ|safe}}
+        // console.log(saa)
         String.prototype.removeStopWords = function () {
             var x;
             var y;
