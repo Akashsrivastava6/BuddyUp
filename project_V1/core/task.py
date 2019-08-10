@@ -79,7 +79,7 @@ def getTrend(twitter_handle):
     if len(moving_aves)>0:   
         summ=moving_aves[-1]
     else:
-        summ="No"
+        summ=101
     return json.dumps(tweet_dat, default=json_serial),tweet_dat,twitter_handle,json.dumps(tweet_dat,default=json_serial),json.dumps(tweet_dat,default=json_serial),summ
 
 

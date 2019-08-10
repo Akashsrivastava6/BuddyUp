@@ -107,11 +107,11 @@ def trend(request):
                 message,tweet_data,friend,obj1,obj2,summ=core.task.getTrend(twitter_handle) # get trend method is called to get the trend data from db
                 fname=login.task.getFirstName(usr) # retrieving the logged in user friest name
                 sumry=""
-                if summ >2:
+                if summ >0.5 and summ <5:
                         sumry="Positive"
                 elif summ=="No":
                         sumry="No Tweet in last 10 days"
-                elif summ<=2 and summ>=-2:
+                elif summ<=0.5 and summ>=-0.5:
                         sumry="Neutral"
                 else:
                         sumry="Negative"
