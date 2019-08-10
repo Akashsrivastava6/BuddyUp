@@ -221,7 +221,7 @@
                </div>
            </nav>
             <div class="content-wrapper">
-                <h2>{{friend}}'s twitter analysis</u> </h2>
+                <h2>{{friend}}'s well being overview</u> </h2>
                 <div class="row m-b-1">
                     <div class="col-12">
                         <div class="card shadow" id="trend">
@@ -713,7 +713,7 @@
                 focus.select(".tooltip-date").text("Date: " + d3.timeFormat("%b-%d")(d.date))
                 focus.select(".tooltip-likes").text("Tweet: " + (d.tweet))
                 focus.select(".tooltip-likes").text("Score: " + (d.score).toFixed(2))
-                focus.select(".x-hover-line").attr("y2", height - y(d.score)).style("border", "solid");
+               focus.select(".x-hover-line").attr("y2", height - y(d.score)).style("border", "solid");
                 focus.style("color", "white");
             }
 
@@ -844,7 +844,7 @@
                             "you're", "you've", "your", "yours", "yourself", "yourselves"
                         ],
                         maxItems: 20,
-                        minLength: '3px',
+                        minLength: '5px',
                         palette: ['#D32F2F', '#1976D2', '#111111', '#E53935', '#1E88E5', '#7E57C2',
                             '#F44336', '#2196F3', '#1e1e1e'
                         ],
@@ -967,7 +967,7 @@
             svg.append("text")
                 .attr("class", "legendTitle")
                 .attr("x", 10)
-                .attr("y", 54)
+                .attr("y", 111)
                 .style("text-anchor", "left")
                 .style("font-size", "17px")
                 .style("font-weight", "700")
@@ -976,21 +976,12 @@
             svg.append("text")
                 .attr("class", "legendTitle")
                 .attr("x", 98)
-                .attr("y", 167)
+                .attr("y", 225)
                 .style("text-anchor", "left")
                 .style("font-size", "17px")
                 .style("font-weight", "700")
                 .text("(Positive)");
 
-
-            svg.append("text")
-                .attr("class", "legendTitle")
-                .attr("x", 55)
-                .attr("y", 283)
-                .style("text-anchor", "left")
-                .style("font-size", "17px")
-                .style("font-weight", "700")
-                .text("(Less Positive)");
 
             svg.append("text")
                 .attr("class", "legendTitle")
@@ -1003,17 +994,8 @@
 
             svg.append("text")
                 .attr("class", "legendTitle")
-                .attr("x", 45)
-                .attr("y", 397)
-                .style("text-anchor", "left")
-                .style("font-size", "17px")
-                .style("font-weight", "700")
-                .text("(Less Negative)");
-
-            svg.append("text")
-                .attr("class", "legendTitle")
                 .attr("x", 88)
-                .attr("y", 511)
+                .attr("y", 455)
                 .style("text-anchor", "left")
                 .style("font-size", "17px")
                 .style("font-weight", "700")
@@ -1022,7 +1004,7 @@
             svg.append("text")
                 .attr("class", "legendTitle")
                 .attr("x", 3)
-                .attr("y", 625)
+                .attr("y", 567)
                 .style("text-anchor", "left")
                 .style("font-size", "17px")
                 .style("font-weight", "700")
