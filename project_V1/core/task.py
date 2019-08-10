@@ -67,7 +67,7 @@ def getTrend(twitter_handle):
     dd=score1.set_index('date').groupby(pd.Grouper(freq='D')).mean()
     dd=dd.dropna()
     mylist = dd['score']
-    N = 7
+    N = 10
     cumsum, moving_aves = [0], []
 
     for i, x in enumerate(mylist, 1):
@@ -76,8 +76,10 @@ def getTrend(twitter_handle):
             moving_ave = (cumsum[i] - cumsum[i-N])/N
         #can do stuff with moving_ave here
             moving_aves.append(moving_ave)
-        
-    summ=moving_aves[-1]
+    if len(moving_aves)>0:   
+        summ=moving_aves[-1]
+    else:
+        summ="No"
     return json.dumps(tweet_dat, default=json_serial),tweet_dat,twitter_handle,json.dumps(tweet_dat,default=json_serial),json.dumps(tweet_dat,default=json_serial),summ
 
 

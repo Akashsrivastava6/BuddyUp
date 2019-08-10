@@ -109,6 +109,8 @@ def trend(request):
                 sumry=""
                 if summ >2:
                         sumry="Positive"
+                elif summ=="No":
+                        sumry="No Tweet in last 10 days"
                 elif summ<=2 and summ>=-2:
                         sumry="Neutral"
                 else:
