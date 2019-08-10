@@ -197,7 +197,7 @@
 
                           <ul>
                               <a href="/home/personalisation?twitter_handle={{friend}}" class="btn btn-info"
-                                  role="button">Help us get better</a>
+                                 id="help_btn" role="button">Help us get better</a>
 
                           </ul>
                       </form>
@@ -802,8 +802,10 @@
                 zingchart.MODULESDIR = 'https://cdn.zingchart.com/modules/';
                 let chartConfig = {
                     type: 'wordcloud',
-                    backgroundColor: '#111',
+                    backgroundColor: '#f9f9f9',
                     fontColor: '#111',
+                                        fontWeight: 'bold',
+
                     aspect: "spiral",
                     options: {
                         text: tweets_data,
@@ -843,14 +845,14 @@
                             "you'll",
                             "you're", "you've", "your", "yours", "yourself", "yourselves"
                         ],
-                        maxItems: 50,
+                        maxItems: 20,
                         minLength: '3px',
-                        palette: ['#D32F2F', '#1976D2', '#9E9E9E', '#E53935', '#1E88E5', '#7E57C2',
-                            '#F44336', '#2196F3', '#A1887F'
+                        palette: ['#D32F2F', '#1976D2', '#111111', '#E53935', '#1E88E5', '#7E57C2',
+                            '#F44336', '#2196F3', '#1e1e1e'
                         ],
                         rotate: true,
-                        fontSize: '30px',
-
+                        fontSize: '80px',
+                        fontWeight: 'bold',
 
                         style: {
                             tooltip: {
@@ -870,6 +872,8 @@
                                 wrapText: false
                             },
                             fontFamily: 'Open Sans',
+                            fontWeight: 'bold',
+                            fontSize: '50px',
                             hoverState: {
                                 wrap: true,
                                 backgroundColor: '#111',
@@ -905,7 +909,7 @@
                 var chart = new CanvasJS.Chart("chartContainer", {
                     animationEnabled: true,
                     zoomEnabled: true,
-                    backgroundColor: '#fff',
+                    backgroundColor: '#f9f9f9',
                     fontColor: "#fff",
                     axisX: {
                         title: "Time",
