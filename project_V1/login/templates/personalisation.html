@@ -39,7 +39,37 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
     </script>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            z-index: -1;
+        }
 
+        th {
+              border: 1px solid #dddddd;
+            text-align: center;
+        }
+
+        td {
+            width: 10%;
+            border: 1px solid #dddddd;
+            text-align: justify;
+            padding: 5px 5px 5px 5px;
+        }
+        .btn {
+            background: #5f2ceb;
+            border-radius: 15px;
+        }
+        .btn:hover {
+            background: #fff;   
+            color: #111;
+        }
+        #thanks {
+            display: none;
+        }
+    </style>
 
 </head>
 
@@ -115,46 +145,77 @@
             <!-- Sidebar  -->
             <div class="content-wrapper">
                 <h2>Help us get better!</u></h2>
-                <div class="feedback-form" id="personalise" style="text-align: center;align-content: center;align-items: center;">
+                <div class="feedback-form" id="personalise"
+                    style="text-align: center;align-content: center;align-items: center;">
 
                     {%block content%}
                     {%if tweet_data%}
-
                     <table class="feedback-table">
-                        <tr>
+                        <tr style="text-align: center;" id="row1">
                             <th mat-header-cell *matHeaderCellDef> Tweet Date </th>
                             <th>Tweet </th>
                             <th>Class Label</th>
-                            <th>
-                                Correctly Classified?
-                            </th>
+                            <th>Correctly Classified?</th>
                         </tr>
                         {%for d in tweet_data%}
-                        <tr>
-                            <td>
-                               <a href="http://twitter.com/{{twitter_handle}}/status/{{d.id}}" target="_blank" style="text-decoration: underline;" onclick="twitter_dialog()">{{d.id}}</a>
+                        <tr id="{{d.id}}">
+                            <td style="text-align: center;">
+                                <a href="http://twitter.com/{{twitter_handle}}/status/{{d.id}}" target="_blank"
+                                    style="text-decoration: underline;" onclick="twitter_dialog()">View Tweet</a>
                             </td>
-                            <td id="tweet_show" style="padding:0 30px 0 50px;">
+                            <td>
                                 {{d.tweet_data}}
                             </td>
-                            <td style="padding: 20px;">
-                                {{d.class}}
+                            {%if d.tweet_score > 0 %}
+                            <td id="tweet_show" style="text-align: center;">
+                                Positive
                             </td>
-                            <td style="display: inline-block;margin-left: -24%;padding: 20px;">
-                            <input type="radio" name="selection">Yes &nbsp;
-                            <input type="radio" name="selection">No
-                            
+                            {%else%}
+                            <td id="tweet_show" style="text-align: center;">
+                                Negative
+                            </td>
+                            {%endif%}
+                            <td id="classify" style="text-align: center;">
+                                <button class="btn btn-primary {{d.id}}" name="optradio{{d}}">Yes</button>
+                                &nbsp;
+                                <button class="btn btn-primary {{d.id}}" name="optradio{{d}}">No</button>
                             </td>
 
                         </tr>
+                                                         <script>
+                                                         var i = 0;  
+                                                                $(document).ready(function () {
+                                                                    $('.{{d.id}}').click(function () {
+                                                                        $("#{{d.id}}").fadeOut();
+                                                                        if (i == 9) {
+                                                                                        
+                                                                                        $("#thanks").fadeIn();
+                                                                                        
+                                                                                $("#row1").fadeOut();
+                                                                        };
+                                                                        i++;
+                                                                        
+                                                                    });
+                                                                    $('.{{d.id}}').click(function () {
+                                                                        $("#{{d.id}}").fadeOut();
+                                                                    });
+                                                                });
+                                                            </script>
                         {%endfor%}
                         {%endif%}
                         {%endblock %}
                     </table>
+                                                <div id="thanks">
+                                                    Thank you for your feedback.
+                                                </div>
                 </div>
             </div>
-            <input type="submit" value="submit" style="width: 20%;">
+            <!-- <input type="submit" value="submit" style="width: 20%;"> -->
         </div>
     </div>
+    <script>
+
+    </script>
 </body>
+
 </html>
