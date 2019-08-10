@@ -113,7 +113,7 @@ def trend(request):
                         sumry="No Tweet in last 10 days"
                 elif summ<=0.5 and summ>=-0.5:
                         sumry="Neutral"
-                else:
+                elif summ<-0.5 and summ >-5-:
                         sumry="Negative"
                 return render(request, 'trend.html', {"usr":fname,"Message": message, "tweet_data":tweet_data, "friend": friend,'obj1':obj1,'obj2':obj2,"summ":sumry}) # returning page and data 
         else:
