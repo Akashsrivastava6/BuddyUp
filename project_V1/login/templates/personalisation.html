@@ -129,9 +129,10 @@
             <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
                 <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
                     <a class="navbar-brand brand-logo" href="/home/submit">
-                        <u>BUDDY|UP</u>
-                        <a class="navbar-brand brand-logo-mini" href="/home/submit">
-                            <img src="#" alt="logo" /> </a>
+                        <img src="{%static 'images/buddyup-logo.png'%}" alt="logo"
+                            style="width: 170px; height:70px;margin-left:0;" /> </a>
+                    <a class="navbar-brand brand-logo-mini" href="/home/submit">
+                        <img src="#" alt="logo" /> </a>
                 </div>
                 <div class="navbar-menu-wrapper d-flex align-items-center">
 
@@ -163,7 +164,7 @@
 
                     {%block content%}
                     {%if tweet_data%}
-                    <table class="feedback-table">
+                    <table class="feedback-table" id="row2">
                         <tr style="text-align: center;" id="row1">
                             <th mat-header-cell *matHeaderCellDef> Tweet Date </th>
                             <th>Tweet </th>
@@ -204,7 +205,7 @@
                                                                         if  (i == 9)  {               
                                                                             $("#thanks").fadeIn();            
                                                                             $("#row1").fadeOut();
-                                                                        };
+                                                                        }      
                                                                         i++;
                                                                     });
                                                                     $('.{{d.id}}').click(function () {
@@ -219,6 +220,9 @@
                     </table>
                                                 <div id="thanks">
                                                     Thank you for your feedback.
+                                                </div>
+                                                <div class="thanks2">
+
                                                 </div>
                 </div>
             </div>
