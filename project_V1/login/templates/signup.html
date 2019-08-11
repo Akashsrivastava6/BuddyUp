@@ -115,14 +115,14 @@
     
     </script>
 <script>
-    var d="{{Message|safe}}"
+    var d={{Message|safe}}
     console.log(d)
          function redirect() {
                 window.location.href = "/home/login";
             }
         
-    if (d !=null){
-       
+    if (d != "{{new_reg}}") {
+        console.log(d)
         setTimeout(redirect, 5000); //2000 is equivalent to 2 seconds
 
     }
@@ -141,15 +141,17 @@
             <div class="wrap-login100">
                 <form class="login-form validate-form" name="signup" action="register" method="post">
                         {%csrf_token%}
-                    <!-- <span class="login-form-logo">
-                        <i class="zmdi zmdi-landscape"></i>
-                    </span>-->
+                     <span class="login-form-logo">
+                        <a class="navbar-brand brand-logo" href="/home/">
+                            <img src="{%static 'images/buddyup-logo-2.png'%}" alt="logo"
+                                style="width: 170px; height:70px;margin-left:20px;;" /> </a>
+                    </span>
                     <span class="login-form-title">
                         <h2>Signup</h2>
                     </span>
 
                     <span class="login-form-title" style="margin-top: 10px;">
-                        <h5>Welcome to our webapp</h5>
+                        <h5>Welcome to BUDDYUP</h5>
                     </span>
 
                     <div class="wrap-input100 validate-input" data-validate="First Name">

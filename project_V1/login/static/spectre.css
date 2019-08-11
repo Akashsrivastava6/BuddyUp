@@ -604,15 +604,15 @@ dl dd {
 }
 
 .btn.btn-primary {
-  background: #5755d9;
-  border-color: #4b48d6;
+  background: #6200EE;
+  border-color: #6200EE;
   color: #fff;
 }
 
 .btn.btn-primary:focus,
 .btn.btn-primary:hover {
-  background: #4240d4;
-  border-color: #3634d2;
+  background: #6300ee9c;
+  border-color: #6300ee9c;
   color: #fff;
 }
 

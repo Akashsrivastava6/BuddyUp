@@ -184,10 +184,11 @@
        <div id="content">
            <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
                <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-                   <a class="navbar-brand brand-logo" href="/home/submit">
-                       <u>BUDDY|UP</u>
-                       <a class="navbar-brand brand-logo-mini" href="/home/submit">
-                           <img src="#" alt="logo" /> </a>
+                     <a class="navbar-brand brand-logo" href="/home/submit">
+                         <img src="{%static 'images/buddyup-logo.png'%}" alt="logo"
+                             style="width: 170px; height:70px;margin-left:0;" /> </a>
+                     <a class="navbar-brand brand-logo-mini" href="/home/submit">
+                         <img src="#" alt="logo" /> </a>
                </div>
                <div class="navbar-menu-wrapper d-flex align-items-center">
                    <ul class="navbar-nav ml-auto">
@@ -226,8 +227,9 @@
                     0 1px 1px 0 rgba(0, 0, 0, 0.19);border-radius: 10px; text-align: center;color: #111; background:
                     #ffffff; font-weight: 600;font-size:
                     24px;">
+                    {{summ}}
                     The overall well being of <b style="color:#5f2ceb"><u>{{friend}}</u></b> in the past 10 days is
-                    <b style="color:#5f2ceb"><u>Neutral</u></b>. For
+                    <b style="color:#5f2ceb"><u>{{summ}}</u></b>. For
                     more
                     details, please view the trend below.
                 </p>

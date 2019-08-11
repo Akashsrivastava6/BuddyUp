@@ -43,7 +43,9 @@
                 <form class="login-form validate-form" action="submit" method="post">
                     {%csrf_token%}
                     <span class="login-form-logo">
-                        <h2><u>BUDDY|UP</u></h2>
+                        <a class="navbar-brand brand-logo" href="/home/">
+                            <img src="{%static 'images/buddyup-logo-2.png'%}" alt="logo"
+                                style="width: 170px; height:70px;margin-left:20px;;" /> </a>
                     </span>
                     <!-- <span class="login-form-title">
                     </span> -->
