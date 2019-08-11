@@ -40,8 +40,7 @@ def personalisation(request):
         usr = request.session['username']
         fname = task.getFirstName(usr)
         twitter_handle = request.GET.get('twitter_handle')
-        message, tweet_data, friend, obj1, obj2 = core.task.getTrend(
-            twitter_handle)
+        message, tweet_data, friend, obj1, obj2,summ = core.task.getTrend(twitter_handle)
         
         return render(request, 'personalisation.html', {'Message': fname, "tweet_data": tweet_data[0:10], 'twitter_handle': twitter_handle})
     return redirect("/login")
