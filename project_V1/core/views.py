@@ -37,7 +37,7 @@ def Checkingtwitter(request):
         # updating session
         usr=request.GET.get("twitter_handle")
         request.session['username']=usr 
-        request.session.set_expiry(180)
+        
         email=request.POST.get("username")  
         pwd=request.POST.get('password')
         fname=request.POST.get("fname")
@@ -49,7 +49,8 @@ def Checkingtwitter(request):
         d=User_detail.objects.filter(username=usr).update(email=email) # updating users email
         d=User_detail.objects.filter(username=usr).update(password=pwd) # updating users password
         
-        page,t_handle,t_handle2=core.task.twitterCheck(usr.lower()) # calling twittercheck
+        page,t_handle,t_handle2,n=core.task.twitterCheck(usr.lower()) # calling twittercheck
+        request.session.set_expiry(n)
         fname=login.task.getFirstName(usr) # retrieving users first name
         return render(request,page,{"Message":fname,'data':t_handle,"data2":t_handle2}) # returning page and data
        
@@ -63,8 +64,9 @@ def Checking(request):
                 u.delete()
                 
                 request.session['username']=extra # updating session
-                request.session.set_expiry(10) # updating session
-                page,t_handle,t_handle2=core.task.twitterCheck(extra)  # calling twittercheck
+              
+                page,t_handle,t_handle2,n=core.task.twitterCheck(extra)  # calling twittercheck
+                request.session.set_expiry(n) # updating session
                 # fname=login.task.getFirstName(extra)
                 fname=extra   
                 return render(request,page,{"Message":fname,'data':t_handle,"data2":t_handle2}) # returing page and data

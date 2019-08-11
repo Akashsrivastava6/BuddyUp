@@ -99,21 +99,21 @@ def twitterCheck(username):
             if len(userfollowing)>0:
                 if len(userfollowing.filter(isActive=1))>0:
                     t_handle,t_handle2=login.task.getFriends(username)
-                    return 'dashboard.html',t_handle,t_handle2
+                    return 'dashboard.html',t_handle,t_handle2,180
                 else:
                     t_handle=getFollower(username)
-                    return 'followers.html',t_handle,None
+                    return 'followers.html',t_handle,None,180
             else:
                 t_handle,t_handle2=login.task.getFriends(username)
-                return 'dashboard.html',t_handle,t_handle2
+                return 'dashboard.html',t_handle,t_handle2,180
         else:
-            return 'editprofile.html',None,None       
+            return 'editprofile.html',None,None,10      
     else:                
         adduserD=User_detail(username=username.lower())
         # adduserR=Registration(username_id=extra,firstname=userdata.first_name,lastname=userdata.last_name)
         
         adduserD.save()
-        return 'editprofile.html',None,None
+        return 'editprofile.html',None,None,10
         
                 
 
