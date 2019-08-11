@@ -47,7 +47,7 @@ def personalisation(request):
     return redirect("/login")
         
 def signupUser(request):
-    return render(request,'signup.html')
+    return render(request,'signup.html',{"Message":""})
 
 def myprofile(request):
     return render(request,'myprofile.html')
