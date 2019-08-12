@@ -222,17 +222,28 @@
            </nav>
             <div class="content-wrapper">
                 <h2>{{friend}}'s well being overview</u> </h2>
+                {%if summ == 'No'%}
+
                 <p
                     style="width:96%; margin-left:2%;  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
                     0 1px 1px 0 rgba(0, 0, 0, 0.19);border-radius: 10px; text-align: center;color: #111; background:
                     #ffffff; font-weight: 600;font-size:
                     24px;">
                     
-                    The overall well being of <b style="color:#5f2ceb"><u>@{{friend}}</u></b> in the past 10 days is
-                    <b style="color:#5f2ceb"><u>{{summ}}</u></b>. For
-                    more
-                    details, please view the trend below.
+                    No Tweets in last 10 days
                 </p>
+                {%else%}
+                    <p style="width:96%; margin-left:2%;  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
+                                        0 1px 1px 0 rgba(0, 0, 0, 0.19);border-radius: 10px; text-align: center;color: #111; background:
+                                        #ffffff; font-weight: 600;font-size:
+                                        24px;">
+                    
+                        The overall well being of <b style="color:#5f2ceb"><u>@{{friend}}</u></b> in the past 10 days is
+                        <b style="color:#5f2ceb"><u>{{summ}}</u></b>. For
+                        more
+                        details, please view the trend below.
+                    </p>
+                    {%endif%}
                 <div class="row m-b-1">
                     <div class="col-12">
                         <div class="card shadow" id="trend">
