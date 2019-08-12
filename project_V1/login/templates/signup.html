@@ -121,7 +121,7 @@
                 window.location.href = "/home/login";
             }
     console.log(d)  
-    if (d !=""){
+    if (d !="n"){
         console.log("inside if")
         setTimeout(redirect, 5000); //2000 is equivalent to 2 seconds
 
@@ -186,8 +186,11 @@
                         <br>
                     <div class="login-form-title">
                         <h6>
-                        
-                        {{Message}}
+                            <script>console.log({{Message}})</script>
+                            {%if Message == 'n'%}
+                            {%else%}
+                            Your username is {{Message}}
+                            {%endif%}
                          </h6>
                    </div>
                 </div>
@@ -198,7 +201,7 @@
                     </div>
 
                     <div class="form-sign-up">
-                        Already have an account? <a href="/home/login">login</a>.
+                        Already have an account? <a href="/home/login" style="color: blue">login</a>.
                         <span class="focus-input100" data-placeholder=""></span>
                         </label>
                     </div>
@@ -208,5 +211,7 @@
                             <a href="{% url 'social:begin' 'twitter' %}" class="twitter-btn">
                                 <i class="fa fa-twitter fa-fw" style="padding:0 20px 0 0px;"></i> Login with Twitter
                             </a> </button>
+
+
 </body>
 </html>

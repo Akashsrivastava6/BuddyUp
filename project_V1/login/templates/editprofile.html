@@ -171,7 +171,7 @@
                         <br>
                         <div class="login-form-title">
                             <h6>
-                                {{Message}}
+                                  Your username is {{Message}}
                             </h6>
                         </div>
                     </div>
@@ -183,7 +183,9 @@
                     </form>
 </div>
       </div>
-                    
+    <script>
+    window.onbeforeunload = function() { return "Your work will be lost."; };
+    </script>   
 </body>
 
 </html>

@@ -757,7 +757,7 @@
                     (d.date))).appendTo(".feedback-form");
                 $(("<table>")).appendTo(".feedback-form")
                 for (i = 0; i <= d.tweet.length - 1; i++) {
-                    tweets_data += d.tweet[i]
+                    tweets_data += (d.tweet[i] + "\n")
                     //      console.log("printing tweet" + d.tweet[i])
                      console.log(d)
                     if (d.is_noti[i] == true) {
@@ -771,7 +771,7 @@
                     }
 
                 }
-
+                
                 $('<h4>' + d3.timeFormat("%b-%d-%Y")(d.date) + '</h4>').appendTo(".feedback-container-head");
                 $('<h4>' + "Day's Tweet Timeline" + '</h4>').appendTo(".wordchart-container");
                 $(("</table>")).appendTo(".feedback-form")
@@ -809,7 +809,7 @@
                 // chart.draw();
                 // });
                 //   console.log(tweets_data.removeStopWords());
-
+                    console.log(tweets_data)
                 zingchart.MODULESDIR = 'https://cdn.zingchart.com/modules/';
                 let chartConfig = {
                     type: 'wordcloud',
@@ -866,31 +866,31 @@
                         fontWeight: 'bold',
 
                         style: {
-                            tooltip: {
-                                                                wrap: true,
-                                
-                                padding: '1px',
-                                alpha: 3.9,
-                                backgroundColor: '#D32F2F',
-                                borderColor: 'none',
-                                borderRadius: '3px',
-                                fontColor: 'white',
-                                fontFamily: 'Open Sans',
-                                textAlpha: 6,
-                                fontSize: '20px',
-                                visible: true,
-                                width: '300px',
-                                wrapText: false
-                            },
-                            fontFamily: 'Open Sans',
-                            fontWeight: 'bold',
-                            fontSize: '50px',
-                            hoverState: {
-                                wrap: true,
-                                backgroundColor: '#111',
-                                borderColor: 'none',
-                                borderRadius: '3px',
-                                fontColor: 'white'
+                          tooltip: {
+                                                           wrap: true,
+
+                                                           padding: '1px',
+                                                           alpha: 3.9,
+                                                           backgroundColor: '#D32F2F',
+                                                           borderColor: 'none',
+                                                           borderRadius: '3px',
+                                                           fontColor: 'white',
+                                                           fontFamily: 'Open Sans',
+                                                           textAlpha: 6,
+                                                           fontSize: '20px',
+                                                           visible: true,
+                                                           width: '300px',
+                                                           wrapText: false
+                                                           },
+                                                           fontFamily: 'Open Sans',
+                                                           fontWeight: 'bold',
+                                                           fontSize: '50px',
+                                                           hoverState: {
+                                                           wrap: true,
+                                                           backgroundColor: '#111',
+                                                           borderColor: 'none',
+                                                           borderRadius: '3px',
+                                                           fontColor: 'white'
                             }
                         }
                     }
@@ -940,7 +940,7 @@
                         toolTipContent: "<b>Tweet </b>{tweet}<br /><b>Time: </b>{x} <br /><b>Score: </b>{y}",
                         dataPoints: tweet_time,
                         markerSize: 20,
-                                            markerColor: "#5a02ad",
+                        markerColor: "#5a02ad",
 
                     }]
                 });
