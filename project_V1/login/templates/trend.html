@@ -757,9 +757,9 @@
                     (d.date))).appendTo(".feedback-form");
                 $(("<table>")).appendTo(".feedback-form")
                 for (i = 0; i <= d.tweet.length - 1; i++) {
-                    tweets_data += (d.tweet[i] + "\n")
-                    //      console.log("printing tweet" + d.tweet[i])
-                     console.log(d)
+                    tweets_data += (d.tweet[i] + ' ')
+                    console.log("printing tweet" + d.tweet[i])
+                  //   console.log(d)
                     if (d.is_noti[i] == true) {
                         $(('<div id="test" style="color:red;"><tr>' + [i + 1] + '. ' + d.tweet[i] +
                             '<br><hr></tr>')).appendTo(".feedback-form");
@@ -867,7 +867,6 @@
 
                         style: {
                           tooltip: {
-                                                           wrap: true,
 
                                                            padding: '1px',
                                                            alpha: 3.9,
@@ -880,13 +879,12 @@
                                                            fontSize: '20px',
                                                            visible: true,
                                                            width: '300px',
-                                                           wrapText: false
+                                                           wrapText: false,
                                                            },
                                                            fontFamily: 'Open Sans',
                                                            fontWeight: 'bold',
                                                            fontSize: '50px',
                                                            hoverState: {
-                                                           wrap: true,
                                                            backgroundColor: '#111',
                                                            borderColor: 'none',
                                                            borderRadius: '3px',
