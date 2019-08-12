@@ -40,7 +40,7 @@ def registerNewUser(usr,pwd,fname,lname,dob):
         user_login_details.save()
         user_registration_details.save()
         
-        return "You have been registered!!"
+        return usr
     return "Email already registered"    
 
 def notificationdata(usr):

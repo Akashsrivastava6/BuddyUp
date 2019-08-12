@@ -35,7 +35,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
     </script>
-    <!-- Bootstrap JS -->
+    <script src="
+    https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js">
+    </script>
+<!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
     </script>
@@ -215,6 +218,9 @@ border:none;font-size:19px;font-weight:700;" name="friend" value={{c}} readonly>
                                             <div id="tweets-arr" class="toggle" >
                                                 <b>{{ d.date }}</b> <br>
                                                 {{d.tweet}}
+                                                <script>
+                                                    $.notify("You received a notification", "success");
+                                                </script>
                                                 <hr>
                                             </div>
                                             {%endfor%}
@@ -250,6 +256,9 @@ border:none;font-size:19px;font-weight:700;" name="friend" value={{c}} readonly>
             }
             $(this).next().collapse('toggle');
         });
+        if ("#tweets-arr" != null){
+        $(".elem-demo").notify("Hello Box");
+        }
     </script>
 
 
