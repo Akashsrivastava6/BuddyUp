@@ -539,13 +539,13 @@
 
 
             var rect = svg.append("rect")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                .attr("transform", "translate(" + margin.left - 40 + "," + margin.top + ")")
                 .attr("class", "overlay")
                 .attr("id", "line01")
-                .attr("width", width)
-                .attr("height", height)
-                    .attr('viewBox','0 0 '+Math.min(width,height)+' '+Math.min(width,height))
-                    .attr('preserveAspectRatio','xMinYMin')
+                .attr("width", width+200)
+                .attr("height", height+300)
+                        // .attr('viewBox','0 0 '+Math.min(width,height)+' '+Math.min(width,height))
+                        // .attr('preserveAspectRatio','xMinYMin')
                 .order("", 10)
                 .on("mouseover", function () {
                     focus.style("display", null)
@@ -706,7 +706,6 @@
                 .attr("class", "tooltip-date")
                 .attr("x", -130)
                 .attr("y", -35)
-                .attr("transform", "translate(" -100 + ", " + -100 + ")"); 
 
             focus.append("text")
                 .attr("class", "tooltip-likes")
@@ -822,7 +821,7 @@
                         text: tweets_data,
                         aspect: 'spiral',
                         colorType: 'palette',
-                        ignore: ["a", "about", "above", "after", "again", "against", "all", "am", "an",
+                        ignore: ["1","2","3","4", "5", "6", "7", "8", "9", "0", "200", "a", "about", "above", "after", "again", "against", "all", "am", "an",
                             "and",
                             "any", "are", "aren't", "as", "at", "be", "because", "been", "before", "being",
                             "below",
@@ -856,8 +855,8 @@
                             "you'll",
                             "you're", "you've", "your", "yours", "yourself", "yourselves"
                         ],
-                        maxItems: 20,
-                        minLength: '5px',
+                        maxItems: 15,
+                        minLength: '3px',
                         palette: ['#D32F2F', '#1976D2', '#111111', '#E53935', '#1E88E5', '#7E57C2',
                             '#F44336', '#2196F3', '#1e1e1e'
                         ],
