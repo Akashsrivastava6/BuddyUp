@@ -65,28 +65,31 @@ def getTrend(twitter_handle):
         scores.append([a.tweet_date,a.score])
     score1=pd.DataFrame(scores,columns=['date','score'])
 
-    dd=score1.set_index('date').groupby(pd.Grouper(freq='D')).mean()
-    dd=dd.dropna()
-    mylist = dd['score'].tolist()
-    if len(mylist) >10:
-        N=10
-    else:
-        N=len(mylist)
-
-
     cumsum, moving_aves = [0], []
+    if len(score1)>0:
+        dd=score1.set_index('date').groupby(pd.Grouper(freq='D')).mean()
+        dd=dd.dropna()
+        mylist = dd['score'].tolist()
+        if len(mylist) >10:
+            N=10
+        else:
+            N=len(mylist)
 
+
+        
+
+        
+        for i, x in enumerate(mylist, 1):
+            cumsum.append(cumsum[i-1] + x)
+            if i>=N:
+                moving_ave = (cumsum[i] - cumsum[i-N])/N
+                #can do stuff with moving_ave here
+                moving_aves.append(moving_ave)
     
-    for i, x in enumerate(mylist, 1):
-        cumsum.append(cumsum[i-1] + x)
-        if i>=N:
-            moving_ave = (cumsum[i] - cumsum[i-N])/N
-            #can do stuff with moving_ave here
-            moving_aves.append(moving_ave)
     if len(moving_aves)>0:   
         summ=moving_aves[-1]
     else:
-        summ=mylist
+        summ=101
     
     return json.dumps(tweet_dat, default=json_serial),tweet_dat,twitter_handle,json.dumps(tweet_dat,default=json_serial),json.dumps(tweet_dat,default=json_serial),summ
 
