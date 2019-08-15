@@ -47,13 +47,14 @@ def notificationdata(usr):
     data3=following.objects.filter(user_id=usr).filter(isActive=1)
     noti_list=[]
     dd1 = []
+    
     for d in data3:
         dd = []
         # t_handle.append(d.twitter_handle)
         noti_data= notification_data.objects.filter(twitter_handle=d.twitter_handle) 
         for row in noti_data:
             noti_list.append({"handle":d.twitter_handle,"tweet":row.tweet_data})
-            dd.append({"tweet":row.tweet_data,"date":row.noti_date.date()})            
+            dd.append({"tweet":row.tweet_data,"date":row.noti_date.date(),"datetime":row.noti_date})            
         dd=dd[::-1]
         dd1.append({"handle": d.twitter_handle, "tweet_arr": dd})
         
@@ -63,3 +64,8 @@ def notificationdata(usr):
 def getFirstName(usr):
     fname=Registration.objects.filter(username=usr)
     return fname[0].FirstName
+
+def getLastLogin(usr):
+    last_login=User_detail.objects.filter(username=usr)
+    return last_login[0].last_login
+

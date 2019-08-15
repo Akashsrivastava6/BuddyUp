@@ -20,15 +20,15 @@ def sendRequest(usr,friend_handle,friend_email,url):
     data=following.objects.filter(user_id=usr).filter(twitter_handle=friend_handle) # checking if the user has added the friend before
     if len(data)>0: # if the friend data is already id db then following page is returned
         t_handle,t_handle2=login.task.getFriends(usr) # geting data to update followers list
-        return t_handle,t_handle2,"Request already send for this twitter handle." #
+        return t_handle,t_handle2,"Request already sent for this twitter handle." #
     else: # if the friend is added for the first time.
         friend_tweet=following(user_id=usr,twitter_handle=friend_handle,friend_Email=friend_email,url=url) # adding friends details in db
         friend_name=login.task.getFirstName(usr) # retrieving frist name of the logged in user
-        send_mail("Request From " + friend_name + " to join BuddyUp.", "Hi,\n\nYour friend " + friend_name + ", wants to add you on BuddyUp. BuddyUp is a webapp which generates and shows trend based on the recent twitter activity. Please read the below privacy policy and take the action.\n\nPrivacy Notice: This notice is to inform you that as a part of a research project BUDDYUP undertaken for the completion of masters’ degree Computer Science Negotiated Learning at University College Dublin. The research group shall be analyzing your twitter handle which comprises of Twitter Username and Password to understand human behavior. This information is anonymously used for the research project and does not directly or specifically identify you. To details on the processing of personal data, we wish to inform you that your personal data shall be stored in the database for profile creation and granting access to your tweets to " +  friend_name  +
+        send_mail("Request From " + friend_name + " to join BuddyUp.", "Hi,\n\nYour friend " + friend_name + ", wants to add you on BuddyUp. BuddyUp is a web Application which generates and shows trend based on the recent twitter activity. Please read the below privacy policy and take the action.\n\nPrivacy Notice: This notice is to inform you that as a part of a research project BUDDYUP undertaken for the completion of masters’ degree Computer Science Negotiated Learning at University College Dublin. The research group shall be analyzing your twitter handle which comprises of Twitter Username and Password to understand human behavior. To details on the processing of personal data, we wish to inform you that your personal data shall be stored in the database for profile creation and granting access to your tweets to " +  friend_name  +
                   ". Please be informed that the information obtained under this research project will be erased without the possibility of reverse engineer, within 3 months from the submission of the research project. The motive of this research is to provide a tool that continuously monitors and notifies the emotional well being of loved ones on Twitter. Please note that the data obtained from this research project is purely for academic and non-commercial purpose. As we respect your right to privacy and in compliance with GDPR and ePrivacy Directives, we wish to procure a freely given, informed, unambiguous and explicit consent for processing the personal data available in your twitter handle. \n\nBy clicking on the link, you can provide your consent and register with us. However, you do have an option to opt out of this research project by ignoring this mail. If you need any further details on the research project, you may feel free to contact us on support@buddyup.cc. We would be happy to walk you through the research outcomes.\n\n buddyup.cc/oauth/login/twitter/ \n\n Thanks,\n BuddyUp Team", "a.team.ucd.5@gmail.com", [friend_email])  # sending mail to the friend
         friend_tweet.save()
         t_handle,t_handle2=login.task.getFriends(usr) # geting data to update followers list
-        return t_handle,t_handle2,"An Email is send for Confirmation!" # returning the page and data
+        return t_handle,t_handle2,"An Email is sent for Confirmation!" # returning the page and data
         
 
 
@@ -149,7 +149,7 @@ def noti_task():
 
 
 
-@periodic_task(run_every=(crontab(minute='*/2')), name="AddTweets_task", ignore_result=True)
+@periodic_task(run_every=(crontab(minute='*/1')), name="AddTweets_task", ignore_result=True)
 def AddTweets():
     data=following.objects.filter(isActive=1)
     dep_list=pd.read_csv("core\\dep_list.csv")

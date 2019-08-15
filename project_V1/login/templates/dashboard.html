@@ -68,6 +68,15 @@
             })
         })
     </script>
+    <script>
+        // var noti={{dd1|safe}}
+        // console.log(noti)
+        // var c=0
+        // for(i=0;i<noti.length-1;i++){
+            
+        // }
+
+    </script>
 
 
     <div class="wrapper">
@@ -194,6 +203,7 @@ border:none;font-size:19px;font-weight:700;" name="friend" value={{c}} readonly>
                         <div class="notification">
                             <h3>Notifications</h3>
                             <div class="test">
+                                
                                 {%if dd1%}
                                 
                                 {% for c in dd1%}
@@ -218,15 +228,26 @@ border:none;font-size:19px;font-weight:700;" name="friend" value={{c}} readonly>
                                             <div id="tweets-arr" class="toggle" >
                                                 <b>{{ d.date }}</b> <br>
                                                 {{d.tweet}}
-                                                <script>
-                                                    $.notify("You received a notification", "success");
-                                                </script>
+                                                
                                                 <hr>
                                             </div>
                                             {%endfor%}
                                         </div>
                                         {%endfor%}
+                                        {%if last_login is  1%}
+                                        
+                                        <script>
+                                            
+                                            $.notify("You "+{{last_login}} +" new notification", "success");
+                                        </script>
+                                        {%elif last_login > 1%}
+                                        <script>
+
+                                            $.notify("You " + {{ last_login }} +" new notifications", "success");
+                                        </script>
+                                        {%endif%}
                                     </div>
+
                                     {%else%}
                                     <div class="no-noti">
                                         <h5>You don't have any notifications.</h5>

@@ -1,10 +1,12 @@
 from django.db import models
+from datetime import datetime,timezone
 
 # Create your models here.
 class User_detail(models.Model):
     username=models.CharField('Username',max_length=60,primary_key=True)
     password=models.CharField('Password',max_length=300)
     email=models.CharField('email',max_length=60,null=True)
+    last_login=models.DateTimeField('last_login', default= datetime.now(timezone.utc))
     
 
     

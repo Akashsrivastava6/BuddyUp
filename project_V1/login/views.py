@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from core.models import following
 import core.task
 from login import task 
+from datetime import datetime,timezone
 
 @login_required
 def home(request):
@@ -67,8 +68,15 @@ def loginRequest(request):
         usr=request.session['username']
         t_handle,t_handle2=task.getFriends(usr)
         noti_list, dd1=task.notificationdata(usr)
+        last_login=task.getLastLogin(usr)
+        co=0
+        for a in dd1:
+            for b in a["tweet_arr"]:
+                if b["datetime"]>last_login:
+                    co=co+1
         fname=task.getFirstName(usr)
-        return render(request,'dashboard.html',{'Message':fname,'data':t_handle,"data2":t_handle2,'noti':noti_list,'dd1':dd1})
+        d=User_detail.objects.filter(username=usr).update(last_login=datetime.now(timezone.utc))
+        return render(request,'dashboard.html',{'Message':fname,'data':t_handle,"data2":t_handle2,'noti':noti_list,'dd1':dd1,"last_login":co})
     request.session.clear_expired()
     usr=request.POST.get("username")
     pwd=request.POST.get('password')
@@ -80,8 +88,15 @@ def loginRequest(request):
         request.session['username']=usr
         t_handle,t_handle2=task.getFriends(usr)
         noti_list,dd1=task.notificationdata(usr)
+        last_login=task.getLastLogin(usr)
+        co=0
+        for a in dd1:
+            for b in a["tweet_arr"]:
+                if b["datetime"]>last_login:
+                    co=co+1
+        d=User_detail.objects.filter(username=usr).update(last_login=datetime.now(timezone.utc))
         fname=task.getFirstName(usr)
-        return render(request, 'dashboard.html', {'Message': fname, 'data': t_handle,"data2":t_handle2, 'noti': noti_list, 'dd1': dd1})
+        return render(request, 'dashboard.html', {'Message': fname, 'data': t_handle,"data2":t_handle2, 'noti': noti_list, 'dd1': dd1,"last_login":co})
         
 
 def RegisterUser(request):

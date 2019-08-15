@@ -90,7 +90,7 @@ def Followers(request):
                         d=following.objects.filter(twitter_handle=usr).filter(user_id=friend).delete() # if the status is Revoke then revoking access for that particular friend.
                         
                         for email in emails:
-                                send_mail("Access revoked by @"+usr,"Your friend just revoked the access. to access his twitter timeline please add him again.","a.team.ucd.5@gmail.com",[email.email]) # sending mail to the friend
+                                send_mail("Access revoked by @"+usr,"Your friend just @"+usr +" revoked the access. To access his twitter timeline please add him again.","a.team.ucd.5@gmail.com",[email.email]) # sending mail to the friend
                 t_handle=core.task.getFollower(usr) # retrieving followers list from db
                 noti_list, dd1=login.task.notificationdata(usr) # retrieving notification data from db
                 fname=login.task.getFirstName(usr) # retrieving first name of the logged in user

@@ -25,7 +25,7 @@ SECRET_KEY = 'cb+2j=k$%!1m#%prsla@=o^crosa4-ot2q%6i#!1qhywprx+7+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['54.194.230.5','127.0.0.1']
+ALLOWED_HOSTS = ['54.194.230.5','127.0.0.1',]
 
 
 # Application definition
@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'project_V1.urls'
@@ -154,7 +155,7 @@ STATIC_URL = '/static/'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'login/submit'
-
+SOCIAL_AUTH_LOGIN_ERROR_URL = 'login'
 SOCIAL_AUTH_TWITTER_KEY = 'twVFhyS2oNaSjcUUVaYVnTBpH'
 SOCIAL_AUTH_TWITTER_SECRET = 'GlvJcYHsfeT6szx7oLuVBiWgtwAg2SCEEzhJpyUuWslooI61cn'
 
