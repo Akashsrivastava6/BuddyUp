@@ -48,8 +48,6 @@
 
         });
 
-        //for confirm password 
-
         $(document).ready(function () {
                 $('button[name="register"]').click(function () {
                     var fname = $('input[name="fname"]').val()
@@ -126,9 +124,6 @@
             <div class="wrap-login100">
                 <form class="login-form validate-form" name="signup" action="twitterregister?twitter_handle={{Message}}" method="post">
                     {%csrf_token%}
-                    <!-- <span class="login-form-logo">
-                        <i class="zmdi zmdi-landscape"></i>
-                    </span>-->
                     <span class="login-form-title">
                         <h2>Welcome to BuddyUp</h2>
                     </span>
@@ -183,9 +178,7 @@
                     </form>
 </div>
       </div>
-    <script>
-    window.onbeforeunload = function() { return "Your work will be lost."; };
-    </script>   
+
 </body>
 
 </html>
