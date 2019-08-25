@@ -200,42 +200,31 @@ def AddTweets():
                     c2=0
                     d_flag=0       
                     sen=sp(text) 
+                    
                     for word in sen: # for each word in sen
                         if (word.tag_ =='PRP') or (word.tag_ =='PRP$'): # checking if the word is a personal pronoun
                             if word.text.lower() in pronounlistf: # checking if the the word is self reflecting personal pronoun
                         #                 listl.append(word.text)
                                         #print(text+":"+word.text+"c1")
+                                
                                 c1=c1+1 # incremating the counter
                             elif word.text.lower() in pronounlisto: #checking if the word is not self reflecting personal pronoun
                                         #print(text+":"+word.text+"c2")
                                 c2=c2+1 # incrementin the counter
+                                
                             if c1 == 0 and c2==0: # checking if the two counters are equal
                                 d_flag=1 # setting the flag as 1
                             elif c1>c2: # if self reflecting personal pronoun are more than non self reflecting personal pronoun
-                                d_flag=1
+                                d_flag=2
+                                
                             else:        
                                 pass
                             if d_flag==1:    # checing if the flag is 1 that is there are self reflecting personal pronoun in the tweet
                                 for word in sen:
                                     if word.text.lower() in dep_list['WORD'].values: # if the word is in dep list
                                         d_flag=2
-                        elif word.text.lower() in dep_list['WORD'].values:
-                            d_flag=1;
-                            if (word.tag_ =='PRP') or (word.tag_ =='PRP$'): # checking if the word is a personal pronoun
-                                if word.text.lower() in pronounlistf: # checking if the the word is self reflecting personal pronoun
-                        #                 listl.append(word.text)
-                                        #print(text+":"+word.text+"c1")
-                                    c1=c1+1 # incremating the counter
-                                elif word.text.lower() in pronounlisto: #checking if the word is not self reflecting personal pronoun
-                                        #print(text+":"+word.text+"c2")
-                                    c2=c2+1 # incrementin the counter
-                            if c1 == 0 and c2==0: # checking if the two counters are equal
-                                d_flag=1 # setting the flag as 1
-                            elif c1>c2: # if self reflecting personal pronoun are more than non self reflecting personal pronoun
-                                d_flag=2
-                            else:        
-                                pass
-
+                                        
+                       
                     if d_flag==2: # checking if the twwet is notifiable or not if d_flag is 2 then it is notifiable
                         # print(t_handle+"  "+text+" "+str(date.today))
                         d=tweets_data.objects.filter(twitter_handle=t_handle).filter(tweet_id=tmp1[pos]).update(is_notification=1) # updating the tweet as notifiable
