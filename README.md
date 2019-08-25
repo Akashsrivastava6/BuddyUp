@@ -1,4 +1,4 @@
-# BuddyUP ReadME Guide
+# BuddyUP Guide
 
 ## What is BuddyUP?
 
