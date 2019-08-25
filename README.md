@@ -31,7 +31,8 @@ This application is responsible for the overall functionality of the dashboard o
 
 - Views.py: This is one of the most important files in the application as this contains callable classes which takes requests and then returns them as a response to the task.py file. 
 - Task.py: Contains all the callable functions responsible for performing tasks in the application
-- urls.py: This file is responsible 
+- urls.py: This file consists of the urls and manages how the navigation of the application would work  
+- models.py: Consists the database models responsible for the creation of the primary database of the application 
 - Processes.py: Contains all the functions to pre-process the tweets and the algorithm to calculate the sentiment score of the tweets
 - Templates 
   - Homepage.html: This is the landing page of the applicaion and the main page as well
