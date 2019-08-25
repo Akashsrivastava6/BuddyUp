@@ -73,8 +73,3 @@ python manage.py runserver
 - **Arpan Tiwari** - [arpantiwari](https://github.com/arpantiwari)
 - **Arunuday Ganju** - [arunduayganju](https://github.com/ArunudayGanju)
 - **Achin Tamiri** - [achintamiri](https://github.com/achintamiri)
-
-## License 
-
-
-This project is licensed under the MIT License 
