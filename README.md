@@ -71,7 +71,7 @@ python manage.py runserver
 - **Akash Srivastava** - [akashsrivastava](https://github.com/Akashsrivastava6)
 - **Arpan Tiwari** - [arpantiwari](https://github.com/arpantiwari)
 - **Arunuday Ganju** - [arunduayganju](https://github.com/ArunudayGanju)
-- **Achin Tamiri** = [achintamiri](https://github.com/achintamiri)
+- **Achin Tamiri** - [achintamiri](https://github.com/achintamiri)
 
 ## License 
 
