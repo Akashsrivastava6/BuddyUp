@@ -63,3 +63,15 @@ Once the migrations are migrated, you can start the application by the following
 ```
 python manage.py runserver
 ```
+
+## Authors 
+
+- **Arnab Tarwani** - [arnabtarwani](https://github.com/arnabtarwani)
+- **Akash Srivastava** - [akashsrivastava](https://github.com/Akashsrivastava6)
+- **Arpan Tiwari** - [arpantiwari](https://github.com/arpantiwari)
+- **Arunuday Ganju** - [arunduayganju](https://github.com/ArunudayGanju)
+- **Achin Tamiri** = [achintamiri](https://github.com/achintamiri)
+
+## License 
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
