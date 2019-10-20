@@ -57,7 +57,7 @@ gensim==3.7.3
 google-pasta==0.1.7
 greenlet==0.4.15
 grpcio==1.21.1
-gunicorn==19.4.5
+gunicorn==19.5.0
 h5py==2.9.0
 hyperlink==19.0.0
 icc-rt==2019.0
