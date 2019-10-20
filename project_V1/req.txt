@@ -21,7 +21,7 @@ Django==2.2.1
 django-background-tasks==1.2.0
 django-compat==1.0.15
 dnspython==1.16.0
-ecdsa==0.13.2
+ecdsa==0.13.3
 elasticsearch==7.0.2
 en-core-web-sm==2.1.0
 eventlet==0.25.0
