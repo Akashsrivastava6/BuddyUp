@@ -105,7 +105,7 @@ monotonic==1.5
 multidict==4.5.2
 murmurhash==1.0.2
 mysqlclient==1.4.2.post1
-nbconvert==5.5.0
+nbconvert==6.3.0
 nbformat==4.4.0
 networkx==2.3
 nltk==3.4.3
